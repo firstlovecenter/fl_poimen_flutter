@@ -1,7 +1,7 @@
-import 'package:client_flutter/model/model.dart';
-import 'package:client_flutter/widgets/alert_box.dart';
-import 'package:client_flutter/widgets/business_list_tile.dart';
-import 'package:client_flutter/widgets/rating_display.dart';
+import 'package:poimen/models/model.dart';
+import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/business_list_tile.dart';
+import 'package:poimen/widgets/rating_display.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'business_detail_screen.dart';
@@ -34,21 +34,21 @@ final userByIdQuery = gql("""
 class UserDetailScreen extends StatelessWidget {
   final String userId;
 
-  const UserDetailScreen({Key key, @required this.userId}) : super(key: key);
+  const UserDetailScreen({Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Query(
       options: QueryOptions(
-        documentNode: userByIdQuery,
+        document: userByIdQuery,
         variables: {
           'id': userId,
         },
       ),
       builder: (
         QueryResult result, {
-        Future<QueryResult> Function() refetch,
-        FetchMore fetchMore,
+        Future<QueryResult?> Function()? refetch,
+        FetchMore? fetchMore,
       }) {
         Widget body;
         String name = '';
@@ -59,14 +59,14 @@ class UserDetailScreen extends StatelessWidget {
           body = AlertBox(
             type: AlertType.error,
             text: result.exception.toString(),
-            onRetry: () => refetch(),
+            onRetry: () => refetch!(),
           );
-        } else if (result.loading) {
+        } else if (result.isLoading) {
           body = const Center(
             child: CircularProgressIndicator(),
           );
         } else {
-          final user = User.fromJson(result.data['users'][0]);
+          final user = User.fromJson(result.data!['users'][0]);
           name = user.name;
           numReviews = user.reviews.length;
           numReccomendations = user.recommendations.length;
@@ -111,8 +111,8 @@ class UserReviewsView extends StatelessWidget {
   final User user;
 
   const UserReviewsView({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -145,8 +145,8 @@ class UserReview extends StatelessWidget {
   final Review review;
 
   const UserReview({
-    Key key,
-    @required this.review,
+    Key? key,
+    required this.review,
   }) : super(key: key);
 
   @override
@@ -208,8 +208,8 @@ class UserReccomendationsView extends StatelessWidget {
   final User user;
 
   const UserReccomendationsView({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:client_flutter/model/model.dart';
-import 'package:client_flutter/screens/business_detail_screen.dart';
+import 'package:poimen/models/model.dart';
+import 'package:poimen/screens/business_detail_screen.dart';
 import 'rating_display.dart';
 
 class BusinessListTile extends StatelessWidget {
   const BusinessListTile({
-    Key key,
-    @required this.business,
+    Key? key,
+    required this.business,
   }) : super(key: key);
 
   final Business business;

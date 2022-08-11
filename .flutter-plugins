@@ -1,6 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-connectivity=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.4.8+6/
-connectivity_macos=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_macos-0.1.0+3/
-path_provider=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.11/
-path_provider_linux=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
-path_provider_macos=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3/
+connectivity_plus=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.1.0/
+connectivity_plus_linux=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_linux-1.1.0/
+connectivity_plus_macos=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_macos-1.2.4/
+connectivity_plus_web=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_web-1.1.0+1/
+connectivity_plus_windows=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_plus_windows-1.2.2/
+path_provider=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.4/
+path_provider_linux=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.6/
+path_provider_macos=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
+path_provider_windows=/Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.6/

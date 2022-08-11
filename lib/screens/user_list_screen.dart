@@ -1,8 +1,8 @@
-import 'package:client_flutter/widgets/alert_box.dart';
+import 'package:poimen/widgets/alert_box.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:client_flutter/model/model.dart';
-import 'package:client_flutter/widgets/menu_drawer.dart';
+import 'package:poimen/models/model.dart';
+import 'package:poimen/widgets/menu_drawer.dart';
 import 'user_detail_screen.dart';
 
 final getUsersQuery = gql("""
@@ -25,28 +25,28 @@ class UserListScreen extends StatelessWidget {
       drawer: MenuDrawer(),
       body: Query(
         options: QueryOptions(
-          documentNode: getUsersQuery,
+          document: getUsersQuery,
         ),
         builder: (
           QueryResult result, {
-          Future<QueryResult> Function() refetch,
-          FetchMore fetchMore,
+          Future<QueryResult?> Function()? refetch,
+          FetchMore? fetchMore,
         }) {
           if (result.hasException) {
             return AlertBox(
               type: AlertType.error,
               text: result.exception.toString(),
-              onRetry: () => refetch(),
+              onRetry: () => refetch!(),
             );
           }
 
-          if (result.loading) {
+          if (result.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          final List<User> usersRes = result.data['users']
+          final List<User> usersRes = result.data!['users']
               .map<User>((user) => User.fromJson(user))
               .toList();
 
@@ -54,12 +54,12 @@ class UserListScreen extends StatelessWidget {
             return AlertBox(
               type: AlertType.info,
               text: 'No users to show.',
-              onRetry: refetch,
+              onRetry: refetch!,
             );
           }
 
           return RefreshIndicator(
-            onRefresh: () => refetch(),
+            onRefresh: () => refetch!(),
             child: Material(
               child: ListView.builder(
                 itemBuilder: (_, index) {

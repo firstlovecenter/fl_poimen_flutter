@@ -22,7 +22,7 @@ class MenuDrawer extends StatelessWidget {
                 ),
                 Text(
                   'GRANDstack Flutter',
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
                         color: Colors.white,
                       ),
                 ),

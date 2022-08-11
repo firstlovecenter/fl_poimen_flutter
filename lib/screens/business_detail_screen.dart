@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:client_flutter/model/model.dart';
-import 'package:client_flutter/screens/user_detail_screen.dart';
-import 'package:client_flutter/widgets/alert_box.dart';
-import 'package:client_flutter/widgets/rating_display.dart';
+import 'package:poimen/models/model.dart';
+import 'package:poimen/screens/user_detail_screen.dart';
+import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/rating_display.dart';
 
 final businessByIdQuery = gql("""
   query businessById(\$id: ID) {
@@ -33,22 +33,22 @@ final businessByIdQuery = gql("""
 class BusinessDetailScreen extends StatelessWidget {
   final String businessId;
 
-  const BusinessDetailScreen({Key key, @required this.businessId})
+  const BusinessDetailScreen({Key? key, required this.businessId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Query(
       options: QueryOptions(
-        documentNode: businessByIdQuery,
+        document: businessByIdQuery,
         variables: {
           'id': businessId,
         },
       ),
       builder: (
         QueryResult result, {
-        Future<QueryResult> Function() refetch,
-        FetchMore fetchMore,
+        Future<QueryResult?> Function()? refetch,
+        FetchMore? fetchMore,
       }) {
         Widget body;
         String name = '';
@@ -57,14 +57,14 @@ class BusinessDetailScreen extends StatelessWidget {
           body = AlertBox(
             type: AlertType.error,
             text: result.exception.toString(),
-            onRetry: () => refetch(),
+            onRetry: () => refetch!(),
           );
-        } else if (result.loading) {
+        } else if (result.isLoading) {
           body = const Center(
             child: CircularProgressIndicator(),
           );
         } else {
-          final business = Business.fromJson(result.data['businesses'][0]);
+          final business = Business.fromJson(result.data!['businesses'][0]);
           name = business.name;
 
           body = SingleChildScrollView(
@@ -106,8 +106,8 @@ class BusinessDetailScreen extends StatelessWidget {
 
 class BusinessCard extends StatelessWidget {
   const BusinessCard({
-    Key key,
-    @required this.business,
+    Key? key,
+    required this.business,
   }) : super(key: key);
 
   final Business business;
@@ -152,8 +152,8 @@ class ReviewTile extends StatelessWidget {
   final Review review;
 
   const ReviewTile({
-    Key key,
-    @required this.review,
+    Key? key,
+    required this.review,
   }) : super(key: key);
 
   @override

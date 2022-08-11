@@ -1,10 +1,12 @@
+import 'package:poimen/widgets/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:client_flutter/services/gql.dart';
-import 'package:client_flutter/screens/business_list_screen.dart';
-import 'package:client_flutter/screens/user_list_screen.dart';
+import 'package:poimen/services/gql.dart';
+import 'package:poimen/screens/user_list_screen.dart';
 
-void main() {
+void main() async {
+  await initHiveForFlutter();
+
   runApp(MyApp());
 }
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => BusinessListScreen(),
+          '/': (context) => LoginScreen(),
           '/users': (context) => UserListScreen(),
         },
         debugShowCheckedModeBanner: false,

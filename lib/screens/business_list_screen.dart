@@ -1,9 +1,9 @@
-import 'package:client_flutter/widgets/alert_box.dart';
+import 'package:poimen/widgets/alert_box.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:client_flutter/model/model.dart';
-import 'package:client_flutter/widgets/business_list_tile.dart';
-import 'package:client_flutter/widgets/menu_drawer.dart';
+import 'package:poimen/models/model.dart';
+import 'package:poimen/widgets/business_list_tile.dart';
+import 'package:poimen/widgets/menu_drawer.dart';
 
 final getBusinessesQuery = gql("""
   query {
@@ -27,28 +27,28 @@ class BusinessListScreen extends StatelessWidget {
       drawer: MenuDrawer(),
       body: Query(
         options: QueryOptions(
-          documentNode: getBusinessesQuery,
+          document: getBusinessesQuery,
         ),
         builder: (
           QueryResult result, {
-          Future<QueryResult> Function() refetch,
-          FetchMore fetchMore,
+          Future<QueryResult?> Function()? refetch,
+          FetchMore? fetchMore,
         }) {
           if (result.hasException) {
             return AlertBox(
               type: AlertType.error,
               text: result.exception.toString(),
-              onRetry: () => refetch(),
+              onRetry: () => refetch!(),
             );
           }
 
-          if (result.loading) {
+          if (result.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          final businessesRes = result.data['businesses']
+          final businessesRes = result.data!['businesses']
               .map((biz) => Business.fromJson(biz))
               .toList();
 
@@ -56,12 +56,12 @@ class BusinessListScreen extends StatelessWidget {
             return AlertBox(
               type: AlertType.info,
               text: 'No businesses to show.',
-              onRetry: refetch,
+              onRetry: refetch!,
             );
           }
 
           return RefreshIndicator(
-            onRefresh: () => refetch(),
+            onRefresh: () => refetch!(),
             child: Material(
               child: ListView.builder(
                 itemBuilder: (_, index) {

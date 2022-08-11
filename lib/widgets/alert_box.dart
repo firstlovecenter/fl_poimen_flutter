@@ -13,10 +13,10 @@ class AlertBox extends StatelessWidget {
   final void Function() onRetry;
 
   const AlertBox({
-    Key key,
-    @required this.text,
+    Key? key,
+    required this.text,
     this.type = AlertType.warning,
-    this.onRetry,
+    required this.onRetry,
   }) : super(key: key);
 
   @override

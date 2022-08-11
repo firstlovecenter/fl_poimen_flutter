@@ -1,4 +1,4 @@
-package io.grandstack.client_flutter
+package io.grandstack.poimen
 
 import io.flutter.embedding.android.FlutterActivity
 

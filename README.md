@@ -120,14 +120,14 @@ GRAPHQL_SERVER_PATH=/graphql
 
 ```
 
-### [`/mobile_client_flutter`](./mobile_client_flutter)
+### [`/mobile_poimen`](./mobile_poimen)
 
 ![](img/grandstack-flutter.png)
 
-A mobile client built with [Flutter](https://flutter.dev) which supports Android, iOS, and web. See the [README](./mobile_client_flutter/README.md) for detailed setup instructions.
+A mobile client built with [Flutter](https://flutter.dev) which supports Android, iOS, and web. See the [README](./mobile_poimen/README.md) for detailed setup instructions.
 
 ```
-cd ./mobile_client_flutter && flutter run
+cd ./mobile_poimen && flutter run
 ```
 
 ## Docker Compose
