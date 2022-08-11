@@ -146,6 +146,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "conventional_commit",
+      "rootUri": "file:///Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/conventional_commit-0.4.3+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "convert",
       "rootUri": "file:///Users/jd/Documents/dev/flutter-workspace/flutter/.pub-cache/hosted/pub.dartlang.org/convert-2.1.1",
       "packageUri": "lib/",
@@ -572,7 +578,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-08-05T19:48:44.113076Z",
+  "generated": "2022-08-11T03:27:19.334944Z",
   "generator": "pub",
   "generatorVersion": "2.13.1"
 }

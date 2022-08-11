@@ -17,6 +17,7 @@ dependencies:
   graphql_flutter: ^3.1.0
   json_annotation: ^3.0.1
   smooth_star_rating: ^1.1.1
+  conventional_commit: ^0.4.3+1
 
 dev_dependencies:
   flutter_test:

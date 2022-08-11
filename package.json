@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^16.2.4",
+    "generate-changelog": "^1.8.0",
+    "husky": "^8.0.1"
+  },
+  "scripts": {
+    "start": "flutter run",
+    "release:major": "node scripts/release.js major",
+    "release:minor": "node scripts/release.js minor",
+    "release:patch": "node scripts/release.js patch",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
