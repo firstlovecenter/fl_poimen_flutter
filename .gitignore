@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# flutter
+.dart_tool/
+
 # testing
 /coverage
 
