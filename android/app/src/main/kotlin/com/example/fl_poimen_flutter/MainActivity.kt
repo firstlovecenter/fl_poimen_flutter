@@ -1,4 +1,4 @@
-package com.example.fl_poimen_flutter
+package io.firstlovecenter.app
 
 import io.flutter.embedding.android.FlutterActivity
 
