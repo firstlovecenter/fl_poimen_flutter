@@ -54,7 +54,7 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-            'appAuthRedirectScheme': 'mj.coffee.app'
+            'appAuthRedirectScheme': 'io.firstlovecenter.app'
         ]
     }
 

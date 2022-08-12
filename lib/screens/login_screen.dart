@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/services/auth_service.dart';
+import 'package:poimen/widgets/button.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -20,6 +22,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool isProgressing = false;
+  bool isLoggedIn = false;
+  String errorMessage = '';
+  String? name;
+
+  @override
+  void initState() {
+    initAction();
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -66,10 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Login Button'),
-            ),
+            if (isProgressing)
+              const CircularProgressIndicator()
+            else if (!isLoggedIn)
+              CommonButton(
+                onPressed: loginAction,
+                text: 'Login | Register',
+              )
+            else
+              Text('Welcome $name'),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -77,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            if (errorMessage.isNotEmpty) Text(errorMessage),
           ],
         ),
       ),
@@ -86,5 +104,50 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  setSuccessAuthState() async {
+    setState(() {
+      isProgressing = false;
+      isLoggedIn = true;
+      name = AuthService.instance.idToken?.name;
+    });
+
+    print('Success!');
+
+    // await ChatService.instance.connectUser(AuthService.instance.profile);
+    // CoffeeRouter.instance.push(MenuScreen.route());
+  }
+
+  setLoadingState() {
+    setState(() {
+      isProgressing = true;
+      errorMessage = '';
+    });
+  }
+
+  Future<void> loginAction() async {
+    setLoadingState();
+    final message = await AuthService.instance.login();
+    if (message == 'Success') {
+      setSuccessAuthState();
+    } else {
+      setState(() {
+        isProgressing = false;
+        errorMessage = message;
+      });
+    }
+  }
+
+  initAction() async {
+    setLoadingState();
+    final bool isAuth = await AuthService.instance.init();
+    if (isAuth) {
+      setSuccessAuthState();
+    } else {
+      setState(() {
+        isProgressing = false;
+      });
+    }
   }
 }
