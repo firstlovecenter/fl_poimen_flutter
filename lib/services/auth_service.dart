@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -39,7 +40,9 @@ class AuthService {
       final String setResult = await _setLocalVariables(result);
       return setResult == 'Success';
     } catch (e, s) {
-      print('error on refresh token: $e - stack: $s');
+      if (kDebugMode) {
+        print('error on refresh token: $e - stack: $s');
+      }
       // logOut() possibly
       return false;
     }
@@ -64,7 +67,9 @@ class AuthService {
     } on PlatformException {
       return 'User has cancelled or no internet!';
     } catch (e, s) {
-      print('Login Uknown error $e, $s');
+      if (kDebugMode) {
+        print('Login Uknown error $e, $s');
+      }
       return 'Unkown Error!';
     }
   }

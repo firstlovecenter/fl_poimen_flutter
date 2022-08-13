@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import './screens/login_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const PoimenApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class PoimenApp extends StatelessWidget {
+  const PoimenApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -25,6 +25,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.pink,
       ),
+      // routes: {
+      //   '/': (context) => const MyHomePage(
+      //         title: 'Profile Choose Page',
+      //       ),
+      // },
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
