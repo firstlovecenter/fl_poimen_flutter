@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/screens/profile_choose_screen.dart';
+import 'package:poimen/screens/profile_choose/profile_choose_screen.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
