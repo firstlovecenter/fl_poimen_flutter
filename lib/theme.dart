@@ -14,6 +14,7 @@ var lightTheme = ThemeData(
     headline1: TextStyle(
       fontWeight: FontWeight.bold,
     ),
+    headline5: TextStyle(color: Colors.redAccent),
     subtitle1: TextStyle(
       color: Colors.grey,
     ),
@@ -23,6 +24,19 @@ var lightTheme = ThemeData(
 
 var darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: Colors.purple,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: const TextTheme(
+    headline5: TextStyle(color: Colors.redAccent),
+  ),
+  buttonTheme: const ButtonThemeData(
+    buttonColor: Colors.redAccent,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.only(top: 13, bottom: 13),
+      primary: Colors.redAccent,
+      textStyle: const TextStyle(fontSize: 18),
+    ),
+  ),
   backgroundColor: const Color(0x00242424),
 );

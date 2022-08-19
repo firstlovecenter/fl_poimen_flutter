@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/services/auth_service.dart';
-import 'package:poimen/widgets/button.dart';
+import 'package:poimen/widgets/auth_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -68,17 +68,16 @@ class _LoginScreenState extends State<LoginScreen> {
             if (isProgressing)
               const CircularProgressIndicator()
             else if (!isLoggedIn)
-              CommonButton(
+              AuthButton(
                 onPressed: loginAction,
                 text: 'Login | Register',
               )
             else
               Text('Welcome $name'),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/home', (route) => false),
-              child: const Text('Enter App'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () =>
+            //   child: const Text('Enter App'),
+            // ),
             if (errorMessage.isNotEmpty) Text(errorMessage),
           ],
         ),
@@ -94,9 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     print('Success!');
-
-    // await ChatService.instance.connectUser(AuthService.instance.profile);
-    // CoffeeRouter.instance.push(MenuScreen.route());
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
   }
 
   setLoadingState() {

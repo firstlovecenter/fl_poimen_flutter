@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'auth0_permissions.dart';
-
 part 'auth0_user.g.dart';
 
 @JsonSerializable()
@@ -18,7 +16,8 @@ class Auth0User {
 
   bool get hasImage => picture.isNotEmpty;
 
-  get leaderFellowship => roles.where((role) => role == 'leaderFellowship').isNotEmpty;
+  get leaderFellowship =>
+      roles.where((role) => role == 'leaderFellowship').isNotEmpty;
 
   final String nickname;
   final String name;

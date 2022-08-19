@@ -112,7 +112,8 @@ class AuthService {
         result != null && result.accessToken != null && result.idToken != null;
 
     if (isValidResult) {
-      auth0AccessToken = result.accessToken;
+      // Auth0 tutorial says to use accessToken but this idToken is what works
+      auth0AccessToken = result.idToken; //result.accessToken;
       idToken = parseIdToken(result.idToken!);
       profile = await getUserDetails(result.accessToken!);
 
