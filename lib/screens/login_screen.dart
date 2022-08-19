@@ -75,7 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
             else
               Text('Welcome $name'),
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/app'),
+              onPressed: () => Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home', (route) => false),
               child: const Text('Enter App'),
             ),
             if (errorMessage.isNotEmpty) Text(errorMessage),

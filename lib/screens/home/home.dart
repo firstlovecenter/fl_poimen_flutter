@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/screens/home/home_screen.dart';
 import 'package:poimen/screens/profile_choose/profile_choose_screen.dart';
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<App> createState() => _AppState();
+  State<Home> createState() => _HomeState();
 }
 
-class _AppState extends State<App> {
+class _HomeState extends State<Home> {
   int currentIndex = 0;
   final List<Widget> screens = [
-    const Text('dsata'),
+    const HomeScreen(),
     const ProfileChooseScreen()
-    // const LoginScreen(),
   ];
 
   @override

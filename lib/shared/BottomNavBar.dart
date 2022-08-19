@@ -23,7 +23,7 @@ class BottomNavBar extends StatelessWidget {
             backgroundColor: Colors.blue),
         BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_sharp),
-            label: 'Profiles',
+            label: 'Profile',
             backgroundColor: Colors.blue),
       ],
     );
