@@ -13,30 +13,64 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const CircleAvatar(
-                backgroundColor: Colors.red,
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.users,
-                    size: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.only(top: 13, bottom: 13),
-                primary: Colors.grey,
-                textStyle: const TextStyle(fontSize: 18),
-              ),
-              label: const Text(
-                'Sunday Attendance',
-                textAlign: TextAlign.left,
-              ),
+          children: const [
+            HomePageButton(
+              text: 'Sunday Attendance',
+              icon: FontAwesomeIcons.clipboardUser,
+            ),
+            Padding(padding: EdgeInsets.all(8)),
+            HomePageButton(
+              text: 'Weekday Attendance',
+              icon: FontAwesomeIcons.clipboardUser,
+            ),
+            Padding(padding: EdgeInsets.all(8)),
+            HomePageButton(
+              text: 'First Timers and New Converts',
+              icon: FontAwesomeIcons.clipboardUser,
+            ),
+            Padding(padding: EdgeInsets.all(8)),
+            HomePageButton(
+              text: 'Membership List',
+              icon: FontAwesomeIcons.clipboardUser,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomePageButton extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  const HomePageButton({Key? key, required this.text, required this.icon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: CircleAvatar(
+          backgroundColor: Colors.red,
+          child: Center(
+            child: Icon(
+              icon,
+              size: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
+          primary: Colors.black87,
+          textStyle: const TextStyle(fontSize: 18),
+        ),
+        label: Text(
+          text,
+          textAlign: TextAlign.left,
         ),
       ),
     );

@@ -3,7 +3,9 @@ import 'package:poimen/routes.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/login_screen.dart';
 import 'package:poimen/services/gql.dart';
+import 'package:poimen/state/user_state.dart';
 import 'package:poimen/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   // We're using HiveStore for persistence,
@@ -21,12 +23,15 @@ class PoimenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: client,
-      child: MaterialApp(
-        title: 'Poimen Flutter',
-        theme: darkTheme,
-        darkTheme: lightTheme,
-        routes: appRoutes,
-        home: const LoginScreen(),
+      child: ChangeNotifierProvider(
+        create: (context) => UserState(),
+        child: MaterialApp(
+          title: 'Poimen Flutter',
+          theme: darkTheme,
+          darkTheme: lightTheme,
+          routes: appRoutes,
+          home: const LoginScreen(),
+        ),
       ),
     );
   }

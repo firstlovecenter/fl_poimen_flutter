@@ -1,46 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
+import 'package:poimen/state/user_state.dart';
+import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
   final ProfileChurch church;
-  final String level;
   final String? role;
-  const ProfileCard(
-      {Key? key, required this.church, required this.level, this.role})
+  const ProfileCard({Key? key, required this.church, this.role})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var state = Provider.of<UserState>(context);
+
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '$level $role',
-              overflow: TextOverflow.fade,
-              softWrap: false,
-            ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            SizedBox(
-              height: 69,
-              width: 69,
-              child: CircleAvatar(
-                foregroundImage: AssetImage(getRoleImmage(level)),
+      child: InkWell(
+        onTap: () {
+          state.churchLevel = church.typename;
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '${church.typename} $role',
+                overflow: TextOverflow.fade,
+                softWrap: false,
               ),
-            ),
-            const Padding(padding: EdgeInsets.all(8.0)),
-            Text(church.name),
-          ],
+              const Padding(padding: EdgeInsets.all(8.0)),
+              SizedBox(
+                height: 69,
+                width: 69,
+                child: CircleAvatar(
+                  foregroundImage: AssetImage(_getRoleImage(church.typename)),
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Text(church.name),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-getRoleImmage(String level) {
+_getRoleImage(String level) {
   switch (level) {
     case 'Fellowship':
       return 'assets/images/profile-choose/fellowship-leader.jpg';
@@ -50,7 +57,7 @@ getRoleImmage(String level) {
       return 'assets/images/profile-choose/constituency-leader.jpg';
     case 'Council':
       return 'assets/images/profile-choose/council-leader.jpeg';
-    case 'Gathering Service':
+    case 'GatheringService':
       return 'assets/images/profile-choose/gathering-admin.jpg';
 
     default:

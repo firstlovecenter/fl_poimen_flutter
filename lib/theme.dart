@@ -26,15 +26,15 @@ var darkTheme = ThemeData(
   brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   textTheme: const TextTheme(
-    headline5: TextStyle(color: Colors.redAccent),
+    headline5: TextStyle(color: Colors.deepPurpleAccent),
   ),
   buttonTheme: const ButtonThemeData(
-    buttonColor: Colors.redAccent,
+    buttonColor: Colors.deepPurpleAccent,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.only(top: 13, bottom: 13),
-      primary: Colors.redAccent,
+      primary: Colors.deepPurple,
       textStyle: const TextStyle(fontSize: 18),
     ),
   ),

@@ -46,32 +46,22 @@ class ProfileChooseScreen extends StatelessWidget {
               crossAxisSpacing: 10.0,
               children: [
                 ...user.leadsFellowship.map((church) {
-                  return ProfileCard(
-                      church: church, level: 'Fellowship', role: 'Leader');
+                  return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.leadsBacenta.map((church) {
-                  return ProfileCard(
-                      church: church, level: 'Bacenta', role: 'Leader');
+                  return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.leadsConstituency.map((church) {
-                  return ProfileCard(
-                      church: church, level: 'Constituency', role: 'Leader');
+                  return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.leadsCouncil.map((church) {
-                  return ProfileCard(
-                      church: church, level: 'Council', role: 'Leader');
+                  return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.leadsGatheringService.map((church) {
-                  return ProfileCard(
-                      church: church,
-                      level: 'Gathering Service',
-                      role: 'Admin');
+                  return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.isAdminForGatheringService.map((church) {
-                  return ProfileCard(
-                      church: church,
-                      level: 'Gathering Service',
-                      role: 'Admin');
+                  return ProfileCard(church: church, role: 'Admin');
                 }).toList(),
               ],
             ),
@@ -84,7 +74,7 @@ class ProfileChooseScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(20)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

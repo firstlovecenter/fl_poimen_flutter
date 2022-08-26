@@ -4,19 +4,23 @@ final getUserRoles = gql('''
   query getUserRoles(\$id: String!) {
     members(where: { auth_id: \$id }) {
       id
+      typename
       firstName
       lastName
       pictureUrl
       leadsFellowship {
+        typename
         id
         name
       }
       leadsBacenta {
         id
+        typename
         name
       }
       leadsConstituency {
         id
+        typename
         name
       }
       leadsSonta {
@@ -25,15 +29,18 @@ final getUserRoles = gql('''
       }
       leadsCouncil {
         id
+        typename
         name
       }
    
       leadsGatheringService {
         id
+        typename
         name
       }
       isAdminForGatheringService {
         id
+        typename
         name
       }
     }

@@ -3,10 +3,12 @@ part 'models_profile.g.dart';
 
 @JsonSerializable()
 class ProfileChurch {
+  String typename;
   String id;
   String name;
 
   ProfileChurch({
+    required this.typename,
     required this.id,
     required this.name,
   });
