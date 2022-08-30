@@ -16,8 +16,9 @@ class ProfileCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          userState.churchLevel = church.typename;
+          userState.church = church;
           userState.role = role.toLowerCase() + church.typename;
+
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home', (route) => false);
         },

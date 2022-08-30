@@ -19,24 +19,28 @@ class HomeScreen extends StatelessWidget {
             HomePageButton(
               text: 'Bacenta Attendance',
               icon: FontAwesomeIcons.clipboardUser,
+              route: '/fellowship-members',
               permitted: ['leaderBacenta'],
             ),
             Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'Fellowship Attendance',
               icon: FontAwesomeIcons.clipboardUser,
+              route: '/fellowship-members',
               permitted: ['leaderFellowship'],
             ),
             Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
+              route: '/fellowship-members',
               permitted: ['all'],
             ),
             Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'Membership List',
               icon: FontAwesomeIcons.clipboardUser,
+              route: '/fellowship-members',
               permitted: ['all'],
             ),
           ],
@@ -49,12 +53,14 @@ class HomeScreen extends StatelessWidget {
 class HomePageButton extends StatelessWidget {
   final String text;
   final IconData icon;
+  final String route;
   final List<String> permitted;
 
   const HomePageButton(
       {Key? key,
       required this.text,
       required this.icon,
+      required this.route,
       required this.permitted})
       : super(key: key);
 
@@ -68,7 +74,9 @@ class HomePageButton extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, route);
+        },
         icon: CircleAvatar(
           backgroundColor: Colors.red,
           child: Center(

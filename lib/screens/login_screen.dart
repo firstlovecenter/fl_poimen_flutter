@@ -93,7 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     print('Success!');
-    Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/profile-choose', (route) => false);
   }
 
   setLoadingState() {

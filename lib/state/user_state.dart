@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/screens/profile_choose/models_profile.dart';
 
 class UserState with ChangeNotifier {
-  String _churchLevel = 'Fellowship';
   String _role = '';
+  ProfileChurch _church = ProfileChurch(
+    id: '',
+    typename: '',
+    name: '',
+  );
 
-  String get churchLevel => _churchLevel;
   String get role => _role;
+  ProfileChurch get church => _church;
 
-  set churchLevel(String churchLevel) {
-    _churchLevel = churchLevel;
+  set church(ProfileChurch church) {
+    _church = church;
     notifyListeners();
   }
 
