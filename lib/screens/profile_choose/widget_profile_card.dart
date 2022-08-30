@@ -5,18 +5,19 @@ import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
   final ProfileChurch church;
-  final String? role;
-  const ProfileCard({Key? key, required this.church, this.role})
+  final String role;
+  const ProfileCard({Key? key, required this.church, required this.role})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<UserState>(context);
+    var userState = Provider.of<UserState>(context);
 
     return Card(
       child: InkWell(
         onTap: () {
-          state.churchLevel = church.typename;
+          userState.churchLevel = church.typename;
+          userState.role = church.typename + role;
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
