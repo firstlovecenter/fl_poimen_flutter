@@ -61,8 +61,7 @@ class HomePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var userState = Provider.of<UserState>(context);
-    print(userState.role);
-    if (!permitted.contains(userState.role) || !permitted.contains('all')) {
+    if (!permitted.contains(userState.role) && !permitted.contains('all')) {
       return Container();
     }
 
