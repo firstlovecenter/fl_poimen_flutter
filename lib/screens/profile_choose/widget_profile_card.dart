@@ -19,17 +19,17 @@ class ProfileCard extends StatelessWidget {
           userState.church = church;
           userState.role = role.toLowerCase() + church.typename;
 
-          if(church.typename == 'Fellowship'){
+          if (church.typename == 'Fellowship') {
             userState.fellowshipId = church.id;
-          } else if(church.typename == 'Bacenta'){
+          } else if (church.typename == 'Bacenta') {
             userState.bacentaId = church.id;
-          } else if(church.typename == 'Constituency'){
+          } else if (church.typename == 'Constituency') {
             userState.constituencyId = church.id;
-          } else if(church.typename == 'Council'){
+          } else if (church.typename == 'Council') {
             userState.councilId = church.id;
-          } else if(church.typename == 'Stream'){
+          } else if (church.typename == 'Stream') {
             userState.streamId = church.id;
-          } else if(church.typename == 'Gathering'){
+          } else if (church.typename == 'GatheringService') {
             userState.gatheringId = church.id;
           }
 

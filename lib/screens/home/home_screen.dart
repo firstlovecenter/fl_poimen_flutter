@@ -8,6 +8,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var churchState = Provider.of<SharedState>(context);
+    String churchLevel = churchState.church.typename.toLowerCase();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Home Screen')),
       body: Container(
@@ -15,33 +18,26 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             HomePageButton(
-              text: 'Bacenta Attendance',
+              text: '${churchState.church.typename} Attendance',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/fellowship-members',
-              permitted: ['leaderBacenta'],
+              route: '/$churchLevel-members',
+              permitted: ['leader${churchState.church.typename}'],
             ),
-            Padding(padding: EdgeInsets.all(8)),
-            HomePageButton(
-              text: 'Fellowship Attendance',
-              icon: FontAwesomeIcons.clipboardUser,
-              route: '/fellowship-members',
-              permitted: ['leaderFellowship'],
-            ),
-            Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/fellowship-members',
-              permitted: ['all'],
+              route: '/$churchLevel-members',
+              permitted: const ['all'],
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'Membership List',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/fellowship-members',
-              permitted: ['all'],
+              route: '/$churchLevel-members',
+              permitted: const ['all'],
             ),
           ],
         ),

@@ -9,16 +9,16 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/alert_box.dart';
 
-class FellowshipMembershipList extends StatelessWidget {
-  const FellowshipMembershipList({Key? key}) : super(key: key);
+class ConstituencyMembershipList extends StatelessWidget {
+  const ConstituencyMembershipList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return Query(
-      options: QueryOptions(document: getFellowshipMembers, variables: {
-        'id': churchState.fellowshipId,
+      options: QueryOptions(document: getConstituencyMembers, variables: {
+        'id': churchState.constituencyId,
       }),
       builder: (
         QueryResult result, {
@@ -26,7 +26,7 @@ class FellowshipMembershipList extends StatelessWidget {
         FetchMore? fetchMore,
       }) {
         Widget body;
-        String pageTitle = 'Fellowship Members';
+        String pageTitle = 'Constituency Members';
 
         if (result.hasException) {
           body = AlertBox(
@@ -37,12 +37,12 @@ class FellowshipMembershipList extends StatelessWidget {
         } else if (result.isLoading && result.data != null) {
           body = const LoadingScreen();
         } else {
-          final fellowship =
-              ChurchForMemberList.fromJson(result.data!['fellowships'][0]);
+          final constituency =
+              ChurchForMemberList.fromJson(result.data!['constituencies'][0]);
 
-          pageTitle = '${fellowship.name} Fellowship Membership';
+          pageTitle = '${constituency.name} Constituency Membership';
 
-          body = ChurchMembershipList(church: fellowship);
+          body = ChurchMembershipList(church: constituency);
         }
 
         return Scaffold(
