@@ -9,7 +9,6 @@ import 'package:poimen/widgets/auth_button.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 
 class ProfileChooseScreen extends StatelessWidget {
-  // final userId;
   const ProfileChooseScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
