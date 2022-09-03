@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:poimen/state/user_state.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -66,7 +66,7 @@ class HomePageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userState = Provider.of<UserState>(context);
+    var userState = Provider.of<SharedState>(context);
     if (!permitted.contains(userState.role) && !permitted.contains('all')) {
       return Container();
     }

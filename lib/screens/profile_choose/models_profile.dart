@@ -1,15 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';import 'package:json_annotation/json_annotation.dart';
 part 'models_profile.g.dart';
 
 @JsonSerializable()
 class ProfileChurch {
-  String typename;
   String id;
+  String typename;
   String name;
 
   ProfileChurch({
-    required this.typename,
     required this.id,
+    required this.typename,
     required this.name,
   });
   factory ProfileChurch.fromJson(Map<String, dynamic> json) =>

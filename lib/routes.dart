@@ -1,5 +1,5 @@
 import 'package:poimen/screens/home/home.dart';
-import 'package:poimen/screens/membership/fellowship_list.dart';
+import 'package:poimen/screens/membership/screen_fellowship_list.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 
 var appRoutes = {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
-import 'package:poimen/state/user_state.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -11,13 +11,27 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userState = Provider.of<UserState>(context);
+    var userState = Provider.of<SharedState>(context);
 
     return Card(
       child: InkWell(
         onTap: () {
           userState.church = church;
           userState.role = role.toLowerCase() + church.typename;
+
+          if(church.typename == 'Fellowship'){
+            userState.fellowshipId = church.id;
+          } else if(church.typename == 'Bacenta'){
+            userState.bacentaId = church.id;
+          } else if(church.typename == 'Constituency'){
+            userState.constituencyId = church.id;
+          } else if(church.typename == 'Council'){
+            userState.councilId = church.id;
+          } else if(church.typename == 'Stream'){
+            userState.streamId = church.id;
+          } else if(church.typename == 'Gathering'){
+            userState.gatheringId = church.id;
+          }
 
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home', (route) => false);

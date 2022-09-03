@@ -3,7 +3,7 @@ import 'package:poimen/routes.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/login_screen.dart';
 import 'package:poimen/services/gql.dart';
-import 'package:poimen/state/user_state.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ class PoimenApp extends StatelessWidget {
     return GraphQLProvider(
       client: client,
       child: ChangeNotifierProvider(
-        create: (context) => UserState(),
+        create: (context) => SharedState(),
         child: MaterialApp(
           title: 'Poimen Flutter',
           theme: darkTheme,

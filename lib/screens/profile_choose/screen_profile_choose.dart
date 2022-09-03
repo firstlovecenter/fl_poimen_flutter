@@ -6,6 +6,7 @@ import 'package:poimen/screens/profile_choose/widget_profile_card.dart';
 import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/auth_button.dart';
+import 'package:poimen/widgets/loading_screen.dart';
 
 class ProfileChooseScreen extends StatelessWidget {
   // final userId;
@@ -33,9 +34,7 @@ class ProfileChooseScreen extends StatelessWidget {
             onRetry: () => refetch!(),
           );
         } else if (result.isLoading && result.data != null) {
-          body = const Center(
-            child: CircularProgressIndicator(),
-          );
+          body = const LoadingScreen();
         } else {
           final user = Profile.fromJson(result.data!['members'][0]);
           pageTitle = user.firstName;

@@ -8,16 +8,16 @@ part of 'models_profile.dart';
 
 ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) {
   return ProfileChurch(
-    typename: json['typename'] as String,
     id: json['id'] as String,
+    typename: json['typename'] as String,
     name: json['name'] as String,
   );
 }
 
 Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) =>
     <String, dynamic>{
-      'typename': instance.typename,
       'id': instance.id,
+      'typename': instance.typename,
       'name': instance.name,
     };
 
