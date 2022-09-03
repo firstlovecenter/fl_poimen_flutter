@@ -19,17 +19,12 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HomePageButton(
-              text: '${churchState.church.typename} Attendance',
-              icon: FontAwesomeIcons.clipboardUser,
-              route: '/$churchLevel-members',
-              permitted: ['leader${churchState.church.typename}'],
-            ),
+            attendanceLevels(churchState.church.typename),
             const Padding(padding: EdgeInsets.all(8)),
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/$churchLevel-members',
+              route: '/$churchLevel-idls',
               permitted: const ['all'],
             ),
             const Padding(padding: EdgeInsets.all(8)),
@@ -44,6 +39,19 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget attendanceLevels(String churchLevel) {
+  if (churchLevel != 'Fellowship' && churchLevel != 'Bacenta') {
+    return Container();
+  }
+
+  return HomePageButton(
+    text: '$churchLevel Attendance',
+    icon: FontAwesomeIcons.clipboardUser,
+    route: '/${churchLevel.toLowerCase()}-members',
+    permitted: ['leader$churchLevel'],
+  );
 }
 
 class HomePageButton extends StatelessWidget {
