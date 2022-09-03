@@ -17,5 +17,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "concurrently": "^7.3.0"
   }
 }
