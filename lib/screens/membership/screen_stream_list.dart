@@ -37,8 +37,7 @@ class StreamMembershipList extends StatelessWidget {
         } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
-          final stream =
-              ChurchForMemberList.fromJson(result.data?['streams'][0]);
+          final stream = ChurchForMemberList.fromJson(result.data?['streams'][0]);
 
           pageTitle = '${stream.name} Stream Membership';
 

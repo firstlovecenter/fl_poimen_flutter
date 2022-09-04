@@ -11,10 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0;
-  final List<Widget> screens = [
-    const HomeScreen(),
-    const ProfileChooseScreen()
-  ];
+  final List<Widget> screens = [const HomeScreen(), const ProfileChooseScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +22,12 @@ class _HomeState extends State<Home> {
         currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.blue),
+              icon: Icon(Icons.home), label: 'Home', backgroundColor: Colors.red),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_sharp),
-              label: 'Profiles',
-              backgroundColor: Colors.blue),
+            icon: Icon(Icons.account_circle_sharp),
+            label: 'Profiles',
+            backgroundColor: Colors.blue,
+          ),
         ],
       ),
     );

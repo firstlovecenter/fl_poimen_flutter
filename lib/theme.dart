@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+Color _colorFromHex(String hexColor) {
+  final hexCode = hexColor.replaceAll('#', '');
+  return Color(int.parse('FF$hexCode', radix: 16));
+}
+
 var lightTheme = ThemeData(
   bottomAppBarTheme: const BottomAppBarTheme(
     color: Colors.black87,
@@ -23,11 +28,17 @@ var lightTheme = ThemeData(
 );
 
 var darkTheme = ThemeData(
+  // MAIN COLORS
+  primarySwatch: Colors.deepPurple,
+  scaffoldBackgroundColor: _colorFromHex('#121212'),
   brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
+
+  // TYPOGRAPHY & TEXT
   textTheme: const TextTheme(
     headline5: TextStyle(color: Colors.deepPurpleAccent),
   ),
+  cardColor: _colorFromHex("#1A1A1A"),
   buttonTheme: const ButtonThemeData(
     buttonColor: Colors.deepPurpleAccent,
   ),
@@ -37,6 +48,14 @@ var darkTheme = ThemeData(
       primary: Colors.deepPurple,
       textStyle: const TextStyle(fontSize: 18),
     ),
+  ),
+  iconTheme: const IconThemeData(
+    color: Colors.deepPurpleAccent,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: _colorFromHex("#1A1A1A"),
+    selectedItemColor: Colors.deepPurpleAccent,
+    unselectedItemColor: Colors.grey,
   ),
   backgroundColor: const Color(0x00242424),
 );

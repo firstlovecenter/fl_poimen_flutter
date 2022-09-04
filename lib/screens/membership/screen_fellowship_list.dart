@@ -34,11 +34,10 @@ class FellowshipMembershipList extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading  || result.data == null) {
+        } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
-          final fellowship =
-              ChurchForMemberList.fromJson(result.data?['fellowships'][0]);
+          final fellowship = ChurchForMemberList.fromJson(result.data?['fellowships'][0]);
 
           pageTitle = '${fellowship.name} Fellowship Membership';
 

@@ -94,8 +94,11 @@ class HomePageButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
-          primary: Colors.black87,
           textStyle: const TextStyle(fontSize: 18),
+          primary: const Color(0xFF1A1A1A),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), // <-- Radius
+          ),
         ),
         label: Text(
           text,
