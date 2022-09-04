@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 class ProfileCard extends StatelessWidget {
   final ProfileChurch church;
   final String role;
-  const ProfileCard({Key? key, required this.church, required this.role})
-      : super(key: key);
+  const ProfileCard({Key? key, required this.church, required this.role}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var userState = Provider.of<SharedState>(context);
 
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         onTap: () {
           userState.church = church;
@@ -33,8 +33,7 @@ class ProfileCard extends StatelessWidget {
             userState.gatheringId = church.id;
           }
 
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home', (route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

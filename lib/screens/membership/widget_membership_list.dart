@@ -21,62 +21,72 @@ class ChurchMembershipList extends StatelessWidget {
     const contentStyle =
         TextStyle(color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.normal);
 
-    return Accordion(
-      maxOpenSections: 1,
-      scaleWhenAnimating: true,
-      openAndCloseAnimation: true,
-      paddingListHorizontal: 0,
-      headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-      headerBackgroundColor: Colors.black,
-      headerBackgroundColorOpened: const Color(0xFF1A1A1A),
-      contentBackgroundColor: const Color(0xFF090909),
-      headerBorderRadius: 0,
-      contentHorizontalPadding: 5,
-      contentBorderWidth: 1,
-      // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-      // sectionClosingHapticFeedback: SectionHapticFeedback.light,
+    const double accordionHeight = 450;
+    int memberCount = church.sheep.length + church.goats.length + church.deer.length;
+
+    return Column(
       children: [
-        AccordionSection(
-          isOpen: true,
-          contentBorderRadius: 0,
-          leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
-          header: const Text('Sheep', style: headerStyle),
-          content: SizedBox(
-            height: 500,
-            child: ListView(
-              children: noDataChecker(
-                church.sheep.map((member) {
-                  return _memberTile(member);
-                }).toList(),
+        const Padding(padding: EdgeInsets.all(10)),
+        Text('Total Members: $memberCount'),
+        Accordion(
+          maxOpenSections: 1,
+          scaleWhenAnimating: true,
+          openAndCloseAnimation: true,
+          paddingListHorizontal: 0,
+          headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+          headerBackgroundColor: Colors.black,
+          headerBackgroundColorOpened: const Color(0xFF1A1A1A),
+          contentBackgroundColor: const Color(0xFF090909),
+          headerBorderRadius: 0,
+          contentHorizontalPadding: 5,
+          contentBorderWidth: 1,
+          // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+          // sectionClosingHapticFeedback: SectionHapticFeedback.light,
+
+          children: [
+            AccordionSection(
+              isOpen: true,
+              contentBorderRadius: 0,
+              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              header: const Text('Sheep', style: headerStyle),
+              content: SizedBox(
+                height: accordionHeight,
+                child: ListView(
+                  children: noDataChecker(
+                    church.sheep.map((member) {
+                      return _memberTile(member);
+                    }).toList(),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        AccordionSection(
-          leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
-          contentBorderRadius: 0,
-          header: const Text('Goats', style: headerStyle),
-          content: SizedBox(
-            height: 500,
-            child: ListView(
-              children: noDataChecker(church.goats.map((member) {
-                return _memberTile(member);
-              }).toList()),
+            AccordionSection(
+              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              contentBorderRadius: 0,
+              header: const Text('Goats', style: headerStyle),
+              content: SizedBox(
+                height: accordionHeight,
+                child: ListView(
+                  children: noDataChecker(church.goats.map((member) {
+                    return _memberTile(member);
+                  }).toList()),
+                ),
+              ),
             ),
-          ),
-        ),
-        AccordionSection(
-          leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
-          contentBorderRadius: 0,
-          header: const Text('Deer', style: headerStyle),
-          content: SizedBox(
-            height: 500,
-            child: ListView(
-              children: noDataChecker(church.deer.map((member) {
-                return _memberTile(member);
-              }).toList()),
+            AccordionSection(
+              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              contentBorderRadius: 0,
+              header: const Text('Deer', style: headerStyle),
+              content: SizedBox(
+                height: accordionHeight,
+                child: ListView(
+                  children: noDataChecker(church.deer.map((member) {
+                    return _memberTile(member);
+                  }).toList()),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );
