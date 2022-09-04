@@ -34,11 +34,11 @@ class ConstituencyMembershipList extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading && result.data != null) {
+        } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
           final constituency =
-              ChurchForMemberList.fromJson(result.data!['constituencies'][0]);
+              ChurchForMemberList.fromJson(result.data?['constituencies'][0]);
 
           pageTitle = '${constituency.name} Constituency Membership';
 

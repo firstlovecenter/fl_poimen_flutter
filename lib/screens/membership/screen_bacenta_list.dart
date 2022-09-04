@@ -34,11 +34,13 @@ class BacentaMembershipList extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading && result.data != null) {
+        } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
+          final resultData = result.data as Map<String, dynamic>;
+
           final bacenta =
-              ChurchForMemberList.fromJson(result.data!['bacentas'][0]);
+              ChurchForMemberList.fromJson(resultData['bacentas'][0]);
 
           pageTitle = '${bacenta.name} Bacenta Membership';
 

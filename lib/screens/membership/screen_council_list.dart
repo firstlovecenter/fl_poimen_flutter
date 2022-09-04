@@ -34,11 +34,11 @@ class CouncilMembershipList extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading && result.data != null) {
+        } else if (result.isLoading  || result.data == null) {
           body = const LoadingScreen();
         } else {
           final council =
-              ChurchForMemberList.fromJson(result.data!['councils'][0]);
+              ChurchForMemberList.fromJson(result.data?['councils'][0]);
 
           pageTitle = '${council.name} Council Membership';
 

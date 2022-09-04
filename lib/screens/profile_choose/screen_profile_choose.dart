@@ -32,10 +32,10 @@ class ProfileChooseScreen extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading && result.data != null) {
+        } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
-          final user = Profile.fromJson(result.data!['members'][0]);
+          final user = Profile.fromJson(result.data?['members'][0]);
           pageTitle = user.firstName;
 
           body = Expanded(

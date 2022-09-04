@@ -34,12 +34,11 @@ class GatheringMembershipList extends StatelessWidget {
             text: result.exception.toString(),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading && result.data != null) {
+        } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
           final gathering = ChurchForMemberList.fromJson(
-              result.data!['gatheringServices'][0]);
-          print(gathering.sheep);
+              result.data?['gatheringServices'][0]);
 
           pageTitle = '${gathering.name} Gathering Membership';
 
