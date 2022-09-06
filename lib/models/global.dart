@@ -1,3 +1,5 @@
+import 'package:poimen/screens/membership/models_membership.dart';
+
 class Gender {
   String gender = '';
 }
@@ -5,3 +7,4 @@ class Gender {
 class Dob {
   String date = '';
 }
+

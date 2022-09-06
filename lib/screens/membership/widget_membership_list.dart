@@ -2,7 +2,9 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/no_data.dart';
+import 'package:provider/provider.dart';
 
 class ChurchMembershipList extends StatelessWidget {
   const ChurchMembershipList({
@@ -91,10 +93,13 @@ class ChurchMembershipList extends StatelessWidget {
 
 Column _memberTile(BuildContext context, Member member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
+  var memberState = Provider.of<SharedState>(context);
+
   return Column(
     children: [
       ListTile(
         onTap: () {
+          memberState.memberId = member.id;
           Navigator.pushNamed(context, '/member-details');
         },
         title: Text('${member.firstName} ${member.lastName}'),

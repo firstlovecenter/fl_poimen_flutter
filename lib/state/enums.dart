@@ -4,5 +4,10 @@ enum ChurchLevel {
   constituency,
   council,
   stream,
-  gathering
+  gathering,
+}
+
+enum Gender {
+  male,
+  female,
 }
