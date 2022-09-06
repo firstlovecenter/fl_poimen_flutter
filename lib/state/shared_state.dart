@@ -8,6 +8,7 @@ class SharedState with ChangeNotifier {
     typename: '',
     name: '',
   );
+  String _memberId = '';
   String _fellowshipId = '';
   String _bacentaId = '';
   String _constituencyId = '';
@@ -18,6 +19,7 @@ class SharedState with ChangeNotifier {
   String get role => _role;
   ProfileChurch get church => _church;
 
+  String get memberId => _memberId;
   String get fellowshipId => _fellowshipId;
   String get bacentaId => _bacentaId;
   String get constituencyId => _constituencyId;
@@ -32,6 +34,11 @@ class SharedState with ChangeNotifier {
 
   set role(String role) {
     _role = role;
+    notifyListeners();
+  }
+
+  set memberId(String memberId) {
+    _memberId = memberId;
     notifyListeners();
   }
 
