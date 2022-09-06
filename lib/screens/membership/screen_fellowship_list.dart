@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/gql_membership.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/loading_screen.dart';
+import 'package:poimen/widgets/gql_container.dart';
 import 'package:provider/provider.dart';
-
-import '../../widgets/alert_box.dart';
 
 class FellowshipMembershipList extends StatelessWidget {
   const FellowshipMembershipList({Key? key}) : super(key: key);
@@ -16,45 +13,22 @@ class FellowshipMembershipList extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return Query(
-      options: QueryOptions(document: getFellowshipMembers, variables: {
-        'id': churchState.fellowshipId,
-      }),
-      builder: (
-        QueryResult result, {
-        VoidCallback? refetch,
-        FetchMore? fetchMore,
-      }) {
+    return GQLContainer(
+      query: getFellowshipMembers,
+      variables: {'id': churchState.fellowshipId},
+      defaultPageTitle: 'Fellowship Members',
+      bodyFunction: (Map<String, dynamic>? data) {
         Widget body;
-        String pageTitle = 'Fellowship Members';
+        String pageTitle;
 
-        if (result.hasException) {
-          body = AlertBox(
-            type: AlertType.error,
-            text: result.exception.toString(),
-            onRetry: () => refetch!(),
-          );
-        } else if (result.isLoading || result.data == null) {
-          body = const LoadingScreen();
-        } else {
-          final fellowship = ChurchForMemberList.fromJson(result.data?['fellowships'][0]);
+        final fellowship = ChurchForMemberList.fromJson(data?['fellowships'][0]);
 
-          pageTitle = '${fellowship.name} Fellowship Membership';
+        pageTitle = '${fellowship.name} Fellowship Membership';
 
-          body = ChurchMembershipList(church: fellowship);
-        }
+        body = ChurchMembershipList(church: fellowship);
+        var returnValues = GQLContainerReturnValue(pageTitle: pageTitle, body: body);
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(pageTitle),
-              ],
-            ),
-          ),
-          body: body,
-        );
+        return returnValues;
       },
     );
   }

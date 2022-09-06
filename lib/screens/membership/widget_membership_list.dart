@@ -16,10 +16,6 @@ class ChurchMembershipList extends StatelessWidget {
   Widget build(BuildContext context) {
     const headerStyle =
         TextStyle(color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
-    const contentStyleHeader =
-        TextStyle(color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.w700);
-    const contentStyle =
-        TextStyle(color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.normal);
 
     const double accordionHeight = 450;
     int memberCount = church.sheep.length + church.goats.length + church.deer.length;
@@ -54,7 +50,7 @@ class ChurchMembershipList extends StatelessWidget {
                 child: ListView(
                   children: noDataChecker(
                     church.sheep.map((member) {
-                      return _memberTile(member);
+                      return _memberTile(context, member);
                     }).toList(),
                   ),
                 ),
@@ -68,7 +64,7 @@ class ChurchMembershipList extends StatelessWidget {
                 height: accordionHeight,
                 child: ListView(
                   children: noDataChecker(church.goats.map((member) {
-                    return _memberTile(member);
+                    return _memberTile(context, member);
                   }).toList()),
                 ),
               ),
@@ -81,7 +77,7 @@ class ChurchMembershipList extends StatelessWidget {
                 height: accordionHeight,
                 child: ListView(
                   children: noDataChecker(church.deer.map((member) {
-                    return _memberTile(member);
+                    return _memberTile(context, member);
                   }).toList()),
                 ),
               ),
@@ -93,12 +89,14 @@ class ChurchMembershipList extends StatelessWidget {
   }
 }
 
-Column _memberTile(Member member) {
+Column _memberTile(BuildContext context, Member member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-
   return Column(
     children: [
       ListTile(
+        onTap: () {
+          Navigator.pushNamed(context, '/member-details');
+        },
         title: Text('${member.firstName} ${member.lastName}'),
         subtitle: Text(member.typename),
         leading: CircleAvatar(

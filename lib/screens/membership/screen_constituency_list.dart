@@ -4,6 +4,7 @@ import 'package:poimen/screens/membership/gql_membership.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/widgets/gql_container.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -16,46 +17,22 @@ class ConstituencyMembershipList extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return Query(
-      options: QueryOptions(document: getConstituencyMembers, variables: {
-        'id': churchState.constituencyId,
-      }),
-      builder: (
-        QueryResult result, {
-        VoidCallback? refetch,
-        FetchMore? fetchMore,
-      }) {
+    return GQLContainer(
+      query: getConstituencyMembers,
+      variables: {'id': churchState.constituencyId},
+      defaultPageTitle: 'Constituency Members',
+      bodyFunction: (Map<String, dynamic>? data) {
         Widget body;
-        String pageTitle = 'Constituency Members';
+        String pageTitle;
 
-        if (result.hasException) {
-          body = AlertBox(
-            type: AlertType.error,
-            text: result.exception.toString(),
-            onRetry: () => refetch!(),
-          );
-        } else if (result.isLoading || result.data == null) {
-          body = const LoadingScreen();
-        } else {
-          final constituency =
-              ChurchForMemberList.fromJson(result.data?['constituencies'][0]);
+        final constituency = ChurchForMemberList.fromJson(data?['constituencies'][0]);
 
-          pageTitle = '${constituency.name} Constituency Membership';
+        pageTitle = '${constituency.name} Constituency Membership';
 
-          body = ChurchMembershipList(church: constituency);
-        }
+        body = ChurchMembershipList(church: constituency);
+        var returnValues = GQLContainerReturnValue(pageTitle: pageTitle, body: body);
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(pageTitle),
-              ],
-            ),
-          ),
-          body: body,
-        );
+        return returnValues;
       },
     );
   }

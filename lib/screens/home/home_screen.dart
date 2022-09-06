@@ -75,35 +75,32 @@ class HomePageButton extends StatelessWidget {
       return Container();
     }
 
-    return InkWell(
-      onTap: () {},
-      child: ElevatedButton.icon(
-        onPressed: () {
-          Navigator.pushNamed(context, route);
-        },
-        icon: CircleAvatar(
-          backgroundColor: Colors.red,
-          child: Center(
-            child: Icon(
-              icon,
-              size: 20,
-              color: Colors.white,
-            ),
+    return ElevatedButton.icon(
+      onPressed: () {
+        Navigator.pushNamed(context, route);
+      },
+      icon: CircleAvatar(
+        backgroundColor: Colors.red,
+        child: Center(
+          child: Icon(
+            icon,
+            size: 20,
+            color: Colors.white,
           ),
         ),
-        style: ElevatedButton.styleFrom(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
-          textStyle: const TextStyle(fontSize: 18),
-          primary: const Color(0xFF1A1A1A),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10), // <-- Radius
-          ),
+      ),
+      style: ElevatedButton.styleFrom(
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
+        textStyle: const TextStyle(fontSize: 18),
+        primary: const Color(0xFF1A1A1A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // <-- Radius
         ),
-        label: Text(
-          text,
-          textAlign: TextAlign.left,
-        ),
+      ),
+      label: Text(
+        text,
+        textAlign: TextAlign.left,
       ),
     );
   }
