@@ -73,10 +73,8 @@ class AlertBox extends StatelessWidget {
               ? const SizedBox(height: 8.0)
               : const SizedBox.shrink(),
           onRetry != null
-              ? FlatButton(
+              ? TextButton(
                   onPressed: onRetry,
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).colorScheme.onPrimary,
                   child: const Text('Try Again'),
                 )
               : const SizedBox.shrink(),
