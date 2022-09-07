@@ -1,3 +1,4 @@
+import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
@@ -26,4 +27,8 @@ var appRoutes = {
 
   // Display IDL list for Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
+
+  ////// ATTENDANCE ROUTES //////
+  // Fellowship Attendance Screens
+  '/fellowship-services': (context) => const FellowshipServicesScreen(),
 };

@@ -52,7 +52,7 @@ class AlertBox extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
+      child: ListView(
         children: [
           Row(
             children: [
@@ -69,11 +69,9 @@ class AlertBox extends StatelessWidget {
               ),
             ],
           ),
+          onRetry != null ? const SizedBox(height: 8.0) : const SizedBox.shrink(),
           onRetry != null
-              ? const SizedBox(height: 8.0)
-              : const SizedBox.shrink(),
-          onRetry != null
-              ? TextButton(
+              ? ElevatedButton(
                   onPressed: onRetry,
                   child: const Text('Try Again'),
                 )

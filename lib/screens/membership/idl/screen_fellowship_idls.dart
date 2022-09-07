@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:poimen/screens/membership/idl/gql_fellowship_idls.dart';
 import 'package:poimen/screens/membership/idl/models_idl.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/gql_container.dart';
 import 'package:poimen/widgets/page_title.dart';

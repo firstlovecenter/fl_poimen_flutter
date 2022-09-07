@@ -49,7 +49,7 @@ Widget attendanceLevels(String churchLevel) {
   return HomePageButton(
     text: '$churchLevel Attendance',
     icon: FontAwesomeIcons.clipboardUser,
-    route: '/${churchLevel.toLowerCase()}-members',
+    route: '/${churchLevel.toLowerCase()}-services',
     permitted: ['leader$churchLevel'],
   );
 }

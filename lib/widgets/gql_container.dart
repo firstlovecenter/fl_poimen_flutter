@@ -31,6 +31,8 @@ class GQLContainer extends StatelessWidget {
         Widget body;
 
         if (result.hasException) {
+          var list = result.exception?.linkException;
+          print('you are here ${result.exception?.linkException.toString()}');
           body = AlertBox(
             type: AlertType.error,
             text: result.exception.toString(),
