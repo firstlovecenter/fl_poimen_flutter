@@ -19,6 +19,7 @@ final getMemberDetails = gql('''
       whatsappNumber
       ministry {
         id
+        typename
         name
       }
       stream {

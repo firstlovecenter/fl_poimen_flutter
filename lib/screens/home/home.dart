@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/screens/home/home_screen.dart';
+import 'package:poimen/screens/home/screen_home.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 
 class Home extends StatefulWidget {

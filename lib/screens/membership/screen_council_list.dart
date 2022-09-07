@@ -4,10 +4,11 @@ import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class CouncilMembershipList extends StatelessWidget {
-  const CouncilMembershipList({Key? key}) : super(key: key);
+class CouncilMembershipScreen extends StatelessWidget {
+  const CouncilMembershipScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +18,14 @@ class CouncilMembershipList extends StatelessWidget {
       query: getCouncilMembers,
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Council Members',
-      bodyFunction: (Map<String, dynamic>? data) {
+      bodyFunction: (data) {
         Widget body;
-        String pageTitle;
 
         final council = ChurchForMemberList.fromJson(data?['councils'][0]);
 
-        pageTitle = '${council.name} Council Membership';
-
         body = ChurchMembershipList(church: council);
-        var returnValues = GQLContainerReturnValue(pageTitle: pageTitle, body: body);
+        var returnValues = GQLContainerReturnValue(
+            pageTitle: PageTitle(church: council, pageTitle: 'Membership'), body: body);
 
         return returnValues;
       },

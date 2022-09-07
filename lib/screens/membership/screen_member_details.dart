@@ -4,6 +4,7 @@ import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
 class MemberDetailsScreen extends StatelessWidget {
@@ -20,23 +21,29 @@ class MemberDetailsScreen extends StatelessWidget {
       bodyFunction: (data) {
         final member = Member.fromJson(data?['members'][0]);
         final picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.lg);
-        final _headerStyle =
-            const TextStyle(color: Color(0xffffffff), fontSize: 25, fontWeight: FontWeight.w500);
+        const headerStyle = TextStyle(
+          color: Color(0xffffffff),
+          fontSize: 25,
+          fontWeight: FontWeight.w500,
+        );
 
         var returnValues = GQLContainerReturnValue(
-          pageTitle: 'Member Details',
+          pageTitle: const PageTitle(pageTitle: 'Member Details'),
           body: ListView(
             children: [
               Center(
-                child: CircleAvatar(
-                  radius: 80,
-                  foregroundImage: NetworkImage(picture.imageUrl),
+                child: Hero(
+                  tag: 'member-${member.id}',
+                  child: CircleAvatar(
+                    radius: 80,
+                    foregroundImage: NetworkImage(picture.url),
+                  ),
                 ),
               ),
               Center(
                   child: Text(
                 '${member.firstName} ${member.lastName}',
-                style: _headerStyle,
+                style: headerStyle,
               )),
               const BioDetailsCard(title: 'Sex', detail: 'Female'),
               const BioDetailsCard(title: 'Date of Birth', detail: 'DOB'),

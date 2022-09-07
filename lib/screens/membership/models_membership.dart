@@ -29,6 +29,8 @@ class MemberForList {
   String firstName = '';
   String lastName = '';
   String pictureUrl = '';
+  String? phoneNumber;
+  String? whatsappNumber;
 
   MemberForList({
     required this.id,
@@ -36,6 +38,8 @@ class MemberForList {
     required this.firstName,
     required this.lastName,
     required this.pictureUrl,
+    this.phoneNumber,
+    this.whatsappNumber,
   });
 
   factory MemberForList.fromJson(Map<String, dynamic> json) => _$MemberForListFromJson(json);
@@ -47,8 +51,6 @@ class Member extends MemberForList {
   List<bool> lastFourServices = [];
   Gender gender = Gender();
   TimeGraph dob = TimeGraph();
-  String phoneNumber = '';
-  String whatsappNumber = '';
   Church stream;
   Church fellowship;
   Church? ministry;
@@ -56,8 +58,6 @@ class Member extends MemberForList {
   Member(
       {required this.gender,
       required this.dob,
-      required this.phoneNumber,
-      required this.whatsappNumber,
       required this.stream,
       required this.ministry,
       required this.fellowship})
@@ -75,20 +75,13 @@ class Member extends MemberForList {
 }
 
 @JsonSerializable()
-class ChurchForMemberList {
-  String id = '';
-  String typename = 'Fellowship';
-  String name = '';
+class ChurchForMemberList extends Church {
   List<MemberForList> sheep = [];
   List<MemberForList> goats = [];
   List<MemberForList> deer = [];
 
-  ChurchForMemberList(
-      {required this.id,
-      required this.name,
-      required this.sheep,
-      required this.goats,
-      required this.deer});
+  ChurchForMemberList({required this.sheep, required this.goats, required this.deer})
+      : super(id: '', typename: '', name: '');
 
   factory ChurchForMemberList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForMemberListFromJson(json);

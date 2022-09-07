@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
+import 'package:poimen/widgets/page_title.dart';
 
 class GQLContainer extends StatelessWidget {
   final dynamic query;
@@ -26,7 +27,7 @@ class GQLContainer extends StatelessWidget {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        String pageTitle = defaultPageTitle;
+        Widget pageTitle = Text(defaultPageTitle);
         Widget body;
 
         if (result.hasException) {
@@ -48,7 +49,7 @@ class GQLContainer extends StatelessWidget {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(pageTitle),
+                pageTitle,
               ],
             ),
           ),
@@ -60,7 +61,7 @@ class GQLContainer extends StatelessWidget {
 }
 
 class GQLContainerReturnValue {
-  final String pageTitle;
+  final PageTitle pageTitle;
   final Widget body;
 
   GQLContainerReturnValue({required this.pageTitle, required this.body});

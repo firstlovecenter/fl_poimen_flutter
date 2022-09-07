@@ -1,22 +1,21 @@
 class CloudinaryImage {
-  String _imageUrl = '';
+  String _url = '';
   ImageSize _size = ImageSize.normal;
 
   CloudinaryImage({String url = '', ImageSize size = ImageSize.normal}) {
-    _imageUrl = url;
+    _url = url;
     if (url == '') {
-      _imageUrl =
-          'https://res.cloudinary.com/firstlovecenter/image/upload/v1627893621/user_qvwhs7.png';
+      _url = 'https://res.cloudinary.com/firstlovecenter/image/upload/v1627893621/user_qvwhs7.png';
     }
     _size = size;
   }
 
-  String get imageUrl => _transformImage(_imageUrl, _size);
+  String get url => _transformImage(_url, _size);
 
-  set imageUrl(
-    String imageUrl,
+  set url(
+    String url,
   ) {
-    _imageUrl = imageUrl;
+    _url = url;
   }
 
   set size(ImageSize size) {

@@ -5,6 +5,11 @@ Color _colorFromHex(String hexColor) {
   return Color(int.parse('FF$hexCode', radix: 16));
 }
 
+class PoimenTheme {
+  static final Color phoneColor = _colorFromHex('#A8DCFF');
+  static final Color whatsappColor = _colorFromHex('#90EDB3');
+}
+
 var lightTheme = ThemeData(
   bottomAppBarTheme: const BottomAppBarTheme(
     color: Colors.black87,

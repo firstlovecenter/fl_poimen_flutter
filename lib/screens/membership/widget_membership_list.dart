@@ -104,8 +104,11 @@ Column _memberTile(BuildContext context, MemberForList member) {
         },
         title: Text('${member.firstName} ${member.lastName}'),
         subtitle: Text(member.typename),
-        leading: CircleAvatar(
-          foregroundImage: NetworkImage(picture.imageUrl),
+        leading: Hero(
+          tag: 'member-${member.id}',
+          child: CircleAvatar(
+            foregroundImage: NetworkImage(picture.url),
+          ),
         ),
       ),
       const Divider(thickness: 1)
