@@ -8,6 +8,7 @@ Color _colorFromHex(String hexColor) {
 class PoimenTheme {
   static final Color phoneColor = _colorFromHex('#A8DCFF');
   static final Color whatsappColor = _colorFromHex('#90EDB3');
+  static final Color cardColor = _colorFromHex("#2A2A2A");
 }
 
 var lightTheme = ThemeData(

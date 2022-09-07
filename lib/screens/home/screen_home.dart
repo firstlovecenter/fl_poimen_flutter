@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
               route: '/$churchLevel-idls',
-              permitted: const ['all'],
+              permitted: const ['leaderFellowship'],
             ),
             const Padding(padding: EdgeInsets.all(8)),
             HomePageButton(

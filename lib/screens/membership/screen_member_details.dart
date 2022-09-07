@@ -3,7 +3,9 @@ import 'package:poimen/screens/membership/gql_member_details.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +32,9 @@ class MemberDetailsScreen extends StatelessWidget {
         var returnValues = GQLContainerReturnValue(
           pageTitle: const PageTitle(pageTitle: 'Member Details'),
           body: ListView(
+            padding: const EdgeInsets.all(8.0),
             children: [
+              const Padding(padding: EdgeInsets.all(8.0)),
               Center(
                 child: Hero(
                   tag: 'member-${member.id}',
@@ -45,10 +49,17 @@ class MemberDetailsScreen extends StatelessWidget {
                 '${member.firstName} ${member.lastName}',
                 style: headerStyle,
               )),
+              const Padding(padding: EdgeInsets.all(8.0)),
               const BioDetailsCard(title: 'Sex', detail: 'Female'),
               const BioDetailsCard(title: 'Date of Birth', detail: 'DOB'),
-              BioDetailsCard(title: 'Phone Number', detail: '+${member.phoneNumber}'),
-              BioDetailsCard(title: 'Whatsapp Number', detail: '+${member.whatsappNumber}'),
+              BioDetailsCard(
+                  title: 'Phone Number',
+                  detail: '+${member.phoneNumber}',
+                  phoneNumber: member.phoneNumber),
+              BioDetailsCard(
+                  title: 'Whatsapp Number',
+                  detail: '+${member.whatsappNumber}',
+                  whatsappNumber: member.whatsappNumber),
               BioDetailsCard(title: 'Stream', detail: member.stream.name),
               BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
               BioDetailsCard(title: 'Basonta', detail: member.ministry?.name ?? ''),
@@ -72,10 +83,14 @@ class BioDetailsCard extends StatelessWidget {
     Key? key,
     required this.title,
     required this.detail,
+    this.phoneNumber,
+    this.whatsappNumber,
   }) : super(key: key);
 
   final String title;
   final String detail;
+  final String? phoneNumber;
+  final String? whatsappNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -87,22 +102,32 @@ class BioDetailsCard extends StatelessWidget {
       return Container();
     }
 
+    List<Widget> contacts = [];
+
+    if (phoneNumber != null) {
+      contacts.add(ContactIcon(
+        icon: Icons.phone,
+        color: PoimenTheme.phoneColor,
+        phoneNumber: phoneNumber,
+      ));
+    }
+
+    if (whatsappNumber != null) {
+      contacts.add(ContactIcon(
+        icon: Icons.whatsapp,
+        color: PoimenTheme.whatsappColor,
+        whatsappNumber: whatsappNumber,
+      ));
+    }
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 12, bottom: 12, left: 10, right: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: titleStyle,
-            ),
-            Text(
-              detail,
-              style: detailStyle,
-            )
-          ],
+      child: ListTile(
+        title: Text(title, style: titleStyle),
+        subtitle: Text(detail, style: detailStyle),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: contacts,
         ),
       ),
     );
