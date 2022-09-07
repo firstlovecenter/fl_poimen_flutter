@@ -108,6 +108,9 @@ Column _memberTile(BuildContext context, MemberForList member) {
           tag: 'member-${member.id}',
           child: CircleAvatar(
             foregroundImage: NetworkImage(picture.url),
+            // child: Text(
+            //   member.firstName.substring(0, 1) + member.lastName.substring(0, 1),
+            // ),
           ),
         ),
       ),
