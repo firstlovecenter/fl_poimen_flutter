@@ -30,7 +30,7 @@ var lightTheme = ThemeData(
 var darkTheme = ThemeData(
   // MAIN COLORS
   primarySwatch: Colors.deepPurple,
-  scaffoldBackgroundColor: _colorFromHex('#121212'),
+  scaffoldBackgroundColor: _colorFromHex('#242424'),
   brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
 
@@ -38,7 +38,7 @@ var darkTheme = ThemeData(
   textTheme: const TextTheme(
     headline5: TextStyle(color: Colors.deepPurpleAccent),
   ),
-  cardColor: _colorFromHex("#1A1A1A"),
+  cardColor: _colorFromHex("#2A2A2A"),
   buttonTheme: const ButtonThemeData(
     buttonColor: Colors.deepPurpleAccent,
   ),

@@ -11,7 +11,9 @@ Church _$ChurchFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     typename: json['typename'] as String,
     name: json['name'] as String,
-    leader: Member.fromJson(json['leader'] as Map<String, dynamic>),
+    leader: json['leader'] == null
+        ? null
+        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>),
   );
 }
 
@@ -22,25 +24,45 @@ Map<String, dynamic> _$ChurchToJson(Church instance) => <String, dynamic>{
       'leader': instance.leader,
     };
 
-Member _$MemberFromJson(Map<String, dynamic> json) {
-  return Member(
+MemberForList _$MemberForListFromJson(Map<String, dynamic> json) {
+  return MemberForList(
     id: json['id'] as String,
     typename: json['typename'] as String,
     firstName: json['firstName'] as String,
     lastName: json['lastName'] as String,
     pictureUrl: json['pictureUrl'] as String,
-    gender: Map<String, String>.from(json['gender'] as Map),
-    dob: Map<String, String>.from(json['dob'] as Map),
+  );
+}
+
+Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'pictureUrl': instance.pictureUrl,
+    };
+
+Member _$MemberFromJson(Map<String, dynamic> json) {
+  return Member(
+    gender: Gender.fromJson(json['gender'] as Map<String, dynamic>),
+    dob: TimeGraph.fromJson(json['dob'] as Map<String, dynamic>),
     phoneNumber: json['phoneNumber'] as String,
     whatsappNumber: json['whatsappNumber'] as String,
-    stream_name: _$enumDecode(_$ChurchLevelEnumMap, json['stream_name']),
+    stream: Church.fromJson(json['stream'] as Map<String, dynamic>),
     ministry: json['ministry'] == null
         ? null
         : Church.fromJson(json['ministry'] as Map<String, dynamic>),
     fellowship: Church.fromJson(json['fellowship'] as Map<String, dynamic>),
-  )..lastFourServices = (json['lastFourServices'] as List<dynamic>)
-      .map((e) => e as bool)
-      .toList();
+  )
+    ..id = json['id'] as String
+    ..typename = json['typename'] as String
+    ..firstName = json['firstName'] as String
+    ..lastName = json['lastName'] as String
+    ..pictureUrl = json['pictureUrl'] as String
+    ..lastFourServices = (json['lastFourServices'] as List<dynamic>)
+        .map((e) => e as bool)
+        .toList();
 }
 
 Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
@@ -54,58 +76,23 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'dob': instance.dob,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'stream_name': _$ChurchLevelEnumMap[instance.stream_name],
+      'stream': instance.stream,
       'fellowship': instance.fellowship,
       'ministry': instance.ministry,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-const _$ChurchLevelEnumMap = {
-  ChurchLevel.fellowship: 'fellowship',
-  ChurchLevel.bacenta: 'bacenta',
-  ChurchLevel.constituency: 'constituency',
-  ChurchLevel.council: 'council',
-  ChurchLevel.stream: 'stream',
-  ChurchLevel.gathering: 'gathering',
-};
 
 ChurchForMemberList _$ChurchForMemberListFromJson(Map<String, dynamic> json) {
   return ChurchForMemberList(
     id: json['id'] as String,
     name: json['name'] as String,
     sheep: (json['sheep'] as List<dynamic>)
-        .map((e) => Member.fromJson(e as Map<String, dynamic>))
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
         .toList(),
     goats: (json['goats'] as List<dynamic>)
-        .map((e) => Member.fromJson(e as Map<String, dynamic>))
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
         .toList(),
     deer: (json['deer'] as List<dynamic>)
-        .map((e) => Member.fromJson(e as Map<String, dynamic>))
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
         .toList(),
   )..typename = json['typename'] as String;
 }

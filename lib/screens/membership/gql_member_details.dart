@@ -17,18 +17,27 @@ final getMemberDetails = gql('''
       }
       phoneNumber
       whatsappNumber
-      stream_name
       ministry {
         id
         name
       }
+      stream {
+        id
+        typename
+        name
+        
+      }
       fellowship {
         id
+        typename
+        name
         leader {
           id
+          typename
           firstName
           lastName
           fullName
+          pictureUrl
         }
       }
     }

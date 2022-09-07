@@ -93,7 +93,7 @@ class HomePageButton extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
         textStyle: const TextStyle(fontSize: 18),
-        primary: const Color(0xFF1A1A1A),
+        primary: const Color(0xFF2E2E2E),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), // <-- Radius
         ),

@@ -91,7 +91,7 @@ class ChurchMembershipList extends StatelessWidget {
   }
 }
 
-Column _memberTile(BuildContext context, Member member) {
+Column _memberTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 

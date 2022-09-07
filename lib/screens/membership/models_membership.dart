@@ -1,8 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:poimen/models/global.dart';
-import 'package:poimen/state/enums.dart';
+import 'package:poimen/models/neo4j.dart';
 part 'models_membership.g.dart';
 
 @JsonSerializable()
@@ -10,13 +9,13 @@ class Church {
   String id = '';
   String typename = '';
   String name = '';
-  Member leader;
+  MemberForList? leader;
 
   Church({
     required this.id,
     required this.typename,
     required this.name,
-    required this.leader,
+    this.leader,
   });
 
   factory Church.fromJson(Map<String, dynamic> json) => _$ChurchFromJson(json);
@@ -24,36 +23,54 @@ class Church {
 }
 
 @JsonSerializable()
-class Member {
+class MemberForList {
   String id = '';
   String typename = 'Member';
   String firstName = '';
   String lastName = '';
   String pictureUrl = '';
+
+  MemberForList({
+    required this.id,
+    required this.typename,
+    required this.firstName,
+    required this.lastName,
+    required this.pictureUrl,
+  });
+
+  factory MemberForList.fromJson(Map<String, dynamic> json) => _$MemberForListFromJson(json);
+  Map<String, dynamic> toJson() => _$MemberForListToJson(this);
+}
+
+@JsonSerializable()
+class Member extends MemberForList {
   List<bool> lastFourServices = [];
-  Map<String, String> gender = {'gender': ''};
-  Map<String, String> dob = {'date': ''};
+  Gender gender = Gender();
+  TimeGraph dob = TimeGraph();
   String phoneNumber = '';
   String whatsappNumber = '';
-  ChurchLevel stream_name = ChurchLevel.fellowship;
+  Church stream;
   Church fellowship;
   Church? ministry;
 
   Member(
-      {required this.id,
-      required this.typename,
-      required this.firstName,
-      required this.lastName,
-      required this.pictureUrl,
-      required this.gender,
+      {required this.gender,
       required this.dob,
       required this.phoneNumber,
       required this.whatsappNumber,
-      required this.stream_name,
+      required this.stream,
       required this.ministry,
-      required this.fellowship});
+      required this.fellowship})
+      : super(
+          id: '',
+          typename: '',
+          firstName: '',
+          lastName: '',
+          pictureUrl: '',
+        );
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$MemberToJson(this);
 }
 
@@ -62,9 +79,9 @@ class ChurchForMemberList {
   String id = '';
   String typename = 'Fellowship';
   String name = '';
-  List<Member> sheep = [];
-  List<Member> goats = [];
-  List<Member> deer = [];
+  List<MemberForList> sheep = [];
+  List<MemberForList> goats = [];
+  List<MemberForList> deer = [];
 
   ChurchForMemberList(
       {required this.id,

@@ -20,13 +20,6 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -35,13 +28,6 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -50,13 +36,6 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }
@@ -82,13 +61,6 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -97,13 +69,6 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -112,13 +77,6 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }
@@ -144,13 +102,6 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -159,13 +110,6 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -174,13 +118,6 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }
@@ -206,13 +143,6 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -221,13 +151,6 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -236,13 +159,6 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }
@@ -268,13 +184,6 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -283,13 +192,6 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -298,13 +200,6 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }
@@ -330,13 +225,6 @@ final getGatheringMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       goats {
         id
@@ -345,13 +233,6 @@ final getGatheringMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
       deer {
         id
@@ -360,13 +241,6 @@ final getGatheringMembers = gql('''
         lastName
         fullName
         pictureUrl
-        gender {
-          gender
-        }
-        dob {
-          date
-        }
-        phoneNumber
       }
     }
   }

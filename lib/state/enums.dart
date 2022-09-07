@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum ChurchLevel {
   fellowship,
   bacenta,
@@ -7,7 +9,9 @@ enum ChurchLevel {
   gathering,
 }
 
-enum Gender {
-  male,
-  female,
+enum Stream { Campus, Town, Anagkazo }
+
+enum GenderOptions {
+  Male,
+  Female,
 }

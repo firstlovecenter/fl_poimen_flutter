@@ -29,7 +29,7 @@ String _transformImage(String url, ImageSize size) {
     return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_300,w_300/');
   }
 
-  return url.replaceFirst('upload', 'upload/c_thumb,g_face,h_150,w_150,z_0.7/');
+  return url.replaceFirst('upload/', 'upload/c_thumb,g_face,h_150,w_150,z_0.7/');
 }
 
 enum ImageSize { normal, lg }
