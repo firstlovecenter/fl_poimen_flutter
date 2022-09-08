@@ -15,3 +15,13 @@ enum GenderOptions {
   Male,
   Female,
 }
+
+enum Role {
+  leaderFellowship,
+  leaderBacenta,
+  leaderConstituency,
+  leaderCouncil,
+  leaderStream,
+  leaderGathering,
+  all
+}

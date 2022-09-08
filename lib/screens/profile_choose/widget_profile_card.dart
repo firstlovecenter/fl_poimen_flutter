@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
+import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
@@ -17,19 +18,24 @@ class ProfileCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           userState.church = church;
-          userState.role = role.toLowerCase() + church.typename;
 
           if (church.typename == 'Fellowship') {
+            userState.role = Role.leaderFellowship;
             userState.fellowshipId = church.id;
           } else if (church.typename == 'Bacenta') {
+            userState.role = Role.leaderBacenta;
             userState.bacentaId = church.id;
           } else if (church.typename == 'Constituency') {
+            userState.role = Role.leaderConstituency;
             userState.constituencyId = church.id;
           } else if (church.typename == 'Council') {
+            userState.role = Role.leaderCouncil;
             userState.councilId = church.id;
           } else if (church.typename == 'Stream') {
+            userState.role = Role.leaderStream;
             userState.streamId = church.id;
           } else if (church.typename == 'GatheringService') {
+            userState.role = Role.leaderGathering;
             userState.gatheringId = church.id;
           }
 

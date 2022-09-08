@@ -4,6 +4,7 @@ import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/gql_container.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
@@ -38,9 +39,10 @@ class MemberDetailsScreen extends StatelessWidget {
               Center(
                 child: Hero(
                   tag: 'member-${member.id}',
-                  child: CircleAvatar(
-                    radius: 80,
+                  child: AvatarWithInitials(
                     foregroundImage: NetworkImage(picture.url),
+                    member: member,
+                    radius: 80,
                   ),
                 ),
               ),

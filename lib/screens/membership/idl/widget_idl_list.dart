@@ -5,6 +5,7 @@ import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +42,9 @@ Column _memberTile(BuildContext context, MemberForList member) {
           },
           leading: Hero(
             tag: 'member-${member.id}',
-            child: CircleAvatar(
+            child: AvatarWithInitials(
               foregroundImage: NetworkImage(picture.url),
-              child: Text(
-                member.firstName.substring(0, 1) + member.lastName.substring(0, 1),
-              ),
+              member: member,
             ),
           ),
           title: Text('${member.firstName} ${member.lastName}'),

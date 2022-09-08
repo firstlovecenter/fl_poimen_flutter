@@ -92,8 +92,7 @@ class ProfileChooseScreen extends StatelessWidget {
                     text: 'Sign Out',
                     onPressed: () {
                       AuthService.instance.logout();
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/', (route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
                     }),
                 const Padding(padding: EdgeInsets.all(6))
               ],

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'auth0_id_token.g.dart';
@@ -7,6 +9,8 @@ class Auth0IdToken {
   Auth0IdToken({
     required this.nickname,
     required this.name,
+    required this.given_name,
+    required this.family_name,
     required this.email,
     required this.picture,
     required this.updatedAt,
@@ -21,6 +25,8 @@ class Auth0IdToken {
 
   final String nickname;
   final String name;
+  final String given_name;
+  final String family_name;
   final String picture;
 
   @JsonKey(name: 'updated_at')
@@ -43,8 +49,7 @@ class Auth0IdToken {
   @JsonKey(name: 'https://flcadmin.netlify.app/roles')
   final List<String> roles;
 
-  factory Auth0IdToken.fromJson(Map<String, dynamic> json) =>
-      _$Auth0IdTokenFromJson(json);
+  factory Auth0IdToken.fromJson(Map<String, dynamic> json) => _$Auth0IdTokenFromJson(json);
 
   Map<String, dynamic> toJson() => _$Auth0IdTokenToJson(this);
 }

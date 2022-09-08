@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
+import 'package:poimen/state/enums.dart';
 
 class SharedState with ChangeNotifier {
-  String _role = '';
+  Role _role = Role.leaderFellowship;
   ProfileChurch _church = ProfileChurch(
     id: '',
     typename: '',
@@ -16,7 +17,7 @@ class SharedState with ChangeNotifier {
   String _streamId = '';
   String _gatheringId = '';
 
-  String get role => _role;
+  Role get role => _role;
   ProfileChurch get church => _church;
 
   String get memberId => _memberId;
@@ -32,7 +33,7 @@ class SharedState with ChangeNotifier {
     notifyListeners();
   }
 
-  set role(String role) {
+  set role(Role role) {
     _role = role;
     notifyListeners();
   }

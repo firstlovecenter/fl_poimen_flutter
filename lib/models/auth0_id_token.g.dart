@@ -10,6 +10,8 @@ Auth0IdToken _$Auth0IdTokenFromJson(Map<String, dynamic> json) {
   return Auth0IdToken(
     nickname: json['nickname'] as String,
     name: json['name'] as String,
+    given_name: json['given_name'] as String,
+    family_name: json['family_name'] as String,
     email: json['email'] as String,
     picture: json['picture'] as String,
     updatedAt: json['updated_at'] as String,
@@ -29,6 +31,8 @@ Map<String, dynamic> _$Auth0IdTokenToJson(Auth0IdToken instance) =>
     <String, dynamic>{
       'nickname': instance.nickname,
       'name': instance.name,
+      'given_name': instance.given_name,
+      'family_name': instance.family_name,
       'picture': instance.picture,
       'updated_at': instance.updatedAt,
       'iss': instance.iss,

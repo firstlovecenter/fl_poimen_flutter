@@ -1,8 +1,10 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +47,7 @@ class ChurchMembershipList extends StatelessWidget {
             AccordionSection(
               isOpen: true,
               contentBorderRadius: 0,
-              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              leftIcon: const Icon(FontAwesomeIcons.faceSmile, color: Colors.lightGreenAccent),
               header: const Text('Sheep', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
@@ -59,7 +61,7 @@ class ChurchMembershipList extends StatelessWidget {
               ),
             ),
             AccordionSection(
-              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              leftIcon: const Icon(FontAwesomeIcons.faceMeh, color: Colors.yellowAccent),
               contentBorderRadius: 0,
               header: const Text('Goats', style: headerStyle),
               content: SizedBox(
@@ -72,7 +74,7 @@ class ChurchMembershipList extends StatelessWidget {
               ),
             ),
             AccordionSection(
-              leftIcon: const Icon(Icons.insights_rounded, color: Colors.white),
+              leftIcon: const Icon(FontAwesomeIcons.faceFrown, color: Colors.redAccent),
               contentBorderRadius: 0,
               header: const Text('Deer', style: headerStyle),
               content: SizedBox(
@@ -106,12 +108,7 @@ Column _memberTile(BuildContext context, MemberForList member) {
         subtitle: Text(member.typename),
         leading: Hero(
           tag: 'member-${member.id}',
-          child: CircleAvatar(
-            foregroundImage: NetworkImage(picture.url),
-            // child: Text(
-            //   member.firstName.substring(0, 1) + member.lastName.substring(0, 1),
-            // ),
-          ),
+          child: AvatarWithInitials(foregroundImage: NetworkImage(picture.url), member: member),
         ),
       ),
       const Divider(thickness: 1)
