@@ -17,6 +17,19 @@ class ChurchForServicesList extends Church {
 }
 
 @JsonSerializable()
+class ChurchForBussingList extends Church {
+  List<ServicesForList> bussing = [];
+
+  ChurchForBussingList({
+    required this.bussing,
+  }) : super(id: '', typename: '', name: '');
+
+  factory ChurchForBussingList.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForBussingListFromJson(json);
+  Map<String, dynamic> toJson() => _$ChurchForBussingListToJson(this);
+}
+
+@JsonSerializable()
 class ServicesForList {
   String id = '';
   String typename = 'ServiceRecord';

@@ -23,9 +23,11 @@ final getBacentaServices = gql('''
   query getBacentaServices(\$id: ID!) {
       bacentas(where: { id: \$id }) {
         id
+        typename
         name
-        services(limit: 10) {
+        bussing(limit: 10) {
           id
+          typename
           attendance
           markedAttendance
           serviceDate {

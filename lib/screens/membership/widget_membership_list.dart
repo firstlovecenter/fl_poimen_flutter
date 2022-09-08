@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:provider/provider.dart';
@@ -34,9 +35,9 @@ class ChurchMembershipList extends StatelessWidget {
           openAndCloseAnimation: true,
           paddingListHorizontal: 0,
           headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-          headerBackgroundColor: Colors.black,
+          headerBackgroundColor: const Color(0xFF181818),
           headerBackgroundColorOpened: const Color(0xFF1A1A1A),
-          contentBackgroundColor: const Color(0xFF090909),
+          contentBackgroundColor: PoimenTheme.cardColor,
           headerBorderRadius: 0,
           contentHorizontalPadding: 5,
           contentBorderWidth: 1,

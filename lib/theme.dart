@@ -38,7 +38,7 @@ var lightTheme = ThemeData(
 var darkTheme = ThemeData(
   // MAIN COLORS
   primarySwatch: Colors.deepPurple,
-  scaffoldBackgroundColor: _colorFromHex('#242424'),
+  scaffoldBackgroundColor: _colorFromHex('#121212'),
   brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
 

@@ -1,4 +1,7 @@
+import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
+import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
+import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
@@ -25,10 +28,15 @@ var appRoutes = {
   '/stream-members': (context) => const StreamMembershipScreen(),
   '/gatheringservice-members': (context) => const GatheringMembershipScreen(),
 
-  // Display IDL list for Church Levels
+  // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens
   '/fellowship-services': (context) => const FellowshipServicesScreen(),
+  '/fellowship/attendance-ticker': (context) => const FellowshipAttendanceTickerScreen(),
+
+  // Bacenta Attendance Screens
+  '/bacenta-services': (context) => const BacentaServicesScreen(),
+  '/bacenta/attendance-ticker': (context) => const BacentaAttendanceTickerScreen(),
 };

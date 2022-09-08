@@ -34,7 +34,6 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -72,14 +71,14 @@ class HomeScreen extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.all(20.0)),
             attendanceLevels(churchState.church.typename),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
               route: '/$churchLevel-idls',
               permitted: const [Role.leaderFellowship],
             ),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'Membership List',
               icon: FontAwesomeIcons.clipboardUser,
@@ -132,7 +131,7 @@ class HomePageButton extends StatelessWidget {
         Navigator.pushNamed(context, route);
       },
       icon: CircleAvatar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.deepPurpleAccent,
         child: Center(
           child: Icon(
             icon,
