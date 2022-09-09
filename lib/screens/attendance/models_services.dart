@@ -13,6 +13,7 @@ class ChurchForServicesList extends Church {
 
   factory ChurchForServicesList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForServicesListFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ChurchForServicesListToJson(this);
 }
 
@@ -26,6 +27,7 @@ class ChurchForBussingList extends Church {
 
   factory ChurchForBussingList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForBussingListFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ChurchForBussingListToJson(this);
 }
 

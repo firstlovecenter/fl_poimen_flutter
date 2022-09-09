@@ -31,11 +31,12 @@ class GQLContainer extends StatelessWidget {
         Widget body;
 
         if (result.hasException) {
-          var list = result.exception?.linkException;
-          print('you are here ${result.exception?.linkException.toString()}');
+          var list = result.exception?.graphqlErrors.map((e) => e.message);
+
           body = AlertBox(
             type: AlertType.error,
-            text: result.exception.toString(),
+            text: result.exception?.graphqlErrors[0].message.toString() ??
+                result.exception.toString(),
             onRetry: () => refetch!(),
           );
         } else if (result.isLoading || result.data == null) {

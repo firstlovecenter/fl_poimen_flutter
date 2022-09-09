@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:poimen/screens/attendance/gql_services_list.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/widget_services_list.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/gql_container.dart';
 import 'package:poimen/widgets/page_title.dart';

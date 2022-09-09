@@ -17,6 +17,9 @@ class SharedState with ChangeNotifier {
   String _streamId = '';
   String _gatheringId = '';
 
+  String _bussingRecordId = '';
+  String _serviceRecordId = '';
+
   Role get role => _role;
   ProfileChurch get church => _church;
 
@@ -27,6 +30,9 @@ class SharedState with ChangeNotifier {
   String get councilId => _councilId;
   String get streamId => _streamId;
   String get gatheringId => _gatheringId;
+
+  String get bussingRecordId => _bussingRecordId;
+  String get serviceRecordId => _serviceRecordId;
 
   set church(ProfileChurch church) {
     _church = church;
@@ -70,6 +76,16 @@ class SharedState with ChangeNotifier {
 
   set gatheringId(String gatheringId) {
     _gatheringId = gatheringId;
+    notifyListeners();
+  }
+
+  set bussingRecordId(String bussingRecordId) {
+    _bussingRecordId = bussingRecordId;
+    notifyListeners();
+  }
+
+  set serviceRecordId(String serviceRecordId) {
+    _serviceRecordId = serviceRecordId;
     notifyListeners();
   }
 }

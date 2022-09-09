@@ -5,6 +5,8 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Implement Attendance Ticker in Fellowship Screen
+
     return Scaffold(
       appBar: AppBar(title: const Text('Attendance Ticker')),
     );

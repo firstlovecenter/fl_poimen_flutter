@@ -16,6 +16,8 @@ enum GenderOptions {
   Female,
 }
 
+enum MemberCategory { Sheep, Deer, Goat }
+
 enum Role {
   leaderFellowship,
   leaderBacenta,
