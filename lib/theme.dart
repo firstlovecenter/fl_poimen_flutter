@@ -6,9 +6,9 @@ Color _colorFromHex(String hexColor) {
 }
 
 class PoimenTheme {
-  static final Color phoneColor = _colorFromHex('#A8DCFF');
-  static final Color whatsappColor = _colorFromHex('#90EDB3');
-  static final Color cardColor = _colorFromHex("#2A2A2A");
+  static const Color phoneColor = Color(0xFFA8DCFF);
+  static const Color whatsappColor = Color(0xFF90EDB3);
+  static const Color cardColor = Color(0xFF2A2A2A);
 
   static const Color textSecondary = Colors.grey;
 }
@@ -53,7 +53,7 @@ var darkTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.only(top: 13, bottom: 13),
-      primary: Colors.deepPurple,
+      backgroundColor: Colors.deepPurple,
       textStyle: const TextStyle(fontSize: 18),
     ),
   ),

@@ -35,14 +35,14 @@ class ChurchForBussingList extends Church {
 class ServicesForList {
   String id = '';
   String typename = 'ServiceRecord';
-  int attendance = 0;
+  int? attendance = 0;
   bool markedAttendance = false;
   TimeGraph serviceDate = TimeGraph();
 
   ServicesForList({
     required this.id,
     required this.typename,
-    required this.attendance,
+    this.attendance,
     required this.markedAttendance,
     required this.serviceDate,
   });

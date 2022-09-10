@@ -46,6 +46,7 @@ dependencies:
   accordion: ^2.5.1
   url_launcher: ^6.1.5
   intl: ^0.17.0
+  timeago: ^3.3.0
 
 
 dev_dependencies:

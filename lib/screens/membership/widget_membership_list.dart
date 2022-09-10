@@ -109,7 +109,7 @@ Column _memberTile(BuildContext context, MemberForList member) {
         subtitle: Text(member.typename),
         leading: Hero(
           tag: 'member-${member.id}',
-          child: AvatarWithInitials(foregroundImage: NetworkImage(picture.url), member: member),
+          child: AvatarWithInitials(foregroundImage: picture.image, member: member),
         ),
       ),
       const Divider(thickness: 1)

@@ -43,7 +43,7 @@ Column _memberTile(BuildContext context, MemberForList member) {
           leading: Hero(
             tag: 'member-${member.id}',
             child: AvatarWithInitials(
-              foregroundImage: NetworkImage(picture.url),
+              foregroundImage: picture.image,
               member: member,
             ),
           ),

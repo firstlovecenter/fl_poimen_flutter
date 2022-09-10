@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 Column(
                   children: [
                     AvatarWithInitials(
-                      foregroundImage: NetworkImage(picture.url),
+                      foregroundImage: picture.image,
                       member: user,
                       radius: 45,
                     ),
@@ -142,9 +142,9 @@ class HomePageButton extends StatelessWidget {
       ),
       style: ElevatedButton.styleFrom(
         alignment: Alignment.centerLeft,
+        backgroundColor: const Color(0xFF2E2E2E),
         padding: const EdgeInsets.only(top: 13, bottom: 13, left: 20),
         textStyle: const TextStyle(fontSize: 18),
-        primary: const Color(0xFF2E2E2E),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), // <-- Radius
         ),

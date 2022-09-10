@@ -59,7 +59,7 @@ ServicesForList _$ServicesForListFromJson(Map<String, dynamic> json) {
   return ServicesForList(
     id: json['id'] as String,
     typename: json['typename'] as String,
-    attendance: json['attendance'] as int,
+    attendance: json['attendance'] as int?,
     markedAttendance: json['markedAttendance'] as bool,
     serviceDate:
         TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),

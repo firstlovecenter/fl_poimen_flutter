@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class CloudinaryImage {
   String _url = '';
   ImageSize _size = ImageSize.normal;
@@ -12,9 +14,9 @@ class CloudinaryImage {
 
   String get url => _transformImage(_url, _size);
 
-  set url(
-    String url,
-  ) {
+  NetworkImage get image => NetworkImage(_transformImage(_url, _size));
+
+  set url(String url) {
     _url = url;
   }
 
