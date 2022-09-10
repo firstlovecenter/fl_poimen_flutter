@@ -2,7 +2,7 @@
     package="io.firstlovecenter.app">
    <application
         android:label="fl_poimen_flutter"
-        android:name="${applicationName}"
+        android:name="Poimen"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

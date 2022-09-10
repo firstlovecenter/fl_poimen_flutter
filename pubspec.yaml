@@ -59,6 +59,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.2.9
   json_serializable: ^4.1.3
   build_runner: ^2.0.6
 
@@ -80,7 +81,9 @@ flutter:
     - assets/images/flc_logo_silver.png
     - assets/images/profile-choose/
   #   - images/a_dot_ham.jpeg
-
+flutter_native_splash:
+  color: "#cf6bd1"
+  image: assets/splash.png  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
