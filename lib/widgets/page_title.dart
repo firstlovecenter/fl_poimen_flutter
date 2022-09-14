@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/theme.dart';
 
 class PageTitle extends StatelessWidget {
   const PageTitle({
@@ -21,9 +22,9 @@ class PageTitle extends StatelessWidget {
           Text(pageTitle),
           Text(
             '${church?.name} ${church?.typename}',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 15,
-              color: Colors.grey,
+              color: PoimenTheme.brand,
               fontWeight: FontWeight.bold,
             ),
           )

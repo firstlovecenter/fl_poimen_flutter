@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/state/enums.dart';
 part 'neo4j.g.dart';
@@ -15,9 +16,15 @@ class Neo4jPoint {
 
 @JsonSerializable()
 class TimeGraph {
-  String date;
+  String _date = '';
 
-  TimeGraph({this.date = ''});
+  String get humanReadable => DateFormat('yMMMEd').format(DateTime.parse(_date));
+  DateTime get date => DateTime.parse(_date);
+
+  set date(DateTime date) => _date = date.toString();
+
+  // default constructor
+  TimeGraph();
 
   factory TimeGraph.fromJson(Map<String, dynamic> json) => _$TimeGraphFromJson(json);
   Map<String, dynamic> toJson() => _$TimeGraphToJson(this);

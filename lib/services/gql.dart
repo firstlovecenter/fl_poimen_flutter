@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'dart:io' show Platform;
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:poimen/helpers/constants.dart';
 import 'package:poimen/services/auth_service.dart';
 
-final String host = kIsWeb
-    ? 'http://localhost:4001'
-    : Platform.isAndroid
-        ? 'http://10.0.2.2'
-        : 'https://poimen.firstlovecenter.com';
+// final String host = kIsWeb
+//     ? 'http://localhost:4001'
+//     : Platform.isAndroid
+//         ? 'http://10.0.2.2'
+//         : 'https://poimen.firstlovecenter.com';
+
+const String host = apiEndpoint;
 
 final HttpLink httpLink = HttpLink(
   '$host/graphql',

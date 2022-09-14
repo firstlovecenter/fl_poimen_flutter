@@ -2,6 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/models/neo4j.dart';
+import 'package:poimen/state/enums.dart';
 part 'models_membership.g.dart';
 
 @JsonSerializable()
@@ -25,6 +26,7 @@ class Church {
 @JsonSerializable()
 class MemberForList {
   String id = '';
+  MemberCategory? status = MemberCategory.Sheep;
   String typename = 'Member';
   String firstName = '';
   String lastName = '';
@@ -38,6 +40,7 @@ class MemberForList {
     required this.firstName,
     required this.lastName,
     required this.pictureUrl,
+    this.status,
     this.phoneNumber,
     this.whatsappNumber,
   });

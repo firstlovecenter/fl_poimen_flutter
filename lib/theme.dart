@@ -11,6 +11,7 @@ class PoimenTheme {
   static const Color cardColor = Color(0xFF2A2A2A);
 
   static const Color textSecondary = Colors.grey;
+  static Color brand = _colorFromHex('#7f50ba');
 }
 
 var lightTheme = ThemeData(

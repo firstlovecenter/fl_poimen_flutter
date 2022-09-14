@@ -31,6 +31,7 @@ MemberForList _$MemberForListFromJson(Map<String, dynamic> json) {
     firstName: json['firstName'] as String,
     lastName: json['lastName'] as String,
     pictureUrl: json['pictureUrl'] as String,
+    status: _$enumDecodeNullable(_$MemberCategoryEnumMap, json['status']),
     phoneNumber: json['phoneNumber'] as String?,
     whatsappNumber: json['whatsappNumber'] as String?,
   );
@@ -39,6 +40,7 @@ MemberForList _$MemberForListFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'status': _$MemberCategoryEnumMap[instance.status],
       'typename': instance.typename,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
@@ -46,6 +48,49 @@ Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
     };
+
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
+  }
+
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
+}
+
+K? _$enumDecodeNullable<K, V>(
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<K, V>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$MemberCategoryEnumMap = {
+  MemberCategory.Sheep: 'Sheep',
+  MemberCategory.Deer: 'Deer',
+  MemberCategory.Goat: 'Goat',
+};
 
 Member _$MemberFromJson(Map<String, dynamic> json) {
   return Member(
@@ -58,6 +103,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
     fellowship: Church.fromJson(json['fellowship'] as Map<String, dynamic>),
   )
     ..id = json['id'] as String
+    ..status = _$enumDecodeNullable(_$MemberCategoryEnumMap, json['status'])
     ..typename = json['typename'] as String
     ..firstName = json['firstName'] as String
     ..lastName = json['lastName'] as String
@@ -71,6 +117,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'id': instance.id,
+      'status': _$MemberCategoryEnumMap[instance.status],
       'typename': instance.typename,
       'firstName': instance.firstName,
       'lastName': instance.lastName,

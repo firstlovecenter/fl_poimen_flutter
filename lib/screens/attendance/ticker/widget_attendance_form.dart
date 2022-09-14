@@ -40,19 +40,19 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
         Expanded(
           child: ListView(
             children: [
-              ShowMembersIfAny(
+              _ShowMembersIfAny(
                 members: widget.church.sheep,
                 category: MemberCategory.Sheep,
                 presentMembers: _presentMembers,
                 absentMembers: absentMembers,
               ),
-              ShowMembersIfAny(
+              _ShowMembersIfAny(
                 members: widget.church.goats,
                 category: MemberCategory.Goat,
                 presentMembers: _presentMembers,
                 absentMembers: absentMembers,
               ),
-              ShowMembersIfAny(
+              _ShowMembersIfAny(
                 category: MemberCategory.Deer,
                 members: widget.church.deer,
                 presentMembers: _presentMembers,
@@ -66,7 +66,6 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
             minimumSize: const Size.fromHeight(80),
           ),
           onPressed: () {
-            // TODO: Implement code to send list of member ids to mutation
             widget.tickerMutation.runMutation({
               'presentMembers': _presentMembers,
               'absentMembers': absentMembers,
@@ -78,10 +77,6 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Processing Data')),
             );
-          
-
-            print('result ${widget.tickerMutation.result}');
-            // Validate returns true if the form is valid, or false otherwise.
           },
           child: const Text('Submit'),
         ),
@@ -90,8 +85,8 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
   }
 }
 
-class ShowMembersIfAny extends StatefulWidget {
-  const ShowMembersIfAny(
+class _ShowMembersIfAny extends StatefulWidget {
+  const _ShowMembersIfAny(
       {Key? key,
       required this.category,
       required this.members,
@@ -105,10 +100,10 @@ class ShowMembersIfAny extends StatefulWidget {
   final List<String> absentMembers;
 
   @override
-  State<ShowMembersIfAny> createState() => _ShowMembersIfAnyState();
+  State<_ShowMembersIfAny> createState() => _ShowMembersIfAnyState();
 }
 
-class _ShowMembersIfAnyState extends State<ShowMembersIfAny> {
+class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
   @override
   Widget build(BuildContext context) {
     return widget.members.isEmpty

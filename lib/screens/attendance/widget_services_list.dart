@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
@@ -21,8 +20,7 @@ class ChurchServicesList extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: ListView(
         children: noDataChecker(services.map((service) {
-          var humanReadable = DateFormat("yMMMEd");
-          DateTime date = DateTime.parse(service.serviceDate.date);
+          DateTime date = service.serviceDate.date;
 
           return Card(
             margin: const EdgeInsets.only(bottom: 15),
@@ -49,7 +47,7 @@ class ChurchServicesList extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(humanReadable.format(date)),
+                  Text(service.serviceDate.humanReadable),
                   Text(
                     timeago.format(date),
                     style: const TextStyle(color: PoimenTheme.textSecondary, fontSize: 12),

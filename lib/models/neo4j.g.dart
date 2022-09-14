@@ -20,13 +20,11 @@ Map<String, dynamic> _$Neo4jPointToJson(Neo4jPoint instance) =>
     };
 
 TimeGraph _$TimeGraphFromJson(Map<String, dynamic> json) {
-  return TimeGraph(
-    date: json['date'] as String,
-  );
+  return TimeGraph()..date = DateTime.parse(json['date'] as String);
 }
 
 Map<String, dynamic> _$TimeGraphToJson(TimeGraph instance) => <String, dynamic>{
-      'date': instance.date,
+      'date': instance.date.toIso8601String(),
     };
 
 Gender _$GenderFromJson(Map<String, dynamic> json) {

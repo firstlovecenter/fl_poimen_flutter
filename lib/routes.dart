@@ -1,6 +1,6 @@
 import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
-import 'package:poimen/screens/attendance/ticker/screen_bacenta_report.dart';
+import 'package:poimen/screens/attendance/report/screen_bacenta_report.dart';
 import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
