@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -26,8 +27,25 @@ class ChurchServicesList extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.only(bottom: 15),
             child: ListTile(
-              onTap: () => Navigator.pushNamed(
-                  context, '/${churchState.church.typename.toLowerCase()}/attendance-ticker'),
+              onTap: () {
+                if (churchState.church.typename == 'Bacenta') {
+                  churchState.bussingRecordId = service.id;
+                } else {
+                  churchState.serviceRecordId = service.id;
+                }
+
+                if (!service.markedAttendance) {
+                  Navigator.pushNamed(
+                    context,
+                    '/${churchState.church.typename.toLowerCase()}/attendance-ticker',
+                  );
+                } else {
+                  Navigator.pushNamed(
+                    context,
+                    '/${churchState.church.typename.toLowerCase()}/attendance-report',
+                  );
+                }
+              },
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,6 +60,7 @@ class ChurchServicesList extends StatelessWidget {
                 'Attendance: ${service.attendance.toString()}',
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              trailing: service.markedAttendance ? const Icon(FontAwesomeIcons.circleCheck) : null,
             ),
           );
         }).toList()),

@@ -4,7 +4,7 @@ import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/gql_query_container.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class StreamMembershipScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return GQLContainer(
+    return GQLQueryContainer(
       query: getStreamMembers,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Stream Members',
@@ -28,7 +28,7 @@ class StreamMembershipScreen extends StatelessWidget {
         final stream = ChurchForMemberList.fromJson(data?['streams'][0]);
 
         body = ChurchMembershipList(church: stream);
-        var returnValues = GQLContainerReturnValue(
+        var returnValues = GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
               pageTitle: 'Membership',
               church: stream,

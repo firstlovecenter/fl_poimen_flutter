@@ -3,7 +3,7 @@ import 'package:poimen/screens/attendance/gql_services_list.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/widget_services_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class BacentaServicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return GQLContainer(
+    return GQLQueryContainer(
         query: getBacentaServices,
         variables: {'id': churchState.bacentaId},
         defaultPageTitle: 'Bacenta Services',
@@ -25,7 +25,7 @@ class BacentaServicesScreen extends StatelessWidget {
 
           body = ChurchServicesList(services: bacenta.bussing);
 
-          return GQLContainerReturnValue(
+          return GQLQueryContainerReturnValue(
             pageTitle: PageTitle(pageTitle: 'Recent Bussing', church: bacenta),
             body: body,
           );

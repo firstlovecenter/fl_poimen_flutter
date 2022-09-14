@@ -1,23 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/enums.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
+import 'package:provider/provider.dart';
 
 class AttendanceTickerScreen extends StatefulWidget {
-  const AttendanceTickerScreen({Key? key, required this.church}) : super(key: key);
+  const AttendanceTickerScreen({Key? key, required this.church, required this.tickerMutation})
+      : super(key: key);
 
   final ChurchForMemberList church;
+  final MutationHookResult tickerMutation;
 
   @override
   State<AttendanceTickerScreen> createState() => _AttendanceTickerScreenState();
 }
 
 class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
-  final List<String> _selectedMembers = [];
+  final List<String> _presentMembers = [];
 
   @override
   Widget build(BuildContext context) {
+    var churchState = Provider.of<SharedState>(context);
+    List<String> absentMembers = [
+      ...widget.church.sheep.map((sheep) => sheep.id),
+      ...widget.church.goats.map((goat) => goat.id),
+      ...widget.church.deer.map((deer) => deer.id),
+    ];
+    String recordId = churchState.serviceRecordId;
+
+    if (churchState.church.typename == 'Bacenta') {
+      recordId = churchState.bussingRecordId;
+    }
+
     return Column(
       children: [
         Expanded(
@@ -26,17 +43,20 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               ShowMembersIfAny(
                 members: widget.church.sheep,
                 category: MemberCategory.Sheep,
-                selectedMembers: _selectedMembers,
+                presentMembers: _presentMembers,
+                absentMembers: absentMembers,
               ),
               ShowMembersIfAny(
                 members: widget.church.goats,
                 category: MemberCategory.Goat,
-                selectedMembers: _selectedMembers,
+                presentMembers: _presentMembers,
+                absentMembers: absentMembers,
               ),
               ShowMembersIfAny(
                 category: MemberCategory.Deer,
                 members: widget.church.deer,
-                selectedMembers: _selectedMembers,
+                presentMembers: _presentMembers,
+                absentMembers: absentMembers,
               ),
             ],
           ),
@@ -47,15 +67,21 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
           ),
           onPressed: () {
             // TODO: Implement code to send list of member ids to mutation
-            print(_selectedMembers);
+            widget.tickerMutation.runMutation({
+              'presentMembers': _presentMembers,
+              'absentMembers': absentMembers,
+              'recordId': recordId,
+              'membersPicture':
+                  'https://res.cloudinary.com/firstlovecenter/image/upload/v1627893621/user_qvwhs7.png',
+            });
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Processing Data')),
+            );
+          
+
+            print('result ${widget.tickerMutation.result}');
             // Validate returns true if the form is valid, or false otherwise.
-            if (_selectedMembers.isNotEmpty) {
-              // If the form is valid, display a snackbar. In the real world,
-              // you'd often call a server or save the information in a database.
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Processing Data')),
-              );
-            }
           },
           child: const Text('Submit'),
         ),
@@ -66,12 +92,17 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
 
 class ShowMembersIfAny extends StatefulWidget {
   const ShowMembersIfAny(
-      {Key? key, required this.category, required this.members, required this.selectedMembers})
+      {Key? key,
+      required this.category,
+      required this.members,
+      required this.presentMembers,
+      required this.absentMembers})
       : super(key: key);
 
   final List<MemberForList> members;
   final MemberCategory category;
-  final List<String> selectedMembers;
+  final List<String> presentMembers;
+  final List<String> absentMembers;
 
   @override
   State<ShowMembersIfAny> createState() => _ShowMembersIfAnyState();
@@ -103,16 +134,16 @@ class _ShowMembersIfAnyState extends State<ShowMembersIfAny> {
                           CheckboxListTile(
                             activeColor: Colors.deepPurpleAccent,
                             checkColor: Colors.black54,
-                            value: widget.selectedMembers.contains(member.id),
+                            value: widget.presentMembers.contains(member.id),
                             onChanged: (bool? value) {
                               setState(() {
                                 if (value!) {
-                                  widget.selectedMembers.add(member.id);
+                                  widget.presentMembers.add(member.id);
+                                  widget.absentMembers.remove(member.id);
                                 } else {
-                                  widget.selectedMembers.remove(member.id);
+                                  widget.presentMembers.remove(member.id);
+                                  widget.absentMembers.add(member.id);
                                 }
-
-                                print(widget.selectedMembers);
                               });
                             },
                             secondary: AvatarWithInitials(

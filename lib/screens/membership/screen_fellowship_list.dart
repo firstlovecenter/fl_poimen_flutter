@@ -3,7 +3,7 @@ import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class FellowshipMembershipScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return GQLContainer(
+    return GQLQueryContainer(
       query: getFellowshipMembers,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship Members',
@@ -24,7 +24,7 @@ class FellowshipMembershipScreen extends StatelessWidget {
         final fellowship = ChurchForMemberList.fromJson(data?['fellowships'][0]);
 
         body = ChurchMembershipList(church: fellowship);
-        var returnValues = GQLContainerReturnValue(
+        var returnValues = GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             church: fellowship,
             pageTitle: 'Membership',

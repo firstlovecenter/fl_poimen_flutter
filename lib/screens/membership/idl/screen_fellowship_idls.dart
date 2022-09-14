@@ -3,7 +3,7 @@ import 'package:poimen/screens/membership/idl/gql_fellowship_idls.dart';
 import 'package:poimen/screens/membership/idl/models_idl.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class FellowshipIDLScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
-    return GQLContainer(
+    return GQLQueryContainer(
       query: getFellowshipIdls,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IDL List',
@@ -25,7 +25,7 @@ class FellowshipIDLScreen extends StatelessWidget {
 
         body = ChurchIdlList(church: fellowship);
 
-        return GQLContainerReturnValue(
+        return GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
               church: fellowship,
               pageTitle: 'IDL List',

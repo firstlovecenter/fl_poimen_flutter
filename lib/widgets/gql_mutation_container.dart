@@ -4,13 +4,13 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:poimen/widgets/page_title.dart';
 
-class GQLContainer extends StatelessWidget {
+class GQLMutationContainer extends StatelessWidget {
   final dynamic query;
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
   final Function(Map<String, dynamic>?) bodyFunction;
 
-  const GQLContainer(
+  const GQLMutationContainer(
       {Key? key,
       required this.query,
       required this.variables,
@@ -20,29 +20,27 @@ class GQLContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Query(
-      options: QueryOptions(document: query, variables: variables),
-      builder: (
-        QueryResult result, {
-        VoidCallback? refetch,
-        FetchMore? fetchMore,
-      }) {
+    return Mutation(
+      options: MutationOptions(document: query),
+      builder: (RunMutation runMutation, QueryResult? result) {
         Widget pageTitle = Text(defaultPageTitle);
         Widget body;
 
-        if (result.hasException) {
-          var list = result.exception?.graphqlErrors.map((e) => e.message);
+        if (result == null) {
+          return const LoadingScreen();
+        }
 
+        if (result.hasException) {
           body = AlertBox(
             type: AlertType.error,
             text: result.exception?.graphqlErrors[0].message.toString() ??
                 result.exception.toString(),
-            onRetry: () => refetch!(),
+            onRetry: () => runMutation(variables),
           );
         } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
-          GQLContainerReturnValue res = bodyFunction(result.data);
+          GQLQueryContainerReturnValue res = bodyFunction(result.data);
           pageTitle = res.pageTitle;
           body = res.body;
         }
@@ -56,16 +54,22 @@ class GQLContainer extends StatelessWidget {
               ],
             ),
           ),
-          body: body,
+          body: Column(
+            children: [
+              body,
+              ElevatedButton(
+                  onPressed: () => runMutation(variables), child: const Text('Run Mutation'))
+            ],
+          ),
         );
       },
     );
   }
 }
 
-class GQLContainerReturnValue {
+class GQLQueryContainerReturnValue {
   final PageTitle pageTitle;
   final Widget body;
 
-  GQLContainerReturnValue({required this.pageTitle, required this.body});
+  GQLQueryContainerReturnValue({required this.pageTitle, required this.body});
 }

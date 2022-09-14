@@ -5,7 +5,7 @@ import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
-import 'package:poimen/widgets/gql_container.dart';
+import 'package:poimen/widgets/gql_query_container.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class MemberDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<SharedState>(context);
 
-    return GQLContainer(
+    return GQLQueryContainer(
       query: getMemberDetails,
       variables: {'id': state.memberId},
       defaultPageTitle: 'Member Details',
@@ -30,7 +30,7 @@ class MemberDetailsScreen extends StatelessWidget {
           fontWeight: FontWeight.w500,
         );
 
-        var returnValues = GQLContainerReturnValue(
+        var returnValues = GQLQueryContainerReturnValue(
           pageTitle: const PageTitle(pageTitle: 'Member Details'),
           body: ListView(
             padding: const EdgeInsets.all(8.0),
