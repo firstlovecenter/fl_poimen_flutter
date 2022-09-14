@@ -52,7 +52,7 @@ class MemberDetailsScreen extends StatelessWidget {
                 style: headerStyle,
               )),
               const Padding(padding: EdgeInsets.all(8.0)),
-              const BioDetailsCard(title: 'Sex', detail: 'Female'),
+              BioDetailsCard(title: 'Sex', detail: member.gender.gender.name),
               BioDetailsCard(title: 'Date of Birth', detail: member.dob.humanReadable),
               BioDetailsCard(
                   title: 'Phone Number',
