@@ -61,7 +61,8 @@ class MemberDetailsScreen extends StatelessWidget {
               BioDetailsCard(
                   title: 'Whatsapp Number',
                   detail: '+${member.whatsappNumber}',
-                  whatsappNumber: member.whatsappNumber),
+                  whatsAppInfo: WhatsAppInfo(
+                      firstName: member.firstName, number: member.whatsappNumber ?? "")),
               BioDetailsCard(title: 'Stream', detail: member.stream.name),
               BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
               BioDetailsCard(title: 'Basonta', detail: member.ministry?.name ?? ''),
@@ -86,13 +87,13 @@ class BioDetailsCard extends StatelessWidget {
     required this.title,
     required this.detail,
     this.phoneNumber,
-    this.whatsappNumber,
+    this.whatsAppInfo,
   }) : super(key: key);
 
   final String title;
   final String detail;
   final String? phoneNumber;
-  final String? whatsappNumber;
+  final WhatsAppInfo? whatsAppInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +115,14 @@ class BioDetailsCard extends StatelessWidget {
       ));
     }
 
-    if (whatsappNumber != null) {
-      contacts.add(ContactIcon(
-        icon: Icons.whatsapp,
-        color: PoimenTheme.whatsappColor,
-        whatsappNumber: whatsappNumber,
-      ));
+    if (whatsAppInfo != null) {
+      contacts.add(
+        ContactIcon(
+          icon: Icons.whatsapp,
+          color: PoimenTheme.whatsappColor,
+          whatsAppInfo: whatsAppInfo,
+        ),
+      );
     }
 
     return Card(

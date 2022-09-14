@@ -58,7 +58,8 @@ Column _memberTile(BuildContext context, MemberForList member) {
             ContactIcon(
               icon: FontAwesomeIcons.whatsapp,
               color: PoimenTheme.whatsappColor,
-              whatsappNumber: member.whatsappNumber,
+              whatsAppInfo:
+                  WhatsAppInfo(number: member.whatsappNumber ?? '', firstName: member.firstName),
             ),
           ]),
         ),

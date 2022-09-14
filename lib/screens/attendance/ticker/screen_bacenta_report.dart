@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BacentaAttendanceReportScreen extends StatelessWidget {
-  const BacentaAttendanceReportScreen({super.key});
+  const BacentaAttendanceReportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

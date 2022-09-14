@@ -21,11 +21,13 @@ class HomeScreen extends StatelessWidget {
     final authUser = AuthService.instance.idToken;
 
     final user = MemberForList(
-        id: authUser!.sub,
-        typename: 'Member',
-        firstName: authUser.given_name,
-        lastName: authUser.family_name,
-        pictureUrl: authUser.picture);
+      id: authUser!.sub,
+      typename: 'Member',
+      firstName: authUser.given_name,
+      lastName: authUser.family_name,
+      pictureUrl: authUser.picture,
+      whatsappNumber: '0000',
+    );
     final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);
 
     return Scaffold(

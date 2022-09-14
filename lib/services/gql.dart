@@ -4,13 +4,13 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/services/auth_service.dart';
 
 final String host = kIsWeb
-    ? 'localhost'
+    ? 'http://localhost:4001'
     : Platform.isAndroid
-        ? '10.0.2.2'
-        : 'localhost';
+        ? 'http://10.0.2.2'
+        : 'https://poimen.firstlovecenter.com';
 
 final HttpLink httpLink = HttpLink(
-  'http://$host:4001/graphql',
+  '$host/graphql',
 );
 final authToken = AuthService.instance.auth0AccessToken.toString();
 

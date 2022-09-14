@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+class WhatsAppInfo {
+  final String number;
+  final String firstName;
+
+  WhatsAppInfo({required this.number, required this.firstName});
+}
+
 class ContactIcon extends StatelessWidget {
   const ContactIcon({
     Key? key,
     required this.icon,
     required this.color,
     this.phoneNumber,
-    this.whatsappNumber,
+    this.whatsAppInfo,
   }) : super(key: key);
 
   final IconData icon;
   final Color color;
   final String? phoneNumber;
-  final String? whatsappNumber;
+  final WhatsAppInfo? whatsAppInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +30,8 @@ class ContactIcon extends StatelessWidget {
         backgroundColor: color,
         child: IconButton(
           onPressed: () async {
-            if (whatsappNumber != null) {
-              await _sendWhatsappMessage(whatsappNumber);
+            if (whatsAppInfo?.number != null) {
+              await _sendWhatsappMessage(whatsAppInfo);
             } else if (phoneNumber != null) {
               await _makePhoneCall(phoneNumber);
             }
@@ -56,17 +63,20 @@ Future<void> _makePhoneCall(String? phoneNumber) async {
   } else {
     throw 'Could not launch $launchUri';
   }
-
-  await launchUrl(launchUri);
 }
 
-Future<void> _sendWhatsappMessage(String? whatsappNumber) async {
-  if (whatsappNumber == null) {
+Future<void> _sendWhatsappMessage(WhatsAppInfo? whatsapp) async {
+  if (whatsapp == null) {
     return;
   }
   final Uri launchUri = Uri(
     scheme: 'https',
-    path: 'wa.me/$whatsappNumber',
+    path: 'api.whatsapp.com/send',
+    queryParameters: {
+      'phone': whatsapp.number,
+      'text': 'Hey there ${whatsapp.firstName}',
+      'app_absent': '0',
+    },
   );
 
   if (await canLaunchUrl(launchUri)) {
@@ -74,6 +84,4 @@ Future<void> _sendWhatsappMessage(String? whatsappNumber) async {
   } else {
     throw 'Could not launch $launchUri';
   }
-
-  await launchUrl(launchUri);
 }
