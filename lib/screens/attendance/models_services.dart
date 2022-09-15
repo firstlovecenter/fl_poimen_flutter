@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
@@ -37,14 +38,18 @@ class ServicesForList {
   String typename = 'ServiceRecord';
   int? attendance = 0;
   bool markedAttendance = false;
-  TimeGraph serviceDate = TimeGraph();
+  TimeGraph? serviceDate = TimeGraph();
+  String createdAt = '';
+
+  String get humanReadableDate => DateFormat('yMMMEd').format(DateTime.parse(createdAt));
+  DateTime get createdDate => DateTime.parse(createdAt.substring(0, 10));
 
   ServicesForList({
     required this.id,
     required this.typename,
     this.attendance,
     required this.markedAttendance,
-    required this.serviceDate,
+    this.serviceDate,
   });
 
   factory ServicesForList.fromJson(Map<String, dynamic> json) => _$ServicesForListFromJson(json);

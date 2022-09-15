@@ -23,7 +23,6 @@ class TimeGraph {
 
   set date(DateTime date) => _date = date.toString();
 
-  // default constructor
   TimeGraph();
 
   factory TimeGraph.fromJson(Map<String, dynamic> json) => _$TimeGraphFromJson(json);

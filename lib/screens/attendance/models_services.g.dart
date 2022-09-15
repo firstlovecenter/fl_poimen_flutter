@@ -61,9 +61,10 @@ ServicesForList _$ServicesForListFromJson(Map<String, dynamic> json) {
     typename: json['typename'] as String,
     attendance: json['attendance'] as int?,
     markedAttendance: json['markedAttendance'] as bool,
-    serviceDate:
-        TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
-  );
+    serviceDate: json['serviceDate'] == null
+        ? null
+        : TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+  )..createdAt = json['createdAt'] as String;
 }
 
 Map<String, dynamic> _$ServicesForListToJson(ServicesForList instance) =>
@@ -73,4 +74,5 @@ Map<String, dynamic> _$ServicesForListToJson(ServicesForList instance) =>
       'attendance': instance.attendance,
       'markedAttendance': instance.markedAttendance,
       'serviceDate': instance.serviceDate,
+      'createdAt': instance.createdAt,
     };
