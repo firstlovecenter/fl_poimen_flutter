@@ -21,20 +21,23 @@ class ChurchIdlList extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: ListView(
         children: noDataChecker(church.idls.map((member) {
-          return _memberTile(context, member);
+          return memberTile(context, member);
         }).toList()),
       ),
     );
   }
 }
 
-Column _memberTile(BuildContext context, MemberForList member) {
+Column memberTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
   return Column(
     children: [
       Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: ListTile(
           onTap: () {
             memberState.memberId = member.id;

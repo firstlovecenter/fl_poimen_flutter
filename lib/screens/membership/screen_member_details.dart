@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/gql_member_details.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
@@ -51,6 +52,42 @@ class MemberDetailsScreen extends StatelessWidget {
                 '${member.firstName} ${member.lastName}',
                 style: headerStyle,
               )),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ...member.lastFourServices.map((present) {
+                    if (present) {
+                      return Row(
+                        children: const [
+                          Padding(padding: EdgeInsets.all(4.0)),
+                          CircleAvatar(
+                            backgroundColor: Colors.green,
+                            radius: 15,
+                            child: Icon(
+                              FontAwesomeIcons.check,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return Row(
+                      children: const [
+                        Padding(padding: EdgeInsets.all(4.0)),
+                        CircleAvatar(
+                          backgroundColor: Colors.red,
+                          radius: 15,
+                          child: Icon(
+                            FontAwesomeIcons.xmark,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+                ],
+              ),
               const Padding(padding: EdgeInsets.all(8.0)),
               BioDetailsCard(title: 'Sex', detail: member.gender.gender.name),
               BioDetailsCard(title: 'Date of Birth', detail: member.dob.humanReadable),

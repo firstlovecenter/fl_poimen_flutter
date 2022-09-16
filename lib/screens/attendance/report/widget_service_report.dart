@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/attendance/report/models_service_reports.dart';
+import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ChurchServicesReport extends StatelessWidget {
@@ -14,7 +14,7 @@ class ChurchServicesReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         const Padding(padding: EdgeInsets.all(8.0)),
         Text(
@@ -26,30 +26,32 @@ class ChurchServicesReport extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        _ShowMembers(membersPresent: record.membersPresent)
+        _ShowMembers(members: record.membersAbsent, title: 'Members Who Were Absent'),
+        const Padding(padding: EdgeInsets.all(15.0)),
+        _ShowMembers(title: 'Members Who Were Present', members: record.membersPresent),
       ],
     );
   }
 }
 
 class _ShowMembers extends StatelessWidget {
-  const _ShowMembers({Key? key, required this.membersPresent}) : super(key: key);
+  const _ShowMembers({Key? key, required this.members, required this.title}) : super(key: key);
 
-  final List<MemberForList> membersPresent;
+  final List<MemberForList> members;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: membersPresent.map((member) {
-        return ListTile(
-          leading: AvatarWithInitials(
-            member: member,
-            foregroundImage: NetworkImage(member.pictureUrl),
-          ),
-          title: Text('${member.firstName} ${member.lastName}'),
-          subtitle: Text(member.status?.name ?? ''),
-        );
-      }).toList(),
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18),
+        ),
+        ...members.map((member) {
+          return memberTile(context, member);
+        }).toList()
+      ],
     );
   }
 }
