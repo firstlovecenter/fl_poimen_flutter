@@ -6,12 +6,13 @@ import 'package:poimen/services/auth_service.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 
 class ImageUploadButton extends StatefulWidget {
-  ImageUploadButton({Key? key, required this.preset, required this.pictureUrl, required this.child})
+  const ImageUploadButton(
+      {Key? key, required this.preset, required this.setPictureUrl, required this.child})
       : super(key: key);
 
   final String preset;
   final Widget child;
-  String pictureUrl;
+  final dynamic setPictureUrl;
 
   @override
   State<ImageUploadButton> createState() => _ImageUploadButtonState();
@@ -19,20 +20,21 @@ class ImageUploadButton extends StatefulWidget {
 
 class _ImageUploadButtonState extends State<ImageUploadButton> {
   double progress = 0.0;
-  String pictureUrl = '';
+  String picture = '';
 
   @override
   Widget build(BuildContext context) {
     final cloudinary = CloudinaryPublic('firstlovecenter', widget.preset, cache: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Card(
           child: SizedBox(
             height: 200,
-            child: pictureUrl != ''
+            child: picture != ''
                 ? Image.network(
-                    pictureUrl,
+                    picture,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) {
@@ -53,7 +55,7 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        progress > 0.0 && pictureUrl == ''
+        progress > 0.0 && picture == ''
             ? LinearProgressIndicator(
                 backgroundColor: const Color.fromARGB(255, 199, 180, 251).withOpacity(0.6),
               )
@@ -93,8 +95,8 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
                         );
 
                         setState(() {
-                          pictureUrl = response.secureUrl;
-                          widget.pictureUrl = response.secureUrl;
+                          picture = response.secureUrl;
+                          widget.setPictureUrl(response.secureUrl);
                         });
                       } on CloudinaryException catch (error) {
                         print(error.message);

@@ -27,9 +27,35 @@ class ChurchServicesReport extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        SizedBox(
-          height: 200,
-          child: Image.network(CloudinaryImage(url: record.membersPicture, size: ImageSize.lg).url),
+        Card(
+          elevation: 5,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          ),
+          child: SizedBox(
+            height: 200,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                CloudinaryImage(url: record.membersPicture, size: ImageSize.fixedHeight).url,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(members: record.membersAbsent, title: 'Members Who Were Absent'),

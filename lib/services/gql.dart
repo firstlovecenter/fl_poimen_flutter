@@ -19,7 +19,15 @@ final Link link = authLink.concat(httpLink);
 ValueNotifier<GraphQLClient> client = ValueNotifier(
   GraphQLClient(
     // The default store is the InMemoryStore, which does NOT persist to disk
-    cache: GraphQLCache(store: InMemoryStore()),
+    cache: GraphQLCache(store: HiveStore()),
+    defaultPolicies: DefaultPolicies(
+      watchQuery: Policies(
+        fetch: FetchPolicy.cacheAndNetwork,
+      ),
+      watchMutation: Policies(
+        fetch: FetchPolicy.cacheAndNetwork,
+      ),
+    ),
     link: link,
   ),
 );

@@ -22,6 +22,13 @@ class AttendanceTickerScreen extends StatefulWidget {
 
 class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
   final List<String> _presentMembers = [];
+  String _pictureUrl = '';
+
+  void setPictureUrl(String url) {
+    setState(() {
+      _pictureUrl = url;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +39,6 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
       ...widget.church.deer.map((deer) => deer.id),
     ];
     String recordId = churchState.serviceRecordId;
-    String pictureUrl = '';
 
     if (churchState.church.typename == 'Bacenta') {
       recordId = churchState.bussingRecordId;
@@ -46,7 +52,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               const Padding(padding: EdgeInsets.all(15.0)),
               ImageUploadButton(
                 preset: membershipAttendancePreset,
-                pictureUrl: pictureUrl,
+                setPictureUrl: setPictureUrl,
                 child: const Text('Upload Membership Picture'),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
@@ -80,7 +86,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               'presentMembers': _presentMembers,
               'absentMembers': absentMembers,
               'recordId': recordId,
-              'membersPicture': pictureUrl,
+              'membersPicture': _pictureUrl,
             });
 
             ScaffoldMessenger.of(context).showSnackBar(

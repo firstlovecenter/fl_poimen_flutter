@@ -26,6 +26,9 @@ class CloudinaryImage {
 }
 
 String _transformImage(String url, ImageSize size) {
+  if (size == ImageSize.fixedHeight) {
+    return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_200/');
+  }
   if (size == ImageSize.lg) {
     return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_300,w_300/');
   }
@@ -33,4 +36,4 @@ String _transformImage(String url, ImageSize size) {
   return url.replaceFirst('upload/', 'upload/c_thumb,g_face,h_150,w_150,z_0.7/');
 }
 
-enum ImageSize { normal, lg }
+enum ImageSize { normal, lg, fixedHeight }
