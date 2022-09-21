@@ -1,3 +1,4 @@
+import 'package:poimen/screens/attendance/report/screen_fellowship_report.dart';
 import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
 import 'package:poimen/screens/attendance/report/screen_bacenta_report.dart';
@@ -36,6 +37,7 @@ var appRoutes = {
   // Fellowship Attendance Screens
   '/fellowship-services': (context) => const FellowshipServicesScreen(),
   '/fellowship/attendance-ticker': (context) => const FellowshipAttendanceTickerScreen(),
+  '/fellowship/attendance-report': (context) => const FellowshipAttendanceReportScreen(),
 
   // Bacenta Attendance Screens
   '/bacenta-services': (context) => const BacentaServicesScreen(),
