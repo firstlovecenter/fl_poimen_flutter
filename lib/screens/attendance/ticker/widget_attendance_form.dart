@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:poimen/helpers/constants.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/services/cloudinary_service.dart';
+import 'package:poimen/services/cloudinary_service.dart' as cloudinary_custom;
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
+import 'package:poimen/widgets/image_upload_button.dart';
 import 'package:provider/provider.dart';
 
 class AttendanceTickerScreen extends StatefulWidget {
@@ -30,6 +32,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
       ...widget.church.deer.map((deer) => deer.id),
     ];
     String recordId = churchState.serviceRecordId;
+    String pictureUrl = '';
 
     if (churchState.church.typename == 'Bacenta') {
       recordId = churchState.bussingRecordId;
@@ -40,6 +43,13 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
         Expanded(
           child: ListView(
             children: [
+              const Padding(padding: EdgeInsets.all(15.0)),
+              ImageUploadButton(
+                preset: membershipAttendancePreset,
+                pictureUrl: pictureUrl,
+                child: const Text('Upload Membership Picture'),
+              ),
+              const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
                 members: widget.church.sheep,
                 category: MemberCategory.Sheep,
@@ -70,8 +80,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               'presentMembers': _presentMembers,
               'absentMembers': absentMembers,
               'recordId': recordId,
-              'membersPicture':
-                  'https://res.cloudinary.com/firstlovecenter/image/upload/v1627893621/user_qvwhs7.png',
+              'membersPicture': pictureUrl,
             });
 
             ScaffoldMessenger.of(context).showSnackBar(
@@ -128,7 +137,7 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
                         children: [
                           CheckboxListTile(
                             activeColor: Colors.deepPurpleAccent,
-                            checkColor: Colors.black54,
+                            checkColor: Colors.white38,
                             value: widget.presentMembers.contains(member.id),
                             onChanged: (bool? value) {
                               setState(() {
@@ -143,7 +152,8 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
                             },
                             secondary: AvatarWithInitials(
                               member: member,
-                              foregroundImage: CloudinaryImage(url: member.pictureUrl).image,
+                              foregroundImage:
+                                  cloudinary_custom.CloudinaryImage(url: member.pictureUrl).image,
                             ),
                             title: Text('${member.firstName} ${member.lastName}'),
                           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poimen/screens/attendance/report/models_service_reports.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/theme.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -24,6 +25,11 @@ class ChurchServicesReport extends StatelessWidget {
         Text(
           timeago.format(record.serviceDate.date),
           style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
+        ),
+        const Padding(padding: EdgeInsets.all(8.0)),
+        SizedBox(
+          height: 200,
+          child: Image.network(CloudinaryImage(url: record.membersPicture, size: ImageSize.lg).url),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(members: record.membersAbsent, title: 'Members Who Were Absent'),

@@ -20,8 +20,6 @@ class ChurchServicesList extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: ListView(
         children: noDataChecker(services.map((service) {
-          DateTime date = service.createdDate;
-
           return Card(
             margin: const EdgeInsets.only(bottom: 15),
             child: ListTile(
@@ -47,9 +45,9 @@ class ChurchServicesList extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(service.humanReadableDate),
+                  Text(service.serviceDate.humanReadable),
                   Text(
-                    timeago.format(date),
+                    timeago.format(service.serviceDate.date),
                     style: const TextStyle(color: PoimenTheme.textSecondary, fontSize: 12),
                   ),
                 ],

@@ -5,3 +5,6 @@ const auth0Issuer = 'https://$auth0Domain';
 const bundleIdentifier = 'com.firstlovecenter.poimen';
 const auth0RedirectUri = '$bundleIdentifier://login-callback';
 const refreshTokenKey = 'refresh_token';
+
+// Cloudinary Image Presets
+const membershipAttendancePreset = String.fromEnvironment('CLOUDINARY_MEMBER_ATTENDANCE_PRESET');

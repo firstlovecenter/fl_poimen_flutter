@@ -25,6 +25,7 @@ class MemberDetailsScreen extends StatelessWidget {
       bodyFunction: (data) {
         final member = Member.fromJson(data?['members'][0]);
         final picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.lg);
+
         const headerStyle = TextStyle(
           color: Color(0xffffffff),
           fontSize: 25,

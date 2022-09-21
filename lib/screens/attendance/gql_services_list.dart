@@ -11,7 +11,9 @@ final getFellowshipServices = gql('''
         typename
         attendance
         markedAttendance
-        createdAt
+        serviceDate{
+            date
+         } 
       }
     }
   }
@@ -28,7 +30,9 @@ final getBacentaServices = gql('''
           typename
           attendance
           markedAttendance
-          createdAt
+          serviceDate{
+            date
+         } 
         }
       }
     }
