@@ -21,6 +21,8 @@ ValueNotifier<GraphQLClient> client = ValueNotifier(
     // The default store is the InMemoryStore, which does NOT persist to disk
     cache: GraphQLCache(store: HiveStore()),
     defaultPolicies: DefaultPolicies(
+      query: Policies(fetch: FetchPolicy.cacheAndNetwork),
+      mutate: Policies(fetch: FetchPolicy.cacheAndNetwork),
       watchQuery: Policies(
         fetch: FetchPolicy.cacheAndNetwork,
       ),
