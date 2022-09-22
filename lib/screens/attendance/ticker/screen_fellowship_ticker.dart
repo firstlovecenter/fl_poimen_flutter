@@ -27,9 +27,10 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           Widget body;
 
           final fellowship = ChurchForMemberList.fromJson(data?['fellowships'][0]);
+
           final attendanceMutation = useMutation(
             MutationOptions(
-              document: recordMemberFellowshipAttendance,
+              document: recordMembershipAttendance,
               // ignore: void_checks
               update: (cache, result) {
                 return cache;

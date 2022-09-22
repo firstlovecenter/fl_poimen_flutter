@@ -1,4 +1,5 @@
 import 'package:accordion/accordion.dart';
+import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
@@ -41,15 +42,14 @@ class ChurchMembershipList extends StatelessWidget {
           headerBorderRadius: 0,
           contentHorizontalPadding: 5,
           contentBorderWidth: 1,
-          // sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-          // sectionClosingHapticFeedback: SectionHapticFeedback.light,
-
+          sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+          sectionClosingHapticFeedback: SectionHapticFeedback.light,
           children: [
             AccordionSection(
               isOpen: true,
               contentBorderRadius: 0,
               leftIcon: const Icon(FontAwesomeIcons.faceSmile, color: Colors.lightGreenAccent),
-              header: const Text('Sheep', style: headerStyle),
+              header: Text('Sheep: ${church.sheep.length}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(
@@ -64,7 +64,7 @@ class ChurchMembershipList extends StatelessWidget {
             AccordionSection(
               leftIcon: const Icon(FontAwesomeIcons.faceMeh, color: Colors.yellowAccent),
               contentBorderRadius: 0,
-              header: const Text('Goats', style: headerStyle),
+              header: Text('Goats: ${church.goats.length}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(
@@ -77,7 +77,7 @@ class ChurchMembershipList extends StatelessWidget {
             AccordionSection(
               leftIcon: const Icon(FontAwesomeIcons.faceFrown, color: Colors.redAccent),
               contentBorderRadius: 0,
-              header: const Text('Deer', style: headerStyle),
+              header: Text('Deer: ${church.deer.length}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(

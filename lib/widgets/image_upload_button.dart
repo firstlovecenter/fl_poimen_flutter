@@ -19,8 +19,8 @@ class ImageUploadButton extends StatefulWidget {
 }
 
 class _ImageUploadButtonState extends State<ImageUploadButton> {
-  double progress = 0.0;
   String picture = '';
+  double progress = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +51,16 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
                       );
                     },
                   )
-                : const Center(child: Text('No Image to Show')),
+                : progress > 0.0
+                    ? const Center(child: Text('Uploading...'))
+                    : const Center(child: Text('No Image to Show')),
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
         progress > 0.0 && picture == ''
             ? LinearProgressIndicator(
                 backgroundColor: const Color.fromARGB(255, 199, 180, 251).withOpacity(0.6),
+                // value: progress,
               )
             : progress == 1.0
                 ? const ElevatedButton(onPressed: null, child: Text('Upload Complete'))
@@ -96,8 +99,8 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
 
                         setState(() {
                           picture = response.secureUrl;
-                          widget.setPictureUrl(response.secureUrl);
                         });
+                        widget.setPictureUrl(response.secureUrl);
                       } on CloudinaryException catch (error) {
                         print(error.message);
                         print(error.request);

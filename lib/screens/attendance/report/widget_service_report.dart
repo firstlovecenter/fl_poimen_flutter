@@ -15,6 +15,8 @@ class ChurchServicesReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int totalMembership = record.membersAbsent.length + record.membersPresent.length;
+
     return ListView(
       children: [
         const Padding(padding: EdgeInsets.all(8.0)),
@@ -58,9 +60,19 @@ class ChurchServicesReport extends StatelessWidget {
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        _ShowMembers(members: record.membersAbsent, title: 'Members Who Were Absent'),
+        _ShowMembers(
+            members: record.membersAbsent,
+            title: 'Members Who Were Absent: ${record.membersAbsent.length}/$totalMembership'),
         const Padding(padding: EdgeInsets.all(15.0)),
-        _ShowMembers(title: 'Members Who Were Present', members: record.membersPresent),
+        _ShowMembers(
+            title: 'Members Who Were Present: ${record.membersPresent.length}/$totalMembership',
+            members: record.membersPresent),
+        const Padding(padding: EdgeInsets.all(15.0)),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/${church.typename.toLowerCase()}-services');
+            },
+            child: const Text('Go to Services List'))
       ],
     );
   }

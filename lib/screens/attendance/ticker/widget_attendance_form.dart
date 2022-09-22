@@ -33,7 +33,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
-    List<String> absentMembers = [
+    final List<String> membership = [
       ...widget.church.sheep.map((sheep) => sheep.id),
       ...widget.church.goats.map((goat) => goat.id),
       ...widget.church.deer.map((deer) => deer.id),
@@ -60,19 +60,16 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
                 members: widget.church.sheep,
                 category: MemberCategory.Sheep,
                 presentMembers: _presentMembers,
-                absentMembers: absentMembers,
               ),
               _ShowMembersIfAny(
                 members: widget.church.goats,
                 category: MemberCategory.Goat,
                 presentMembers: _presentMembers,
-                absentMembers: absentMembers,
               ),
               _ShowMembersIfAny(
                 category: MemberCategory.Deer,
                 members: widget.church.deer,
                 presentMembers: _presentMembers,
-                absentMembers: absentMembers,
               ),
             ],
           ),
@@ -82,6 +79,13 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
             minimumSize: const Size.fromHeight(80),
           ),
           onPressed: () {
+            if (!validate(context, [recordId, _pictureUrl])) {
+              return;
+            }
+
+            final absentMembers =
+                membership.where((member) => !_presentMembers.contains(member)).toList();
+
             widget.tickerMutation.runMutation({
               'presentMembers': _presentMembers,
               'absentMembers': absentMembers,
@@ -101,18 +105,16 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
 }
 
 class _ShowMembersIfAny extends StatefulWidget {
-  const _ShowMembersIfAny(
-      {Key? key,
-      required this.category,
-      required this.members,
-      required this.presentMembers,
-      required this.absentMembers})
-      : super(key: key);
+  const _ShowMembersIfAny({
+    Key? key,
+    required this.category,
+    required this.members,
+    required this.presentMembers,
+  }) : super(key: key);
 
   final List<MemberForList> members;
   final MemberCategory category;
   final List<String> presentMembers;
-  final List<String> absentMembers;
 
   @override
   State<_ShowMembersIfAny> createState() => _ShowMembersIfAnyState();
@@ -149,10 +151,8 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
                               setState(() {
                                 if (value!) {
                                   widget.presentMembers.add(member.id);
-                                  widget.absentMembers.remove(member.id);
                                 } else {
                                   widget.presentMembers.remove(member.id);
-                                  widget.absentMembers.add(member.id);
                                 }
                               });
                             },
@@ -173,4 +173,17 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
             ],
           );
   }
+}
+
+validate(BuildContext context, List<String> fields) {
+  if (fields.contains('')) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Please upload a picture of the attendance'),
+      ),
+    );
+    return false;
+  }
+
+  return true;
 }

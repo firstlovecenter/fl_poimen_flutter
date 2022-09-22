@@ -29,7 +29,7 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
           final bacenta = ChurchForMemberList.fromJson(data?['bacentas'][0]);
           final attendanceMutation = useMutation(
             MutationOptions(
-              document: recordMemberBacentaAttendance,
+              document: recordMembershipAttendance,
               // ignore: void_checks
               update: (cache, result) {
                 return cache;

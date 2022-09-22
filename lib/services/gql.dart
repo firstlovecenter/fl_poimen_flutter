@@ -22,11 +22,7 @@ ValueNotifier<GraphQLClient> client = ValueNotifier(
     cache: GraphQLCache(store: HiveStore()),
     defaultPolicies: DefaultPolicies(
       query: Policies(fetch: FetchPolicy.cacheAndNetwork),
-      mutate: Policies(fetch: FetchPolicy.cacheAndNetwork),
       watchQuery: Policies(
-        fetch: FetchPolicy.cacheAndNetwork,
-      ),
-      watchMutation: Policies(
         fetch: FetchPolicy.cacheAndNetwork,
       ),
     ),
