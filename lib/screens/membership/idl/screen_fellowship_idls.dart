@@ -3,7 +3,8 @@ import 'package:poimen/screens/membership/idl/gql_fellowship_idls.dart';
 import 'package:poimen/screens/membership/idl/models_idl.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_query_container.dart';
+import 'package:poimen/services/gql_query_container.dart';
+import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class FellowshipIDLScreen extends StatelessWidget {
       query: getFellowshipIdls,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IDL List',
+      bottomNavBar: const BottomNavBar(),
       bodyFunction: (data) {
         Widget body;
 

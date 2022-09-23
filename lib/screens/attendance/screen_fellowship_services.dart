@@ -3,7 +3,8 @@ import 'package:poimen/screens/attendance/gql_services_list.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/widget_services_list.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/gql_query_container.dart';
+import 'package:poimen/services/gql_query_container.dart';
+import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class FellowshipServicesScreen extends StatelessWidget {
         query: getFellowshipServices,
         variables: {'id': churchState.fellowshipId},
         defaultPageTitle: 'Fellowship Services',
+        bottomNavBar: const BottomNavBar(),
         bodyFunction: (data) {
           Widget body;
 

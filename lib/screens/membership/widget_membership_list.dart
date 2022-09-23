@@ -23,7 +23,7 @@ class ChurchMembershipList extends StatelessWidget {
     const headerStyle =
         TextStyle(color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
 
-    const double accordionHeight = 450;
+    const double accordionHeight = 380;
     int memberCount = church.sheep.length + church.goats.length + church.deer.length;
 
     return Column(

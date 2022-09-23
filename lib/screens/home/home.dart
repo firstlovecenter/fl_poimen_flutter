@@ -17,18 +17,22 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) => setState(() => currentIndex = index),
-        currentIndex: currentIndex,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: 'Home', backgroundColor: Colors.red),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_sharp),
-            label: 'Profiles',
-            backgroundColor: Colors.blue,
-          ),
-        ],
+      bottomNavigationBar: Hero(
+        tag: 'bottomNavBar',
+        child: BottomNavigationBar(
+          onTap: (index) => setState(() => currentIndex = index),
+          currentIndex: currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_sharp),
+              label: 'Profiles',
+            ),
+          ],
+        ),
       ),
     );
   }

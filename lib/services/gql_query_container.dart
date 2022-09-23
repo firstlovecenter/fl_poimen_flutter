@@ -9,13 +9,15 @@ class GQLQueryContainer extends StatelessWidget {
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
   final Function(Map<String, dynamic>?) bodyFunction;
+  final Widget? bottomNavBar;
 
   const GQLQueryContainer(
       {Key? key,
       required this.query,
       required this.variables,
       required this.defaultPageTitle,
-      required this.bodyFunction})
+      required this.bodyFunction,
+      this.bottomNavBar})
       : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class GQLQueryContainer extends StatelessWidget {
             ),
           ),
           body: body,
+          bottomNavigationBar: bottomNavBar,
         );
       },
     );

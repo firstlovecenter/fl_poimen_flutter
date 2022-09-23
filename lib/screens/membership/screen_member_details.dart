@@ -6,7 +6,7 @@ import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
-import 'package:poimen/widgets/gql_query_container.dart';
+import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
