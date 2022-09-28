@@ -4,7 +4,9 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({Key? key, required this.menu}) : super(key: key);
+
+  final List<Map<String, dynamic>?> Function(String) menu;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -25,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
     String churchLevel = church.typename.toLowerCase();
 
-    var menuArray = getAttendanceMenus(churchLevel);
+    var menuArray = widget.menu(churchLevel);
 
     // print(_selectedIndex);
     return Hero(

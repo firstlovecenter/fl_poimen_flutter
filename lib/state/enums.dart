@@ -9,6 +9,38 @@ enum ChurchLevel {
   gathering,
 }
 
+ChurchLevel convertToChurchEnum(String churchLevel) {
+  switch (churchLevel) {
+    case 'fellowship':
+      return ChurchLevel.fellowship;
+    case 'bacenta':
+      return ChurchLevel.bacenta;
+    case 'constituency':
+      return ChurchLevel.constituency;
+    case 'council':
+      return ChurchLevel.council;
+    case 'stream':
+      return ChurchLevel.stream;
+    case 'gathering':
+      return ChurchLevel.gathering;
+    default:
+      return ChurchLevel.fellowship;
+  }
+}
+
+class ChurchString {
+  String _lowerCase = '';
+  String _properCase = '';
+
+  ChurchString(String levelLowerCase) {
+    _lowerCase = levelLowerCase;
+    _properCase = levelLowerCase[0].toUpperCase() + levelLowerCase.substring(1);
+  }
+
+  String get lowerCase => _lowerCase;
+  String get properCase => _properCase;
+}
+
 enum Stream { Campus, Town, Anagkazo }
 
 enum GenderOptions {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/idl/gql_fellowship_idls.dart';
 import 'package:poimen/screens/membership/idl/models_idl.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
@@ -19,7 +20,7 @@ class FellowshipIDLScreen extends StatelessWidget {
       query: getFellowshipIdls,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IDL List',
-      bottomNavBar: const BottomNavBar(),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus),
       bodyFunction: (data) {
         Widget body;
 

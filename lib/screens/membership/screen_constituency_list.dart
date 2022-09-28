@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
@@ -18,7 +19,7 @@ class ConstituencyMembershipScreen extends StatelessWidget {
       query: getConstituencyMembers,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Members',
-      bottomNavBar: const BottomNavBar(),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus),
       bodyFunction: (data) {
         Widget body;
 

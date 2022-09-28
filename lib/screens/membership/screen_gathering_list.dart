@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
@@ -19,7 +20,7 @@ class GatheringMembershipScreen extends StatelessWidget {
       query: getGatheringMembers,
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Gathering Members',
-      bottomNavBar: const BottomNavBar(),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus),
       bodyFunction: (data) {
         Widget body;
 

@@ -1,3 +1,6 @@
+import 'package:poimen/screens/attendance/defaulters/screen_constituency_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.dart';
 import 'package:poimen/screens/attendance/report/screen_fellowship_report.dart';
 import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
@@ -43,4 +46,11 @@ var appRoutes = {
   '/bacenta-services': (context) => const BacentaServicesScreen(),
   '/bacenta/attendance-ticker': (context) => const BacentaAttendanceTickerScreen(),
   '/bacenta/attendance-report': (context) => const BacentaAttendanceReportScreen(),
+
+// Attendance Defaulters
+
+  '/constituency/attendance-defaulters': (context) =>
+      const ConstituencyAttendanceDefaultersScreen(),
+  '/council/attendance-defaulters': (context) => const CouncilAttendanceDefaultersScreen(),
+  '/stream/attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),
 };

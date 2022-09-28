@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/attendance/gql_services_list.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/widget_services_list.dart';
@@ -19,7 +20,7 @@ class FellowshipServicesScreen extends StatelessWidget {
         query: getFellowshipServices,
         variables: {'id': churchState.fellowshipId},
         defaultPageTitle: 'Fellowship Services',
-        bottomNavBar: const BottomNavBar(),
+        bottomNavBar: BottomNavBar(menu: getAttendanceMenus),
         bodyFunction: (data) {
           Widget body;
 

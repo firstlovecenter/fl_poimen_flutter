@@ -15,7 +15,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
-    String churchLevel = churchState.church.typename.toLowerCase();
+    String level = churchState.church.typename.toLowerCase();
+    final churchLevel = convertToChurchEnum(level);
+
     var church = churchState.church;
     var role = _parseRole(churchState.role);
     final authUser = AuthService.instance.idToken;
@@ -72,21 +74,23 @@ class HomeScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 22),
             ),
             const Padding(padding: EdgeInsets.all(20.0)),
-            attendanceLevels(churchState.church.typename),
+            attendanceLevels(churchLevel),
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/$churchLevel-idls',
+              route: '/${level.toLowerCase()}-idls',
               permitted: const [Role.leaderFellowship],
             ),
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'Membership List',
               icon: FontAwesomeIcons.clipboardUser,
-              route: '/$churchLevel-members',
+              route: '/${level.toLowerCase()}-members',
               permitted: const [Role.all],
             ),
+            const Padding(padding: EdgeInsets.all(3)),
+            defaultersLevels(churchLevel),
           ],
         ),
       ),
@@ -94,16 +98,35 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget attendanceLevels(String churchLevel) {
-  if (churchLevel != 'Fellowship' && churchLevel != 'Bacenta') {
+Widget attendanceLevels(ChurchLevel churchLevel) {
+  if (churchLevel != ChurchLevel.fellowship && churchLevel != ChurchLevel.bacenta) {
     return Container();
   }
 
+  ChurchString level = ChurchString(churchLevel.name);
+
   return HomePageButton(
-    text: '$churchLevel Attendance',
+    text: '${level.properCase} Attendance',
     icon: FontAwesomeIcons.clipboardUser,
-    route: '/${churchLevel.toLowerCase()}-services',
-    permitted: [Role.values.byName('leader$churchLevel')],
+    route: '/${level.lowerCase}-services',
+    permitted: [Role.values.byName('leader${level.properCase}')],
+  );
+}
+
+Widget defaultersLevels(ChurchLevel churchLevel) {
+  const permittedLevels = [ChurchLevel.constituency, ChurchLevel.council, ChurchLevel.stream];
+
+  if (!permittedLevels.contains(churchLevel)) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'Attendance Defaulters',
+    icon: FontAwesomeIcons.xmark,
+    route: '/${level.lowerCase}/attendance-defaulters',
+    permitted: [Role.values.byName('leader${level.properCase}')],
   );
 }
 
