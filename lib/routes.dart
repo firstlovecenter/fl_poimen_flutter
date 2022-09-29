@@ -1,3 +1,4 @@
+import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/constituency_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.dart';
@@ -51,6 +52,9 @@ var appRoutes = {
 
   '/constituency/attendance-defaulters': (context) =>
       const ConstituencyAttendanceDefaultersScreen(),
+  '/constituency/fellowship-attendance-defaulters': (context) =>
+      const ConstituencyFellowshipAttendanceDefaultersScreen(),
+
   '/council/attendance-defaulters': (context) => const CouncilAttendanceDefaultersScreen(),
   '/stream/attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),
 };

@@ -17,7 +17,7 @@ class ConstituencyAttendanceDefaultersScreen extends StatelessWidget {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: constituencyAttendanceDefaulters,
+      query: getConstituencyAttendanceDefaulters,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Attendance Defaulters',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus),

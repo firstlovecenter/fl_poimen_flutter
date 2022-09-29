@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final constituencyAttendanceDefaulters = gql('''
-   query constituencyAttendanceDefaulters(\$id: ID!) {
+final getConstituencyAttendanceDefaulters = gql('''
+   query getConstituencyAttendanceDefaulters(\$id: ID!) {
      constituencies(where: { id: \$id }) {
        id
        name

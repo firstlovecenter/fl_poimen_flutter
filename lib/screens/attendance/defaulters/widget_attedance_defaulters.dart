@@ -15,11 +15,13 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
           const Padding(padding: EdgeInsets.all(80)),
           DefaultersMenuCard(
             number: church.bacentaAttendanceDefaultersCount,
+            churchLevel: church.typename.toLowerCase(),
             title: 'Did Not Fill Bacenta Attendance',
           ),
           const Padding(padding: EdgeInsets.all(10)),
           DefaultersMenuCard(
             number: church.fellowshipAttendanceDefaultersCount,
+            churchLevel: church.typename.toLowerCase(),
             title: 'Did Not Fill Fellowship Attendance',
           ),
         ],
@@ -33,31 +35,38 @@ class DefaultersMenuCard extends StatelessWidget {
     Key? key,
     required this.number,
     required this.title,
+    required this.churchLevel,
   }) : super(key: key);
 
   final int number;
   final String title;
+  final String churchLevel;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(
+        '/$churchLevel/fellowship-attendance-defaulters',
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 12, bottom: 12),
-        child: ListTile(
-          title: Text(title),
-          trailing: Card(
-            color: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-              child: Text(
-                '$number',
-                style: const TextStyle(color: Colors.red, fontSize: 20),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12, bottom: 12),
+          child: ListTile(
+            title: Text(title),
+            trailing: Card(
+              color: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+                child: Text(
+                  '$number',
+                  style: const TextStyle(color: Colors.red, fontSize: 20),
+                ),
               ),
             ),
           ),
