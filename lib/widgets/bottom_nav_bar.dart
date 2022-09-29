@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatelessWidget {
   const BottomNavBar({Key? key, required this.menu}) : super(key: key);
 
   final List<Map<String, dynamic>?> Function(String) menu;
-
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +14,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
     String churchLevel = church.typename.toLowerCase();
 
-    var menuArray = widget.menu(churchLevel);
+    var menuArray = menu(churchLevel);
 
-    // print(_selectedIndex);
     return Hero(
       tag: 'bottomNavBar',
       child: BottomNavigationBar(
-        items: getIcons(menuArray, _selectedIndex),
-        currentIndex: _selectedIndex,
+        items: getIcons(menuArray),
+        currentIndex: churchState.bottomNavSelectedIndex,
         onTap: (int index) {
-          _onItemTapped(index);
+          churchState.bottomNavSelectedIndex = index;
 
           List<String> routesArray = getRoutes(menuArray);
 
@@ -57,7 +43,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 }
 
-getIcons(List<Map<String, dynamic>?> menuArray, dynamic i) {
+getIcons(List<Map<String, dynamic>?> menuArray) {
   List<BottomNavigationBarItem> icons = [];
 
   for (var menu in menuArray) {

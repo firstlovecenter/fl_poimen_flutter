@@ -4,7 +4,7 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:poimen/widgets/page_title.dart';
 
-class GQLQueryContainer extends StatelessWidget {
+class GQLQueryContainer extends StatefulWidget {
   final dynamic query;
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
@@ -21,15 +21,20 @@ class GQLQueryContainer extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<GQLQueryContainer> createState() => _GQLQueryContainerState();
+}
+
+class _GQLQueryContainerState extends State<GQLQueryContainer> {
+  @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(document: query, variables: variables),
+      options: QueryOptions(document: widget.query, variables: widget.variables),
       builder: (
         QueryResult result, {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        Widget pageTitle = Text(defaultPageTitle);
+        Widget pageTitle = Text(widget.defaultPageTitle);
         Widget body;
 
         if (result.hasException) {
@@ -42,7 +47,7 @@ class GQLQueryContainer extends StatelessWidget {
         } else if (result.isLoading || result.data == null) {
           body = const LoadingScreen();
         } else {
-          GQLQueryContainerReturnValue res = bodyFunction(result.data);
+          GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);
           pageTitle = res.pageTitle;
           body = res.body;
         }
@@ -57,7 +62,7 @@ class GQLQueryContainer extends StatelessWidget {
             ),
           ),
           body: body,
-          bottomNavigationBar: bottomNavBar,
+          bottomNavigationBar: widget.bottomNavBar,
         );
       },
     );
