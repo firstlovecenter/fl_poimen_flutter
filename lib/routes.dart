@@ -1,3 +1,4 @@
+import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/constituency_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
@@ -49,11 +50,12 @@ var appRoutes = {
   '/bacenta/attendance-report': (context) => const BacentaAttendanceReportScreen(),
 
 // Attendance Defaulters
-
   '/constituency/attendance-defaulters': (context) =>
       const ConstituencyAttendanceDefaultersScreen(),
   '/constituency/fellowship-attendance-defaulters': (context) =>
       const ConstituencyFellowshipAttendanceDefaultersScreen(),
+  '/constituency/bacenta-attendance-defaulters': (context) =>
+      const ConstituencyBacentaAttendanceDefaultersScreen(),
 
   '/council/attendance-defaulters': (context) => const CouncilAttendanceDefaultersScreen(),
   '/stream/attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),

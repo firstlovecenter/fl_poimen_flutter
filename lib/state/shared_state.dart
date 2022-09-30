@@ -19,11 +19,11 @@ class SharedState with ChangeNotifier {
 
   String _bussingRecordId = '';
   String _serviceRecordId = '';
-  int _bottomNavSelectedIndex = 0;
+  String _bottomNavSelected = '';
 
   Role get role => _role;
   ProfileChurch get church => _church;
-  int get bottomNavSelectedIndex => _bottomNavSelectedIndex;
+  String get bottomNavSelected => _bottomNavSelected;
 
   String get memberId => _memberId;
   String get fellowshipId => _fellowshipId;
@@ -46,8 +46,8 @@ class SharedState with ChangeNotifier {
     notifyListeners();
   }
 
-  set bottomNavSelectedIndex(int bottomNavSelectedIndex) {
-    _bottomNavSelectedIndex = bottomNavSelectedIndex;
+  set bottomNavSelected(String bottomNavSelected) {
+    _bottomNavSelected = bottomNavSelected;
     notifyListeners();
   }
 

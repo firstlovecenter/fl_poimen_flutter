@@ -15,14 +15,16 @@ class BottomNavBar extends StatelessWidget {
     String churchLevel = church.typename.toLowerCase();
 
     var menuArray = menu(churchLevel);
+    menuArray.removeWhere((element) => element == null);
+    int attendanceIndex(String key) => menuArray.indexWhere((element) => element?['navKey'] == key);
 
     return Hero(
       tag: 'bottomNavBar',
       child: BottomNavigationBar(
         items: getIcons(menuArray),
-        currentIndex: churchState.bottomNavSelectedIndex,
+        currentIndex: attendanceIndex(churchState.bottomNavSelected),
         onTap: (int index) {
-          churchState.bottomNavSelectedIndex = index;
+          churchState.bottomNavSelected = menuArray[index]?['navKey'];
 
           List<String> routesArray = getRoutes(menuArray);
 

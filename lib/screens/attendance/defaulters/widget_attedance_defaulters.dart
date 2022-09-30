@@ -16,12 +16,14 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
           DefaultersMenuCard(
             number: church.bacentaAttendanceDefaultersCount,
             churchLevel: church.typename.toLowerCase(),
+            attendanceCategory: 'bacenta',
             title: 'Did Not Fill Bacenta Attendance',
           ),
           const Padding(padding: EdgeInsets.all(10)),
           DefaultersMenuCard(
             number: church.fellowshipAttendanceDefaultersCount,
             churchLevel: church.typename.toLowerCase(),
+            attendanceCategory: 'fellowship',
             title: 'Did Not Fill Fellowship Attendance',
           ),
         ],
@@ -36,17 +38,19 @@ class DefaultersMenuCard extends StatelessWidget {
     required this.number,
     required this.title,
     required this.churchLevel,
+    required this.attendanceCategory,
   }) : super(key: key);
 
   final int number;
   final String title;
   final String churchLevel;
+  final String attendanceCategory;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.of(context).pushNamed(
-        '/$churchLevel/fellowship-attendance-defaulters',
+        '/$churchLevel/$attendanceCategory-attendance-defaulters',
       ),
       child: Card(
         shape: RoundedRectangleBorder(

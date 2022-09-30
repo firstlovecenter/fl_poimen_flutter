@@ -79,12 +79,14 @@ class HomeScreen extends StatelessWidget {
             HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
+              navKey: 'idls',
               route: '/${level.toLowerCase()}-idls',
               permitted: const [Role.leaderFellowship],
             ),
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'Membership List',
+              navKey: 'membership',
               icon: FontAwesomeIcons.clipboardUser,
               route: '/${level.toLowerCase()}-members',
               permitted: const [Role.all],
@@ -108,6 +110,7 @@ Widget attendanceLevels(ChurchLevel churchLevel) {
   return HomePageButton(
     text: '${level.properCase} Attendance',
     icon: FontAwesomeIcons.clipboardUser,
+    navKey: 'attendance',
     route: '/${level.lowerCase}-services',
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
@@ -125,6 +128,7 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
   return HomePageButton(
     text: 'Attendance Defaulters',
     icon: FontAwesomeIcons.xmark,
+    navKey: 'attendance-defaulters',
     route: '/${level.lowerCase}/attendance-defaulters',
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
@@ -133,6 +137,7 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
 class HomePageButton extends StatelessWidget {
   final String text;
   final IconData icon;
+  final String navKey;
   final String route;
   final List<Role> permitted;
 
@@ -141,6 +146,7 @@ class HomePageButton extends StatelessWidget {
       required this.text,
       required this.icon,
       required this.route,
+      required this.navKey,
       required this.permitted})
       : super(key: key);
 
@@ -153,6 +159,7 @@ class HomePageButton extends StatelessWidget {
 
     return ElevatedButton.icon(
       onPressed: () {
+        userState.bottomNavSelected = navKey;
         Navigator.pushNamed(context, route);
       },
       icon: CircleAvatar(
