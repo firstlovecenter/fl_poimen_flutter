@@ -117,7 +117,12 @@ Widget attendanceLevels(ChurchLevel churchLevel) {
 }
 
 Widget defaultersLevels(ChurchLevel churchLevel) {
-  const permittedLevels = [ChurchLevel.constituency, ChurchLevel.council, ChurchLevel.stream];
+  const permittedLevels = [
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+    ChurchLevel.stream,
+    ChurchLevel.gathering
+  ];
 
   if (!permittedLevels.contains(churchLevel)) {
     return Container();

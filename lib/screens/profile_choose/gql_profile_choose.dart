@@ -32,6 +32,11 @@ final getUserRoles = gql('''
         typename
         name
       }
+      leadsStream {
+        id
+        typename
+        name
+      }
    
       leadsGatheringService {
         id

@@ -55,6 +55,9 @@ class ProfileChooseScreen extends StatelessWidget {
                 ...user.leadsCouncil.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
+                ...user.leadsStream.map((church) {
+                  return ProfileCard(church: church, role: 'Leader');
+                }).toList(),
                 ...user.leadsGatheringService.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
                 }).toList(),

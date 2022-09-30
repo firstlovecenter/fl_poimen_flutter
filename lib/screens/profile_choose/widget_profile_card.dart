@@ -80,6 +80,8 @@ _getRoleImage(String level) {
       return 'assets/images/profile-choose/constituency-leader.jpg';
     case 'Council':
       return 'assets/images/profile-choose/council-leader.jpeg';
+    case 'Stream':
+      return 'assets/images/profile-choose/council-leader.jpeg';
     case 'GatheringService':
       return 'assets/images/profile-choose/gathering-admin.jpg';
 

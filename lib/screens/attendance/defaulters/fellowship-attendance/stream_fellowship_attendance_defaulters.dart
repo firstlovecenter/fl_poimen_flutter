@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/helpers/menus.dart';
+import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/widget_fellowship_defaulters_list.dart';
 import 'package:poimen/screens/attendance/defaulters/gql_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/models_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/widget_attedance_defaulters.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class CouncilAttendanceDefaultersScreen extends StatelessWidget {
-  const CouncilAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class StreamFellowshipAttendanceDefaultersScreen extends StatelessWidget {
+  const StreamFellowshipAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getCouncilAttendanceDefaulters,
-      variables: {'id': churchState.councilId},
-      defaultPageTitle: 'Council Attendance Defaulters',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+      query: getStreamFellowshipAttendanceDefaultersList,
+      variables: {'id': churchState.streamId},
+      defaultPageTitle: 'Fellowship Attendance Defaulters',
       bodyFunction: (data) {
         Widget body;
 
-        final council = ChurchForAttendanceDefaulters.fromJson(data?['councils'][0]);
+        final stream = ChurchForFellowshipAttendanceDefaultersList.fromJson(data?['streams'][0]);
 
-        body = ChurchAttendanceDefaulters(church: council);
+        body = FellowshipAttendanceDefaultersList(
+          church: stream,
+        );
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: council,
+            church: stream,
           ),
           body: body,
         );

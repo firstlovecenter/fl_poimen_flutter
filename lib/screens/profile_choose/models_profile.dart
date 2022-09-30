@@ -12,8 +12,7 @@ class ProfileChurch {
     required this.typename,
     required this.name,
   });
-  factory ProfileChurch.fromJson(Map<String, dynamic> json) =>
-      _$ProfileChurchFromJson(json);
+  factory ProfileChurch.fromJson(Map<String, dynamic> json) => _$ProfileChurchFromJson(json);
   Map<String, dynamic> toJson() => _$ProfileChurchToJson(this);
 }
 
@@ -28,6 +27,7 @@ class Profile {
   List<ProfileChurch> leadsConstituency;
   List<ProfileChurch> leadsSonta;
   List<ProfileChurch> leadsCouncil;
+  List<ProfileChurch> leadsStream;
   List<ProfileChurch> leadsGatheringService;
   List<ProfileChurch> isAdminForGatheringService;
 
@@ -41,11 +41,11 @@ class Profile {
     required this.leadsConstituency,
     required this.leadsSonta,
     required this.leadsCouncil,
+    required this.leadsStream,
     required this.leadsGatheringService,
     required this.isAdminForGatheringService,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFromJson(json);
+  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }

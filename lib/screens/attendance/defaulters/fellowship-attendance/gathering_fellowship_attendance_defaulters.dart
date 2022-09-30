@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/helpers/menus.dart';
+import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/widget_fellowship_defaulters_list.dart';
 import 'package:poimen/screens/attendance/defaulters/gql_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/models_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/widget_attedance_defaulters.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class CouncilAttendanceDefaultersScreen extends StatelessWidget {
-  const CouncilAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class GatheringFellowshipAttendanceDefaultersScreen extends StatelessWidget {
+  const GatheringFellowshipAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getCouncilAttendanceDefaulters,
-      variables: {'id': churchState.councilId},
-      defaultPageTitle: 'Council Attendance Defaulters',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+      query: getGatheringFellowshipAttendanceDefaultersList,
+      variables: {'id': churchState.gatheringId},
+      defaultPageTitle: 'Fellowship Attendance Defaulters',
       bodyFunction: (data) {
         Widget body;
 
-        final council = ChurchForAttendanceDefaulters.fromJson(data?['councils'][0]);
+        final gathering =
+            ChurchForFellowshipAttendanceDefaultersList.fromJson(data?['gatheringServices'][0]);
 
-        body = ChurchAttendanceDefaulters(church: council);
+        body = FellowshipAttendanceDefaultersList(
+          church: gathering,
+        );
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: council,
+            church: gathering,
           ),
           body: body,
         );
