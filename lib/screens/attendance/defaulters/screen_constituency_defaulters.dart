@@ -20,7 +20,7 @@ class ConstituencyAttendanceDefaultersScreen extends StatelessWidget {
       query: getConstituencyAttendanceDefaulters,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Attendance Defaulters',
-      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus),
+      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data) {
         Widget body;
 
