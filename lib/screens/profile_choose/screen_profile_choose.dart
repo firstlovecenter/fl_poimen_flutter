@@ -26,7 +26,6 @@ class ProfileChooseScreen extends StatelessWidget {
         Widget body;
         String pageTitle = 'Profile Choose';
 
-        print(result.exception);
         if (result.hasException) {
           body = AlertBox(
             type: AlertType.error,
