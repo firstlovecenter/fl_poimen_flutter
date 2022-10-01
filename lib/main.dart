@@ -27,8 +27,8 @@ class PoimenApp extends StatelessWidget {
         create: (context) => SharedState(),
         child: MaterialApp(
           title: 'Poimen Flutter',
-          theme: darkTheme,
-          darkTheme: lightTheme,
+          theme: lightTheme,
+          darkTheme: darkTheme,
           routes: appRoutes,
           home: const LoginScreen(),
         ),
