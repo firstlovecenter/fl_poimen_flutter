@@ -19,16 +19,28 @@ class ChurchImclList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: ListView(
-        children: noDataChecker(church.imcls.map((member) {
-          return memberTile(context, member);
+      child: ListView(children: [
+        const Padding(padding: EdgeInsets.all(10)),
+        const Text(
+          'This is the list of those who were not at the last church service',
+          style: TextStyle(fontSize: 16),
+        ),
+        Center(
+          child: Text(
+            'You must contact them to find out why they were absent',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: PoimenTheme.brand),
+          ),
+        ),
+        const Padding(padding: EdgeInsets.all(8.0)),
+        ...noDataChecker(church.imcls.map((member) {
+          return _memberTile(context, member);
         }).toList()),
-      ),
+      ]),
     );
   }
 }
 
-Column memberTile(BuildContext context, MemberForList member) {
+Column _memberTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
@@ -51,7 +63,7 @@ Column memberTile(BuildContext context, MemberForList member) {
             ),
           ),
           title: Text('${member.firstName} ${member.lastName}'),
-          subtitle: Text(member.typename),
+          subtitle: Text(member.status!),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             ContactIcon(
               icon: Icons.phone,

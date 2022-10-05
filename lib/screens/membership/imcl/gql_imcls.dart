@@ -9,6 +9,7 @@ final getFellowshipImcls = gql('''
       imcls {
         id
         typename
+        status
         firstName
         lastName
         pictureUrl
@@ -28,6 +29,7 @@ final getBacentaImcls = gql('''
       imcls {
         id
         typename
+        status
         firstName
         lastName
         pictureUrl

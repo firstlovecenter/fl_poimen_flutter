@@ -9,6 +9,7 @@ final getFellowshipIdls = gql('''
       idls {
         id
         typename
+        status
         firstName
         lastName
         pictureUrl
