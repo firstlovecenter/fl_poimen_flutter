@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     var churchState = Provider.of<SharedState>(context);
     String level = churchState.church.typename.toLowerCase();
     final churchLevel = convertToChurchEnum(level);
+    final levelForUrl = churchLevel.name.toLowerCase();
 
     var church = churchState.church;
     var role = _parseRole(churchState.role);
@@ -25,6 +26,7 @@ class HomeScreen extends StatelessWidget {
     final user = MemberForList(
       id: authUser!.sub,
       typename: 'Member',
+      status: 'Sheep',
       firstName: authUser.given_name,
       lastName: authUser.family_name,
       pictureUrl: authUser.picture,
@@ -80,7 +82,7 @@ class HomeScreen extends StatelessWidget {
               text: 'Missing Persons Call List',
               icon: FontAwesomeIcons.personCircleQuestion,
               navKey: 'idls',
-              route: '/${level.toLowerCase()}-imcls',
+              route: '/$levelForUrl-imcls',
               permitted: const [Role.leaderFellowship, Role.leaderBacenta],
             ),
             const Padding(padding: EdgeInsets.all(3)),
@@ -88,7 +90,7 @@ class HomeScreen extends StatelessWidget {
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.userPlus,
               navKey: 'idls',
-              route: '/${level.toLowerCase()}-idls',
+              route: '/$levelForUrl-idls',
               permitted: const [Role.leaderFellowship],
             ),
             const Padding(padding: EdgeInsets.all(3)),
@@ -96,7 +98,7 @@ class HomeScreen extends StatelessWidget {
               text: 'Membership List',
               navKey: 'membership',
               icon: FontAwesomeIcons.solidAddressBook,
-              route: '/${level.toLowerCase()}-members',
+              route: '/$levelForUrl-members',
               permitted: const [Role.all],
             ),
             const Padding(padding: EdgeInsets.all(3)),

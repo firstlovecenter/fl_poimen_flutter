@@ -42,7 +42,7 @@ var appRoutes = {
   '/constituency-members': (context) => const ConstituencyMembershipScreen(),
   '/council-members': (context) => const CouncilMembershipScreen(),
   '/stream-members': (context) => const StreamMembershipScreen(),
-  '/gatheringservice-members': (context) => const GatheringMembershipScreen(),
+  '/gathering-members': (context) => const GatheringMembershipScreen(),
 
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),

@@ -20,6 +20,7 @@ class StreamMembershipScreen extends StatelessWidget {
       query: getStreamMembers,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Stream Members',
+      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (Map<String, dynamic>? data) {
         Widget body;
 

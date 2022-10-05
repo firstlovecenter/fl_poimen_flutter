@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
@@ -6,14 +7,14 @@ class BottomNavBar extends StatelessWidget {
   BottomNavBar({Key? key, required this.menu, this.index}) : super(key: key);
 
   int? index = 0;
-  final List<Map<String, dynamic>?> Function(String) menu;
+  final List<Map<String, dynamic>?> Function(ChurchLevel) menu;
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
     var church = churchState.church;
 
-    String churchLevel = church.typename.toLowerCase();
+    final churchLevel = convertToChurchEnum(church.typename.toLowerCase());
 
     var menuArray = menu(churchLevel);
     int computedIndex = 0;
