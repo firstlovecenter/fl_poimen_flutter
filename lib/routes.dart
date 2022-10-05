@@ -18,6 +18,8 @@ import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
+import 'package:poimen/screens/membership/imcl/screen_bacenta_idls.dart';
+import 'package:poimen/screens/membership/imcl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
 import 'package:poimen/screens/membership/screen_constituency_list.dart';
 import 'package:poimen/screens/membership/screen_council_list.dart';
@@ -44,6 +46,10 @@ var appRoutes = {
 
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
+
+  // Display IMCL for Fellowship and Bacenta Levels
+  '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
+  '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens

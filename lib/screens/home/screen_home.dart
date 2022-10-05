@@ -77,6 +77,14 @@ class HomeScreen extends StatelessWidget {
             attendanceLevels(churchLevel),
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
+              text: 'Missing Persons Call List',
+              icon: FontAwesomeIcons.clipboardUser,
+              navKey: 'idls',
+              route: '/${level.toLowerCase()}-imcls',
+              permitted: const [Role.leaderFellowship, Role.leaderBacenta],
+            ),
+            const Padding(padding: EdgeInsets.all(3)),
+            HomePageButton(
               text: 'First Timers and New Converts',
               icon: FontAwesomeIcons.clipboardUser,
               navKey: 'idls',

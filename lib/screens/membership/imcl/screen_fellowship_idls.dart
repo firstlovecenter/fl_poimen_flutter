@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/helpers/menus.dart';
-import 'package:poimen/screens/membership/idl/gql_fellowship_idls.dart';
-import 'package:poimen/screens/membership/idl/models_idl.dart';
-import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
+import 'package:poimen/screens/membership/imcl/gql_imcls.dart';
+import 'package:poimen/screens/membership/imcl/models_imcl.dart';
+import 'package:poimen/screens/membership/imcl/widget_imcl_list.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class FellowshipIDLScreen extends StatelessWidget {
-  const FellowshipIDLScreen({Key? key}) : super(key: key);
+class FellowshipIMCLScreen extends StatelessWidget {
+  const FellowshipIMCLScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getFellowshipIdls,
+      query: getFellowshipImcls,
       variables: {'id': churchState.fellowshipId},
-      defaultPageTitle: 'Fellowship IDL List',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 3),
+      defaultPageTitle: 'Fellowship IMCL List',
+      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 2),
       bodyFunction: (data) {
         Widget body;
 
-        final fellowship = ChurchForIdlList.fromJson(data?['fellowships'][0]);
+        final fellowship = ChurchForImclList.fromJson(data?['fellowships'][0]);
 
-        body = ChurchIdlList(church: fellowship);
+        body = ChurchImclList(church: fellowship);
 
         return GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
               church: fellowship,
-              pageTitle: 'IDL List',
+              pageTitle: 'IMCL List',
             ),
             body: body);
       },

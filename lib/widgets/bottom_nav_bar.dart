@@ -48,6 +48,9 @@ class BottomNavBar extends StatelessWidget {
             case 3:
               Navigator.pushNamed(context, routesArray[3]);
               break;
+            case 4:
+              Navigator.pushNamed(context, routesArray[4]);
+              break;
           }
         },
       ),

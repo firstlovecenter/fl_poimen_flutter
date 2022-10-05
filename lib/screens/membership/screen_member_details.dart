@@ -24,7 +24,7 @@ class MemberDetailsScreen extends StatelessWidget {
       query: getMemberDetails,
       variables: {'id': state.memberId},
       defaultPageTitle: 'Member Details',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 3),
+      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         final member = Member.fromJson(data?['members'][0]);
         final picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.lg);
