@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'Missing Persons Call List',
-              icon: FontAwesomeIcons.clipboardUser,
+              icon: FontAwesomeIcons.personCircleQuestion,
               navKey: 'idls',
               route: '/${level.toLowerCase()}-imcls',
               permitted: const [Role.leaderFellowship, Role.leaderBacenta],
@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(3)),
             HomePageButton(
               text: 'First Timers and New Converts',
-              icon: FontAwesomeIcons.clipboardUser,
+              icon: FontAwesomeIcons.userPlus,
               navKey: 'idls',
               route: '/${level.toLowerCase()}-idls',
               permitted: const [Role.leaderFellowship],
@@ -95,7 +95,7 @@ class HomeScreen extends StatelessWidget {
             HomePageButton(
               text: 'Membership List',
               navKey: 'membership',
-              icon: FontAwesomeIcons.clipboardUser,
+              icon: FontAwesomeIcons.solidAddressBook,
               route: '/${level.toLowerCase()}-members',
               permitted: const [Role.all],
             ),
@@ -117,7 +117,7 @@ Widget attendanceLevels(ChurchLevel churchLevel) {
 
   return HomePageButton(
     text: '${level.properCase} Attendance',
-    icon: FontAwesomeIcons.clipboardUser,
+    icon: FontAwesomeIcons.userCheck,
     navKey: 'attendance',
     route: '/${level.lowerCase}-services',
     permitted: [Role.values.byName('leader${level.properCase}')],
@@ -140,7 +140,7 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
 
   return HomePageButton(
     text: 'Attendance Defaulters',
-    icon: FontAwesomeIcons.xmark,
+    icon: FontAwesomeIcons.userXmark,
     navKey: 'attendance-defaulters',
     route: '/${level.lowerCase}/attendance-defaulters',
     permitted: [Role.values.byName('leader${level.properCase}')],

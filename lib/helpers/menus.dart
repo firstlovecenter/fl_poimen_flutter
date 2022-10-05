@@ -8,7 +8,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(String churchLevel) => [
       churchLevel == 'fellowship' || churchLevel == 'bacenta'
           ? {
               'title': 'Attendance',
-              'icon': FontAwesomeIcons.checkDouble,
+              'icon': FontAwesomeIcons.userCheck,
               'route': '/$churchLevel-services',
               'navKey': 'attendance'
             }
@@ -24,7 +24,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(String churchLevel) => [
       churchLevel == 'fellowship'
           ? {
               'title': 'IDLs',
-              'icon': FontAwesomeIcons.doorOpen,
+              'icon': FontAwesomeIcons.userPlus,
               'route': '/$churchLevel-idls',
               'navKey': 'idls'
             }
@@ -32,14 +32,14 @@ List<Map<String, dynamic>?> getAttendanceMenus(String churchLevel) => [
       _higherChurches.contains(churchLevel)
           ? {
               'title': 'Defaulters',
-              'icon': FontAwesomeIcons.xmark,
+              'icon': FontAwesomeIcons.userXmark,
               'route': '/$churchLevel/attendance-defaulters',
               'navKey': 'attendance-defaulters'
             }
           : null,
       {
         'title': 'Members',
-        'icon': FontAwesomeIcons.userGroup,
+        'icon': FontAwesomeIcons.solidAddressBook,
         'route': '/$churchLevel-members',
         'navKey': 'membership'
       },

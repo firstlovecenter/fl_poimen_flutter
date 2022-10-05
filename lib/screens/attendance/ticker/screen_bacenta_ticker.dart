@@ -35,7 +35,8 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
-                Navigator.pushNamed(context, '/bacenta/attendance-report');
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/bacenta/attendance-report', (route) => false);
               },
             ),
           );

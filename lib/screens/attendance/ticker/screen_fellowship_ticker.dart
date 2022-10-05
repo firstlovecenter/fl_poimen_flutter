@@ -36,7 +36,8 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
-                Navigator.pushNamed(context, '/fellowship/attendance-report');
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/fellowship/attendance-report', (route) => false);
               },
             ),
           );
