@@ -22,6 +22,7 @@ final getUserRoles = gql('''
         id
         typename
         name
+        imclTotal
       }
       leadsSonta {
         id
@@ -31,22 +32,26 @@ final getUserRoles = gql('''
         id
         typename
         name
+        imclTotal
       }
       leadsStream {
         id
         typename
         name
+        imclTotal
       }
    
       leadsGatheringService {
         id
         typename
         name
+        imclTotal
       }
       isAdminForGatheringService {
         id
         typename
         name
+        imclTotal
       }
     }
   }

@@ -11,6 +11,7 @@ ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     typename: json['typename'] as String,
     name: json['name'] as String,
+    imclTotal: json['imclTotal'] as int?,
   );
 }
 
@@ -19,6 +20,7 @@ Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) =>
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
+      'imclTotal': instance.imclTotal,
     };
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) {

@@ -6,11 +6,13 @@ class ProfileChurch {
   String id;
   String typename;
   String name;
+  int? imclTotal;
 
   ProfileChurch({
     required this.id,
     required this.typename,
     required this.name,
+    this.imclTotal,
   });
   factory ProfileChurch.fromJson(Map<String, dynamic> json) => _$ProfileChurchFromJson(json);
   Map<String, dynamic> toJson() => _$ProfileChurchToJson(this);
