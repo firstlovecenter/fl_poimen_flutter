@@ -72,22 +72,25 @@ class DefaulterSubChurchCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
+        if (level == ChurchLevel.constituency) {
+          churchState.constituencyId = church.id;
+          Navigator.pushNamed(context, '/constituency/attendance-defaulters');
+        }
         if (level == ChurchLevel.stream) {
           churchState.streamId = church.id;
+          Navigator.pushNamed(
+            context,
+            '/${church.typename.toLowerCase()}-by-${subChurchLevel.name}/attendance-defaulters',
+          );
         }
 
         if (level == ChurchLevel.council) {
           churchState.councilId = church.id;
+          Navigator.pushNamed(
+            context,
+            '/${church.typename.toLowerCase()}-by-${subChurchLevel.name}/attendance-defaulters',
+          );
         }
-
-        if (level == ChurchLevel.constituency) {
-          churchState.constituencyId = church.id;
-        }
-
-        Navigator.pushNamed(
-          context,
-          '/${church.typename.toLowerCase()}-by-${subChurchLevel.name}/attendance-defaulters',
-        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

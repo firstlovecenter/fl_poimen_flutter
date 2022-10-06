@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poimen/helpers/global_functions.dart';
 import 'package:poimen/screens/attendance/defaulters/models_defaulters.dart';
 import 'package:poimen/state/enums.dart';
-import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:provider/provider.dart';
 
 class ChurchAttendanceDefaulters extends StatelessWidget {
   const ChurchAttendanceDefaulters({Key? key, required this.church}) : super(key: key);
@@ -13,12 +11,15 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedState churchState = Provider.of<SharedState>(context);
-    String level = churchState.church.typename.toLowerCase();
+    String level = church.typename.toLowerCase();
     final churchLevel = convertToChurchEnum(level);
     ChurchLevel subChurchLevel = getSubChurch(churchLevel);
     ChurchString subChurchString = ChurchString(subChurchLevel.name.toLowerCase());
-    int? subChurchCount = 0;
+    int? subChurchCount;
+
+    if (church.bacentaCount != null) {
+      subChurchCount = church.bacentaCount;
+    }
 
     if (church.constituencyCount != null) {
       subChurchCount = church.constituencyCount;

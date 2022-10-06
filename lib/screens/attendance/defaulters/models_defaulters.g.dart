@@ -50,6 +50,7 @@ ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
         json['fellowshipAttendanceDefaultersCount'] as int,
     bacentaAttendanceDefaultersCount:
         json['bacentaAttendanceDefaultersCount'] as int,
+    bacentaCount: json['bacentaCount'] as int?,
     constituencyCount: json['constituencyCount'] as int?,
     councilCount: json['councilCount'] as int?,
     streamCount: json['streamCount'] as int?,
@@ -76,6 +77,7 @@ Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
           instance.fellowshipAttendanceDefaultersCount,
       'bacentaAttendanceDefaultersCount':
           instance.bacentaAttendanceDefaultersCount,
+      'bacentaCount': instance.bacentaCount,
       'constituencyCount': instance.constituencyCount,
       'councilCount': instance.councilCount,
       'streamCount': instance.streamCount,

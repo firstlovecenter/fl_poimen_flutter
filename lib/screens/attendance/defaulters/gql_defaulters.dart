@@ -6,6 +6,7 @@ final getConstituencyAttendanceDefaulters = gql('''
        id
        name
        typename
+       bacentaCount
        fellowshipAttendanceDefaultersCount
        bacentaAttendanceDefaultersCount
      }

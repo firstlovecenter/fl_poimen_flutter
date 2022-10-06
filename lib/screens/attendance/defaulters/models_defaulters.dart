@@ -25,16 +25,17 @@ class ChurchBySubChurchForAttendanceDefaulters extends Church {
 class ChurchForAttendanceDefaulters extends Church {
   int fellowshipAttendanceDefaultersCount = 0;
   int bacentaAttendanceDefaultersCount = 0;
+  int? bacentaCount = 0;
   int? constituencyCount = 0;
   int? councilCount = 0;
   int? streamCount = 0;
   int? fellowshipServicesThisWeekCount = 0;
   int? bacentaBussingThisWeekCount = 0;
 
-
   ChurchForAttendanceDefaulters({
     required this.fellowshipAttendanceDefaultersCount,
     required this.bacentaAttendanceDefaultersCount,
+    required this.bacentaCount,
     required this.constituencyCount,
     required this.councilCount,
     required this.streamCount,
