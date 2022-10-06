@@ -12,8 +12,12 @@ final getCouncilAttendanceDefaultersByConstituency = gql('''
           typename
           leader {
             id
-            name
+            firstName
+            lastName
             typename
+            phoneNumber
+            whatsappNumber
+            pictureUrl
           }
           fellowshipServicesThisWeekCount
           fellowshipAttendanceDefaultersCount

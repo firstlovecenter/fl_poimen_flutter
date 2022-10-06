@@ -49,6 +49,58 @@ class ContactIcon extends StatelessWidget {
   }
 }
 
+class ContactIconRect extends StatelessWidget {
+  const ContactIconRect({
+    Key? key,
+    required this.icon,
+    required this.color,
+    this.phoneNumber,
+    this.whatsAppInfo,
+  }) : super(key: key);
+
+  final IconData icon;
+  final Color color;
+  final String? phoneNumber;
+  final WhatsAppInfo? whatsAppInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    final label = phoneNumber != null ? 'Call' : 'WhatsApp';
+
+    return InkWell(
+      onTap: () async {
+        if (whatsAppInfo?.number != null) {
+          await _sendWhatsappMessage(whatsAppInfo);
+        } else if (phoneNumber != null) {
+          await _makePhoneCall(phoneNumber);
+        }
+
+        return;
+      },
+      child: Card(
+        color: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+          child: Row(children: [
+            Icon(icon, color: Colors.black87),
+            const Padding(padding: EdgeInsets.all(3.0)),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
 Future<void> _makePhoneCall(String? phoneNumber) async {
   if (phoneNumber == null) {
     return;

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/global_functions.dart';
 import 'package:poimen/screens/attendance/defaulters/models_defaulters.dart';
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/icon_contact.dart';
 import 'package:provider/provider.dart';
 
 class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
@@ -103,6 +105,25 @@ class DefaulterSubChurchCard extends StatelessWidget {
                   color: _setSemanticColour(church.bacentaAttendanceDefaultersCount == 0),
                 ),
               ),
+              const Padding(padding: EdgeInsets.all(6)),
+              Text('${church.leader?.firstName} ${church.leader?.lastName}'),
+              Row(
+                children: [
+                  ContactIconRect(
+                    icon: FontAwesomeIcons.phone,
+                    color: PoimenTheme.phoneColor,
+                    phoneNumber: church.leader?.phoneNumber,
+                  ),
+                  ContactIconRect(
+                    icon: FontAwesomeIcons.whatsapp,
+                    color: PoimenTheme.whatsappColor,
+                    whatsAppInfo: WhatsAppInfo(
+                      firstName: church.leader?.firstName ?? '',
+                      number: church.leader?.whatsappNumber ?? '',
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),
@@ -110,7 +131,14 @@ class DefaulterSubChurchCard extends StatelessWidget {
     );
   }
 
-  _setSemanticColour(bool condition) {
-    return condition ? PoimenTheme.good : PoimenTheme.bad;
+  Color _setSemanticColour(bool isGood, [bool? isWarning]) {
+    if (isGood) {
+      return PoimenTheme.good;
+    }
+    if (isWarning != null && isWarning) {
+      return PoimenTheme.warning;
+    }
+
+    return PoimenTheme.bad;
   }
 }

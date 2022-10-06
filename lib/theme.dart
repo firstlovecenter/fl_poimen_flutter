@@ -14,6 +14,7 @@ class PoimenTheme {
   static Color brand = _colorFromHex('#7f50ba');
   static Color bad = _colorFromHex('#F44A4A');
   static Color good = _colorFromHex('#39FF14');
+  static Color warning = Colors.yellow;
 }
 
 var lightTheme = ThemeData(
