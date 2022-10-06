@@ -12,6 +12,8 @@ class PoimenTheme {
 
   static const Color textSecondary = Colors.grey;
   static Color brand = _colorFromHex('#7f50ba');
+  static Color bad = _colorFromHex('#F44A4A');
+  static Color good = _colorFromHex('#39FF14');
 }
 
 var lightTheme = ThemeData(

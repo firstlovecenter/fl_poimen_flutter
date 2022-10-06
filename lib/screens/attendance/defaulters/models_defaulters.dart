@@ -3,13 +3,43 @@ import 'package:poimen/screens/membership/models_membership.dart';
 part 'models_defaulters.g.dart';
 
 @JsonSerializable()
+class ChurchBySubChurchForAttendanceDefaulters extends Church {
+  List<ChurchForAttendanceDefaulters>? constituencies;
+  List<ChurchForAttendanceDefaulters>? councils;
+  List<ChurchForAttendanceDefaulters>? streams;
+
+  ChurchBySubChurchForAttendanceDefaulters({
+    this.constituencies,
+    this.councils,
+    this.streams,
+  }) : super(id: '', name: '', typename: '');
+
+  factory ChurchBySubChurchForAttendanceDefaulters.fromJson(Map<String, dynamic> json) =>
+      _$ChurchBySubChurchForAttendanceDefaultersFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$ChurchBySubChurchForAttendanceDefaultersToJson(this);
+}
+
+@JsonSerializable()
 class ChurchForAttendanceDefaulters extends Church {
   int fellowshipAttendanceDefaultersCount = 0;
   int bacentaAttendanceDefaultersCount = 0;
+  int? constituencyCount = 0;
+  int? councilCount = 0;
+  int? streamCount = 0;
+  int? fellowshipServicesThisWeekCount = 0;
+  int? bacentaBussingThisWeekCount = 0;
+
 
   ChurchForAttendanceDefaulters({
     required this.fellowshipAttendanceDefaultersCount,
     required this.bacentaAttendanceDefaultersCount,
+    required this.constituencyCount,
+    required this.councilCount,
+    required this.streamCount,
+    required this.fellowshipServicesThisWeekCount,
+    required this.bacentaBussingThisWeekCount,
   }) : super(id: '', typename: '', name: '');
 
   factory ChurchForAttendanceDefaulters.fromJson(Map<String, dynamic> json) =>
@@ -17,7 +47,6 @@ class ChurchForAttendanceDefaulters extends Church {
   @override
   Map<String, dynamic> toJson() => _$ChurchForAttendanceDefaultersToJson(this);
 }
-
 
 @JsonSerializable()
 class ChurchForFellowshipAttendanceDefaultersList extends Church {

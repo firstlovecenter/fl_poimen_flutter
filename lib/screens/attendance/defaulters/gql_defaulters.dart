@@ -66,6 +66,7 @@ final getCouncilAttendanceDefaulters = gql('''
        id
        name
        typename
+       constituencyCount
        fellowshipAttendanceDefaultersCount
        bacentaAttendanceDefaultersCount
      }
@@ -126,6 +127,7 @@ final getStreamAttendanceDefaulters = gql('''
        id
        name
        typename
+       councilCount
        fellowshipAttendanceDefaultersCount
        bacentaAttendanceDefaultersCount
      }
@@ -186,6 +188,7 @@ final getGatheringAttendanceDefaulters = gql('''
        id
        name
        typename
+       streamCount
        fellowshipAttendanceDefaultersCount
        bacentaAttendanceDefaultersCount
      }

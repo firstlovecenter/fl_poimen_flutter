@@ -6,6 +6,43 @@ part of 'models_defaulters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ChurchBySubChurchForAttendanceDefaulters
+    _$ChurchBySubChurchForAttendanceDefaultersFromJson(
+        Map<String, dynamic> json) {
+  return ChurchBySubChurchForAttendanceDefaulters(
+    constituencies: (json['constituencies'] as List<dynamic>?)
+        ?.map((e) =>
+            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    councils: (json['councils'] as List<dynamic>?)
+        ?.map((e) =>
+            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    streams: (json['streams'] as List<dynamic>?)
+        ?.map((e) =>
+            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  )
+    ..id = json['id'] as String
+    ..typename = json['typename'] as String
+    ..name = json['name'] as String
+    ..leader = json['leader'] == null
+        ? null
+        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$ChurchBySubChurchForAttendanceDefaultersToJson(
+        ChurchBySubChurchForAttendanceDefaulters instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'name': instance.name,
+      'leader': instance.leader,
+      'constituencies': instance.constituencies,
+      'councils': instance.councils,
+      'streams': instance.streams,
+    };
+
 ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
     Map<String, dynamic> json) {
   return ChurchForAttendanceDefaulters(
@@ -13,6 +50,12 @@ ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
         json['fellowshipAttendanceDefaultersCount'] as int,
     bacentaAttendanceDefaultersCount:
         json['bacentaAttendanceDefaultersCount'] as int,
+    constituencyCount: json['constituencyCount'] as int?,
+    councilCount: json['councilCount'] as int?,
+    streamCount: json['streamCount'] as int?,
+    fellowshipServicesThisWeekCount:
+        json['fellowshipServicesThisWeekCount'] as int?,
+    bacentaBussingThisWeekCount: json['bacentaBussingThisWeekCount'] as int?,
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
@@ -33,6 +76,12 @@ Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
           instance.fellowshipAttendanceDefaultersCount,
       'bacentaAttendanceDefaultersCount':
           instance.bacentaAttendanceDefaultersCount,
+      'constituencyCount': instance.constituencyCount,
+      'councilCount': instance.councilCount,
+      'streamCount': instance.streamCount,
+      'fellowshipServicesThisWeekCount':
+          instance.fellowshipServicesThisWeekCount,
+      'bacentaBussingThisWeekCount': instance.bacentaBussingThisWeekCount,
     };
 
 ChurchForFellowshipAttendanceDefaultersList
