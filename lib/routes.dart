@@ -8,6 +8,8 @@ import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/gathe
 import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/stream_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/gathering_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/council_by_constituency_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/gathering_by_stream_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/stream_by_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.dart';
@@ -90,4 +92,8 @@ var appRoutes = {
   // Attendance Defaulters Grouped By SubChurch
   '/council-by-constituency/attendance-defaulters': (context) =>
       const CouncilByConstituencyAttendanceDefaultersScreen(),
+  '/stream-by-council/attendance-defaulters': (context) =>
+      const StreamByCouncilAttendanceDefaultersScreen(),
+  '/gathering-by-stream/attendance-defaulters': (context) =>
+      const GatheringByStreamAttendanceDefaultersScreen(),
 };

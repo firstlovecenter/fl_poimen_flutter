@@ -9,29 +9,29 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class CouncilByConstituencyAttendanceDefaultersScreen extends StatelessWidget {
-  const CouncilByConstituencyAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class StreamByCouncilAttendanceDefaultersScreen extends StatelessWidget {
+  const StreamByCouncilAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getCouncilAttendanceDefaultersByConstituency,
-      variables: {'id': churchState.councilId},
+      query: getStreamAttendanceDefaultersByCouncil,
+      variables: {'id': churchState.streamId},
       defaultPageTitle: 'Attendance Defaulters',
       bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data) {
         Widget body;
 
-        final council = ChurchBySubChurchForAttendanceDefaulters.fromJson(data?['councils'][0]);
+        final stream = ChurchBySubChurchForAttendanceDefaulters.fromJson(data?['streams'][0]);
 
-        body = ChurchBySubChurchAttendanceDefaulters(church: council);
+        body = ChurchBySubChurchAttendanceDefaulters(church: stream);
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: council,
+            church: stream,
           ),
           body: body,
         );

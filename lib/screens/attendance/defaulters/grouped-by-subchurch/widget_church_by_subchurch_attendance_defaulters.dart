@@ -15,11 +15,9 @@ class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedState churchState = Provider.of<SharedState>(context);
-    String level = churchState.church.typename.toLowerCase();
+    String level = church.typename.toLowerCase();
     final churchLevel = convertToChurchEnum(level);
     ChurchLevel subChurchLevel = getSubChurch(churchLevel);
-    String subChurchState = churchState.constituencyId;
     List<ChurchForAttendanceDefaulters> subChurch = [];
 
     if (subChurchLevel == ChurchLevel.constituency) {
@@ -27,12 +25,10 @@ class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
     }
 
     if (subChurchLevel == ChurchLevel.council) {
-      subChurchState = churchState.councilId;
       subChurch = church.councils ?? [];
     }
 
     if (subChurchLevel == ChurchLevel.stream) {
-      subChurchState = churchState.streamId;
       subChurch = church.streams ?? [];
     }
 
@@ -46,8 +42,12 @@ class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
           ),
           const Padding(padding: EdgeInsets.all(10)),
-          ...subChurch
-              .map((church) => DefaulterSubChurchCard(churchState: subChurchState, church: church)),
+          ...subChurch.map(
+            (church) => DefaulterSubChurchCard(
+              church: church,
+              level: subChurchLevel,
+            ),
+          ),
           const Padding(padding: EdgeInsets.all(10)),
         ],
       ),
@@ -56,19 +56,39 @@ class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
 }
 
 class DefaulterSubChurchCard extends StatelessWidget {
-  DefaulterSubChurchCard({
+  const DefaulterSubChurchCard({
     Key? key,
     required this.church,
-    required this.churchState,
+    required this.level,
   }) : super(key: key);
 
   final ChurchForAttendanceDefaulters church;
-  String churchState;
+  final ChurchLevel level;
 
   @override
   Widget build(BuildContext context) {
+    SharedState churchState = Provider.of<SharedState>(context);
+    ChurchLevel subChurchLevel = getSubChurch(level);
+
     return InkWell(
-      onTap: () => {churchState = church.id, Navigator.of(context).pushNamed('')},
+      onTap: () {
+        if (level == ChurchLevel.stream) {
+          churchState.streamId = church.id;
+        }
+
+        if (level == ChurchLevel.council) {
+          churchState.councilId = church.id;
+        }
+
+        if (level == ChurchLevel.constituency) {
+          churchState.constituencyId = church.id;
+        }
+
+        Navigator.pushNamed(
+          context,
+          '/${church.typename.toLowerCase()}-by-${subChurchLevel.name}/attendance-defaulters',
+        );
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
