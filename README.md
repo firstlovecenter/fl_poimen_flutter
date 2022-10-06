@@ -4,6 +4,13 @@ This project was built using [GRANDstack](https://grandstack.io) (GraphQL, React
 <br/><br/>
 [![First Love Logo](/img/flc-logo-small.png)](https://www.firstlovecenter.com)
 
+# Build Commands
+App Bundle for Android:
+`flutter build appbundle`
+
+IPA for iOS:
+`flutter build ipa`
+
 # Pastoral Care Application
 
 Please find attached the rough UI Design by clicking this link.
