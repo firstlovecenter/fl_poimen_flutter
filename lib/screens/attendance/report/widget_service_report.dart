@@ -19,16 +19,24 @@ class ChurchServicesReport extends StatelessWidget {
 
     return ListView(
       children: [
-        const Padding(padding: EdgeInsets.all(8.0)),
-        Text(
-          'Summary for ${record.serviceDate.humanReadable}',
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Summary for ${record.serviceDate.humanReadable}',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+              Text(
+                timeago.format(record.serviceDate.date),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: PoimenTheme.brand, fontSize: 16.0),
+              ),
+            ],
+          ),
         ),
-        Text(
-          timeago.format(record.serviceDate.date),
-          style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
-        ),
-        const Padding(padding: EdgeInsets.all(8.0)),
+        const Padding(padding: EdgeInsets.all(10.0)),
         AttendanceImageCarousel(membersPicture: record.membersPicture),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(

@@ -46,17 +46,24 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
         Expanded(
           child: ListView(
             children: [
-              const Padding(padding: EdgeInsets.all(8.0)),
-              Text(
-                'Summary for ${widget.service.serviceDate.humanReadable}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Summary for ${widget.service.serviceDate.humanReadable}',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    ),
+                    Text(
+                      format(widget.service.serviceDate.date),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: PoimenTheme.brand, fontSize: 16.0),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                format(widget.service.serviceDate.date),
-                style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
-              ),
-              const Padding(padding: EdgeInsets.all(8.0)),
-              const Padding(padding: EdgeInsets.all(15.0)),
+              const Padding(padding: EdgeInsets.all(10.0)),
               AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
               const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
