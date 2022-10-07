@@ -37,7 +37,7 @@ class HomePageButton extends StatelessWidget {
           ListTile(
             onTap: () {
               userState.bottomNavSelected = navKey;
-              Navigator.pushNamed(context, route);
+              Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
             },
             tileColor: PoimenTheme.cardColor,
             shape: RoundedRectangleBorder(

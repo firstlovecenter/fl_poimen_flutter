@@ -37,7 +37,10 @@ class HomeScreen extends StatelessWidget {
     final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
+      appBar: AppBar(
+        title: const Text('Home Screen'),
+        // automaticallyImplyLeading: false,
+      ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
         child: Column(

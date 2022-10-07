@@ -38,19 +38,19 @@ class BottomNavBar extends StatelessWidget {
 
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, routesArray[0]);
+              Navigator.of(context).pushNamedAndRemoveUntil(routesArray[0], (route) => false);
               break;
             case 1:
-              Navigator.pushNamed(context, routesArray[1]);
+              Navigator.of(context).pushNamedAndRemoveUntil(routesArray[1], (route) => false);
               break;
             case 2:
-              Navigator.pushNamed(context, routesArray[2]);
+              Navigator.of(context).pushNamedAndRemoveUntil(routesArray[2], (route) => false);
               break;
             case 3:
-              Navigator.pushNamed(context, routesArray[3]);
+              Navigator.of(context).pushNamedAndRemoveUntil(routesArray[3], (route) => false);
               break;
             case 4:
-              Navigator.pushNamed(context, routesArray[4]);
+              Navigator.of(context).pushNamedAndRemoveUntil(routesArray[4], (route) => false);
               break;
           }
         },
