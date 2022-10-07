@@ -70,7 +70,8 @@ class ChurchServicesReport extends StatelessWidget {
         const Padding(padding: EdgeInsets.all(15.0)),
         ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/${church.typename.toLowerCase()}-services');
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/${church.typename.toLowerCase()}-services', (route) => false);
             },
             child: const Text('Go to Services List'))
       ],
