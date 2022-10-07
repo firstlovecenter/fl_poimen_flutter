@@ -109,27 +109,37 @@ class DefaulterSubChurchCard extends StatelessWidget {
               Text(
                 'Total Number of Services ${church.fellowshipServicesThisWeekCount}',
                 style: TextStyle(
-                    color: _setSemanticColour(church.fellowshipServicesThisWeekCount != 0)),
+                  fontSize: 16,
+                  color: _setSemanticColour(church.fellowshipServicesThisWeekCount != 0),
+                ),
               ),
               Text(
                 'Did Not Mark Fellowship Attendance ${church.fellowshipAttendanceDefaultersCount}',
                 style: TextStyle(
+                    fontSize: 16,
                     color: _setSemanticColour(church.fellowshipAttendanceDefaultersCount == 0)),
               ),
               Text(
                 'Number of Bacentas Bussed ${church.bacentaBussingThisWeekCount}',
                 style: TextStyle(
+                  fontSize: 16,
                   color: _setSemanticColour(church.bacentaBussingThisWeekCount != 0),
                 ),
               ),
               Text(
                 'Did Not Mark Bacenta Attendance ${church.bacentaAttendanceDefaultersCount}',
                 style: TextStyle(
+                  fontSize: 16,
                   color: _setSemanticColour(church.bacentaAttendanceDefaultersCount == 0),
                 ),
               ),
               const Padding(padding: EdgeInsets.all(6)),
-              Text('${church.leader?.firstName} ${church.leader?.lastName}'),
+              Text(
+                '${church.leader?.firstName} ${church.leader?.lastName}',
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
               Row(
                 children: [
                   ContactIconRect(
