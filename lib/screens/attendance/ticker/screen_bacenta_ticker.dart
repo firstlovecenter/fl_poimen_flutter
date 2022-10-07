@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/ticker/widget_attendance_form.dart';
 import 'package:poimen/screens/attendance/ticker/gql_ticker.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
@@ -27,6 +28,8 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
           Widget body;
 
           final bacenta = ChurchForMemberList.fromJson(data?['bacentas'][0]);
+          final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
+
           final attendanceMutation = useMutation(
             MutationOptions(
               document: recordMembershipAttendance,
@@ -35,6 +38,7 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
+                print(resultData);
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/bacenta/attendance-report', (route) => false);
               },
@@ -43,6 +47,7 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
 
           body = AttendanceTickerScreen(
             church: bacenta,
+            service: service,
             tickerMutation: attendanceMutation,
           );
 

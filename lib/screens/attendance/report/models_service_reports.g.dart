@@ -12,7 +12,9 @@ ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) {
     typename: json['typename'] as String,
     serviceDate:
         TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
-    membersPicture: json['membersPicture'] as String,
+    membersPicture: (json['membersPicture'] as List<dynamic>)
+        .map((e) => e as String)
+        .toList(),
     membersPresent: (json['membersPresent'] as List<dynamic>)
         .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
         .toList(),

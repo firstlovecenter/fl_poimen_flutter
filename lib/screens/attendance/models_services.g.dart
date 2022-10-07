@@ -74,3 +74,23 @@ Map<String, dynamic> _$ServicesForListToJson(ServicesForList instance) =>
       'markedAttendance': instance.markedAttendance,
       'serviceDate': instance.serviceDate,
     };
+
+ServiceWithPicture _$ServiceWithPictureFromJson(Map<String, dynamic> json) {
+  return ServiceWithPicture(
+    id: json['id'] as String,
+    typename: json['typename'] as String,
+    membersPicture: (json['membersPicture'] as List<dynamic>)
+        .map((e) => e as String)
+        .toList(),
+    serviceDate:
+        TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ServiceWithPictureToJson(ServiceWithPicture instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'membersPicture': instance.membersPicture,
+      'serviceDate': instance.serviceDate,
+    };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:poimen/screens/attendance/models_services.dart';
 import 'package:poimen/screens/attendance/ticker/widget_attendance_form.dart';
 import 'package:poimen/screens/attendance/ticker/gql_ticker.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
@@ -27,6 +28,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           Widget body;
 
           final fellowship = ChurchForMemberList.fromJson(data?['fellowships'][0]);
+          final service = ServiceWithPicture.fromJson(data?['serviceRecords'][0]);
 
           final attendanceMutation = useMutation(
             MutationOptions(
@@ -36,14 +38,14 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/fellowship/attendance-report', (route) => false);
+                Navigator.of(context).pushReplacementNamed('/fellowship/attendance-report');
               },
             ),
           );
 
           body = AttendanceTickerScreen(
             church: fellowship,
+            service: service,
             tickerMutation: attendanceMutation,
           );
 

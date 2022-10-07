@@ -50,3 +50,22 @@ class ServicesForList {
   factory ServicesForList.fromJson(Map<String, dynamic> json) => _$ServicesForListFromJson(json);
   Map<String, dynamic> toJson() => _$ServicesForListToJson(this);
 }
+
+@JsonSerializable()
+class ServiceWithPicture {
+  String id = '';
+  String typename = 'ServiceRecord';
+  List<String> membersPicture = [];
+  TimeGraph serviceDate = TimeGraph();
+
+  ServiceWithPicture({
+    required this.id,
+    required this.typename,
+    required this.membersPicture,
+    required this.serviceDate,
+  });
+
+  factory ServiceWithPicture.fromJson(Map<String, dynamic> json) =>
+      _$ServiceWithPictureFromJson(json);
+  Map<String, dynamic> toJson() => _$ServiceWithPictureToJson(this);
+}

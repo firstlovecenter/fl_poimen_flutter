@@ -8,7 +8,7 @@ class ServicesForReport {
   String id = '';
   String typename = '';
   TimeGraph serviceDate = TimeGraph();
-  String membersPicture = '';
+  List<String> membersPicture = [];
   List<MemberForList> membersPresent = [];
   List<MemberForList> membersAbsent = [];
 

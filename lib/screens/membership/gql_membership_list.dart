@@ -4,6 +4,8 @@ final getFellowshipMembers = gql('''
    query getFellowshipMembers(\$id: ID!, \$serviceRecordId: ID) {
     serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
       id
+      typename
+      membersPicture
       serviceDate {
         date
       }
@@ -42,9 +44,11 @@ final getFellowshipMembers = gql('''
 ''');
 
 final getBacentaMembers = gql('''
-   query getBacentaMembers(\$id: ID!, \$serviceRecordId: ID) {
-    serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
+   query getBacentaMembers(\$id: ID!, \$bussingRecordId: ID) {
+    bussingRecords(where: { id: \$bussingRecordId }, options: { limit: 1 }) {
       id
+      typename
+      membersPicture
       serviceDate {
         date
       }

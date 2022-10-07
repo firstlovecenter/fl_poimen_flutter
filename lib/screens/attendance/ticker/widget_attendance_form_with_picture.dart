@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/screens/attendance/models_services.dart';
+import 'package:poimen/helpers/constants.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart' as cloudinary_custom;
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/attendance_image_carousel.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
+import 'package:poimen/widgets/image_upload_button.dart';
 import 'package:provider/provider.dart';
-import 'package:timeago/timeago.dart';
 
-class AttendanceTickerScreen extends StatefulWidget {
-  const AttendanceTickerScreen(
-      {Key? key, required this.church, required this.service, required this.tickerMutation})
+class AttendanceTickerWithPictureScreen extends StatefulWidget {
+  const AttendanceTickerWithPictureScreen(
+      {Key? key, required this.church, required this.tickerMutation})
       : super(key: key);
 
   final ChurchForMemberList church;
-  final ServiceWithPicture service;
   final MutationHookResult tickerMutation;
 
   @override
-  State<AttendanceTickerScreen> createState() => _AttendanceTickerScreenState();
+  State<AttendanceTickerWithPictureScreen> createState() =>
+      _AttendanceTickerWithPictureScreenState();
 }
 
-class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
+class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWithPictureScreen> {
   final List<String> _presentMembers = [];
+  String _pictureUrl = '';
+
+  void setPictureUrl(String url) {
+    setState(() {
+      _pictureUrl = url;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +51,12 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
         Expanded(
           child: ListView(
             children: [
-              const Padding(padding: EdgeInsets.all(8.0)),
-              Text(
-                'Summary for ${widget.service.serviceDate.humanReadable}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                format(widget.service.serviceDate.date),
-                style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
-              ),
-              const Padding(padding: EdgeInsets.all(8.0)),
               const Padding(padding: EdgeInsets.all(15.0)),
-              AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
+              ImageUploadButton(
+                preset: membershipAttendancePreset,
+                setPictureUrl: setPictureUrl,
+                child: const Text('Upload Membership Picture'),
+              ),
               const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
                 members: widget.church.sheep,
@@ -82,7 +81,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
             minimumSize: const Size.fromHeight(80),
           ),
           onPressed: () {
-            if (!validate(context, [recordId])) {
+            if (!validate(context, [recordId, _pictureUrl])) {
               return;
             }
 
@@ -93,6 +92,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               'presentMembers': _presentMembers,
               'absentMembers': absentMembers,
               'recordId': recordId,
+              'membersPicture': _pictureUrl,
             });
 
             ScaffoldMessenger.of(context).showSnackBar(

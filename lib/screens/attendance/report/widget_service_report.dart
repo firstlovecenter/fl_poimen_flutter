@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:poimen/screens/attendance/report/models_service_reports.dart';
 import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/attendance_image_carousel.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ChurchServicesReport extends StatelessWidget {
@@ -29,36 +29,7 @@ class ChurchServicesReport extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        Card(
-          elevation: 5,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          child: SizedBox(
-            height: 200,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                CloudinaryImage(url: record.membersPicture, size: ImageSize.fixedHeight).url,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
+        AttendanceImageCarousel(membersPicture: record.membersPicture),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(
             members: record.membersAbsent,
