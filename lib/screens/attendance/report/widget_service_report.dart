@@ -46,13 +46,16 @@ class ChurchServicesReport extends StatelessWidget {
         _ShowMembers(
             title: 'Members Who Were Present: ${record.membersPresent.length}/$totalMembership',
             members: record.membersPresent),
-        const Padding(padding: EdgeInsets.all(15.0)),
-        ElevatedButton(
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/${church.typename.toLowerCase()}-services', (route) => false);
             },
-            child: const Text('Go to Services List'))
+            child: const Text('Go to Services List'),
+          ),
+        ),
       ],
     );
   }
