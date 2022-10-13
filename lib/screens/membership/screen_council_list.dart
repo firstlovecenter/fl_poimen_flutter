@@ -20,7 +20,7 @@ class CouncilMembershipScreen extends StatelessWidget {
       query: getCouncilMembers,
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Council Members',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         Widget body;
 

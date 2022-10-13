@@ -20,7 +20,7 @@ class BacentaServicesScreen extends StatelessWidget {
         query: getBacentaServices,
         variables: {'id': churchState.bacentaId},
         defaultPageTitle: 'Bacenta Services',
-        bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+        bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
         bodyFunction: (data) {
           Widget body;
 

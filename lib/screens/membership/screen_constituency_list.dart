@@ -19,7 +19,7 @@ class ConstituencyMembershipScreen extends StatelessWidget {
       query: getConstituencyMembers,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Members',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         Widget body;
 

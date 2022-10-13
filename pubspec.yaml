@@ -85,7 +85,7 @@ flutter:
     - assets/images/flc_logo_silver.png
     - assets/images/profile-choose/
     - assets/animations/
-  #   - images/a_dot_ham.jpeg
+
 flutter_native_splash:
   color: "#cf6bd1"
   image: assets/splash.png  

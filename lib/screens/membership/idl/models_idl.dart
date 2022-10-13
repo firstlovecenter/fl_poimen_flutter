@@ -11,5 +11,6 @@ class ChurchForIdlList extends Church {
   }) : super(id: '', typename: '', name: '');
 
   factory ChurchForIdlList.fromJson(Map<String, dynamic> json) => _$ChurchForIdlListFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ChurchForIdlListToJson(this);
 }

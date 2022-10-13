@@ -20,7 +20,7 @@ class FellowshipIMCLScreen extends StatelessWidget {
       query: getFellowshipImcls,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IMCL List',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 2),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
       bodyFunction: (data) {
         Widget body;
 

@@ -4,9 +4,9 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatelessWidget {
-  BottomNavBar({Key? key, required this.menu, this.index}) : super(key: key);
+  const BottomNavBar({Key? key, required this.menu, this.index}) : super(key: key);
 
-  int? index = 0;
+  final int? index;
   final List<Map<String, dynamic>?> Function(ChurchLevel) menu;
 
   @override
@@ -20,10 +20,10 @@ class BottomNavBar extends StatelessWidget {
     int computedIndex = 0;
     menuArray.removeWhere((element) => element == null);
 
-    if (index! > menuArray.length - 1) {
+    if ((index ?? 0) > menuArray.length - 1) {
       computedIndex = menuArray.length - 1;
     } else {
-      computedIndex = index!;
+      computedIndex = index ?? 0;
     }
 
     return Hero(

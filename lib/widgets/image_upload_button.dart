@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:poimen/services/auth_service.dart';
@@ -102,8 +103,10 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
                         });
                         widget.setPictureUrl(response.secureUrl);
                       } on CloudinaryException catch (error) {
-                        print(error.message);
-                        print(error.request);
+                        if (kDebugMode) {
+                          print(error.message);
+                          print(error.request);
+                        }
                       }
                     },
                     child: widget.child,

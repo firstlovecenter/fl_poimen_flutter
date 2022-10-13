@@ -20,7 +20,7 @@ class FellowshipIDLScreen extends StatelessWidget {
       query: getFellowshipIdls,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IDL List',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 3),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 3),
       bodyFunction: (data) {
         Widget body;
 

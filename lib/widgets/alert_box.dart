@@ -10,13 +10,13 @@ enum AlertType {
 class AlertBox extends StatelessWidget {
   final String text;
   final AlertType type;
-  final void Function() onRetry;
+  final void Function()? onRetry;
 
   const AlertBox({
     Key? key,
     required this.text,
     this.type = AlertType.warning,
-    required this.onRetry,
+    this.onRetry,
   }) : super(key: key);
 
   @override

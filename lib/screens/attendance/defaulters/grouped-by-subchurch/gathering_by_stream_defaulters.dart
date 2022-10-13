@@ -20,7 +20,7 @@ class GatheringByStreamAttendanceDefaultersScreen extends StatelessWidget {
       query: getGatheringAttendanceDefaultersByStream,
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Attendance Defaulters',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data) {
         Widget body;
 

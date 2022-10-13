@@ -11,9 +11,9 @@ class HomePageButton extends StatelessWidget {
   final String navKey;
   final String route;
   final List<Role> permitted;
-  int? alertNumber;
+  final int? alertNumber;
 
-  HomePageButton({
+  const HomePageButton({
     Key? key,
     required this.text,
     required this.icon,

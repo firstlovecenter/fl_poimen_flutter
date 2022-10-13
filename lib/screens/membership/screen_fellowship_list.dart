@@ -20,7 +20,7 @@ class FellowshipMembershipScreen extends StatelessWidget {
       query: getFellowshipMembers,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship Members',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         Widget body;
 

@@ -20,7 +20,7 @@ class CouncilAttendanceDefaultersScreen extends StatelessWidget {
       query: getCouncilAttendanceDefaulters,
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Council Attendance Defaulters',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data) {
         Widget body;
 

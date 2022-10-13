@@ -20,7 +20,7 @@ class GatheringMembershipScreen extends StatelessWidget {
       query: getGatheringMembers,
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Gathering Members',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         Widget body;
 

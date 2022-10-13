@@ -20,7 +20,7 @@ class StreamAttendanceDefaultersScreen extends StatelessWidget {
       query: getStreamAttendanceDefaulters,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Stream Attendance Defaulters',
-      bottomNavBar: BottomNavBar(menu: getAttendanceMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data) {
         Widget body;
 
