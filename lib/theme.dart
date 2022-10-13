@@ -11,7 +11,7 @@ class PoimenTheme {
   static const Color cardColor = Color(0xFF2A2A2A);
 
   static const Color textSecondary = Colors.grey;
-  static Color brand = _colorFromHex('#7f50ba');
+  static Color brand = _colorFromHex('#611ABB');
   static Color bad = _colorFromHex('#F44A4A');
   static Color good = _colorFromHex('#39FF14');
   static Color warning = Colors.yellow;
@@ -47,8 +47,8 @@ var darkTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
 
   // TYPOGRAPHY & TEXT
-  textTheme: const TextTheme(
-    headline5: TextStyle(color: Colors.deepPurpleAccent),
+  textTheme: TextTheme(
+    headline5: TextStyle(color: PoimenTheme.brand),
   ),
   cardColor: _colorFromHex("#2A2A2A"),
   buttonTheme: const ButtonThemeData(
