@@ -25,10 +25,14 @@ class ChurchImclList extends StatelessWidget {
           'This is the list of those who were not at the last church service',
           style: TextStyle(fontSize: 16),
         ),
-        Center(
+        const Center(
           child: Text(
             'You must contact them to find out why they were absent',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: PoimenTheme.brand),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.deepPurpleAccent,
+            ),
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
@@ -50,33 +54,60 @@ Column _memberTile(BuildContext context, MemberForList member) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: ListTile(
-          onTap: () {
-            memberState.memberId = member.id;
-            Navigator.pushNamed(context, '/member-details');
-          },
-          leading: Hero(
-            tag: 'member-${member.id}',
-            child: AvatarWithInitials(
-              foregroundImage: picture.image,
-              member: member,
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Column(
+            children: [
+              ListTile(
+                onTap: () {
+                  memberState.memberId = member.id;
+                  Navigator.pushNamed(context, '/member-details');
+                },
+                leading: Hero(
+                  tag: 'member-${member.id}',
+                  child: AvatarWithInitials(
+                    foregroundImage: picture.image,
+                    member: member,
+                  ),
+                ),
+                title: Text('${member.firstName} ${member.lastName}'),
+                subtitle: Text(member.status!),
+                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                  ContactIcon(
+                    icon: Icons.phone,
+                    color: PoimenTheme.phoneColor,
+                    phoneNumber: member.phoneNumber,
+                  ),
+                  ContactIcon(
+                    icon: FontAwesomeIcons.whatsapp,
+                    color: PoimenTheme.whatsappColor,
+                    whatsAppInfo: WhatsAppInfo(
+                        number: member.whatsappNumber ?? '', firstName: member.firstName),
+                  ),
+                ]),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  print(member.id);
+                },
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                ),
+                icon: const Icon(
+                  FontAwesomeIcons.pencil,
+                  size: 15,
+                ),
+                label: const Text('Submit Reason'),
+              ),
+            ],
           ),
-          title: Text('${member.firstName} ${member.lastName}'),
-          subtitle: Text(member.status!),
-          trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-            ContactIcon(
-              icon: Icons.phone,
-              color: PoimenTheme.phoneColor,
-              phoneNumber: member.phoneNumber,
-            ),
-            ContactIcon(
-              icon: FontAwesomeIcons.whatsapp,
-              color: PoimenTheme.whatsappColor,
-              whatsAppInfo:
-                  WhatsAppInfo(number: member.whatsappNumber ?? '', firstName: member.firstName),
-            ),
-          ]),
         ),
       ),
     ],
