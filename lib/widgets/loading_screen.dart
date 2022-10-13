@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({
@@ -8,7 +9,10 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Align(
-      child: CircularProgressIndicator(),
+      child: SizedBox(
+        height: 250,
+        child: RiveAnimation.asset('assets/animations/loader.riv'),
+      ),
     );
   }
 }

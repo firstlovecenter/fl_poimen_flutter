@@ -24,7 +24,7 @@ class ProfileChooseScreen extends StatelessWidget {
         FetchMore? fetchMore,
       }) {
         Widget body;
-        String pageTitle = 'Profile Choose';
+        String pageTitle = '';
 
         if (result.hasException) {
           body = AlertBox(
@@ -33,7 +33,7 @@ class ProfileChooseScreen extends StatelessWidget {
             onRetry: () => refetch!(),
           );
         } else if (result.isLoading || result.data == null) {
-          body = const LoadingScreen();
+          body = const Expanded(child: LoadingScreen());
         } else {
           final user = Profile.fromJson(result.data?['members'][0]);
           pageTitle = user.firstName;

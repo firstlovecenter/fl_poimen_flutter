@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/widgets/auth_button.dart';
+import 'package:poimen/widgets/loading_screen.dart';
 import 'package:rive/rive.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (isProgressing)
-              const CircularProgressIndicator()
+              const LoadingScreen()
             else if (!isLoggedIn)
               Padding(
                 padding: const EdgeInsets.all(12.0),
