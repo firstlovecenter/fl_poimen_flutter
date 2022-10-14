@@ -141,6 +141,10 @@ ButtonStyle _imclButtonStyle() {
 _bottomSheet(BuildContext context, MemberForList member) {
   showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
+      isScrollControlled: true,
       builder: (BuildContext context) {
         return IMCLReportForm(member: member);
       });
