@@ -10,7 +10,7 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Align(
       child: SizedBox(
-        height: 250,
+        height: 160,
         child: RiveAnimation.asset('assets/animations/loader.riv'),
       ),
     );
