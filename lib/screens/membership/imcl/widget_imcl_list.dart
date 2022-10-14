@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/imcl/models_imcl.dart';
+import 'package:poimen/screens/membership/imcl/widget_imcl_report_form.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -44,7 +45,7 @@ class ChurchImclList extends StatelessWidget {
   }
 }
 
-Column _memberTile(BuildContext context, MemberForList member) {
+Column _memberTile(BuildContext context, ImclForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
@@ -86,30 +87,61 @@ Column _memberTile(BuildContext context, MemberForList member) {
                   ),
                 ]),
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  print(member.id);
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+              member.imclChecked
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        color: const Color.fromARGB(130, 76, 175, 79),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Text(
+                            member.missedChurchComments[0].comment,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : ElevatedButton.icon(
+                      onPressed: () {
+                        _bottomSheet(context, member);
+                      },
+                      style: _imclButtonStyle(),
+                      icon: const Icon(
+                        FontAwesomeIcons.pencil,
+                        size: 15,
+                      ),
+                      label: const Text('Submit Reason'),
                     ),
-                  ),
-                ),
-                icon: const Icon(
-                  FontAwesomeIcons.pencil,
-                  size: 15,
-                ),
-                label: const Text('Submit Reason'),
-              ),
             ],
           ),
         ),
       ),
     ],
   );
+}
+
+ButtonStyle _imclButtonStyle() {
+  return ButtonStyle(
+    padding: MaterialStateProperty.all(
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    ),
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ),
+  );
+}
+
+_bottomSheet(BuildContext context, MemberForList member) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return IMCLReportForm(member: member);
+      });
 }

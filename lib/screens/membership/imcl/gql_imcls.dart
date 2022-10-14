@@ -10,11 +10,25 @@ final getFellowshipImcls = gql('''
         id
         typename
         status
+        imclChecked
         firstName
         lastName
         pictureUrl
         phoneNumber
         whatsappNumber
+        missedChurchComments(options: { sort: [{ timestamp: DESC }], limit: 1 }) {
+          id
+          typename
+          timestamp
+          comment
+          author {
+            id
+            typename
+            firstName
+            lastName
+            pictureUrl
+          }
+        }
       }
     }
   }
@@ -29,13 +43,54 @@ final getBacentaImcls = gql('''
       imcls {
         id
         typename
+        imclChecked
         status
         firstName
         lastName
         pictureUrl
         phoneNumber
         whatsappNumber
+
+        missedChurchComments(options: { sort: [{ timestamp: DESC }], limit: 1 }) {
+          id
+          typename
+          timestamp
+          comment
+          author {
+            id
+            typename
+            firstName
+            lastName
+            pictureUrl
+          }
+        }
       }
     }
   }
+''');
+
+final recordReasonForMemberAbsence = gql('''
+  mutation recordReasonForMemberAbsence(\$memberId: ID!, \$reason: String!){
+  RecordReasonForMemberAbsence(memberId: \$memberId, reason: \$reason) {
+    id
+    typename
+    firstName
+    lastName
+    imclChecked
+
+    missedChurchComments (options: { sort: [{ timestamp: DESC }], limit: 1 }){
+      id
+      typename
+      timestamp
+      comment
+      author {
+        id
+        typename
+        firstName
+        lastName
+        pictureUrl
+      }
+    }
+  }
+}
 ''');

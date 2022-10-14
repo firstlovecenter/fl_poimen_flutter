@@ -40,8 +40,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         if (result.hasException) {
           body = AlertBox(
             type: AlertType.error,
-            text: result.exception?.graphqlErrors[0].message.toString() ??
-                result.exception.toString(),
+            text: getGQLException(result.exception),
             onRetry: () => refetch!(),
           );
         } else if (result.isLoading || result.data == null) {

@@ -81,3 +81,16 @@ class AlertBox extends StatelessWidget {
     );
   }
 }
+
+String getGQLException(dynamic? exception) {
+  if (exception == null) {
+    return 'An unknown error occurred';
+  }
+
+  if (exception.graphqlErrors.isEmpty) {
+    return exception.linkException?.parsedResponse.errors[0].message.toString() ??
+        'An unknown error occurred';
+  }
+
+  return exception.graphqlErrors[0].message.toString();
+}
