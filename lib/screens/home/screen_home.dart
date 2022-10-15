@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/home/utils_cycle_countdown.dart';
+import 'package:poimen/screens/home/widget_cycle_countdown.dart';
 import 'package:poimen/screens/home/widget_home_page_button.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/auth_service.dart';
@@ -39,7 +40,6 @@ class HomeScreen extends StatelessWidget {
 
     final daysInCycle = getTotalNumberOfDaysInCycle(churchLevel);
     final daysLeftInCycle = getDaysTillNextDeadline(churchLevel);
-    const sizedBoxDimensions = 120.0;
 
     return Scaffold(
       body: Padding(
@@ -78,32 +78,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      height: sizedBoxDimensions,
-                      width: sizedBoxDimensions * 1.05,
-                      child: CircularProgressIndicator(
-                        backgroundColor: const Color.fromARGB(91, 158, 158, 158),
-                        strokeWidth: 15,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            _setSemanticColour((daysLeftInCycle) / daysInCycle)),
-                        value: (daysInCycle - daysLeftInCycle) / daysInCycle,
-                      ),
-                    ),
-                    SizedBox(
-                      height: sizedBoxDimensions,
-                      width: sizedBoxDimensions * 1.05,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('$daysLeftInCycle days', style: const TextStyle(fontSize: 16)),
-                          const Text('left in cycle', style: TextStyle(fontSize: 10)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                CycleCountdownWidget(daysLeftInCycle: daysLeftInCycle, daysInCycle: daysInCycle),
               ],
             ),
             const Padding(padding: EdgeInsets.all(20.0)),
@@ -141,16 +116,6 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Color _setSemanticColour(value) {
-  if (value < 0.25) {
-    return Colors.red;
-  } else if (value < 0.75) {
-    return Colors.orange;
-  } else {
-    return Colors.green;
   }
 }
 
