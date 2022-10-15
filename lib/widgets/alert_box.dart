@@ -50,39 +50,42 @@ class AlertBox extends StatelessWidget {
         }
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: [
-          Row(
-            children: [
-              Icon(
-                icon,
-                color: color,
-                size: 32.0,
-              ),
-              const SizedBox(
-                width: 16.0,
-              ),
-              Flexible(
-                child: Text(text),
-              ),
-            ],
-          ),
-          onRetry != null ? const SizedBox(height: 8.0) : const SizedBox.shrink(),
-          onRetry != null
-              ? ElevatedButton(
-                  onPressed: onRetry,
-                  child: const Text('Try Again'),
-                )
-              : const SizedBox.shrink(),
-        ],
+    return SizedBox(
+      height: 400,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            Row(
+              children: [
+                Icon(
+                  icon,
+                  color: color,
+                  size: 32.0,
+                ),
+                const SizedBox(
+                  width: 16.0,
+                ),
+                Flexible(
+                  child: Text(text),
+                ),
+              ],
+            ),
+            onRetry != null ? const SizedBox(height: 8.0) : const SizedBox.shrink(),
+            onRetry != null
+                ? ElevatedButton(
+                    onPressed: onRetry,
+                    child: const Text('Try Again'),
+                  )
+                : const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
 }
 
-String getGQLException(dynamic? exception) {
+String getGQLException(dynamic exception) {
   if (exception == null) {
     return 'An unknown error occurred';
   }

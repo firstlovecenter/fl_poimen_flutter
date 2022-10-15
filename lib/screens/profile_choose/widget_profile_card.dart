@@ -22,15 +22,19 @@ class ProfileCard extends StatelessWidget {
           if (church.typename == 'Fellowship') {
             userState.role = Role.leaderFellowship;
             userState.fellowshipId = church.id;
+            userState.pastoralCycle = church.currentPastoralCycle as PastoralCycle;
           } else if (church.typename == 'Bacenta') {
             userState.role = Role.leaderBacenta;
             userState.bacentaId = church.id;
+            userState.pastoralCycle = church.currentPastoralCycle as PastoralCycle;
           } else if (church.typename == 'Constituency') {
             userState.role = Role.leaderConstituency;
             userState.constituencyId = church.id;
+            userState.pastoralCycle = church.currentPastoralCycle as PastoralCycle;
           } else if (church.typename == 'Council') {
             userState.role = Role.leaderCouncil;
             userState.councilId = church.id;
+            userState.pastoralCycle = church.currentPastoralCycle as PastoralCycle;
           } else if (church.typename == 'Stream') {
             userState.role = Role.leaderStream;
             userState.streamId = church.id;

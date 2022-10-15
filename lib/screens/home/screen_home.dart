@@ -37,9 +37,9 @@ class HomeScreen extends StatelessWidget {
       whatsappNumber: '0000',
     );
     final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);
-
-    final daysInCycle = getTotalNumberOfDaysInCycle(churchLevel);
-    final daysLeftInCycle = getDaysTillNextDeadline(churchLevel);
+    final daysInCycle = churchState.pastoralCycle.numberOfDays;
+    final daysLeftInCycle =
+        getNumberOfDaysTillDeadline(DateTime.parse(churchState.pastoralCycle.endDate));
 
     return Scaffold(
       body: Padding(
@@ -74,13 +74,7 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-            const Padding(padding: EdgeInsets.all(10.0)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CycleCountdownWidget(daysLeftInCycle: daysLeftInCycle, daysInCycle: daysInCycle),
-              ],
-            ),
+            ...countdownLevels(churchLevel, daysLeftInCycle, daysInCycle),
             const Padding(padding: EdgeInsets.all(20.0)),
             Text(
               '${church.name} ${church.typename}',
@@ -199,4 +193,27 @@ String _parseRole(Role role) {
     default:
       return '';
   }
+}
+
+List<Widget> countdownLevels(ChurchLevel level, int daysLeftInCycle, int daysInCycle) {
+  const permittedLevels = [
+    ChurchLevel.fellowship,
+    ChurchLevel.bacenta,
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+  ];
+
+  if (!permittedLevels.contains(level)) {
+    return [Container()];
+  }
+
+  return [
+    const Padding(padding: EdgeInsets.all(10.0)),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CycleCountdownWidget(daysLeftInCycle: daysLeftInCycle, daysInCycle: daysInCycle),
+      ],
+    )
+  ];
 }

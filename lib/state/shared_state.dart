@@ -9,6 +9,12 @@ class SharedState with ChangeNotifier {
     typename: '',
     name: '',
   );
+  PastoralCycle _pastoralCycle = PastoralCycle(
+    typename: '',
+    startDate: '',
+    endDate: '',
+    numberOfDays: 0,
+  );
   String _memberId = '';
   String _fellowshipId = '';
   String _bacentaId = '';
@@ -25,6 +31,7 @@ class SharedState with ChangeNotifier {
   ProfileChurch get church => _church;
   String get bottomNavSelected => _bottomNavSelected;
 
+  PastoralCycle get pastoralCycle => _pastoralCycle;
   String get memberId => _memberId;
   String get fellowshipId => _fellowshipId;
   String get bacentaId => _bacentaId;
@@ -48,6 +55,11 @@ class SharedState with ChangeNotifier {
 
   set bottomNavSelected(String bottomNavSelected) {
     _bottomNavSelected = bottomNavSelected;
+    notifyListeners();
+  }
+
+  set pastoralCycle(PastoralCycle pastoralCycle) {
+    _pastoralCycle = pastoralCycle;
     notifyListeners();
   }
 

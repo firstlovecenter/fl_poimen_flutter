@@ -12,17 +12,35 @@ final getUserRoles = gql('''
         typename
         id
         name
+        currentPastoralCycle {
+          typename
+          startDate
+          endDate
+          numberOfDays
+        }
       }
       leadsBacenta {
         id
         typename
         name
+        currentPastoralCycle {
+          typename
+          startDate
+          endDate
+          numberOfDays
+        }
       }
       leadsConstituency {
         id
         typename
         name
         imclTotal
+        currentPastoralCycle {
+          typename
+          startDate
+          endDate
+          numberOfDays
+        }
       }
       leadsSonta {
         id
@@ -33,6 +51,12 @@ final getUserRoles = gql('''
         typename
         name
         imclTotal
+        currentPastoralCycle {
+          typename
+          startDate
+          endDate
+          numberOfDays
+        }
       }
       leadsStream {
         id
