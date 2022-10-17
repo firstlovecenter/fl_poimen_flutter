@@ -51,7 +51,7 @@ Column memberTile(BuildContext context, MemberForList member) {
             ),
           ),
           title: Text('${member.firstName} ${member.lastName}'),
-          subtitle: Text(member.typename),
+          subtitle: Text(member.status ?? member.typename),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             ContactIcon(
               icon: Icons.phone,
