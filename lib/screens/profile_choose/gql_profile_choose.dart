@@ -9,38 +9,19 @@ final getUserRoles = gql('''
       lastName
       pictureUrl
       leadsFellowship {
-        typename
         id
+        typename
         name
-        currentPastoralCycle {
-          typename
-          startDate
-          endDate
-          numberOfDays
-        }
       }
       leadsBacenta {
         id
         typename
         name
-        currentPastoralCycle {
-          typename
-          startDate
-          endDate
-          numberOfDays
-        }
       }
       leadsConstituency {
         id
         typename
         name
-        imclTotal
-        currentPastoralCycle {
-          typename
-          startDate
-          endDate
-          numberOfDays
-        }
       }
       leadsSonta {
         id
@@ -50,32 +31,22 @@ final getUserRoles = gql('''
         id
         typename
         name
-        imclTotal
-        currentPastoralCycle {
-          typename
-          startDate
-          endDate
-          numberOfDays
-        }
       }
       leadsStream {
         id
         typename
         name
-        imclTotal
       }
    
       leadsGatheringService {
         id
         typename
         name
-        imclTotal
       }
       isAdminForGatheringService {
         id
         typename
         name
-        imclTotal
       }
     }
   }

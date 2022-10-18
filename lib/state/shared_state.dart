@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/state/enums.dart';
 
@@ -9,6 +10,7 @@ class SharedState with ChangeNotifier {
     typename: '',
     name: '',
   );
+
   PastoralCycle _pastoralCycle = PastoralCycle(
     typename: '',
     startDate: '',
