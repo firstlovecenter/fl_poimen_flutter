@@ -71,9 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           ]),
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
-                    AuthButton(
-                      onPressed: loginAction,
-                      text: 'Login',
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: AuthButton(
+                        onPressed: loginAction,
+                        text: 'Login',
+                      ),
                     )
                   ],
                 ),

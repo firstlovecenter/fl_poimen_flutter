@@ -34,7 +34,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        Widget pageTitle = Text(widget.defaultPageTitle);
+        Widget? pageTitle = Text(widget.defaultPageTitle);
         Widget body;
 
         if (result.hasException) {
@@ -52,14 +52,16 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         }
 
         return Scaffold(
-          appBar: AppBar(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                pageTitle,
-              ],
-            ),
-          ),
+          appBar: pageTitle != null
+              ? AppBar(
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      pageTitle,
+                    ],
+                  ),
+                )
+              : null,
           body: body,
           bottomNavigationBar: widget.bottomNavBar,
         );
@@ -69,8 +71,8 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
 }
 
 class GQLQueryContainerReturnValue {
-  final PageTitle pageTitle;
+  final PageTitle? pageTitle;
   final Widget body;
 
-  GQLQueryContainerReturnValue({required this.pageTitle, required this.body});
+  GQLQueryContainerReturnValue({this.pageTitle, required this.body});
 }

@@ -29,11 +29,12 @@ class FellowshipIMCLScreen extends StatelessWidget {
         body = ChurchImclList(church: fellowship);
 
         return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(
-              church: fellowship,
-              pageTitle: 'IMCL List',
-            ),
-            body: body);
+          pageTitle: PageTitle(
+            church: fellowship,
+            pageTitle: 'IMCL List',
+          ),
+          body: body,
+        );
       },
     );
   }
