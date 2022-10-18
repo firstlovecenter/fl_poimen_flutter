@@ -91,7 +91,7 @@ String getGQLException(dynamic exception) {
   }
 
   if (exception.graphqlErrors.isEmpty) {
-    return exception.linkException?.parsedResponse.errors[0].message.toString() ??
+    return exception.linkException?.parsedResponse?.errors[0].message.toString() ??
         'An unknown error occurred';
   }
 

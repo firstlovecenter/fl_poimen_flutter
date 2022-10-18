@@ -35,6 +35,9 @@ class BottomNavBar extends StatelessWidget {
           churchState.bottomNavSelected = menuArray[index]?['navKey'];
 
           List<String> routesArray = getRoutes(menuArray);
+          if (index == computedIndex) {
+            return;
+          }
 
           switch (index) {
             case 0:
