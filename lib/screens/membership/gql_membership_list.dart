@@ -210,7 +210,7 @@ final getStreamMembers = gql('''
 ''');
 
 final getGatheringMembers = gql('''
-   query getGatheringMembers(\$id: ID!, \$serviceRecordId: ID) {
+   query getGatheringMembers(\$id: ID!, \$serviceRecordId: ID, \$first: Int! \$after: Int!) {
     serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
       id
       serviceDate {
@@ -222,29 +222,47 @@ final getGatheringMembers = gql('''
       typename
       name
 
-      sheep {
-        id
-        typename
-        firstName
-        lastName
-        fullName
-        pictureUrl
+      sheepPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            firstName
+            lastName
+            fullName
+            pictureUrl
+          }  
+        }
+        totalCount
+        position
       }
-      goats {
-        id
-        typename
-        firstName
-        lastName
-        fullName
-        pictureUrl
+      goatsPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            firstName
+            lastName
+            fullName
+            pictureUrl
+          }  
+        }
+        totalCount
+        position
       }
-      deer {
-        id
-        typename
-        firstName
-        lastName
-        fullName
-        pictureUrl
+      deerPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            firstName
+            lastName
+            fullName
+            pictureUrl
+          }  
+        }
+        totalCount
+        position
       }
     }
   }

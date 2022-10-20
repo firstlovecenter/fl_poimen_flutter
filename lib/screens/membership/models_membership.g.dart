@@ -89,17 +89,42 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'ministry': instance.ministry,
     };
 
+Node _$NodeFromJson(Map<String, dynamic> json) {
+  return Node(
+    node: MemberForList.fromJson(json['node'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$NodeToJson(Node instance) => <String, dynamic>{
+      'node': instance.node,
+    };
+
+PaginatedMemberList _$PaginatedMemberListFromJson(Map<String, dynamic> json) {
+  return PaginatedMemberList(
+    edges: (json['edges'] as List<dynamic>)
+        .map((e) => Node.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    totalCount: json['totalCount'] as int,
+    position: json['position'] as int,
+  );
+}
+
+Map<String, dynamic> _$PaginatedMemberListToJson(
+        PaginatedMemberList instance) =>
+    <String, dynamic>{
+      'edges': instance.edges,
+      'totalCount': instance.totalCount,
+      'position': instance.position,
+    };
+
 ChurchForMemberList _$ChurchForMemberListFromJson(Map<String, dynamic> json) {
   return ChurchForMemberList(
-    sheep: (json['sheep'] as List<dynamic>)
-        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    goats: (json['goats'] as List<dynamic>)
-        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    deer: (json['deer'] as List<dynamic>)
-        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    sheepPaginated: PaginatedMemberList.fromJson(
+        json['sheepPaginated'] as Map<String, dynamic>),
+    goatsPaginated: PaginatedMemberList.fromJson(
+        json['goatsPaginated'] as Map<String, dynamic>),
+    deerPaginated: PaginatedMemberList.fromJson(
+        json['deerPaginated'] as Map<String, dynamic>),
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
@@ -116,7 +141,7 @@ Map<String, dynamic> _$ChurchForMemberListToJson(
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
-      'sheep': instance.sheep,
-      'goats': instance.goats,
-      'deer': instance.deer,
+      'sheepPaginated': instance.sheepPaginated,
+      'goatsPaginated': instance.goatsPaginated,
+      'deerPaginated': instance.deerPaginated,
     };

@@ -31,9 +31,9 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
     final List<String> membership = [
-      ...widget.church.sheep.map((sheep) => sheep.id),
-      ...widget.church.goats.map((goat) => goat.id),
-      ...widget.church.deer.map((deer) => deer.id),
+      ...widget.church.sheepPaginated.edges.map((sheep) => sheep.node.id),
+      ...widget.church.goatsPaginated.edges.map((goat) => goat.node.id),
+      ...widget.church.deerPaginated.edges.map((deer) => deer.node.id),
     ];
     String recordId = churchState.serviceRecordId;
 
@@ -67,18 +67,18 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
               const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
-                members: widget.church.sheep,
+                members: widget.church.sheepPaginated.edges.map((edge) => edge.node).toList(),
                 category: MemberCategory.Sheep,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
-                members: widget.church.goats,
+                members: widget.church.goatsPaginated.edges.map((edge) => edge.node).toList(),
                 category: MemberCategory.Goat,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
                 category: MemberCategory.Deer,
-                members: widget.church.deer,
+                members: widget.church.deerPaginated.edges.map((edge) => edge.node).toList(),
                 presentMembers: _presentMembers,
               ),
             ],

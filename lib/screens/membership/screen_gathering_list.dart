@@ -15,10 +15,11 @@ class GatheringMembershipScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
+    const pageSize = 7;
 
     return GQLQueryContainer(
       query: getGatheringMembers,
-      variables: {'id': churchState.gatheringId},
+      variables: {'id': churchState.gatheringId, 'first': pageSize, 'after': 0},
       defaultPageTitle: 'Gathering Members',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {

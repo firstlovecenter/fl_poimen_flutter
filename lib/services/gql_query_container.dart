@@ -9,6 +9,7 @@ class GQLQueryContainer extends StatefulWidget {
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
   final Function(Map<String, dynamic>?) bodyFunction;
+  final Function(Map<String, dynamic>?)? fetchMore;
   final Widget? bottomNavBar;
 
   const GQLQueryContainer(
@@ -17,6 +18,7 @@ class GQLQueryContainer extends StatefulWidget {
       required this.variables,
       required this.defaultPageTitle,
       required this.bodyFunction,
+      this.fetchMore,
       this.bottomNavBar})
       : super(key: key);
 
@@ -47,6 +49,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
           body = const LoadingScreen();
         } else {
           GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);
+
           pageTitle = res.pageTitle;
           body = res.body;
         }

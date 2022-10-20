@@ -78,12 +78,58 @@ class Member extends MemberForList {
 }
 
 @JsonSerializable()
-class ChurchForMemberList extends Church {
-  List<MemberForList> sheep = [];
-  List<MemberForList> goats = [];
-  List<MemberForList> deer = [];
+class Node {
+  MemberForList node = MemberForList(
+    id: '',
+    typename: '',
+    firstName: '',
+    lastName: '',
+    pictureUrl: '',
+  );
 
-  ChurchForMemberList({required this.sheep, required this.goats, required this.deer})
+  Node({required this.node});
+
+  factory Node.fromJson(Map<String, dynamic> json) => _$NodeFromJson(json);
+  Map<String, dynamic> toJson() => _$NodeToJson(this);
+}
+
+@JsonSerializable()
+class PaginatedMemberList {
+  List<Node> edges = [];
+  int totalCount = 0;
+  int position = 0;
+
+  PaginatedMemberList({
+    required this.edges,
+    required this.totalCount,
+    required this.position,
+  });
+
+  factory PaginatedMemberList.fromJson(Map<String, dynamic> json) =>
+      _$PaginatedMemberListFromJson(json);
+  Map<String, dynamic> toJson() => _$PaginatedMemberListToJson(this);
+}
+
+@JsonSerializable()
+class ChurchForMemberList extends Church {
+  PaginatedMemberList sheepPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+  PaginatedMemberList goatsPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+  PaginatedMemberList deerPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+
+  ChurchForMemberList(
+      {required this.sheepPaginated, required this.goatsPaginated, required this.deerPaginated})
       : super(id: '', typename: '', name: '');
 
   factory ChurchForMemberList.fromJson(Map<String, dynamic> json) =>

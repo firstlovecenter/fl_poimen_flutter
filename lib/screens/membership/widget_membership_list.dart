@@ -3,6 +3,7 @@ import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/screens/membership/widget_infinite_scroll.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
@@ -25,12 +26,15 @@ class ChurchMembershipList extends StatelessWidget {
     const headerStyle = TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold);
 
     const double accordionHeight = 340;
-    int memberCount = church.sheep.length + church.goats.length + church.deer.length;
+    int memberCount = church.sheepPaginated.totalCount +
+        church.goatsPaginated.totalCount +
+        church.deerPaginated.totalCount;
 
     return Column(
       children: [
         const Padding(padding: EdgeInsets.all(10)),
         Text('Total Members: $memberCount'),
+        const MemberListView(),
         Accordion(
           maxOpenSections: 1,
           scaleWhenAnimating: true,
@@ -51,13 +55,13 @@ class ChurchMembershipList extends StatelessWidget {
               isOpen: true,
               contentBorderRadius: 0,
               leftIcon: const Icon(FontAwesomeIcons.faceSmile, color: Colors.lightGreenAccent),
-              header: Text('Sheep: ${church.sheep.length}', style: headerStyle),
+              header: Text('Sheep: ${church.sheepPaginated.totalCount}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(
                   children: noDataChecker(
-                    church.sheep.map((member) {
-                      return _memberTile(context, member);
+                    church.sheepPaginated.edges.map((edge) {
+                      return memberListTile(context, edge.node);
                     }).toList(),
                   ),
                 ),
@@ -66,12 +70,12 @@ class ChurchMembershipList extends StatelessWidget {
             AccordionSection(
               leftIcon: const Icon(FontAwesomeIcons.faceMeh, color: Colors.yellowAccent),
               contentBorderRadius: 0,
-              header: Text('Goats: ${church.goats.length}', style: headerStyle),
+              header: Text('Goats: ${church.goatsPaginated.totalCount}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(
-                  children: noDataChecker(church.goats.map((member) {
-                    return _memberTile(context, member);
+                  children: noDataChecker(church.goatsPaginated.edges.map((edge) {
+                    return memberListTile(context, edge.node);
                   }).toList()),
                 ),
               ),
@@ -79,12 +83,12 @@ class ChurchMembershipList extends StatelessWidget {
             AccordionSection(
               leftIcon: const Icon(FontAwesomeIcons.faceFrown, color: Colors.redAccent),
               contentBorderRadius: 0,
-              header: Text('Deer: ${church.deer.length}', style: headerStyle),
+              header: Text('Deer: ${church.deerPaginated.totalCount}', style: headerStyle),
               content: SizedBox(
                 height: accordionHeight,
                 child: ListView(
-                  children: noDataChecker(church.deer.map((member) {
-                    return _memberTile(context, member);
+                  children: noDataChecker(church.deerPaginated.edges.map((edge) {
+                    return memberListTile(context, edge.node);
                   }).toList()),
                 ),
               ),
@@ -96,7 +100,7 @@ class ChurchMembershipList extends StatelessWidget {
   }
 }
 
-Column _memberTile(BuildContext context, MemberForList member) {
+Column memberListTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
