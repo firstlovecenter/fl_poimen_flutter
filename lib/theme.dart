@@ -8,8 +8,11 @@ Color _colorFromHex(String hexColor) {
 class PoimenTheme {
   static const Color phoneColor = Color(0xFFA8DCFF);
   static const Color whatsappColor = Color(0xFF90EDB3);
-  static const Color cardColor = Color(0xFF2A2A2A);
 
+  static const Color darkCardColor = Color(0xFF2A2A2A);
+  static const Color lightCardColor = Color.fromARGB(255, 217, 217, 217);
+
+  static const Color white = Color(0xFFFFFFFF);
   static const Color textSecondary = Colors.grey;
   static Color brand = _colorFromHex('#611ABB');
   static Color bad = _colorFromHex('#F44A4A');
@@ -18,25 +21,36 @@ class PoimenTheme {
 }
 
 var lightTheme = ThemeData(
-  bottomAppBarTheme: const BottomAppBarTheme(
-    color: Colors.black87,
+  // MAIN COLORS
+  primarySwatch: Colors.deepPurple,
+  scaffoldBackgroundColor: _colorFromHex('#F0F0F0'),
+  brightness: Brightness.light,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+
+  // TYPOGRAPHY & TEXT
+  textTheme: TextTheme(
+    headline5: TextStyle(color: PoimenTheme.brand),
   ),
-  primaryColor: Colors.purple,
-  textTheme: const TextTheme(
-    bodyText1: TextStyle(fontSize: 18),
-    bodyText2: TextStyle(fontSize: 16),
-    button: TextStyle(
-      fontWeight: FontWeight.bold,
-    ),
-    headline1: TextStyle(
-      fontWeight: FontWeight.bold,
-    ),
-    headline5: TextStyle(color: Colors.redAccent),
-    subtitle1: TextStyle(
-      color: Colors.grey,
+  cardColor: _colorFromHex("#FDFDFD"),
+  buttonTheme: const ButtonThemeData(
+    buttonColor: Colors.deepPurpleAccent,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      padding: const EdgeInsets.only(top: 13, bottom: 13),
+      backgroundColor: Colors.deepPurple,
+      textStyle: const TextStyle(fontSize: 18),
     ),
   ),
-  buttonTheme: const ButtonThemeData(),
+  iconTheme: const IconThemeData(
+    color: Colors.deepPurpleAccent,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: _colorFromHex("#FDFDFD"),
+    selectedItemColor: Colors.deepPurpleAccent,
+    unselectedItemColor: Colors.grey,
+  ),
+  backgroundColor: const Color(0x00242424),
 );
 
 var darkTheme = ThemeData(

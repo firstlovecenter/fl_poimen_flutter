@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
-import 'package:poimen/screens/attendance/ticker/widget_attendance_form.dart';
 import 'package:poimen/screens/attendance/ticker/gql_ticker.dart';
+import 'package:poimen/screens/attendance/ticker/widget_attendance_ticker.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/state/shared_state.dart';

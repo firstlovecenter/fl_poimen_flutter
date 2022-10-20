@@ -20,8 +20,9 @@ class ChurchMembershipList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const headerStyle =
-        TextStyle(color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    const headerStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
     const double accordionHeight = 340;
     int memberCount = church.sheep.length + church.goats.length + church.deer.length;
@@ -36,9 +37,10 @@ class ChurchMembershipList extends StatelessWidget {
           openAndCloseAnimation: true,
           paddingListHorizontal: 0,
           headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-          headerBackgroundColor: const Color(0xFF181818),
-          headerBackgroundColorOpened: const Color(0xFF1A1A1A),
-          contentBackgroundColor: PoimenTheme.cardColor,
+          headerBackgroundColor: isDarkMode ? const Color(0xFF181818) : null,
+          headerBackgroundColorOpened: isDarkMode ? const Color(0xFF1A1A1A) : null,
+          contentBackgroundColor:
+              isDarkMode ? PoimenTheme.darkCardColor : PoimenTheme.lightCardColor,
           headerBorderRadius: 0,
           contentHorizontalPadding: 5,
           contentBorderWidth: 1,

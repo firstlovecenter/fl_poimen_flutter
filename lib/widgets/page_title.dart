@@ -14,6 +14,9 @@ class PageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
     Widget title = Text(pageTitle);
 
     if (church != null) {
@@ -24,7 +27,7 @@ class PageTitle extends StatelessWidget {
             '${church?.name} ${church?.typename}',
             style: TextStyle(
               fontSize: 15,
-              color: PoimenTheme.brand,
+              color: isDarkMode ? PoimenTheme.brand : PoimenTheme.textSecondary,
               fontWeight: FontWeight.bold,
             ),
           )
