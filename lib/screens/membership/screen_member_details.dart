@@ -30,7 +30,6 @@ class MemberDetailsScreen extends StatelessWidget {
         final picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.lg);
 
         const headerStyle = TextStyle(
-          color: Color(0xffffffff),
           fontSize: 25,
           fontWeight: FontWeight.w500,
         );
@@ -138,10 +137,9 @@ class BioDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const titleStyle = TextStyle(color: Color(0xffffffff), fontSize: 15);
+    const titleStyle = TextStyle(fontSize: 15);
 
-    const detailStyle =
-        TextStyle(color: Color(0x88ffffff), fontSize: 15, fontWeight: FontWeight.normal);
+    const detailStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.normal);
     if (detail == '') {
       return Container();
     }

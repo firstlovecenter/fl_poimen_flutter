@@ -22,7 +22,7 @@ class ChurchMembershipList extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
-    const headerStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
+    const headerStyle = TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold);
 
     const double accordionHeight = 340;
     int memberCount = church.sheep.length + church.goats.length + church.deer.length;

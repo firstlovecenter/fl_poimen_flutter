@@ -29,7 +29,7 @@ class PoimenApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Poimen Flutter',
           theme: lightTheme,
-          darkTheme: lightTheme,
+          darkTheme: darkTheme,
           routes: appRoutes,
           home: const LoginScreen(),
         ),
