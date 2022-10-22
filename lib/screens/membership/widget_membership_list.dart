@@ -120,6 +120,7 @@ class MemberListQuery extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
     ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
+
     const pageSize = 7;
 
     return Query(

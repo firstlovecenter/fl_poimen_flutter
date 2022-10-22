@@ -35,9 +35,9 @@ class ChurchString {
   String _pluralProperCase = '';
 
   ChurchString(String levelLowerCase) {
-    _lowerCase = _lowerCase == 'gatheringservices' ? 'gatheringServices' : levelLowerCase;
+    _lowerCase = _lowerCase == 'gatheringservice' ? 'gatheringService' : levelLowerCase;
     _properCase = levelLowerCase[0].toUpperCase() + levelLowerCase.substring(1);
-    _pluralLowerCase = _lowerCase == 'constituency' ? 'constituencies' : '${levelLowerCase}s';
+    _pluralLowerCase = _convertToPluralLowerCase(_lowerCase);
     _pluralProperCase = _properCase == 'Constituency' ? 'Constituencies' : '${_properCase}s';
   }
 
@@ -45,6 +45,17 @@ class ChurchString {
   String get properCase => _properCase;
   String get pluralLowerCase => _pluralLowerCase;
   String get pluralProperCase => _pluralProperCase;
+}
+
+String _convertToPluralLowerCase(String churchString) {
+  if (churchString == 'constituency') {
+    return 'constituencies';
+  }
+  if (churchString == 'gatheringservice') {
+    return 'gatheringServices';
+  }
+
+  return '${churchString}s';
 }
 
 enum Stream { Campus, Town, Anagkazo }
