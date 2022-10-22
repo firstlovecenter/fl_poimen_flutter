@@ -35,7 +35,7 @@ class ChurchString {
   String _pluralProperCase = '';
 
   ChurchString(String levelLowerCase) {
-    _lowerCase = levelLowerCase;
+    _lowerCase = _lowerCase == 'gatheringservices' ? 'gatheringServices' : levelLowerCase;
     _properCase = levelLowerCase[0].toUpperCase() + levelLowerCase.substring(1);
     _pluralLowerCase = _lowerCase == 'constituency' ? 'constituencies' : '${levelLowerCase}s';
     _pluralProperCase = _properCase == 'Constituency' ? 'Constituencies' : '${_properCase}s';

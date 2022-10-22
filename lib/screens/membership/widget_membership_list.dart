@@ -119,6 +119,7 @@ class MemberListQuery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
+    ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
     const pageSize = 7;
 
     return Query(
@@ -132,7 +133,7 @@ class MemberListQuery extends StatelessWidget {
           }
 
           final church =
-              ChurchForMemberListByCategory.fromJson(result.data?['gatheringServices'][0]);
+              ChurchForMemberListByCategory.fromJson(result.data?[churchString.pluralLowerCase][0]);
 
           PaginatedMemberList? members;
 
@@ -187,6 +188,9 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
 
   @override
   Widget build(BuildContext context) {
+    var churchState = Provider.of<SharedState>(context);
+    ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
+    String churchLevel = churchString.pluralLowerCase;
     bool everyThingLoaded = widget.children.length == 1;
 
     return InfiniteScrollList(
@@ -196,10 +200,10 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
         FetchMoreOptions opts = FetchMoreOptions(
           variables: const {'first': 7, 'after': 630},
           updateQuery: ((previousResultData, fetchMoreResultData) {
-            final church = ChurchForMemberListByCategory.fromJson(
-                fetchMoreResultData?['gatheringServices'][0]);
+            final church =
+                ChurchForMemberListByCategory.fromJson(fetchMoreResultData?[churchLevel][0]);
             final previousChurchData =
-                ChurchForMemberListByCategory.fromJson(previousResultData?['gatheringServices'][0]);
+                ChurchForMemberListByCategory.fromJson(previousResultData?[churchLevel][0]);
 
             bool? done;
 
@@ -207,10 +211,10 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
               done = (previousChurchData.sheepPaginated!.position >=
                   previousChurchData.sheepPaginated!.totalCount);
               final List<dynamic> sheep = [
-                ...previousResultData?['gatheringServices'][0]['sheepPaginated']?['edges'] ?? [],
-                ...fetchMoreResultData?['gatheringServices'][0]['sheepPaginated']?['edges'] ?? []
+                ...previousResultData?[churchLevel][0]['sheepPaginated']?['edges'] ?? [],
+                ...fetchMoreResultData?[churchLevel][0]['sheepPaginated']?['edges'] ?? []
               ];
-              fetchMoreResultData?['gatheringServices'][0]['sheepPaginated']?['edges'] = sheep;
+              fetchMoreResultData?[churchLevel][0]['sheepPaginated']?['edges'] = sheep;
 
               done = (church.sheepPaginated!.position >= church.sheepPaginated!.totalCount);
             }
@@ -219,11 +223,11 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
               done = (previousChurchData.goatsPaginated!.position >=
                   previousChurchData.goatsPaginated!.totalCount);
               final List<dynamic> goats = [
-                ...previousResultData?['gatheringServices'][0]['goatsPaginated']?['edges'] ?? [],
-                ...fetchMoreResultData?['gatheringServices'][0]['goatsPaginated']?['edges'] ?? []
+                ...previousResultData?[churchLevel][0]['goatsPaginated']?['edges'] ?? [],
+                ...fetchMoreResultData?[churchLevel][0]['goatsPaginated']?['edges'] ?? []
               ];
 
-              fetchMoreResultData?['gatheringServices'][0]['goatsPaginated']?['edges'] = goats;
+              fetchMoreResultData?[churchLevel][0]['goatsPaginated']?['edges'] = goats;
 
               done = (church.goatsPaginated!.position >= church.goatsPaginated!.totalCount);
             }
@@ -232,11 +236,11 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
               done = (previousChurchData.deerPaginated!.position >=
                   previousChurchData.deerPaginated!.totalCount);
               final List<dynamic> deer = [
-                ...previousResultData?['gatheringServices'][0]['deerPaginated']?['edges'] ?? [],
-                ...fetchMoreResultData?['gatheringServices'][0]['deerPaginated']?['edges'] ?? []
+                ...previousResultData?[churchLevel][0]['deerPaginated']?['edges'] ?? [],
+                ...fetchMoreResultData?[churchLevel][0]['deerPaginated']?['edges'] ?? []
               ];
 
-              fetchMoreResultData?['gatheringServices'][0]['deerPaginated']?['edges'] = deer;
+              fetchMoreResultData?[churchLevel][0]['deerPaginated']?['edges'] = deer;
               done = (church.deerPaginated!.position >= church.deerPaginated!.totalCount);
             }
 

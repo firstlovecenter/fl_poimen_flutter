@@ -25,7 +25,7 @@ class StreamMembershipScreen extends StatelessWidget {
       bodyFunction: (data) {
         Widget body;
 
-        final stream = ChurchForPaginatedMemberCounts.fromJson(data?['streamServices'][0]);
+        final stream = ChurchForPaginatedMemberCounts.fromJson(data?['streams'][0]);
 
         ChurchWithPaginatedMemberQueries streamWithQueries = ChurchWithPaginatedMemberQueries(
           id: stream.id,
