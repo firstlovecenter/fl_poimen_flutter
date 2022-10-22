@@ -18,7 +18,7 @@ class ConstituencyFellowshipAttendanceDefaultersScreen extends StatelessWidget {
       query: getConstituencyFellowshipAttendanceDefaultersList,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Fellowship Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final constituency =

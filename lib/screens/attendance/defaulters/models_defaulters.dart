@@ -12,7 +12,7 @@ class ChurchBySubChurchForAttendanceDefaulters extends Church {
     this.constituencies,
     this.councils,
     this.streams,
-  }) : super(id: '', name: '', typename: '');
+  });
 
   factory ChurchBySubChurchForAttendanceDefaulters.fromJson(Map<String, dynamic> json) =>
       _$ChurchBySubChurchForAttendanceDefaultersFromJson(json);
@@ -41,7 +41,7 @@ class ChurchForAttendanceDefaulters extends Church {
     required this.streamCount,
     required this.fellowshipServicesThisWeekCount,
     required this.bacentaBussingThisWeekCount,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForAttendanceDefaulters.fromJson(Map<String, dynamic> json) =>
       _$ChurchForAttendanceDefaultersFromJson(json);
@@ -55,7 +55,7 @@ class ChurchForFellowshipAttendanceDefaultersList extends Church {
 
   ChurchForFellowshipAttendanceDefaultersList({
     required this.fellowshipAttendanceDefaulters,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForFellowshipAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForFellowshipAttendanceDefaultersListFromJson(json);
@@ -69,7 +69,7 @@ class ChurchForBacentaAttendanceDefaultersList extends Church {
 
   ChurchForBacentaAttendanceDefaultersList({
     required this.bacentaAttendanceDefaulters,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForBacentaAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForBacentaAttendanceDefaultersListFromJson(json);

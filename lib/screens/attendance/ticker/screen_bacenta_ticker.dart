@@ -24,10 +24,10 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
           'bussingRecordId': churchState.bussingRecordId,
         },
         defaultPageTitle: 'Tick Bacenta Membership Attendance',
-        bodyFunction: (data) {
+        bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = ChurchForMemberList.fromJson(data?['bacentas'][0]);
+          final bacenta = ChurchForPaginatedMemberList.fromJson(data?['bacentas'][0]);
           final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
 
           final attendanceMutation = useMutation(

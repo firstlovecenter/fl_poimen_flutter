@@ -18,7 +18,7 @@ class GatheringBacentaAttendanceDefaultersScreen extends StatelessWidget {
       query: getGatheringBacentaAttendanceDefaultersList,
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final gathering =

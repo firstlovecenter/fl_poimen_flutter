@@ -9,8 +9,8 @@ class GQLQueryContainer extends StatefulWidget {
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
   final Function(Map<String, dynamic>?) bodyFunction;
-  final Function(Map<String, dynamic>?)? fetchMore;
   final Widget? bottomNavBar;
+  final bool? infiniteScroll;
 
   const GQLQueryContainer(
       {Key? key,
@@ -18,7 +18,7 @@ class GQLQueryContainer extends StatefulWidget {
       required this.variables,
       required this.defaultPageTitle,
       required this.bodyFunction,
-      this.fetchMore,
+      this.infiniteScroll,
       this.bottomNavBar})
       : super(key: key);
 
@@ -45,7 +45,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
             text: getGQLException(result.exception),
             onRetry: () => refetch!(),
           );
-        } else if (result.isLoading || result.data == null) {
+        } else if (widget.infiniteScroll != true && (result.isLoading || result.data == null)) {
           body = const LoadingScreen();
         } else {
           GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);

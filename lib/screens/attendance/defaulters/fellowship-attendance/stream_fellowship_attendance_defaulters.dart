@@ -18,7 +18,7 @@ class StreamFellowshipAttendanceDefaultersScreen extends StatelessWidget {
       query: getStreamFellowshipAttendanceDefaultersList,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Fellowship Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final stream = ChurchForFellowshipAttendanceDefaultersList.fromJson(data?['streams'][0]);

@@ -9,7 +9,7 @@ class ChurchForServicesList extends Church {
 
   ChurchForServicesList({
     required this.services,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForServicesList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForServicesListFromJson(json);
@@ -23,7 +23,7 @@ class ChurchForBussingList extends Church {
 
   ChurchForBussingList({
     required this.bussing,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForBussingList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForBussingListFromJson(json);

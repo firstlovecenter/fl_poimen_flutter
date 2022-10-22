@@ -21,7 +21,7 @@ class GatheringAttendanceDefaultersScreen extends StatelessWidget {
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Gathering Attendance Defaulters',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final gathering = ChurchForAttendanceDefaulters.fromJson(data?['gatheringServices'][0]);

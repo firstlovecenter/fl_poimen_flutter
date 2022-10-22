@@ -18,7 +18,7 @@ class ConstituencyBacentaAttendanceDefaultersScreen extends StatelessWidget {
       query: getConstituencyBacentaAttendanceDefaultersList,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final constituency =

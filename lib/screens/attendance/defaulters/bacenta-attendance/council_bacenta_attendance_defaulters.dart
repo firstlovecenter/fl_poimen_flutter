@@ -18,7 +18,7 @@ class CouncilBacentaAttendanceDefaultersScreen extends StatelessWidget {
       query: getCouncilBacentaAttendanceDefaultersList,
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final council = ChurchForBacentaAttendanceDefaultersList.fromJson(data?['councils'][0]);

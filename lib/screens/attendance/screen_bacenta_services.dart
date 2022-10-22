@@ -21,7 +21,7 @@ class BacentaServicesScreen extends StatelessWidget {
         variables: {'id': churchState.bacentaId},
         defaultPageTitle: 'Bacenta Services',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
-        bodyFunction: (data) {
+        bodyFunction: (data, [fetchMore]) {
           Widget body;
 
           final bacenta = ChurchForBussingList.fromJson(data?['bacentas'][0]);

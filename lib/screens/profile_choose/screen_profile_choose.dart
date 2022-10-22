@@ -17,7 +17,7 @@ class ProfileChooseScreen extends StatelessWidget {
         'id': authId,
       },
       defaultPageTitle: 'Profile Selection',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final user = Profile.fromJson(data?['members'][0]);

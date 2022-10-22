@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/theme.dart';
 
 class PageTitle extends StatelessWidget {
@@ -9,7 +9,7 @@ class PageTitle extends StatelessWidget {
     required this.pageTitle,
   }) : super(key: key);
 
-  final Church? church;
+  final ProfileChurch? church;
   final String pageTitle;
 
   @override

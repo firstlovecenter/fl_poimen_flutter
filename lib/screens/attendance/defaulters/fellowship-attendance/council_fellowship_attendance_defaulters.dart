@@ -18,7 +18,7 @@ class CouncilFellowshipAttendanceDefaultersScreen extends StatelessWidget {
       query: getCouncilFellowshipAttendanceDefaultersList,
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Fellowship Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final council = ChurchForFellowshipAttendanceDefaultersList.fromJson(data?['councils'][0]);

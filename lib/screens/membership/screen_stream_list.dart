@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/helpers/menus.dart';
-import 'package:poimen/screens/membership/gql_membership_list.dart';
+import 'package:poimen/screens/membership/gql_paginated_member_lists.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/screens/membership/utils_paginated_member_list.dart';
 import 'package:poimen/screens/membership/widget_membership_list.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -17,22 +18,33 @@ class StreamMembershipScreen extends StatelessWidget {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getStreamMembers,
+      query: getStreamMembershipNumbers,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Stream Members',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
-      bodyFunction: (Map<String, dynamic>? data) {
+      bodyFunction: (data) {
         Widget body;
 
-        final stream = ChurchForMemberList.fromJson(data?['streams'][0]);
+        final stream = ChurchForPaginatedMemberCounts.fromJson(data?['streamServices'][0]);
 
-        body = ChurchMembershipList(church: stream);
+        ChurchWithPaginatedMemberQueries streamWithQueries = ChurchWithPaginatedMemberQueries(
+          id: stream.id,
+          name: stream.name,
+          typename: stream.typename,
+          sheepCount: stream.sheepPaginated?.totalCount ?? 0,
+          sheepQuery: getStreamSheepForList,
+          goatCount: stream.goatsPaginated?.totalCount ?? 0,
+          goatQuery: getStreamGoatsForList,
+          deerCount: stream.deerPaginated?.totalCount ?? 0,
+          deerQuery: getStreamDeerForList,
+        );
+
+        body = ChurchMembershipList(church: streamWithQueries);
+
         var returnValues = GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(
-              pageTitle: 'Membership',
-              church: stream,
-            ),
-            body: body);
+          pageTitle: PageTitle(church: stream, pageTitle: 'Membership'),
+          body: body,
+        );
 
         return returnValues;
       },

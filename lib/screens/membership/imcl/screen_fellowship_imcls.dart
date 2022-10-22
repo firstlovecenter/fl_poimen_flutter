@@ -21,7 +21,7 @@ class FellowshipIMCLScreen extends StatelessWidget {
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IMCL List',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final fellowship = ChurchForImclList.fromJson(data?['fellowships'][0]);

@@ -22,7 +22,7 @@ class FellowshipAttendanceReportScreen extends StatelessWidget {
           'serviceRecordId': churchState.serviceRecordId,
         },
         defaultPageTitle: 'Fellowship Attendance Report',
-        bodyFunction: (data) {
+        bodyFunction: (data, [fetchMore]) {
           Widget body;
 
           final fellowship = Church.fromJson(data?['fellowships'][0]);

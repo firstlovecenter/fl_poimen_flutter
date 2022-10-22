@@ -14,7 +14,7 @@ class AttendanceTickerWithPictureScreen extends StatefulWidget {
       {Key? key, required this.church, required this.tickerMutation})
       : super(key: key);
 
-  final ChurchForMemberList church;
+  final ChurchForPaginatedMemberList church;
   final MutationHookResult tickerMutation;
 
   @override

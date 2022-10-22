@@ -18,7 +18,7 @@ class StreamBacentaAttendanceDefaultersScreen extends StatelessWidget {
       query: getStreamBacentaAttendanceDefaultersList,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final stream = ChurchForBacentaAttendanceDefaultersList.fromJson(data?['streams'][0]);

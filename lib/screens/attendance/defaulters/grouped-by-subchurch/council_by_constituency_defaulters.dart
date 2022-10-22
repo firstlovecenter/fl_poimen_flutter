@@ -21,7 +21,7 @@ class CouncilByConstituencyAttendanceDefaultersScreen extends StatelessWidget {
       variables: {'id': churchState.councilId},
       defaultPageTitle: 'Attendance Defaulters',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final council = ChurchBySubChurchForAttendanceDefaulters.fromJson(data?['councils'][0]);

@@ -21,7 +21,7 @@ class FellowshipIDLScreen extends StatelessWidget {
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship IDL List',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 3),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final fellowship = ChurchForIdlList.fromJson(data?['fellowships'][0]);

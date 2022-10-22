@@ -2,23 +2,19 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/models/neo4j.dart';
+import 'package:poimen/screens/profile_choose/models_profile.dart';
 part 'models_membership.g.dart';
 
 @JsonSerializable()
-class Church {
-  String id = '';
-  String typename = '';
-  String name = '';
+class Church extends ProfileChurch {
   MemberForList? leader;
 
   Church({
-    required this.id,
-    required this.typename,
-    required this.name,
     this.leader,
-  });
+  }) : super(id: '', typename: '', name: '');
 
   factory Church.fromJson(Map<String, dynamic> json) => _$ChurchFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ChurchToJson(this);
 }
 
@@ -111,7 +107,7 @@ class PaginatedMemberList {
 }
 
 @JsonSerializable()
-class ChurchForMemberList extends Church {
+class ChurchForPaginatedMemberList extends Church {
   PaginatedMemberList sheepPaginated = PaginatedMemberList(
     edges: [],
     totalCount: 0,
@@ -128,12 +124,69 @@ class ChurchForMemberList extends Church {
     position: 0,
   );
 
-  ChurchForMemberList(
-      {required this.sheepPaginated, required this.goatsPaginated, required this.deerPaginated})
-      : super(id: '', typename: '', name: '');
+  ChurchForPaginatedMemberList(
+      {required this.sheepPaginated, required this.goatsPaginated, required this.deerPaginated});
 
-  factory ChurchForMemberList.fromJson(Map<String, dynamic> json) =>
-      _$ChurchForMemberListFromJson(json);
+  factory ChurchForPaginatedMemberList.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForPaginatedMemberListFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$ChurchForMemberListToJson(this);
+  Map<String, dynamic> toJson() => _$ChurchForPaginatedMemberListToJson(this);
+}
+
+@JsonSerializable()
+class PaginatedMemberCounts {
+  int totalCount = 0;
+
+  PaginatedMemberCounts({
+    required this.totalCount,
+  });
+
+  factory PaginatedMemberCounts.fromJson(Map<String, dynamic> json) =>
+      _$PaginatedMemberCountsFromJson(json);
+  Map<String, dynamic> toJson() => _$PaginatedMemberCountsToJson(this);
+}
+
+@JsonSerializable()
+class ChurchForPaginatedMemberCounts extends Church {
+  PaginatedMemberCounts? sheepPaginated = PaginatedMemberCounts(
+    totalCount: 0,
+  );
+  PaginatedMemberCounts? goatsPaginated = PaginatedMemberCounts(
+    totalCount: 0,
+  );
+  PaginatedMemberCounts? deerPaginated = PaginatedMemberCounts(
+    totalCount: 0,
+  );
+
+  ChurchForPaginatedMemberCounts(
+      {required this.sheepPaginated, required this.goatsPaginated, required this.deerPaginated});
+
+  factory ChurchForPaginatedMemberCounts.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForPaginatedMemberCountsFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChurchForPaginatedMemberCountsToJson(this);
+}
+
+@JsonSerializable()
+class ChurchForMemberListByCategory extends Church {
+  PaginatedMemberList? sheepPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+  PaginatedMemberList? goatsPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+  PaginatedMemberList? deerPaginated = PaginatedMemberList(
+    edges: [],
+    totalCount: 0,
+    position: 0,
+  );
+
+  ChurchForMemberListByCategory({this.sheepPaginated, this.goatsPaginated, this.deerPaginated});
+
+  factory ChurchForMemberListByCategory.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForMemberListByCategoryFromJson(json);
 }

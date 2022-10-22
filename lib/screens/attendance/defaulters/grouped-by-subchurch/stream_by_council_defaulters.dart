@@ -21,7 +21,7 @@ class StreamByCouncilAttendanceDefaultersScreen extends StatelessWidget {
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Attendance Defaulters',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final stream = ChurchBySubChurchForAttendanceDefaulters.fromJson(data?['streams'][0]);

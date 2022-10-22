@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
       query: query,
       variables: {'id': church.id},
       defaultPageTitle: 'Home',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final church = HomeScreenChurch.fromJson(data?[pluralName][0]);

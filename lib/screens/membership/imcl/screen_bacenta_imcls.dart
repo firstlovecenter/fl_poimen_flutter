@@ -21,7 +21,7 @@ class BacentaIMCLScreen extends StatelessWidget {
       variables: {'id': churchState.bacentaId},
       defaultPageTitle: 'Bacenta IMCL List',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final bacenta = ChurchForImclList.fromJson(data?['bacentas'][0]);

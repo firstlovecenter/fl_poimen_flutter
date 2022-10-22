@@ -22,7 +22,7 @@ class BacentaAttendanceReportScreen extends StatelessWidget {
           'bussingRecordId': churchState.bussingRecordId,
         },
         defaultPageTitle: 'Bacenta Attendance Report',
-        bodyFunction: (data) {
+        bodyFunction: (data, [fetchMore]) {
           Widget body;
 
           final bacenta = Church.fromJson(data?['bacentas'][0]);

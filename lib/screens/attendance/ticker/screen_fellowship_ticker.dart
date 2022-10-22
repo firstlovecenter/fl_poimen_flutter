@@ -24,10 +24,10 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           'serviceRecordId': churchState.serviceRecordId,
         },
         defaultPageTitle: 'Tick Fellowship Membership Attendance',
-        bodyFunction: (data) {
+        bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForMemberList.fromJson(data?['fellowships'][0]);
+          final fellowship = ChurchForPaginatedMemberList.fromJson(data?['fellowships'][0]);
           final service = ServiceWithPicture.fromJson(data?['serviceRecords'][0]);
 
           final attendanceMutation = useMutation(

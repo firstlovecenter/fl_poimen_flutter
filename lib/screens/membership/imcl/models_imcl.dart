@@ -40,7 +40,7 @@ class ChurchForImclList extends Church {
 
   ChurchForImclList({
     required this.imcls,
-  }) : super(id: '', typename: '', name: '');
+  });
 
   factory ChurchForImclList.fromJson(Map<String, dynamic> json) =>
       _$ChurchForImclListFromJson(json);

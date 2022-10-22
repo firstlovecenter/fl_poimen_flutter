@@ -18,7 +18,7 @@ class GatheringFellowshipAttendanceDefaultersScreen extends StatelessWidget {
       query: getGatheringFellowshipAttendanceDefaultersList,
       variables: {'id': churchState.gatheringId},
       defaultPageTitle: 'Fellowship Attendance Defaulters',
-      bodyFunction: (data) {
+      bodyFunction: (data, [fetchMore]) {
         Widget body;
 
         final gathering =
