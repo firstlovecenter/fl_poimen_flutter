@@ -26,7 +26,7 @@ class ConstituencyMembershipScreen extends StatelessWidget {
         Widget body;
 
         final constituency =
-            ChurchForPaginatedMemberCounts.fromJson(data?['constituencyServices'][0]);
+            ChurchForPaginatedMemberCounts.fromJson(data?['constituencies'][0]);
 
         ChurchWithPaginatedMemberQueries constituencyWithQueries = ChurchWithPaginatedMemberQueries(
           id: constituency.id,

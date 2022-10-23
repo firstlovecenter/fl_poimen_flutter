@@ -133,6 +133,10 @@ class MemberListQuery extends StatelessWidget {
             return Text(getGQLException(result.exception));
           }
 
+          if (result.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
           final church =
               ChurchForMemberListByCategory.fromJson(result.data?[churchString.pluralLowerCase][0]);
 

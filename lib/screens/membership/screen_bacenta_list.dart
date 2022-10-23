@@ -25,7 +25,7 @@ class BacentaMembershipScreen extends StatelessWidget {
       bodyFunction: (data) {
         Widget body;
 
-        final bacenta = ChurchForPaginatedMemberCounts.fromJson(data?['bacentaServices'][0]);
+        final bacenta = ChurchForPaginatedMemberCounts.fromJson(data?['bacentas'][0]);
 
         ChurchWithPaginatedMemberQueries bacentaWithQueries = ChurchWithPaginatedMemberQueries(
           id: bacenta.id,

@@ -25,7 +25,7 @@ class FellowshipMembershipScreen extends StatelessWidget {
       bodyFunction: (data) {
         Widget body;
 
-        final fellowship = ChurchForPaginatedMemberCounts.fromJson(data?['fellowshipServices'][0]);
+        final fellowship = ChurchForPaginatedMemberCounts.fromJson(data?['fellowships'][0]);
 
         ChurchWithPaginatedMemberQueries fellowshipWithQueries = ChurchWithPaginatedMemberQueries(
           id: fellowship.id,
