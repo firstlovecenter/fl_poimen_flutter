@@ -132,8 +132,8 @@ class MemberListQuery extends StatelessWidget {
             return Text(getGQLException(result.exception));
           }
 
-          if (result.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+          if ((result.data == null)) {
+            return const CircularProgressIndicator();
           }
 
           final church =
@@ -202,7 +202,7 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
       shrinkWrap: true,
       onLoadingStart: (page) async {
         FetchMoreOptions opts = FetchMoreOptions(
-          variables: const {'first': 7, 'after': 630},
+          variables: {'first': 7, 'after': widget.position},
           updateQuery: ((previousResultData, fetchMoreResultData) {
             final church =
                 ChurchForMemberListByCategory.fromJson(fetchMoreResultData?[churchLevel][0]);
