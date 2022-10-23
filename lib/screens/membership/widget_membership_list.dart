@@ -133,7 +133,7 @@ class MemberListQuery extends StatelessWidget {
           }
 
           if ((result.data == null)) {
-            return const CircularProgressIndicator();
+            return const Center(child: SizedBox(child: CircularProgressIndicator()));
           }
 
           final church =
@@ -195,7 +195,7 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
     var churchState = Provider.of<SharedState>(context);
     ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
     String churchLevel = churchString.pluralLowerCase;
-    bool everyThingLoaded = widget.children.length == 1;
+    bool everyThingLoaded = widget.children.length < widget.position;
 
     return InfiniteScrollList(
       physics: const BouncingScrollPhysics(),
