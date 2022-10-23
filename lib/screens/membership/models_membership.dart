@@ -189,4 +189,6 @@ class ChurchForMemberListByCategory extends Church {
 
   factory ChurchForMemberListByCategory.fromJson(Map<String, dynamic> json) =>
       _$ChurchForMemberListByCategoryFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChurchForMemberListByCategoryToJson(this);
 }

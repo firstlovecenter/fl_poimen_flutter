@@ -27,7 +27,6 @@ class ChurchMembershipList extends StatelessWidget {
     bool isDarkMode = brightness == Brightness.dark;
     const headerStyle = TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold);
     const double accordionHeight = 340;
-    var churchState = Provider.of<SharedState>(context);
 
     int totalCount = church.sheepCount + church.goatCount + church.deerCount;
 
