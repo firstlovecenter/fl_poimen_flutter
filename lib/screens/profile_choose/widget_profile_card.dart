@@ -61,7 +61,7 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
-              Text(church.name),
+              Text(church.name, overflow: TextOverflow.fade, softWrap: false),
             ],
           ),
         ),

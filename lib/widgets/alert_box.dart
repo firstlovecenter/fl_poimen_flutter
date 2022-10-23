@@ -91,9 +91,13 @@ String getGQLException(dynamic exception) {
   }
 
   if (exception.graphqlErrors.isEmpty) {
-    return exception.linkException?.parsedResponse?.errors[0].message.toString() ??
+    if (exception.linkException?.parsedResponse?.errors == null) {
+      return exception.linkException.parsedResponse.response['errorMessage'].toString();
+    }
+
+    return exception.linkException?.parsedResponse?.errors?[0].message.toString() ??
         exception.linkException?.originalException.toString() ??
-        exception;
+        exception.toString();
   }
 
   return exception.graphqlErrors[0].message.toString();
