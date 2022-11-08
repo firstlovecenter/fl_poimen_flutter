@@ -107,3 +107,36 @@ final getGatheringServiceHomeScreen = gql('''
       }
   }
 ''');
+
+final getBacentaPastoralCycle = gql('''
+ mutation getBacentaPastoralCycle {
+  currentBacentaPastoralCycle {
+    typename
+    startDate
+    endDate
+    numberOfDays
+  }
+}
+''');
+
+final getConstituencyPastoralCycle = gql('''
+ mutation getConstituencyPastoralCycle {
+  currentConstituencyPastoralCycle {
+    typename
+    startDate
+    endDate
+    numberOfDays
+  }
+}
+''');
+
+final getCouncilPastoralCycle = gql('''
+ mutation getCouncilPastoralCycle {
+  currentCouncilPastoralCycle {
+    typename
+    startDate
+    endDate
+    numberOfDays
+  }
+}
+''');

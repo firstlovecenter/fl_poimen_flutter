@@ -40,6 +40,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         Widget body;
 
         if (result.hasException) {
+          
           body = AlertBox(
             type: AlertType.error,
             text: getGQLException(result.exception),
