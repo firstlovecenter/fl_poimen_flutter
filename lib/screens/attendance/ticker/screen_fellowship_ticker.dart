@@ -27,7 +27,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForPaginatedMemberList.fromJson(data?['fellowships'][0]);
+          final fellowship = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
           final service = ServiceWithPicture.fromJson(data?['serviceRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -38,6 +38,10 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
+                if (resultData == null) {
+                  return;
+                }
+
                 Navigator.of(context).pushReplacementNamed('/fellowship/attendance-report');
               },
             ),
@@ -50,11 +54,12 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           );
 
           var returnValues = GQLQueryContainerReturnValue(
-              pageTitle: PageTitle(
-                pageTitle: 'Tick Membership Attendance',
-                church: fellowship,
-              ),
-              body: body);
+            pageTitle: PageTitle(
+              pageTitle: 'Tick Membership Attendance',
+              church: fellowship,
+            ),
+            body: body,
+          );
 
           return returnValues;
         });

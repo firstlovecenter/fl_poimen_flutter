@@ -137,12 +137,12 @@ class MemberListQuery extends StatelessWidget {
           }
 
           final church =
-              ChurchForMemberListByCategory.fromJson(result.data?[churchString.pluralLowerCase][0]);
+              ChurchForPaginatedMemberList.fromJson(result.data?[churchString.pluralLowerCase][0]);
 
           PaginatedMemberList? members;
 
           if (category == MemberCategory.Sheep) {
-            members = church.sheepPaginated!;
+            members = church.sheepPaginated;
           }
           if (category == MemberCategory.Goat) {
             members = church.goatsPaginated;
@@ -205,27 +205,27 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
           variables: {'first': 7, 'after': widget.position},
           updateQuery: ((previousResultData, fetchMoreResultData) {
             final church =
-                ChurchForMemberListByCategory.fromJson(fetchMoreResultData?[churchLevel][0]);
+                ChurchForPaginatedMemberList.fromJson(fetchMoreResultData?[churchLevel][0]);
             final previousChurchData =
-                ChurchForMemberListByCategory.fromJson(previousResultData?[churchLevel][0]);
+                ChurchForPaginatedMemberList.fromJson(previousResultData?[churchLevel][0]);
 
             bool? done;
 
             if (widget.category == MemberCategory.Sheep) {
-              done = (previousChurchData.sheepPaginated!.position >=
-                  previousChurchData.sheepPaginated!.totalCount);
+              done = (previousChurchData.sheepPaginated.position >=
+                  previousChurchData.sheepPaginated.totalCount);
               final List<dynamic> sheep = [
                 ...previousResultData?[churchLevel][0]['sheepPaginated']?['edges'] ?? [],
                 ...fetchMoreResultData?[churchLevel][0]['sheepPaginated']?['edges'] ?? []
               ];
               fetchMoreResultData?[churchLevel][0]['sheepPaginated']?['edges'] = sheep;
 
-              done = (church.sheepPaginated!.position >= church.sheepPaginated!.totalCount);
+              done = (church.sheepPaginated.position >= church.sheepPaginated.totalCount);
             }
 
             if (widget.category == MemberCategory.Goat) {
-              done = (previousChurchData.goatsPaginated!.position >=
-                  previousChurchData.goatsPaginated!.totalCount);
+              done = (previousChurchData.goatsPaginated.position >=
+                  previousChurchData.goatsPaginated.totalCount);
               final List<dynamic> goats = [
                 ...previousResultData?[churchLevel][0]['goatsPaginated']?['edges'] ?? [],
                 ...fetchMoreResultData?[churchLevel][0]['goatsPaginated']?['edges'] ?? []
@@ -233,19 +233,19 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
 
               fetchMoreResultData?[churchLevel][0]['goatsPaginated']?['edges'] = goats;
 
-              done = (church.goatsPaginated!.position >= church.goatsPaginated!.totalCount);
+              done = (church.goatsPaginated.position >= church.goatsPaginated.totalCount);
             }
 
             if (widget.category == MemberCategory.Deer) {
-              done = (previousChurchData.deerPaginated!.position >=
-                  previousChurchData.deerPaginated!.totalCount);
+              done = (previousChurchData.deerPaginated.position >=
+                  previousChurchData.deerPaginated.totalCount);
               final List<dynamic> deer = [
                 ...previousResultData?[churchLevel][0]['deerPaginated']?['edges'] ?? [],
                 ...fetchMoreResultData?[churchLevel][0]['deerPaginated']?['edges'] ?? []
               ];
 
               fetchMoreResultData?[churchLevel][0]['deerPaginated']?['edges'] = deer;
-              done = (church.deerPaginated!.position >= church.deerPaginated!.totalCount);
+              done = (church.deerPaginated.position >= church.deerPaginated.totalCount);
             }
 
             if (done == true) {

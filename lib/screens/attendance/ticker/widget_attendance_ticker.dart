@@ -6,6 +6,7 @@ import 'package:poimen/services/cloudinary_service.dart' as cloudinary_custom;
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/attendance_image_carousel.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class AttendanceTickerScreen extends StatefulWidget {
       {Key? key, required this.church, required this.service, required this.tickerMutation})
       : super(key: key);
 
-  final ChurchForPaginatedMemberList church;
+  final ChurchForMemberListByCategory church;
   final ServiceWithPicture service;
   final MutationHookResult tickerMutation;
 
@@ -31,9 +32,9 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
     final List<String> membership = [
-      ...widget.church.sheepPaginated.edges.map((sheep) => sheep.node.id),
-      ...widget.church.goatsPaginated.edges.map((goat) => goat.node.id),
-      ...widget.church.deerPaginated.edges.map((deer) => deer.node.id),
+      ...widget.church.sheep.map((sheep) => sheep.id),
+      ...widget.church.goats.map((goat) => goat.id),
+      ...widget.church.deer.map((deer) => deer.id),
     ];
     String recordId = churchState.serviceRecordId;
 
@@ -67,18 +68,18 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
               const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
-                members: widget.church.sheepPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.sheep,
                 category: MemberCategory.Sheep,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
-                members: widget.church.goatsPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.goats,
                 category: MemberCategory.Goat,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
                 category: MemberCategory.Deer,
-                members: widget.church.deerPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.deer,
                 presentMembers: _presentMembers,
               ),
             ],
@@ -102,8 +103,12 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
               'recordId': recordId,
             });
 
+            var exception = widget.tickerMutation.result.exception != null
+                ? getGQLException(widget.tickerMutation.result.exception)
+                : null;
+
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Processing Data')),
+              SnackBar(content: Text(exception ?? 'Processing Data')),
             );
           },
           child: const Text('Submit'),
@@ -153,7 +158,7 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
                   .map((member) => Column(
                         children: [
                           CheckboxListTile(
-                            activeColor: Colors.deepPurpleAccent,
+                            activeColor: PoimenTheme.darkBrand,
                             checkColor: Colors.white38,
                             value: widget.presentMembers.contains(member.id),
                             onChanged: (bool? value) {

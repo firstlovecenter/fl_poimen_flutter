@@ -26,13 +26,13 @@ class ChurchImclList extends StatelessWidget {
           'This is the list of those who were not at the last church service',
           style: TextStyle(fontSize: 16),
         ),
-        const Center(
+        Center(
           child: Text(
             'You must contact them to find out why they were absent',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: Colors.deepPurpleAccent,
+              color: PoimenTheme.brand,
             ),
           ),
         ),

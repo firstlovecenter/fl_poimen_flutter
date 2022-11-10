@@ -1,5 +1,6 @@
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class HomePageButton extends StatelessWidget {
             minVerticalPadding: const EdgeInsets.only(top: 13, bottom: 13).vertical,
             title: Text(text),
             leading: CircleAvatar(
-              backgroundColor: Colors.deepPurpleAccent,
+              backgroundColor: PoimenTheme.brand,
               child: Center(
                 child: Icon(
                   icon,

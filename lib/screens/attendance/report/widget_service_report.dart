@@ -31,7 +31,9 @@ class ChurchServicesReport extends StatelessWidget {
               Text(
                 timeago.format(record.serviceDate.date),
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: PoimenTheme.brand, fontSize: 16.0),
+                    fontWeight: FontWeight.bold,
+                    color: PoimenTheme.brandTextPrimary,
+                    fontSize: 16.0),
               ),
             ],
           ),

@@ -199,18 +199,15 @@ Map<String, dynamic> _$ChurchForPaginatedMemberCountsToJson(
 ChurchForMemberListByCategory _$ChurchForMemberListByCategoryFromJson(
     Map<String, dynamic> json) {
   return ChurchForMemberListByCategory(
-    sheepPaginated: json['sheepPaginated'] == null
-        ? null
-        : PaginatedMemberList.fromJson(
-            json['sheepPaginated'] as Map<String, dynamic>),
-    goatsPaginated: json['goatsPaginated'] == null
-        ? null
-        : PaginatedMemberList.fromJson(
-            json['goatsPaginated'] as Map<String, dynamic>),
-    deerPaginated: json['deerPaginated'] == null
-        ? null
-        : PaginatedMemberList.fromJson(
-            json['deerPaginated'] as Map<String, dynamic>),
+    sheep: (json['sheep'] as List<dynamic>)
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    goats: (json['goats'] as List<dynamic>)
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    deer: (json['deer'] as List<dynamic>)
+        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+        .toList(),
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
@@ -227,7 +224,7 @@ Map<String, dynamic> _$ChurchForMemberListByCategoryToJson(
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
-      'sheepPaginated': instance.sheepPaginated,
-      'goatsPaginated': instance.goatsPaginated,
-      'deerPaginated': instance.deerPaginated,
+      'sheep': instance.sheep,
+      'goats': instance.goats,
+      'deer': instance.deer,
     };

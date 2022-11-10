@@ -27,7 +27,7 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = ChurchForPaginatedMemberList.fromJson(data?['bacentas'][0]);
+          final bacenta = ChurchForMemberListByCategory.fromJson(data?['bacentas'][0]);
           final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -38,6 +38,10 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
+                if (resultData == null) {
+                  return;
+                }
+
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/bacenta/attendance-report', (route) => false);
               },

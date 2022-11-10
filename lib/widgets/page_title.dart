@@ -27,7 +27,7 @@ class PageTitle extends StatelessWidget {
             '${church?.name} ${church?.typename}',
             style: TextStyle(
               fontSize: 15,
-              color: isDarkMode ? PoimenTheme.brand : PoimenTheme.textSecondary,
+              color: isDarkMode ? PoimenTheme.brandTextPrimary : PoimenTheme.textSecondary,
               fontWeight: FontWeight.bold,
             ),
           )

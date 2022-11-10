@@ -91,6 +91,34 @@ class MemberDetailsScreen extends StatelessWidget {
                   }),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 35),
+                child: ListTile(
+                  onTap: () {},
+                  contentPadding: const EdgeInsets.only(left: 0.0),
+                  leading: Container(
+                    color: PoimenTheme.darkBrand,
+                    child: const SizedBox(
+                      width: 55,
+                      child: Center(
+                        child: Icon(
+                          FontAwesomeIcons.cakeCandles,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: const Text('Membership Upgrades'),
+                  tileColor: PoimenTheme.brand,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5.0),
+                      bottomRight: Radius.circular(5.0),
+                    ),
+                  ),
+                ),
+              ),
               const Padding(padding: EdgeInsets.all(8.0)),
               BioDetailsCard(title: 'Sex', detail: member.gender.gender.name),
               BioDetailsCard(title: 'Date of Birth', detail: member.dob.humanReadable),

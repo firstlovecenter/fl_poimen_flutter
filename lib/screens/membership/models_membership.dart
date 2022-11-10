@@ -169,23 +169,11 @@ class ChurchForPaginatedMemberCounts extends Church {
 
 @JsonSerializable()
 class ChurchForMemberListByCategory extends Church {
-  PaginatedMemberList? sheepPaginated = PaginatedMemberList(
-    edges: [],
-    totalCount: 0,
-    position: 0,
-  );
-  PaginatedMemberList? goatsPaginated = PaginatedMemberList(
-    edges: [],
-    totalCount: 0,
-    position: 0,
-  );
-  PaginatedMemberList? deerPaginated = PaginatedMemberList(
-    edges: [],
-    totalCount: 0,
-    position: 0,
-  );
+  List<MemberForList> sheep = [];
+  List<MemberForList> goats = [];
+  List<MemberForList> deer = [];
 
-  ChurchForMemberListByCategory({this.sheepPaginated, this.goatsPaginated, this.deerPaginated});
+  ChurchForMemberListByCategory({required this.sheep, required this.goats, required this.deer});
 
   factory ChurchForMemberListByCategory.fromJson(Map<String, dynamic> json) =>
       _$ChurchForMemberListByCategoryFromJson(json);
