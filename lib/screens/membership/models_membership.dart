@@ -108,17 +108,17 @@ class PaginatedMemberList {
 
 @JsonSerializable()
 class ChurchForPaginatedMemberList extends Church {
-  PaginatedMemberList sheepPaginated = PaginatedMemberList(
+  PaginatedMemberList? sheepPaginated = PaginatedMemberList(
     edges: [],
     totalCount: 0,
     position: 0,
   );
-  PaginatedMemberList goatsPaginated = PaginatedMemberList(
+  PaginatedMemberList? goatsPaginated = PaginatedMemberList(
     edges: [],
     totalCount: 0,
     position: 0,
   );
-  PaginatedMemberList deerPaginated = PaginatedMemberList(
+  PaginatedMemberList? deerPaginated = PaginatedMemberList(
     edges: [],
     totalCount: 0,
     position: 0,

@@ -91,6 +91,7 @@ class MemberDetailsScreen extends StatelessWidget {
                   }),
                 ],
               ),
+              const Padding(padding: EdgeInsets.all(8.0)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
                 child: ListTile(

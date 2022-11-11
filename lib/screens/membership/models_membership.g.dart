@@ -120,12 +120,18 @@ Map<String, dynamic> _$PaginatedMemberListToJson(
 ChurchForPaginatedMemberList _$ChurchForPaginatedMemberListFromJson(
     Map<String, dynamic> json) {
   return ChurchForPaginatedMemberList(
-    sheepPaginated: PaginatedMemberList.fromJson(
-        json['sheepPaginated'] as Map<String, dynamic>),
-    goatsPaginated: PaginatedMemberList.fromJson(
-        json['goatsPaginated'] as Map<String, dynamic>),
-    deerPaginated: PaginatedMemberList.fromJson(
-        json['deerPaginated'] as Map<String, dynamic>),
+    sheepPaginated: json['sheepPaginated'] == null
+        ? null
+        : PaginatedMemberList.fromJson(
+            json['sheepPaginated'] as Map<String, dynamic>),
+    goatsPaginated: json['goatsPaginated'] == null
+        ? null
+        : PaginatedMemberList.fromJson(
+            json['goatsPaginated'] as Map<String, dynamic>),
+    deerPaginated: json['deerPaginated'] == null
+        ? null
+        : PaginatedMemberList.fromJson(
+            json['deerPaginated'] as Map<String, dynamic>),
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
