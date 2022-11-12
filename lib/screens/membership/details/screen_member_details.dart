@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/menus.dart';
-import 'package:poimen/screens/membership/gql_member_details.dart';
+import 'package:poimen/screens/membership/details/gql_member_details.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -103,7 +103,7 @@ class MemberDetailsScreen extends StatelessWidget {
                       width: 55,
                       child: Center(
                         child: Icon(
-                          FontAwesomeIcons.cakeCandles,
+                          FontAwesomeIcons.circleUp,
                           size: 20,
                           color: Colors.white,
                         ),

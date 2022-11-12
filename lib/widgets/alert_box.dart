@@ -90,12 +90,19 @@ String getGQLException(dynamic exception) {
     return 'An unknown error occurred';
   }
 
+  print('exceptrion $exception');
+
   if (exception.graphqlErrors.isEmpty) {
-    if (exception.linkException?.parsedResponse?.errors == null) {
+    if(exception.linkException?.parsedResponse == null){
+return exception.originalException.toString();
+    }
+
+
+    if (exception.linkException?.parsedResponse.errors == null) {
       return exception.linkException.parsedResponse.response['errorMessage'].toString();
     }
 
-    return exception.linkException?.parsedResponse?.errors?[0].message.toString() ??
+    return exception.linkException?.parsedResponse.errors?[0].message.toString() ??
         exception.linkException?.originalException.toString() ??
         exception.toString();
   }

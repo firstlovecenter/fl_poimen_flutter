@@ -26,6 +26,16 @@ class FellowshipAttendanceReportScreen extends StatelessWidget {
           Widget body;
 
           final fellowship = Church.fromJson(data?['fellowships'][0]);
+
+          if (data?['serviceRecords'].isEmpty) {
+            body = const Center(child: Text('No Service Records'));
+
+            return GQLQueryContainerReturnValue(
+              pageTitle: PageTitle(pageTitle: 'Attendance Report', church: fellowship),
+              body: body,
+            );
+          }
+
           final serviceRecord = ServicesForReport.fromJson(data?['serviceRecords'][0]);
 
           body = ChurchServicesReport(

@@ -14,7 +14,7 @@ class AttendanceTickerWithPictureScreen extends StatefulWidget {
       {Key? key, required this.church, required this.tickerMutation})
       : super(key: key);
 
-  final ChurchForPaginatedMemberList church;
+  final ChurchForMemberListByCategory church;
   final MutationHookResult tickerMutation;
 
   @override
@@ -36,9 +36,9 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
     final List<String> membership = [
-      ...widget.church.sheepPaginated.edges.map((sheep) => sheep.node.id),
-      ...widget.church.goatsPaginated.edges.map((goat) => goat.node.id),
-      ...widget.church.deerPaginated.edges.map((deer) => deer.node.id),
+      ...widget.church.sheep.map((sheep) => sheep.id),
+      ...widget.church.goats.map((goat) => goat.id),
+      ...widget.church.deer.map((deer) => deer.id),
     ];
     String recordId = churchState.serviceRecordId;
 
@@ -59,18 +59,18 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
               _ShowMembersIfAny(
-                members: widget.church.sheepPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.sheep,
                 category: MemberCategory.Sheep,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
-                members: widget.church.goatsPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.goats,
                 category: MemberCategory.Goat,
                 presentMembers: _presentMembers,
               ),
               _ShowMembersIfAny(
                 category: MemberCategory.Deer,
-                members: widget.church.deerPaginated.edges.map((edge) => edge.node).toList(),
+                members: widget.church.deer,
                 presentMembers: _presentMembers,
               ),
             ],
