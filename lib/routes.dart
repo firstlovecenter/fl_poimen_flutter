@@ -28,7 +28,7 @@ import 'package:poimen/screens/membership/screen_constituency_list.dart';
 import 'package:poimen/screens/membership/screen_council_list.dart';
 import 'package:poimen/screens/membership/screen_fellowship_list.dart';
 import 'package:poimen/screens/membership/screen_gathering_list.dart';
-import 'package:poimen/screens/membership/screen_member_details.dart';
+import 'package:poimen/screens/membership/details/screen_member_details.dart';
 import 'package:poimen/screens/membership/screen_stream_list.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 
