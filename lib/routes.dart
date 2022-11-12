@@ -20,6 +20,7 @@ import 'package:poimen/screens/attendance/report/screen_bacenta_report.dart';
 import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
+import 'package:poimen/screens/membership/details/screen_membership_upgrades.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/membership/imcl/screen_fellowship_imcls.dart';
@@ -38,6 +39,7 @@ var appRoutes = {
 
   // Display Member Details
   '/member-details': (context) => const MemberDetailsScreen(),
+  '/membership-upgrades': (context) => const MembershipUpgradesScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),
