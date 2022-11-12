@@ -41,6 +41,7 @@ Column memberTile(BuildContext context, MemberForList member) {
         child: ListTile(
           onTap: () {
             memberState.memberId = member.id;
+            memberState.member = member;
             Navigator.pushNamed(context, '/member-details');
           },
           leading: Hero(

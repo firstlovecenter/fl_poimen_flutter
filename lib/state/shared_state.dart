@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
+import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/state/enums.dart';
 
@@ -9,6 +10,14 @@ class SharedState with ChangeNotifier {
     id: '',
     typename: '',
     name: '',
+  );
+  MemberForList _member = MemberForList(
+    id: '',
+    typename: '',
+    firstName: '',
+    lastName: '',
+    pictureUrl: '',
+    status: '',
   );
 
   PastoralCycle _pastoralCycle = PastoralCycle(
@@ -31,6 +40,7 @@ class SharedState with ChangeNotifier {
 
   Role get role => _role;
   ProfileChurch get church => _church;
+  MemberForList get member => _member;
   String get bottomNavSelected => _bottomNavSelected;
 
   PastoralCycle get pastoralCycle => _pastoralCycle;
@@ -47,6 +57,11 @@ class SharedState with ChangeNotifier {
 
   set church(ProfileChurch church) {
     _church = church;
+    notifyListeners();
+  }
+
+  set member(MemberForList member) {
+    _member = member;
     notifyListeners();
   }
 

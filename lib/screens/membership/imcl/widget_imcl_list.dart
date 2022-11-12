@@ -62,6 +62,7 @@ Column _memberTile(BuildContext context, ImclForList member) {
               ListTile(
                 onTap: () {
                   memberState.memberId = member.id;
+                  memberState.member = member;
                   Navigator.pushNamed(context, '/member-details');
                 },
                 leading: Hero(
