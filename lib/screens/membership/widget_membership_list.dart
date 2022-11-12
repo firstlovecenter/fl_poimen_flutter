@@ -90,6 +90,7 @@ Column memberListTile(BuildContext context, MemberForList member) {
     children: [
       ListTile(
         onTap: () {
+          memberState.member = member;
           memberState.memberId = member.id;
           Navigator.pushNamed(context, '/member-details');
         },
@@ -210,7 +211,6 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
                 ChurchForPaginatedMemberList.fromJson(previousResultData?[churchLevel][0]);
 
             bool? done;
-            print(church.goatsPaginated?.position);
             if (widget.category == MemberCategory.Sheep) {
               done = (previousChurchData.sheepPaginated!.position >=
                   previousChurchData.sheepPaginated!.totalCount);
