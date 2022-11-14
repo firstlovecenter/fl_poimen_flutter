@@ -38,13 +38,16 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         member.hasHolyGhostBaptism ? const Color(0xFF1C4AC0) : Colors.grey,
                     icon: FontAwesomeIcons.wind,
                     title: 'Holy Ghost Baptism',
-                    to: '/membership-upgrades/holy-ghost-baptism',
+                    to: !member.hasHolyGhostBaptism
+                        ? '/membership-upgrades/holy-ghost-baptism'
+                        : '#',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
                     leadingColor: member.hasWaterBaptism ? const Color(0xFF330045) : Colors.grey,
                     icon: FontAwesomeIcons.water,
                     title: 'Water Baptism',
+                    to: !member.hasWaterBaptism ? '/membership-upgrades/water-baptism' : '#',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -61,6 +64,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         : Colors.grey,
                     icon: FontAwesomeIcons.tent,
                     title: 'Camps with the Prophet',
+                    to: member.attendedCampsWithProphet.isNotEmpty
+                        ? '/membership-upgrades/camps-with-prophet'
+                        : '#',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -69,6 +75,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         : Colors.grey,
                     icon: FontAwesomeIcons.tents,
                     title: 'Camps with Other Bishops',
+                    to: member.attendedCampsWithOtherBishops.isNotEmpty
+                        ? '/membership-upgrades/camps-with-other-bishops'
+                        : '#',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -76,6 +85,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         member.hasAudioCollections ? const Color(0xFF452E00) : Colors.grey,
                     icon: FontAwesomeIcons.music,
                     title: 'Audio Collections',
+                    to: !member.hasAudioCollections
+                        ? '/membership-upgrades/audio-collections'
+                        : '#',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -84,6 +96,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         : Colors.grey,
                     icon: FontAwesomeIcons.book,
                     title: 'Bible Translations',
+                    to: !member.hasBibleTranslations.isNotEmpty
+                        ? '/membership-upgrades/bible-translations'
+                        : '#',
                   ),
                 ],
               ),
