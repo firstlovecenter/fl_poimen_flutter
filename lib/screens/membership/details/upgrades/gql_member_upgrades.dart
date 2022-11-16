@@ -10,6 +10,7 @@ final getMemberUpgradesDetails = gql('''
       lastName
       pictureUrl
       hasHolyGhostBaptism
+      hasHolyGhostBaptismDate
       hasWaterBaptism
       graduatedUnderstandingSchools
       hasAudioCollections
@@ -18,4 +19,28 @@ final getMemberUpgradesDetails = gql('''
       attendedCampsWithOtherBishops
     }
   }
+''');
+
+final recordMemberHolyGhostBaptismUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$hasHolyGhostBaptism: Boolean!,
+  \$hasHolyGhostBaptismDate: String
+) {
+  SetMemberHolyGhostBaptism(
+  memberId: \$memberId,
+  hasHolyGhostBaptism: \$hasHolyGhostBaptism,
+  hasHolyGhostBaptismDate: \$hasHolyGhostBaptismDate
+  ) {
+    id
+    firstName
+    lastName
+    hasHolyGhostBaptism
+    hasHolyGhostBaptismDate
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
 ''');

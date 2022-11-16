@@ -5,6 +5,7 @@ part 'models_membership_upgrades.g.dart';
 @JsonSerializable()
 class MemberWithUpgrades extends MemberForList {
   bool hasHolyGhostBaptism;
+  DateTime? hasHolyGhostBaptismDate;
   bool hasWaterBaptism;
   List<String> graduatedUnderstandingSchools;
   bool hasAudioCollections;
@@ -20,6 +21,7 @@ class MemberWithUpgrades extends MemberForList {
     required this.hasBibleTranslations,
     required this.attendedCampsWithProphet,
     required this.attendedCampsWithOtherBishops,
+    this.hasHolyGhostBaptismDate
   }) : super(
           id: '',
           typename: '',

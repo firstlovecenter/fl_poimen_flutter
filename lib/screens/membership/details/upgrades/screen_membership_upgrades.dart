@@ -9,6 +9,7 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/color_block_tile.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class MembershipUpgradesScreen extends StatelessWidget {
   const MembershipUpgradesScreen({Key? key}) : super(key: key);
@@ -38,16 +39,19 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         member.hasHolyGhostBaptism ? const Color(0xFF1C4AC0) : Colors.grey,
                     icon: FontAwesomeIcons.wind,
                     title: 'Holy Ghost Baptism',
+                    subtitle: member.hasHolyGhostBaptismDate != null
+                        ? timeago.format(member.hasHolyGhostBaptismDate!)
+                        : null,
                     to: !member.hasHolyGhostBaptism
                         ? '/membership-upgrades/holy-ghost-baptism'
-                        : '#',
+                        : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
                     leadingColor: member.hasWaterBaptism ? const Color(0xFF330045) : Colors.grey,
                     icon: FontAwesomeIcons.water,
                     title: 'Water Baptism',
-                    to: !member.hasWaterBaptism ? '/membership-upgrades/water-baptism' : '#',
+                    to: !member.hasWaterBaptism ? '/membership-upgrades/water-baptism' : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -66,7 +70,7 @@ class MembershipUpgradesScreen extends StatelessWidget {
                     title: 'Camps with the Prophet',
                     to: member.attendedCampsWithProphet.isNotEmpty
                         ? '/membership-upgrades/camps-with-prophet'
-                        : '#',
+                        : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -77,7 +81,7 @@ class MembershipUpgradesScreen extends StatelessWidget {
                     title: 'Camps with Other Bishops',
                     to: member.attendedCampsWithOtherBishops.isNotEmpty
                         ? '/membership-upgrades/camps-with-other-bishops'
-                        : '#',
+                        : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -85,9 +89,7 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         member.hasAudioCollections ? const Color(0xFF452E00) : Colors.grey,
                     icon: FontAwesomeIcons.music,
                     title: 'Audio Collections',
-                    to: !member.hasAudioCollections
-                        ? '/membership-upgrades/audio-collections'
-                        : '#',
+                    to: !member.hasAudioCollections ? '/membership-upgrades/audio-collections' : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
@@ -98,7 +100,7 @@ class MembershipUpgradesScreen extends StatelessWidget {
                     title: 'Bible Translations',
                     to: !member.hasBibleTranslations.isNotEmpty
                         ? '/membership-upgrades/bible-translations'
-                        : '#',
+                        : '',
                   ),
                 ],
               ),
