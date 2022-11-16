@@ -26,6 +26,9 @@ MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) {
         (json['attendedCampsWithOtherBishops'] as List<dynamic>)
             .map((e) => e as String)
             .toList(),
+    hasHolyGhostBaptismDate: json['hasHolyGhostBaptismDate'] == null
+        ? null
+        : DateTime.parse(json['hasHolyGhostBaptismDate'] as String),
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
@@ -48,6 +51,8 @@ Map<String, dynamic> _$MemberWithUpgradesToJson(MemberWithUpgrades instance) =>
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
       'hasHolyGhostBaptism': instance.hasHolyGhostBaptism,
+      'hasHolyGhostBaptismDate':
+          instance.hasHolyGhostBaptismDate?.toIso8601String(),
       'hasWaterBaptism': instance.hasWaterBaptism,
       'graduatedUnderstandingSchools': instance.graduatedUnderstandingSchools,
       'hasAudioCollections': instance.hasAudioCollections,

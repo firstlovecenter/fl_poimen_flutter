@@ -23,7 +23,11 @@ class ColorBlockTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.pushNamed(context, to ?? '');
+        if (to == '' || to == null) {
+          return;
+        }
+
+        Navigator.pushNamed(context, to!);
       },
       contentPadding: const EdgeInsets.only(left: 0.0),
       leading: SizedBox(
