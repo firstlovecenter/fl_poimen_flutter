@@ -4,19 +4,19 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/details/upgrades/gql_member_upgrades.dart';
 import 'package:poimen/screens/membership/details/upgrades/widget_baptism_form.dart';
 
-class HolyGhostBaptismScreen extends StatefulHookWidget {
-  const HolyGhostBaptismScreen({Key? key}) : super(key: key);
+class WaterBaptismScreen extends StatefulHookWidget {
+  const WaterBaptismScreen({Key? key}) : super(key: key);
 
   @override
-  State<HolyGhostBaptismScreen> createState() => _HolyGhostBaptismScreenState();
+  State<WaterBaptismScreen> createState() => _WaterBaptismScreenState();
 }
 
-class _HolyGhostBaptismScreenState extends State<HolyGhostBaptismScreen> {
+class _WaterBaptismScreenState extends State<WaterBaptismScreen> {
   @override
   Widget build(BuildContext context) {
-    final holyGhostUpgradeMutation = useMutation(
+    final waterUpgradeMutation = useMutation(
       MutationOptions(
-        document: recordMemberHolyGhostBaptismUpgrade,
+        document: recordMemberWaterBaptismUpgrade,
         // ignore: void_checks
         update: (cache, result) {
           return cache;
@@ -31,7 +31,6 @@ class _HolyGhostBaptismScreenState extends State<HolyGhostBaptismScreen> {
       ),
     );
 
-    return BaptismFormWidget(
-        title: 'Holy Ghost Baptism', baptismMutation: holyGhostUpgradeMutation);
+    return BaptismFormWidget(title: 'Water Baptism', baptismMutation: waterUpgradeMutation);
   }
 }

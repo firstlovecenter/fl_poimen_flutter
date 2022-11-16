@@ -12,6 +12,7 @@ final getMemberUpgradesDetails = gql('''
       hasHolyGhostBaptism
       hasHolyGhostBaptismDate
       hasWaterBaptism
+      hasWaterBaptismDate
       graduatedUnderstandingSchools
       hasAudioCollections
       hasBibleTranslations
@@ -37,6 +38,30 @@ mutation (
     lastName
     hasHolyGhostBaptism
     hasHolyGhostBaptismDate
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
+''');
+
+final recordMemberWaterBaptismUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$hasWaterBaptism: Boolean!,
+  \$hasWaterBaptismDate: String
+) {
+  SetMemberWaterBaptism(
+  memberId: \$memberId,
+  hasWaterBaptism: \$hasWaterBaptism,
+  hasWaterBaptismDate: \$hasWaterBaptismDate
+  ) {
+    id
+    firstName
+    lastName
+    hasWaterBaptism
+    hasWaterBaptismDate
     history (options: {limit: 5}) {
       id
       historyRecord

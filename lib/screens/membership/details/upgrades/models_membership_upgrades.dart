@@ -7,6 +7,7 @@ class MemberWithUpgrades extends MemberForList {
   bool hasHolyGhostBaptism;
   DateTime? hasHolyGhostBaptismDate;
   bool hasWaterBaptism;
+  DateTime? hasWaterBaptismDate;
   List<String> graduatedUnderstandingSchools;
   bool hasAudioCollections;
   List<String> hasBibleTranslations;
@@ -21,7 +22,8 @@ class MemberWithUpgrades extends MemberForList {
     required this.hasBibleTranslations,
     required this.attendedCampsWithProphet,
     required this.attendedCampsWithOtherBishops,
-    this.hasHolyGhostBaptismDate
+    this.hasHolyGhostBaptismDate,
+    this.hasWaterBaptismDate,
   }) : super(
           id: '',
           typename: '',

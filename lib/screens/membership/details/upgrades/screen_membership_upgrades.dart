@@ -51,6 +51,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                     leadingColor: member.hasWaterBaptism ? const Color(0xFF330045) : Colors.grey,
                     icon: FontAwesomeIcons.water,
                     title: 'Water Baptism',
+                    subtitle: member.hasWaterBaptismDate != null
+                        ? timeago.format(member.hasWaterBaptismDate!)
+                        : null,
                     to: !member.hasWaterBaptism ? '/membership-upgrades/water-baptism' : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),

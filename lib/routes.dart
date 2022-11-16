@@ -22,6 +22,7 @@ import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/upgrades/screen_membership_upgrades.dart';
 import 'package:poimen/screens/membership/details/upgrades/screen_holy_ghost_baptism.dart';
+import 'package:poimen/screens/membership/details/upgrades/screen_water_baptism_upgrade.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/membership/imcl/screen_fellowship_imcls.dart';
@@ -42,6 +43,7 @@ var appRoutes = {
   '/member-details': (context) => const MemberDetailsScreen(),
   '/membership-upgrades': (context) => const MembershipUpgradesScreen(),
   '/membership-upgrades/holy-ghost-baptism': (context) => const HolyGhostBaptismScreen(),
+  '/membership-upgrades/water-baptism': (context) => const WaterBaptismScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),
