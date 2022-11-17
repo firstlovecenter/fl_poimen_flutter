@@ -90,3 +90,24 @@ mutation (
   }
 }
 ''');
+
+final recordMemberBibleTranslationsUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$hasBibleTranslations: Boolean!
+) {
+  SetMemberBibleTranslations(
+  memberId: \$memberId,
+  hasBibleTranslations: \$hasBibleTranslations
+  ) {
+    id
+    firstName
+    lastName
+    hasBibleTranslations
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
+''');

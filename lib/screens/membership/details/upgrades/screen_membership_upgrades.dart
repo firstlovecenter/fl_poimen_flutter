@@ -96,12 +96,11 @@ class MembershipUpgradesScreen extends StatelessWidget {
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
-                    leadingColor: member.hasBibleTranslations.isNotEmpty
-                        ? const Color(0xFF003445)
-                        : Colors.grey,
+                    leadingColor:
+                        member.hasBibleTranslations ? const Color(0xFF003445) : Colors.grey,
                     icon: FontAwesomeIcons.book,
                     title: 'Bible Translations',
-                    to: !member.hasBibleTranslations.isNotEmpty
+                    to: !member.hasBibleTranslations
                         ? '/membership-upgrades/bible-translations'
                         : '',
                   ),

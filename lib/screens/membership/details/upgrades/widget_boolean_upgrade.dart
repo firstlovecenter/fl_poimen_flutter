@@ -8,10 +8,15 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:provider/provider.dart';
 
 class BooleanUpgradeWidget extends StatefulWidget {
-  const BooleanUpgradeWidget({Key? key, required this.title, required this.booleanMutation})
+  const BooleanUpgradeWidget(
+      {Key? key,
+      required this.title,
+      required this.upgradeRequirements,
+      required this.booleanMutation})
       : super(key: key);
 
   final String title;
+  final String upgradeRequirements;
   final MutationHookResult booleanMutation;
 
   @override
@@ -20,7 +25,6 @@ class BooleanUpgradeWidget extends StatefulWidget {
 
 class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with ValidationMixin {
   final _formKey = GlobalKey<FormState>();
-  final String _baptismDate = '';
 
   TextEditingController dateinput = TextEditingController();
 
@@ -48,7 +52,7 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
               const Center(child: Text('Click on the button which applies')),
               const Padding(padding: EdgeInsets.all(8.0)),
               submitButton(
-                  label: 'Has the Audio Collections',
+                  label: 'Has ${widget.upgradeRequirements}',
                   onPressed: () {
                     widget.booleanMutation.runMutation({
                       'memberId': appState.memberId,
@@ -65,7 +69,7 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
                   }),
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
-                label: 'Does Not Have The Collections',
+                label: 'Doesn\'t Have ${widget.upgradeRequirements}',
                 onPressed: () => Navigator.pop(context),
                 color: PoimenTheme.darkCardColor,
               ),

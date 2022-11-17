@@ -4,19 +4,19 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/details/upgrades/gql_member_upgrades.dart';
 import 'package:poimen/screens/membership/details/upgrades/widget_boolean_upgrade.dart';
 
-class AudioCollectionsScreen extends StatefulHookWidget {
-  const AudioCollectionsScreen({Key? key}) : super(key: key);
+class BibleTranslationsScreen extends StatefulHookWidget {
+  const BibleTranslationsScreen({Key? key}) : super(key: key);
 
   @override
-  State<AudioCollectionsScreen> createState() => _AudioCollectionsScreenState();
+  State<BibleTranslationsScreen> createState() => _BibleTranslationsScreenState();
 }
 
-class _AudioCollectionsScreenState extends State<AudioCollectionsScreen> {
+class _BibleTranslationsScreenState extends State<BibleTranslationsScreen> {
   @override
   Widget build(BuildContext context) {
-    final audioCollectionsUpgradeMutation = useMutation(
+    final bibleTranslationsUpgradeMutation = useMutation(
       MutationOptions(
-        document: recordMemberAudioCollectionsUpgrade,
+        document: recordMemberBibleTranslationsUpgrade,
         // ignore: void_checks
         update: (cache, result) {
           return cache;
@@ -32,8 +32,8 @@ class _AudioCollectionsScreenState extends State<AudioCollectionsScreen> {
     );
 
     return BooleanUpgradeWidget(
-        title: 'Audio Collections',
-        upgradeRequirements: 'All Audio Collections',
-        booleanMutation: audioCollectionsUpgradeMutation);
+        title: 'Bible Translations',
+        upgradeRequirements: 'At Least 3 Bible Translations',
+        booleanMutation: bibleTranslationsUpgradeMutation);
   }
 }

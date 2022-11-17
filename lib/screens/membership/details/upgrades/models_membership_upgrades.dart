@@ -10,7 +10,7 @@ class MemberWithUpgrades extends MemberForList {
   DateTime? hasWaterBaptismDate;
   List<String> graduatedUnderstandingSchools;
   bool hasAudioCollections;
-  List<String> hasBibleTranslations;
+  bool hasBibleTranslations;
   List<String> attendedCampsWithProphet;
   List<String> attendedCampsWithOtherBishops;
 

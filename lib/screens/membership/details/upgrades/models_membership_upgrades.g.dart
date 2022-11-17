@@ -15,9 +15,7 @@ MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) {
             .map((e) => e as String)
             .toList(),
     hasAudioCollections: json['hasAudioCollections'] as bool,
-    hasBibleTranslations: (json['hasBibleTranslations'] as List<dynamic>)
-        .map((e) => e as String)
-        .toList(),
+    hasBibleTranslations: json['hasBibleTranslations'] as bool,
     attendedCampsWithProphet:
         (json['attendedCampsWithProphet'] as List<dynamic>)
             .map((e) => e as String)
