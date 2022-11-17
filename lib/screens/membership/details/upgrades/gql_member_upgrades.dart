@@ -69,3 +69,24 @@ mutation (
   }
 }
 ''');
+
+final recordMemberAudioCollectionsUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$hasAudioCollections: Boolean!
+) {
+  SetMemberAudioCollections(
+  memberId: \$memberId,
+  hasAudioCollections: \$hasAudioCollections
+  ) {
+    id
+    firstName
+    lastName
+    hasAudioCollections
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
+''');
