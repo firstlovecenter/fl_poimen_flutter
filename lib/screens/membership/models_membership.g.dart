@@ -67,7 +67,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
     ..pictureUrl = json['pictureUrl'] as String
     ..phoneNumber = json['phoneNumber'] as String?
     ..whatsappNumber = json['whatsappNumber'] as String?
-    ..lastFourServices = (json['lastFourServices'] as List<dynamic>)
+    ..lastSixServices = (json['lastSixServices'] as List<dynamic>)
         .map((e) => e as bool)
         .toList();
 }
@@ -81,7 +81,7 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'lastFourServices': instance.lastFourServices,
+      'lastSixServices': instance.lastSixServices,
       'gender': instance.gender,
       'dob': instance.dob,
       'stream': instance.stream,

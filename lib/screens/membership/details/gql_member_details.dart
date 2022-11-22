@@ -8,7 +8,7 @@ final getMemberDetails = gql('''
       firstName
       lastName
       pictureUrl
-      lastFourServices
+      lastSixServices
       gender {
         gender
       }

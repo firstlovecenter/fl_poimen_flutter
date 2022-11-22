@@ -46,7 +46,7 @@ class MemberForList {
 
 @JsonSerializable()
 class Member extends MemberForList {
-  List<bool> lastFourServices = [];
+  List<bool> lastSixServices = [];
   Gender gender = Gender();
   TimeGraph dob = TimeGraph();
   Church stream;

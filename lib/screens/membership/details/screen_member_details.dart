@@ -60,7 +60,7 @@ class MemberDetailsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ...member.lastFourServices.map((present) {
+                  ...member.lastSixServices.map((present) {
                     if (present) {
                       return Row(
                         children: const [
