@@ -20,7 +20,7 @@ ImclForList _$ImclForListFromJson(Map<String, dynamic> json) {
     missedChurchComments: (json['missedChurchComments'] as List<dynamic>)
         .map((e) => MissedChurchComment.fromJson(e as Map<String, dynamic>))
         .toList(),
-  );
+  )..lost = json['lost'] as bool?;
 }
 
 Map<String, dynamic> _$ImclForListToJson(ImclForList instance) =>
@@ -28,6 +28,7 @@ Map<String, dynamic> _$ImclForListToJson(ImclForList instance) =>
       'id': instance.id,
       'typename': instance.typename,
       'status': instance.status,
+      'lost': instance.lost,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'pictureUrl': instance.pictureUrl,

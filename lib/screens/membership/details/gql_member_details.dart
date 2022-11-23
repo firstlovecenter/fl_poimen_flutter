@@ -7,6 +7,7 @@ final getMemberDetails = gql('''
       typename
       firstName
       lastName
+      status
       pictureUrl
       lastSixServices
       gender {

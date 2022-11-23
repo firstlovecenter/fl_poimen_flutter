@@ -34,7 +34,7 @@ MemberForList _$MemberForListFromJson(Map<String, dynamic> json) {
     status: json['status'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
     whatsappNumber: json['whatsappNumber'] as String?,
-  );
+  )..lost = json['lost'] as bool?;
 }
 
 Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
@@ -42,6 +42,7 @@ Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
       'id': instance.id,
       'typename': instance.typename,
       'status': instance.status,
+      'lost': instance.lost,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'pictureUrl': instance.pictureUrl,
@@ -62,6 +63,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..typename = json['typename'] as String
     ..status = json['status'] as String?
+    ..lost = json['lost'] as bool?
     ..firstName = json['firstName'] as String
     ..lastName = json['lastName'] as String
     ..pictureUrl = json['pictureUrl'] as String
@@ -76,6 +78,7 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'status': instance.status,
+      'lost': instance.lost,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'pictureUrl': instance.pictureUrl,

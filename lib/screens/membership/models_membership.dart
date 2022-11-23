@@ -23,6 +23,7 @@ class MemberForList {
   String id = '';
   String typename = 'Member';
   String? status = '';
+  bool? lost = false;
   String firstName = '';
   String lastName = '';
   String pictureUrl = '';

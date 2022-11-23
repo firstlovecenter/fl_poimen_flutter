@@ -32,6 +32,7 @@ final getGatheringSheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -57,6 +58,7 @@ final getGatheringGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -82,6 +84,7 @@ final getGatheringDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -127,6 +130,7 @@ final getStreamSheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -152,6 +156,7 @@ final getStreamGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -177,6 +182,7 @@ final getStreamDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -222,6 +228,7 @@ final getCouncilSheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -247,6 +254,7 @@ final getCouncilGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -272,6 +280,7 @@ final getCouncilDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -317,6 +326,7 @@ final getConstituencySheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -342,6 +352,7 @@ final getConstituencyGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -367,6 +378,7 @@ final getConstituencyDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -412,6 +424,7 @@ final getBacentaSheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -437,6 +450,7 @@ final getBacentaGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -462,6 +476,7 @@ final getBacentaDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -507,6 +522,7 @@ final getFellowshipSheepForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -532,6 +548,7 @@ final getFellowshipGoatsForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName
@@ -557,6 +574,7 @@ final getFellowshipDeerForList = gql('''
           node {
             id
             typename
+            lost 
             firstName
             lastName
             fullName

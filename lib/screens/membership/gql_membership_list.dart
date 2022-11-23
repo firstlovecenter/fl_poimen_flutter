@@ -18,6 +18,7 @@ final getFellowshipMembers = gql('''
       sheep {
         id
         typename
+        lost 
         firstName
         lastName
         fullName
@@ -26,6 +27,7 @@ final getFellowshipMembers = gql('''
       goats {
         id
         typename
+        lost 
         firstName
         lastName
         fullName
@@ -34,6 +36,7 @@ final getFellowshipMembers = gql('''
       deer {
         id
         typename
+        lost 
         firstName
         lastName
         fullName

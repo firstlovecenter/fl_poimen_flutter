@@ -34,6 +34,7 @@ MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..typename = json['typename'] as String
     ..status = json['status'] as String?
+    ..lost = json['lost'] as bool?
     ..firstName = json['firstName'] as String
     ..lastName = json['lastName'] as String
     ..pictureUrl = json['pictureUrl'] as String
@@ -46,6 +47,7 @@ Map<String, dynamic> _$MemberWithUpgradesToJson(MemberWithUpgrades instance) =>
       'id': instance.id,
       'typename': instance.typename,
       'status': instance.status,
+      'lost': instance.lost,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'pictureUrl': instance.pictureUrl,
