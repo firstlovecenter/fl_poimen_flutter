@@ -9,27 +9,27 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class BacentaServicesScreen extends StatelessWidget {
-  const BacentaServicesScreen({Key? key}) : super(key: key);
+class SundayBussingScreen extends StatelessWidget {
+  const SundayBussingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-        query: getBacentaServices,
-        variables: {'id': churchState.bacentaId},
-        defaultPageTitle: 'Bacenta Services',
+        query: getSundayBussing,
+        variables: {'id': churchState.fellowshipId},
+        defaultPageTitle: 'Recent Bussing',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = ChurchForBussingList.fromJson(data?['bacentas'][0]);
+          final fellowship = ChurchForBussingList.fromJson(data?['fellowships'][0]);
 
-          body = ChurchServicesList(services: bacenta.bussing);
+          body = ChurchServicesList(services: fellowship.bussing);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Bussing', church: bacenta),
+            pageTitle: PageTitle(pageTitle: 'Recent Bussing', church: fellowship),
             body: body,
           );
         });

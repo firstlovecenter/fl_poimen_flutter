@@ -19,9 +19,9 @@ final getFellowshipServices = gql('''
   }
   ''');
 
-final getBacentaServices = gql('''
-  query getBacentaServices(\$id: ID!) {
-      bacentas(where: { id: \$id }) {
+final getSundayBussing = gql('''
+  query getSundayBussing(\$id: ID!) {
+      fellowships(where: { id: \$id }) {
         id
         typename
         name

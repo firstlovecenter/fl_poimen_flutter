@@ -81,7 +81,7 @@ class HomeScreenBody extends StatelessWidget {
             style: const TextStyle(fontSize: 22),
           ),
           const Padding(padding: EdgeInsets.all(5.0)),
-          attendanceLevels(churchLevel),
+          ...attendanceLevels(churchLevel),
           HomePageButton(
             text: 'Missing Persons Call List',
             icon: FontAwesomeIcons.personCircleQuestion,

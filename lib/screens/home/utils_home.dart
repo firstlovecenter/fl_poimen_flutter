@@ -54,20 +54,29 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
   ];
 }
 
-Widget attendanceLevels(ChurchLevel churchLevel) {
-  if (churchLevel != ChurchLevel.fellowship && churchLevel != ChurchLevel.bacenta) {
-    return Container();
+List<Widget> attendanceLevels(ChurchLevel churchLevel) {
+  if (churchLevel != ChurchLevel.fellowship) {
+    return [Container()];
   }
 
   ChurchString level = ChurchString(churchLevel.name);
 
-  return HomePageButton(
-    text: '${level.properCase} Attendance',
-    icon: FontAwesomeIcons.userCheck,
-    navKey: 'attendance',
-    route: '/${level.lowerCase}-services',
-    permitted: [Role.values.byName('leader${level.properCase}')],
-  );
+  return [
+    HomePageButton(
+      text: 'Weekday Attendance',
+      icon: FontAwesomeIcons.userCheck,
+      navKey: 'attendance',
+      route: '/${level.lowerCase}-weekday-services',
+      permitted: [Role.values.byName('leader${level.properCase}')],
+    ),
+    HomePageButton(
+      text: 'Sunday Attendance',
+      icon: FontAwesomeIcons.userCheck,
+      navKey: 'attendance',
+      route: '/bussing-attendance',
+      permitted: [Role.values.byName('leader${level.properCase}')],
+    )
+  ];
 }
 
 Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {

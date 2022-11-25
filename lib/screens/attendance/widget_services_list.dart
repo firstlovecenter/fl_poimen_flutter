@@ -24,11 +24,7 @@ class ChurchServicesList extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 15),
             child: ListTile(
               onTap: () {
-                if (churchState.church.typename == 'Bacenta') {
-                  churchState.bussingRecordId = service.id;
-                } else {
-                  churchState.serviceRecordId = service.id;
-                }
+                churchState.serviceRecordId = service.id;
 
                 if (!service.markedAttendance) {
                   Navigator.pushNamed(
