@@ -16,6 +16,8 @@ class ChurchServicesList extends StatelessWidget {
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
+    String serviceType = services.isNotEmpty ? services[0].typename : '';
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView(
@@ -24,17 +26,21 @@ class ChurchServicesList extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 15),
             child: ListTile(
               onTap: () {
-                churchState.serviceRecordId = service.id;
+                if (serviceType == 'BussingRecord') {
+                  churchState.bussingRecordId = service.id;
+                } else {
+                  churchState.serviceRecordId = service.id;
+                }
 
                 if (!service.markedAttendance) {
                   Navigator.pushNamed(
                     context,
-                    '/${churchState.church.typename.toLowerCase()}/attendance-ticker',
+                    '/${serviceType.toLowerCase()}/attendance-ticker',
                   );
                 } else {
                   Navigator.pushNamed(
                     context,
-                    '/${churchState.church.typename.toLowerCase()}/attendance-report',
+                    '/${serviceType.toLowerCase()}/attendance-report',
                   );
                 }
               },
@@ -49,7 +55,7 @@ class ChurchServicesList extends StatelessWidget {
                 ],
               ),
               subtitle: Text(
-                'Attendance: ${service.attendance.toString()}',
+                'Attendance: ${service.attendance ?? 0.toString()}',
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               trailing: service.markedAttendance ? const Icon(FontAwesomeIcons.circleCheck) : null,

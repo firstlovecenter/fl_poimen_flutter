@@ -63,19 +63,19 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
 
   return [
     HomePageButton(
+      text: 'Sunday Attendance',
+      icon: FontAwesomeIcons.s,
+      navKey: 'attendance',
+      route: '/bussing-attendance',
+      permitted: [Role.values.byName('leader${level.properCase}')],
+    ),
+    HomePageButton(
       text: 'Weekday Attendance',
-      icon: FontAwesomeIcons.userCheck,
+      icon: FontAwesomeIcons.w,
       navKey: 'attendance',
       route: '/${level.lowerCase}-weekday-services',
       permitted: [Role.values.byName('leader${level.properCase}')],
     ),
-    HomePageButton(
-      text: 'Sunday Attendance',
-      icon: FontAwesomeIcons.userCheck,
-      navKey: 'attendance',
-      route: '/bussing-attendance',
-      permitted: [Role.values.byName('leader${level.properCase}')],
-    )
   ];
 }
 

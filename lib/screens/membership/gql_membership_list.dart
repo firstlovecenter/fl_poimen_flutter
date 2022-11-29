@@ -46,8 +46,8 @@ final getFellowshipMembers = gql('''
   }
 ''');
 
-final getBacentaMembers = gql('''
-   query getBacentaMembers(\$id: ID!, \$bussingRecordId: ID) {
+final getFellowshipMembersForBussing = gql('''
+   query getFellowshipMembersForBussing(\$id: ID!, \$bussingRecordId: ID) {
     bussingRecords(where: { id: \$bussingRecordId }, options: { limit: 1 }) {
       id
       typename
@@ -56,6 +56,41 @@ final getBacentaMembers = gql('''
         date
       }
     }
+    fellowships (where: { id: \$id }) {
+      id
+      typename
+      name
+
+      sheep {
+        id
+        typename
+        firstName
+        lastName
+        fullName
+        pictureUrl
+      }
+      goats {
+        id
+        typename
+        firstName
+        lastName
+        fullName
+        pictureUrl
+      }
+      deer {
+        id
+        typename
+        firstName
+        lastName
+        fullName
+        pictureUrl
+      }
+    }
+  }
+''');
+
+final getBacentaMembers = gql('''
+   query getBacentaMembers(\$id: ID!) {
     bacentas (where: { id: \$id }) {
       id
       typename

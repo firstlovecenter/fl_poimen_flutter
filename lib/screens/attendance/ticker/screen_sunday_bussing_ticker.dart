@@ -10,24 +10,24 @@ import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class BacentaAttendanceTickerScreen extends StatelessWidget {
-  const BacentaAttendanceTickerScreen({Key? key}) : super(key: key);
+class BussingRecordAttendanceTickerScreen extends StatelessWidget {
+  const BussingRecordAttendanceTickerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-        query: getBacentaMembers,
+        query: getFellowshipMembersForBussing,
         variables: {
-          'id': churchState.bacentaId,
+          'id': churchState.fellowshipId,
           'bussingRecordId': churchState.bussingRecordId,
         },
         defaultPageTitle: 'Tick Bacenta Membership Attendance',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = ChurchForMemberListByCategory.fromJson(data?['bacentas'][0]);
+          final bacenta = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
           final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -43,7 +43,7 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
                 }
 
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/bacenta/attendance-report', (route) => false);
+                    .pushNamedAndRemoveUntil('/bussing/attendance-report', (route) => false);
               },
             ),
           );
