@@ -8,33 +8,33 @@ import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class BacentaAttendanceReportScreen extends StatelessWidget {
-  const BacentaAttendanceReportScreen({Key? key}) : super(key: key);
+class BussingAttendanceReportScreen extends StatelessWidget {
+  const BussingAttendanceReportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-        query: getBacentaBussingReport,
+        query: getFellowshipBussingReport,
         variables: {
-          'bacentaId': churchState.bacentaId,
+          'fellowshipId': churchState.fellowshipId,
           'bussingRecordId': churchState.bussingRecordId,
         },
-        defaultPageTitle: 'Bacenta Attendance Report',
+        defaultPageTitle: 'Fellowship Attendance Report',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = Church.fromJson(data?['bacentas'][0]);
+          final fellowship = Church.fromJson(data?['fellowships'][0]);
           final bussingRecord = ServicesForReport.fromJson(data?['bussingRecords'][0]);
 
           body = ChurchServicesReport(
-            church: bacenta,
+            church: fellowship,
             record: bussingRecord,
           );
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: bacenta),
+            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: fellowship),
             body: body,
           );
         });

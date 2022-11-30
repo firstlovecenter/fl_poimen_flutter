@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
+import 'package:poimen/screens/attendance/ticker/enums_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/gql_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/widget_attendance_ticker.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
@@ -48,6 +49,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           );
 
           body = AttendanceTickerScreen(
+            category: ServiceCategory.service,
             church: fellowship,
             service: service,
             tickerMutation: attendanceMutation,

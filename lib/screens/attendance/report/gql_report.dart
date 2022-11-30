@@ -40,9 +40,9 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
   }
   ''');
 
-final getBacentaBussingReport = gql('''
-query getBacentaBussingReport(\$bussingRecordId: ID!, \$bacentaId: ID!) {
-    bacentas(where: { id: \$bacentaId }) {
+final getFellowshipBussingReport = gql('''
+query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
+    fellowships(where: { id: \$fellowshipId }) {
       id
       typename
       name
