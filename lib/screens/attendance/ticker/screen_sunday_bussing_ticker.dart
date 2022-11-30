@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
+import 'package:poimen/screens/attendance/ticker/enums_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/gql_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/widget_attendance_ticker.dart';
 import 'package:poimen/screens/membership/gql_membership_list.dart';
@@ -23,11 +24,11 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
           'id': churchState.fellowshipId,
           'bussingRecordId': churchState.bussingRecordId,
         },
-        defaultPageTitle: 'Tick Bacenta Membership Attendance',
+        defaultPageTitle: 'Tick Fellowship Membership Attendance',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final bacenta = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
+          final fellowship = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
           final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -43,13 +44,14 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
                 }
 
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/bussing/attendance-report', (route) => false);
+                    .pushNamedAndRemoveUntil('/bussingrecord/attendance-report', (route) => false);
               },
             ),
           );
 
           body = AttendanceTickerScreen(
-            church: bacenta,
+            category: ServiceCategory.bussing,
+            church: fellowship,
             service: service,
             tickerMutation: attendanceMutation,
           );
@@ -57,7 +59,7 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
           var returnValues = GQLQueryContainerReturnValue(
               pageTitle: PageTitle(
                 pageTitle: 'Tick Membership Attendance',
-                church: bacenta,
+                church: fellowship,
               ),
               body: body);
 

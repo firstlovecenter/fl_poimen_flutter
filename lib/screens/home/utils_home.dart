@@ -66,14 +66,14 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
       text: 'Sunday Attendance',
       icon: FontAwesomeIcons.s,
       navKey: 'attendance',
-      route: '/bussing-attendance',
+      route: '/bussingrecord-services',
       permitted: [Role.values.byName('leader${level.properCase}')],
     ),
     HomePageButton(
       text: 'Weekday Attendance',
       icon: FontAwesomeIcons.w,
       navKey: 'attendance',
-      route: '/${level.lowerCase}-weekday-services',
+      route: '/servicerecord-services',
       permitted: [Role.values.byName('leader${level.properCase}')],
     ),
   ];

@@ -53,7 +53,7 @@ class ChurchServicesReport extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/${church.typename.toLowerCase()}-services', (route) => false);
+                  '/${record.typename.toLowerCase()}-services', (route) => false);
             },
             child: const Text('Go to Services List'),
           ),

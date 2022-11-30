@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
+import 'package:poimen/screens/attendance/ticker/enums_ticker.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart' as cloudinary_custom;
 import 'package:poimen/state/enums.dart';
@@ -14,9 +15,14 @@ import 'package:timeago/timeago.dart';
 
 class AttendanceTickerScreen extends StatefulWidget {
   const AttendanceTickerScreen(
-      {Key? key, required this.church, required this.service, required this.tickerMutation})
+      {Key? key,
+      required this.church,
+      required this.service,
+      required this.tickerMutation,
+      required this.category})
       : super(key: key);
 
+  final ServiceCategory category;
   final ChurchForMemberListByCategory church;
   final ServiceWithPicture service;
   final MutationHookResult tickerMutation;
@@ -36,10 +42,12 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
       ...widget.church.goats.map((goat) => goat.id),
       ...widget.church.deer.map((deer) => deer.id),
     ];
-    String recordId = churchState.serviceRecordId;
+    String recordId = '';
 
-    if (churchState.church.typename == 'Bacenta') {
+    if (widget.category == ServiceCategory.bussing) {
       recordId = churchState.bussingRecordId;
+    } else if (widget.category == ServiceCategory.service) {
+      recordId = churchState.serviceRecordId;
     }
 
     return Column(
@@ -191,6 +199,7 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
 
 validate(BuildContext context, List<String> fields) {
   if (fields.contains('')) {
+    print(fields);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Please upload a picture of the attendance'),
