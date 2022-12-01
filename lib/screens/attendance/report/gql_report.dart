@@ -54,7 +54,7 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         date
       }
       membersPicture
-      membersPresent {
+      membersPresentFromFellowship(id: \$fellowshipId) {
         id
         status
         typename
@@ -65,7 +65,7 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         whatsappNumber
         pictureUrl
       }
-      membersAbsent {
+      membersAbsentFromFellowship(id: \$fellowshipId) {
         id
         status
         typename

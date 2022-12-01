@@ -15,7 +15,8 @@ class ChurchServicesReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int totalMembership = record.membersAbsent.length + record.membersPresent.length;
+    final int totalMembership =
+        record.membersAbsentFromFellowship.length + record.membersPresentFromFellowship.length;
 
     return ListView(
       children: [
@@ -42,12 +43,14 @@ class ChurchServicesReport extends StatelessWidget {
         AttendanceImageCarousel(membersPicture: record.membersPicture),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(
-            members: record.membersAbsent,
-            title: 'Members Who Were Absent: ${record.membersAbsent.length}/$totalMembership'),
+            members: record.membersAbsentFromFellowship,
+            title:
+                'Members Who Were Absent: ${record.membersAbsentFromFellowship.length}/$totalMembership'),
         const Padding(padding: EdgeInsets.all(15.0)),
         _ShowMembers(
-            title: 'Members Who Were Present: ${record.membersPresent.length}/$totalMembership',
-            members: record.membersPresent),
+            title:
+                'Members Who Were Present: ${record.membersPresentFromFellowship.length}/$totalMembership',
+            members: record.membersPresentFromFellowship),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: ElevatedButton(
