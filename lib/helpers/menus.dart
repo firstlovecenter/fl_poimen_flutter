@@ -14,11 +14,11 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
 
   return [
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
-    churchLevel == ChurchLevel.fellowship || churchLevel == ChurchLevel.bacenta
+    churchLevel == ChurchLevel.fellowship
         ? {
             'title': 'Attendance',
             'icon': FontAwesomeIcons.userCheck,
-            'route': '/$levelForUrl-services',
+            'route': '/servicerecord-services',
             'navKey': 'attendance'
           }
         : null,
