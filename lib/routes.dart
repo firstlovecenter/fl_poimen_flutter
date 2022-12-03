@@ -24,6 +24,7 @@ import 'package:poimen/screens/membership/details/upgrades/screen_audio_collecti
 import 'package:poimen/screens/membership/details/upgrades/screen_bible_translations.dart';
 import 'package:poimen/screens/membership/details/upgrades/screen_membership_upgrades.dart';
 import 'package:poimen/screens/membership/details/upgrades/screen_holy_ghost_baptism.dart';
+import 'package:poimen/screens/membership/details/upgrades/screen_understanding_campaign.dart';
 import 'package:poimen/screens/membership/details/upgrades/screen_water_baptism_upgrade.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/imcl/screen_bacenta_imcls.dart';
@@ -48,6 +49,7 @@ var appRoutes = {
   '/membership-upgrades/water-baptism': (context) => const WaterBaptismScreen(),
   '/membership-upgrades/audio-collections': (context) => const AudioCollectionsScreen(),
   '/membership-upgrades/bible-translations': (context) => const BibleTranslationsScreen(),
+  '/membership-upgrades/understanding-campaign': (context) => const UnderstandingCampaignScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),

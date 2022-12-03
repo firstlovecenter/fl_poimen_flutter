@@ -111,3 +111,33 @@ mutation (
   }
 }
 ''');
+
+final recordMemberUnderstandingCampaignUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$graduatedUnderstandingSchools: [UnderstandingSchools!]!
+) {
+  SetMemberUnderstandingCampaignGraduated(
+  memberId: \$memberId,
+  graduatedUnderstandingSchools: \$graduatedUnderstandingSchools
+  ) {
+    id
+    firstName
+    lastName
+    graduatedUnderstandingSchools
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
+''');
+
+final memberUnderstandingCampaings = gql('''
+query (\$memberId: ID!) {
+  members (where: {id: \$memberId}){
+    id
+    graduatedUnderstandingSchools
+  }
+}
+''');

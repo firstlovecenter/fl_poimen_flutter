@@ -199,7 +199,6 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
 
 validate(BuildContext context, List<String> fields) {
   if (fields.contains('')) {
-    print(fields);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Please upload a picture of the attendance'),

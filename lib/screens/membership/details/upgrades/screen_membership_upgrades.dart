@@ -63,6 +63,9 @@ class MembershipUpgradesScreen extends StatelessWidget {
                         : Colors.grey,
                     icon: FontAwesomeIcons.school,
                     title: 'Understanding Campaign',
+                    to: member.graduatedUnderstandingSchools.isNotEmpty
+                        ? '/membership-upgrades/understanding-campaign'
+                        : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
