@@ -70,8 +70,8 @@ final getBacentaImcls = gql('''
 ''');
 
 final recordReasonForMemberAbsence = gql('''
-  mutation recordReasonForMemberAbsence(\$memberId: ID!, \$reason: String!){
-  RecordReasonForMemberAbsence(memberId: \$memberId, reason: \$reason) {
+  mutation recordReasonForMemberAbsence(\$memberId: ID!, \$reason: String!, \$roleLevel: [String!]!){
+  RecordReasonForMemberAbsence(memberId: \$memberId, reason: \$reason, roleLevel: \$roleLevel) {
     id
     typename
     firstName
