@@ -4,7 +4,6 @@ import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/screens/profile_choose/widget_profile_choose.dart';
 import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/gql_query_container.dart';
-import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +26,6 @@ class ProfileChooseScreen extends StatelessWidget {
         final user = Profile.fromJson(data?['members'][0]);
 
         body = ProfileChooseWidget(user: user);
-
-        userState.roleLevel = getChurchLevelFromAuth((AuthService.instance.idToken?.roles ?? []));
 
         return GQLQueryContainerReturnValue(
           body: body,

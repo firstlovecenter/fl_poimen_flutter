@@ -134,6 +134,42 @@ class MemberDetailsScreen extends StatelessWidget {
               const BioDetailsCard(title: 'Notes', detail: ''),
               const BioDetailsCard(title: 'Invited By', detail: ''),
               const BioDetailsCard(title: 'Last Visited', detail: ''),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Pastoral Comments',
+                        style: PoimenTheme.heading2,
+                      ),
+                      const Padding(padding: EdgeInsets.all(8.0)),
+                      Column(
+                        children: [
+                          const Text(
+                            'He was not home when I tried to visit. All calls could not be reached',
+                            style: TextStyle(color: PoimenTheme.whatsappColor),
+                            overflow: TextOverflow.clip,
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: const [
+                                Text('David Vander, IMCL'),
+                                Text('23 May 2022',
+                                    style: TextStyle(color: PoimenTheme.textSecondary)),
+                              ],
+                            ),
+                          ),
+                          Text('Show More', style: TextStyle(color: PoimenTheme.brandTextPrimary)),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         );
