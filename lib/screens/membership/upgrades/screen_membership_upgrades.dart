@@ -58,36 +58,18 @@ class MembershipUpgradesScreen extends StatelessWidget {
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
-                    leadingColor: member.graduatedUnderstandingSchools.isNotEmpty
-                        ? const Color(0xFF000745)
-                        : Colors.grey,
-                    icon: FontAwesomeIcons.school,
-                    title: 'Understanding Campaign',
-                    to: member.graduatedUnderstandingSchools.isNotEmpty
-                        ? '/membership-upgrades/understanding-campaign'
-                        : '',
-                  ),
+                      leadingColor: member.graduatedUnderstandingSchools.isNotEmpty
+                          ? const Color(0xFF000745)
+                          : Colors.grey,
+                      icon: FontAwesomeIcons.school,
+                      title: 'Understanding Campaign',
+                      to: '/membership-upgrades/understanding-campaign'),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(
-                    leadingColor: member.attendedCampsWithProphet.isNotEmpty
-                        ? const Color(0xFF00450F)
-                        : Colors.grey,
+                    leadingColor: member.hasCampAttendance ? const Color(0xFF00450F) : Colors.grey,
                     icon: FontAwesomeIcons.tent,
-                    title: 'Camps with the Prophet',
-                    to: member.attendedCampsWithProphet.isNotEmpty
-                        ? '/membership-upgrades/camps-with-prophet'
-                        : '',
-                  ),
-                  const Padding(padding: EdgeInsets.all(8.0)),
-                  ColorBlockTile(
-                    leadingColor: member.attendedCampsWithOtherBishops.isNotEmpty
-                        ? const Color(0xFF00450F)
-                        : Colors.grey,
-                    icon: FontAwesomeIcons.tents,
-                    title: 'Camps with Other Bishops',
-                    to: member.attendedCampsWithOtherBishops.isNotEmpty
-                        ? '/membership-upgrades/camps-with-other-bishops'
-                        : '',
+                    title: 'Camps with the Prophet or other Bishop',
+                    to: !member.hasCampAttendance ? '/membership-upgrades/camp-attendance' : '',
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   ColorBlockTile(

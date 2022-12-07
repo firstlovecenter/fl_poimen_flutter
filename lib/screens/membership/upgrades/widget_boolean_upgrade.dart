@@ -39,6 +39,11 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
     var appState = Provider.of<SharedState>(context);
     // replace spaces in title
     String hasUpgradeVariable = widget.title.replaceAll(' ', '');
+    String label = 'Doesn\'t Have';
+
+    if (widget.title == 'Camp Attendance') {
+      label = 'Has Not';
+    }
 
     return ScaffoldWithMemberAvatar(
       title: widget.title,
@@ -69,7 +74,7 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
                   }),
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
-                label: 'Doesn\'t Have ${widget.upgradeRequirements}',
+                label: '$label ${widget.upgradeRequirements}',
                 onPressed: () => Navigator.pop(context),
                 color: PoimenTheme.darkCardColor,
               ),

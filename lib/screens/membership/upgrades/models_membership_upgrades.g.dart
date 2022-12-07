@@ -16,14 +16,7 @@ MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) {
             .toList(),
     hasAudioCollections: json['hasAudioCollections'] as bool,
     hasBibleTranslations: json['hasBibleTranslations'] as bool,
-    attendedCampsWithProphet:
-        (json['attendedCampsWithProphet'] as List<dynamic>)
-            .map((e) => e as String)
-            .toList(),
-    attendedCampsWithOtherBishops:
-        (json['attendedCampsWithOtherBishops'] as List<dynamic>)
-            .map((e) => e as String)
-            .toList(),
+    hasCampAttendance: json['hasCampAttendance'] as bool,
     hasHolyGhostBaptismDate: json['hasHolyGhostBaptismDate'] == null
         ? null
         : DateTime.parse(json['hasHolyGhostBaptismDate'] as String),
@@ -61,6 +54,5 @@ Map<String, dynamic> _$MemberWithUpgradesToJson(MemberWithUpgrades instance) =>
       'graduatedUnderstandingSchools': instance.graduatedUnderstandingSchools,
       'hasAudioCollections': instance.hasAudioCollections,
       'hasBibleTranslations': instance.hasBibleTranslations,
-      'attendedCampsWithProphet': instance.attendedCampsWithProphet,
-      'attendedCampsWithOtherBishops': instance.attendedCampsWithOtherBishops,
+      'hasCampAttendance': instance.hasCampAttendance,
     };

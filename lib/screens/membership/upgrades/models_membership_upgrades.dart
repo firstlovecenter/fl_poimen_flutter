@@ -11,8 +11,7 @@ class MemberWithUpgrades extends MemberForList {
   List<String> graduatedUnderstandingSchools;
   bool hasAudioCollections;
   bool hasBibleTranslations;
-  List<String> attendedCampsWithProphet;
-  List<String> attendedCampsWithOtherBishops;
+  bool hasCampAttendance;
 
   MemberWithUpgrades({
     required this.hasHolyGhostBaptism,
@@ -20,8 +19,7 @@ class MemberWithUpgrades extends MemberForList {
     required this.graduatedUnderstandingSchools,
     required this.hasAudioCollections,
     required this.hasBibleTranslations,
-    required this.attendedCampsWithProphet,
-    required this.attendedCampsWithOtherBishops,
+    required this.hasCampAttendance,
     this.hasHolyGhostBaptismDate,
     this.hasWaterBaptismDate,
   }) : super(

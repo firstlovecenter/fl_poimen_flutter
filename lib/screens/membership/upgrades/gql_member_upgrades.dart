@@ -16,8 +16,7 @@ final getMemberUpgradesDetails = gql('''
       graduatedUnderstandingSchools
       hasAudioCollections
       hasBibleTranslations
-      attendedCampsWithProphet
-      attendedCampsWithOtherBishops
+      hasCampAttendance
     }
   }
 ''');
@@ -104,6 +103,27 @@ mutation (
     firstName
     lastName
     hasBibleTranslations
+    history (options: {limit: 5}) {
+      id
+      historyRecord
+    }
+  }
+}
+''');
+
+final recordMemberCampAttendanceUpgrade = gql('''
+mutation (
+  \$memberId: ID!,
+  \$hasCampAttendance: Boolean!
+) {
+  SetMemberCampAttendance(
+  memberId: \$memberId,
+  hasCampAttendance: \$hasCampAttendance
+  ) {
+    id
+    firstName
+    lastName
+    hasCampAttendance
     history (options: {limit: 5}) {
       id
       historyRecord
