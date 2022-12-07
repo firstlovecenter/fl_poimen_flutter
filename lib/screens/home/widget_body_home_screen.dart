@@ -83,15 +83,6 @@ class HomeScreenBody extends StatelessWidget {
           const Padding(padding: EdgeInsets.all(5.0)),
           ...attendanceLevels(churchLevel),
           HomePageButton(
-            text: 'Missing Persons Call List',
-            icon: FontAwesomeIcons.personCircleQuestion,
-            navKey: 'imcls',
-            route: '/$levelForUrl-imcls',
-            alertNumber: church.imclTotal,
-            permitted: const [Role.leaderFellowship, Role.leaderBacenta],
-          ),
-          imclLevels(churchLevel, church.imclTotal),
-          HomePageButton(
             text: 'First Timers and New Converts',
             icon: FontAwesomeIcons.userPlus,
             navKey: 'idls',
@@ -106,6 +97,29 @@ class HomeScreenBody extends StatelessWidget {
             permitted: const [Role.all],
           ),
           defaultersLevels(churchLevel),
+          const Padding(padding: EdgeInsets.all(6.0)),
+          const Center(
+            child: Text(
+              'Outstanding Work',
+              style: TextStyle(
+                fontSize: 18,
+                color: PoimenTheme.textSecondary,
+              ),
+            ),
+          ),
+          const Padding(padding: EdgeInsets.all(6.0)),
+          HomePageButton(
+            text: 'Missing Persons Call List',
+            icon: FontAwesomeIcons.personCircleQuestion,
+            navKey: 'imcls',
+            route: '/$levelForUrl-imcls',
+            alertNumber: church.imclTotal,
+            permitted: const [Role.leaderFellowship, Role.leaderBacenta],
+          ),
+          imclLevels(churchLevel, church.imclTotal),
+          outstandingVisitationLevels(churchLevel, 3),
+          outstandingPrayerLevels(churchLevel, 3),
+          outstandingTelepastoringLevels(churchLevel, 5)
         ],
       ),
     );

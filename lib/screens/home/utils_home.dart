@@ -94,7 +94,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
   ChurchString level = ChurchString(churchLevel.name);
 
   return HomePageButton(
-    text: 'IMCL Total',
+    text: 'imcl Total',
     icon: FontAwesomeIcons.personCircleQuestion,
     navKey: 'imcl-total',
     route: '#',
@@ -122,6 +122,104 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
     icon: FontAwesomeIcons.userXmark,
     navKey: 'attendance-defaulters',
     route: '/${level.lowerCase}/attendance-defaulters',
+    permitted: [Role.values.byName('leader${level.properCase}')],
+  );
+}
+
+// PASTORAL DUTIES
+
+Widget visitationLevels(ChurchLevel churchLevel, int? outstandingVisitationTotal) {
+  const permittedLevels = [
+    ChurchLevel.fellowship,
+    ChurchLevel.bacenta,
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+  ];
+
+  if (!permittedLevels.contains(churchLevel) || outstandingVisitationTotal == 0) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'Outstanding Visitation',
+    icon: FontAwesomeIcons.doorOpen,
+    navKey: 'outstanding-visitation',
+    route: '#',
+    alertNumber: outstandingVisitationTotal,
+    permitted: [Role.values.byName('leader${level.properCase}')],
+  );
+}
+
+Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisitationTotal) {
+  const permittedLevels = [
+    ChurchLevel.fellowship,
+    ChurchLevel.bacenta,
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+  ];
+
+  if (!permittedLevels.contains(churchLevel) || outstandingVisitationTotal == 0) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'Visitations',
+    icon: FontAwesomeIcons.doorOpen,
+    navKey: 'outstanding-visitation',
+    route: '#',
+    alertNumber: outstandingVisitationTotal,
+    permitted: [Role.values.byName('leader${level.properCase}')],
+  );
+}
+
+Widget outstandingPrayerLevels(ChurchLevel churchLevel, int? outstandingPrayerTotal) {
+  const permittedLevels = [
+    ChurchLevel.fellowship,
+    ChurchLevel.bacenta,
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+  ];
+
+  if (!permittedLevels.contains(churchLevel) || outstandingPrayerTotal == 0) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'Prayer',
+    icon: FontAwesomeIcons.personPraying,
+    navKey: 'outstanding-prayer',
+    route: '#',
+    alertNumber: outstandingPrayerTotal,
+    permitted: [Role.values.byName('leader${level.properCase}')],
+  );
+}
+
+Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingTelepastoringTotal) {
+  const permittedLevels = [
+    ChurchLevel.fellowship,
+    ChurchLevel.bacenta,
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+  ];
+
+  if (!permittedLevels.contains(churchLevel) || outstandingTelepastoringTotal == 0) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'Telepastoring Calls',
+    icon: FontAwesomeIcons.phone,
+    navKey: 'outstanding-telepastoring',
+    route: '#',
+    alertNumber: outstandingTelepastoringTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
 }
