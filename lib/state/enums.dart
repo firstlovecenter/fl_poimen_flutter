@@ -9,6 +9,32 @@ enum ChurchLevel {
   gathering,
 }
 
+ChurchLevel getChurchLevelFromAuth(List<String> role) {
+  if (role
+      .where((element) => ['leaderGatheringService', 'adminGatheringService'].contains(element))
+      .isNotEmpty) {
+    return ChurchLevel.council;
+  } else if (role
+      .where((element) => ['leaderStream', 'adminStream'].contains(element))
+      .isNotEmpty) {
+    return ChurchLevel.council;
+  } else if (role
+      .where((element) => ['leaderCouncil', 'adminCouncil'].contains(element))
+      .isNotEmpty) {
+    return ChurchLevel.council;
+  } else if (role
+      .where((element) => ['leaderConstituency', 'adminConstituency'].contains(element))
+      .isNotEmpty) {
+    return ChurchLevel.constituency;
+  } else if (role.where((element) => ['leaderBacenta'].contains(element)).isNotEmpty) {
+    return ChurchLevel.bacenta;
+  } else if (role.contains('leaderFellowship')) {
+    return ChurchLevel.fellowship;
+  } else {
+    return ChurchLevel.fellowship;
+  }
+}
+
 ChurchLevel convertToChurchEnum(String churchLevel) {
   switch (churchLevel) {
     case 'fellowship':

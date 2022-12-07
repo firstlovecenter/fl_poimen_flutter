@@ -6,6 +6,7 @@ import 'package:poimen/state/enums.dart';
 
 class SharedState with ChangeNotifier {
   Role _role = Role.leaderFellowship;
+  ChurchLevel _roleLevel = ChurchLevel.fellowship;
   ProfileChurch _church = ProfileChurch(
     id: '',
     typename: '',
@@ -39,6 +40,7 @@ class SharedState with ChangeNotifier {
   String _bottomNavSelected = '';
 
   Role get role => _role;
+  ChurchLevel get roleLevel => _roleLevel;
   ProfileChurch get church => _church;
   MemberForList get member => _member;
   String get bottomNavSelected => _bottomNavSelected;
@@ -67,6 +69,11 @@ class SharedState with ChangeNotifier {
 
   set role(Role role) {
     _role = role;
+    notifyListeners();
+  }
+
+  set roleLevel(ChurchLevel roleLevel) {
+    _roleLevel = roleLevel;
     notifyListeners();
   }
 

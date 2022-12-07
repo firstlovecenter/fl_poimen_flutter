@@ -3,6 +3,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
+import 'package:poimen/state/enums.dart';
 part 'models_membership.g.dart';
 
 @JsonSerializable()
@@ -44,6 +45,8 @@ class MemberForList {
   factory MemberForList.fromJson(Map<String, dynamic> json) => _$MemberForListFromJson(json);
   Map<String, dynamic> toJson() => _$MemberForListToJson(this);
 }
+
+
 
 @JsonSerializable()
 class Member extends MemberForList {
