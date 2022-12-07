@@ -16,6 +16,12 @@ class PoimenTheme {
   static const Color textSecondary = Colors.grey;
   static Color brand = _colorFromHex('#850035');
   static Color brandTextPrimary = _colorFromHex('#8a3a59');
+
+  static TextStyle heading2 = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
+
   static Map<int, Color> brands = {
     50: _colorFromHex('#FEEAFD'),
     100: _colorFromHex('#FDCDFB'),

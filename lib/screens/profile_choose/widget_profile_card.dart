@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
+import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class ProfileCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           userState.church = church;
+          userState.roleLevel = getChurchLevelFromAuth((AuthService.instance.idToken?.roles ?? []));
 
           if (church.typename == 'Fellowship') {
             userState.role = Role.leaderFellowship;
