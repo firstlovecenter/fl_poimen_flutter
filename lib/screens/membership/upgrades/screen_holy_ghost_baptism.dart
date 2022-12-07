@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/screens/membership/details/upgrades/gql_member_upgrades.dart';
-import 'package:poimen/screens/membership/details/upgrades/widget_baptism_form.dart';
+import 'package:poimen/screens/membership/upgrades/gql_member_upgrades.dart';
+import 'package:poimen/screens/membership/upgrades/widget_baptism_form.dart';
 
 class HolyGhostBaptismScreen extends StatefulHookWidget {
   const HolyGhostBaptismScreen({Key? key}) : super(key: key);

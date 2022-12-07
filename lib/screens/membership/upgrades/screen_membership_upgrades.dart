@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:poimen/screens/membership/details/upgrades/gql_member_upgrades.dart';
-import 'package:poimen/screens/membership/details/upgrades/models_membership_upgrades.dart';
+import 'package:poimen/screens/membership/upgrades/gql_member_upgrades.dart';
+import 'package:poimen/screens/membership/upgrades/models_membership_upgrades.dart';
 import 'package:poimen/screens/membership/details/widget_member_avatar_screen_header.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/services/gql_query_container.dart';
