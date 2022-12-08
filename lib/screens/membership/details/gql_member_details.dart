@@ -29,7 +29,7 @@ final getMemberDetails = gql('''
         name
         
       }
-      pastoralComments (options: { sort: [{ timestamp: DESC }], limit: 3 }) {
+      pastoralComments {
         id
         typename
         timestamp

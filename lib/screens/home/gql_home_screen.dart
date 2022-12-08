@@ -8,6 +8,7 @@ final getFellowshipHomeScreen = gql('''
       name
       imclTotal
       currentPastoralCycle {
+        id
         typename
         startDate
         endDate
@@ -25,6 +26,7 @@ final getBacentaHomeScreen = gql('''
       name
       imclTotal
       currentPastoralCycle {
+        id
         typename
         startDate
         endDate
@@ -42,6 +44,7 @@ final getConstituencyHomeScreen = gql('''
       name
       imclTotal
       currentPastoralCycle {
+        id
         typename
         startDate
         endDate
@@ -59,6 +62,7 @@ final getSontaHomeScreen = gql('''
       name
       imclTotal
       currentPastoralCycle {
+        id
         typename
         startDate
         endDate
@@ -76,6 +80,7 @@ final getCouncilHomeScreen = gql('''
       name
       imclTotal
       currentPastoralCycle {
+        id
         typename
         startDate
         endDate
