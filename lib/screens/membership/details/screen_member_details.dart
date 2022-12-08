@@ -189,9 +189,18 @@ class MemberDetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const Padding(padding: EdgeInsets.all(8.0)),
-                            Text(
-                              'Show More',
-                              style: TextStyle(color: PoimenTheme.brandTextPrimary),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/member-pastoral-comments',
+                                  arguments: member,
+                                );
+                              },
+                              child: Text(
+                                'Show More',
+                                style: TextStyle(color: PoimenTheme.brandTextPrimary),
+                              ),
                             ),
                           ],
                         ),

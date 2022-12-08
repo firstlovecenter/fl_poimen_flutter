@@ -59,3 +59,30 @@ final getMemberDetails = gql('''
     }
   }
 ''');
+
+final getMemberPastoralComments = gql('''
+ query getMemberProfile(\$id: ID!) {
+    members(where: { id: \$id }) {
+      id
+      typename
+      status
+      firstName
+      lastName
+      pictureUrl
+      pastoralComments (limit: 10) {
+        id
+        typename
+        timestamp
+        comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+        }
+        activity
+      }
+    }
+  }
+''');
