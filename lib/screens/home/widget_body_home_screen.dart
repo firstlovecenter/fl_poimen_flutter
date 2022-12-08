@@ -117,7 +117,7 @@ class HomeScreenBody extends StatelessWidget {
             permitted: const [Role.leaderFellowship, Role.leaderBacenta],
           ),
           imclLevels(churchLevel, church.imclTotal),
-          outstandingVisitationLevels(churchLevel, 3),
+          outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
           outstandingPrayerLevels(churchLevel, 3),
           outstandingTelepastoringLevels(churchLevel, 5)
         ],

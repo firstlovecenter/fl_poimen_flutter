@@ -12,6 +12,7 @@ HomeScreenChurch _$HomeScreenChurchFromJson(Map<String, dynamic> json) {
     typename: json['typename'] as String,
     name: json['name'] as String,
     imclTotal: json['imclTotal'] as int,
+    outstandingVisitationsCount: json['outstandingVisitationsCount'] as int,
     currentPastoralCycle: json['currentPastoralCycle'] == null
         ? null
         : PastoralCycle.fromJson(
@@ -25,6 +26,7 @@ Map<String, dynamic> _$HomeScreenChurchToJson(HomeScreenChurch instance) =>
       'typename': instance.typename,
       'name': instance.name,
       'imclTotal': instance.imclTotal,
+      'outstandingVisitationsCount': instance.outstandingVisitationsCount,
       'currentPastoralCycle': instance.currentPastoralCycle,
     };
 

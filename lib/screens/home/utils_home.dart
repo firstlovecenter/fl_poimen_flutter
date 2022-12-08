@@ -128,30 +128,6 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
 
 // PASTORAL DUTIES
 
-Widget visitationLevels(ChurchLevel churchLevel, int? outstandingVisitationTotal) {
-  const permittedLevels = [
-    ChurchLevel.fellowship,
-    ChurchLevel.bacenta,
-    ChurchLevel.constituency,
-    ChurchLevel.council,
-  ];
-
-  if (!permittedLevels.contains(churchLevel) || outstandingVisitationTotal == 0) {
-    return Container();
-  }
-
-  ChurchString level = ChurchString(churchLevel.name);
-
-  return HomePageButton(
-    text: 'Outstanding Visitation',
-    icon: FontAwesomeIcons.doorOpen,
-    navKey: 'outstanding-visitation',
-    route: '#',
-    alertNumber: outstandingVisitationTotal,
-    permitted: [Role.values.byName('leader${level.properCase}')],
-  );
-}
-
 Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisitationTotal) {
   const permittedLevels = [
     ChurchLevel.fellowship,
@@ -170,7 +146,7 @@ Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisi
     text: 'Visitations',
     icon: FontAwesomeIcons.doorOpen,
     navKey: 'outstanding-visitation',
-    route: '#',
+    route: '/fellowship/outstanding-visitation',
     alertNumber: outstandingVisitationTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );

@@ -7,6 +7,7 @@ final getFellowshipHomeScreen = gql('''
       typename
       name
       imclTotal
+      outstandingVisitationsCount
       currentPastoralCycle {
         id
         typename
