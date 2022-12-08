@@ -2,8 +2,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/models/neo4j.dart';
+import 'package:poimen/screens/membership/imcl/models_imcl.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
-import 'package:poimen/state/enums.dart';
 part 'models_membership.g.dart';
 
 @JsonSerializable()
@@ -46,8 +46,6 @@ class MemberForList {
   Map<String, dynamic> toJson() => _$MemberForListToJson(this);
 }
 
-
-
 @JsonSerializable()
 class Member extends MemberForList {
   List<bool> lastSixServices = [];
@@ -56,13 +54,15 @@ class Member extends MemberForList {
   Church stream;
   Church fellowship;
   Church? ministry;
+  List<PastoralComments>? pastoralComments = [];
 
   Member(
       {required this.gender,
       required this.dob,
       required this.stream,
       required this.ministry,
-      required this.fellowship})
+      required this.fellowship,
+      this.pastoralComments})
       : super(
           id: '',
           typename: '',

@@ -29,6 +29,20 @@ final getMemberDetails = gql('''
         name
         
       }
+      pastoralComments (options: { sort: [{ timestamp: DESC }], limit: 3 }) {
+        id
+        typename
+        timestamp
+        comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+        }
+        activity
+      }
       fellowship {
         id
         typename

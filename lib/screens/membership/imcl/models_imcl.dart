@@ -54,6 +54,7 @@ class PastoralComments {
   String typename = '';
   DateTime timestamp = DateTime.now();
   String comment = '';
+  String activity = '';
   MemberForList author = MemberForList(
     id: '',
     typename: '',
@@ -68,6 +69,7 @@ class PastoralComments {
     required this.timestamp,
     required this.comment,
     required this.author,
+    required this.activity,
   });
 
   factory PastoralComments.fromJson(Map<String, dynamic> json) => _$PastoralCommentsFromJson(json);
@@ -82,6 +84,7 @@ class MissedChurchComment extends PastoralComments {
           typename: '',
           timestamp: DateTime.now(),
           comment: '',
+          activity: '',
           author: MemberForList(
             id: '',
             typename: '',

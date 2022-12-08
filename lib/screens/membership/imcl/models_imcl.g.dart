@@ -68,6 +68,7 @@ PastoralComments _$PastoralCommentsFromJson(Map<String, dynamic> json) {
     timestamp: DateTime.parse(json['timestamp'] as String),
     comment: json['comment'] as String,
     author: MemberForList.fromJson(json['author'] as Map<String, dynamic>),
+    activity: json['activity'] as String,
   );
 }
 
@@ -77,6 +78,7 @@ Map<String, dynamic> _$PastoralCommentsToJson(PastoralComments instance) =>
       'typename': instance.typename,
       'timestamp': instance.timestamp.toIso8601String(),
       'comment': instance.comment,
+      'activity': instance.activity,
       'author': instance.author,
     };
 
@@ -86,6 +88,7 @@ MissedChurchComment _$MissedChurchCommentFromJson(Map<String, dynamic> json) {
     ..typename = json['typename'] as String
     ..timestamp = DateTime.parse(json['timestamp'] as String)
     ..comment = json['comment'] as String
+    ..activity = json['activity'] as String
     ..author = MemberForList.fromJson(json['author'] as Map<String, dynamic>);
 }
 
@@ -96,5 +99,6 @@ Map<String, dynamic> _$MissedChurchCommentToJson(
       'typename': instance.typename,
       'timestamp': instance.timestamp.toIso8601String(),
       'comment': instance.comment,
+      'activity': instance.activity,
       'author': instance.author,
     };

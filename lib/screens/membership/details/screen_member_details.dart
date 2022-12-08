@@ -13,6 +13,7 @@ import 'package:poimen/widgets/color_block_tile.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class MemberDetailsScreen extends StatelessWidget {
   const MemberDetailsScreen({Key? key}) : super(key: key);
@@ -135,41 +136,65 @@ class MemberDetailsScreen extends StatelessWidget {
               const BioDetailsCard(title: 'Invited By', detail: ''),
               const BioDetailsCard(title: 'Last Visited', detail: ''),
               const Padding(padding: EdgeInsets.all(8.0)),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Pastoral Comments',
-                        style: PoimenTheme.heading2,
-                      ),
-                      const Padding(padding: EdgeInsets.all(8.0)),
-                      Column(
-                        children: [
-                          const Text(
-                            'He was not home when I tried to visit. All calls could not be reached',
-                            style: TextStyle(color: PoimenTheme.whatsappColor),
-                            overflow: TextOverflow.clip,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Text('David Vander, IMCL'),
-                                Text('23 May 2022',
-                                    style: TextStyle(color: PoimenTheme.textSecondary)),
+              member.pastoralComments == null || member.pastoralComments!.isEmpty
+                  ? Container()
+                  : Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Pastoral Comments',
+                              style: PoimenTheme.heading2,
+                            ),
+                            const Padding(padding: EdgeInsets.all(8.0)),
+                            Column(
+                              children: [
+                                ...member.pastoralComments!.map((comment) {
+                                  return Column(
+                                    children: [
+                                      Text(
+                                        comment.comment,
+                                        style: const TextStyle(color: PoimenTheme.whatsappColor),
+                                        overflow: TextOverflow.clip,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  '${comment.author.firstName} ${comment.author.lastName}, ',
+                                                ),
+                                                Text(comment.activity),
+                                              ],
+                                            ),
+                                            Text(
+                                              timeago.format(comment.timestamp),
+                                              style: const TextStyle(
+                                                color: PoimenTheme.textSecondary,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }).toList()
                               ],
                             ),
-                          ),
-                          Text('Show More', style: TextStyle(color: PoimenTheme.brandTextPrimary)),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                            const Padding(padding: EdgeInsets.all(8.0)),
+                            Text(
+                              'Show More',
+                              style: TextStyle(color: PoimenTheme.brandTextPrimary),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
             ],
           ),
         );
