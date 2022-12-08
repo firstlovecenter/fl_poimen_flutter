@@ -54,3 +54,33 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
     },
   ];
 }
+
+List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
+  final levelForUrl = churchLevel.name.toLowerCase();
+
+  return [
+    {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
+    churchLevel == ChurchLevel.fellowship || churchLevel == ChurchLevel.bacenta
+        ? {
+            'title': 'IMCLs',
+            'icon': FontAwesomeIcons.personCircleQuestion,
+            'route': '/$levelForUrl-imcls',
+            'navKey': 'imcls'
+          }
+        : null,
+    _higherChurches.contains(churchLevel)
+        ? {
+            'title': 'Defaulters',
+            'icon': FontAwesomeIcons.userXmark,
+            'route': '/$levelForUrl/attendance-defaulters',
+            'navKey': 'attendance-defaulters'
+          }
+        : null,
+    {
+      'title': 'Members',
+      'icon': FontAwesomeIcons.solidAddressBook,
+      'route': '/$levelForUrl-members',
+      'navKey': 'membership'
+    },
+  ];
+}

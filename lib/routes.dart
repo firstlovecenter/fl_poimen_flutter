@@ -1,5 +1,6 @@
 import 'package:poimen/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/duties/imcl/screen_fellowship_imcls.dart';
+import 'package:poimen/duties/visitation/fellowship_oustanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/council_bacenta_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/gathering_bacenta_attendance_defaulters.dart';
@@ -66,9 +67,12 @@ var appRoutes = {
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
 
+  //// PASTORAL DUTIES ///////
   // Display IMCL for Fellowship and Bacenta Levels
   '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
+
+  '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens
