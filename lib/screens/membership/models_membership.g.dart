@@ -50,6 +50,37 @@ Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
       'whatsappNumber': instance.whatsappNumber,
     };
 
+MemberWithComments _$MemberWithCommentsFromJson(Map<String, dynamic> json) {
+  return MemberWithComments(
+    pastoralComments: (json['pastoralComments'] as List<dynamic>?)
+        ?.map((e) => PastoralComments.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  )
+    ..id = json['id'] as String
+    ..typename = json['typename'] as String
+    ..status = json['status'] as String?
+    ..lost = json['lost'] as bool?
+    ..firstName = json['firstName'] as String
+    ..lastName = json['lastName'] as String
+    ..pictureUrl = json['pictureUrl'] as String
+    ..phoneNumber = json['phoneNumber'] as String?
+    ..whatsappNumber = json['whatsappNumber'] as String?;
+}
+
+Map<String, dynamic> _$MemberWithCommentsToJson(MemberWithComments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'status': instance.status,
+      'lost': instance.lost,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'pictureUrl': instance.pictureUrl,
+      'phoneNumber': instance.phoneNumber,
+      'whatsappNumber': instance.whatsappNumber,
+      'pastoralComments': instance.pastoralComments,
+    };
+
 Member _$MemberFromJson(Map<String, dynamic> json) {
   return Member(
     gender: Gender.fromJson(json['gender'] as Map<String, dynamic>),

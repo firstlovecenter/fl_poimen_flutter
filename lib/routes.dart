@@ -20,6 +20,7 @@ import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
 import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
+import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
 import 'package:poimen/screens/membership/upgrades/screen_audio_collections.dart';
 import 'package:poimen/screens/membership/upgrades/screen_bible_translations.dart';
 import 'package:poimen/screens/membership/upgrades/screen_camp_attendance.dart';
@@ -45,6 +46,7 @@ var appRoutes = {
 
   // Display Member Details
   '/member-details': (context) => const MemberDetailsScreen(),
+  '/member-pastoral-comments': (context) => const MemberPastoralCommentsScreen(),
   '/membership-upgrades': (context) => const MembershipUpgradesScreen(),
   '/membership-upgrades/holy-ghost-baptism': (context) => const HolyGhostBaptismScreen(),
   '/membership-upgrades/water-baptism': (context) => const WaterBaptismScreen(),

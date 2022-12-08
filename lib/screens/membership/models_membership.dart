@@ -47,6 +47,25 @@ class MemberForList {
 }
 
 @JsonSerializable()
+class MemberWithComments extends MemberForList {
+  List<PastoralComments>? pastoralComments = [];
+
+  MemberWithComments({required this.pastoralComments})
+      : super(
+          id: '',
+          typename: '',
+          status: '',
+          firstName: '',
+          lastName: '',
+          pictureUrl: '',
+        );
+
+  factory MemberWithComments.fromJson(Map<String, dynamic> json) => _$MemberWithCommentsFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$MemberWithCommentsToJson(this);
+}
+
+@JsonSerializable()
 class Member extends MemberForList {
   List<bool> lastSixServices = [];
   Gender gender = Gender();
