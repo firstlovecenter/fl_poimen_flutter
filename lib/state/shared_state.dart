@@ -22,6 +22,7 @@ class SharedState with ChangeNotifier {
   );
 
   PastoralCycle _pastoralCycle = PastoralCycle(
+    id: '',
     typename: '',
     startDate: '',
     endDate: '',

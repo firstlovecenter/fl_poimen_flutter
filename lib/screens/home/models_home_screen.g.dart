@@ -30,6 +30,7 @@ Map<String, dynamic> _$HomeScreenChurchToJson(HomeScreenChurch instance) =>
 
 PastoralCycle _$PastoralCycleFromJson(Map<String, dynamic> json) {
   return PastoralCycle(
+    id: json['id'] as String,
     typename: json['typename'] as String,
     startDate: json['startDate'] as String,
     endDate: json['endDate'] as String,
@@ -39,6 +40,7 @@ PastoralCycle _$PastoralCycleFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PastoralCycleToJson(PastoralCycle instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'typename': instance.typename,
       'startDate': instance.startDate,
       'endDate': instance.endDate,

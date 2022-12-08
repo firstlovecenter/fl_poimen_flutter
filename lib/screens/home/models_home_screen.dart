@@ -22,12 +22,14 @@ class HomeScreenChurch {
 
 @JsonSerializable()
 class PastoralCycle {
+  final String id;
   final String typename;
   final String startDate;
   final String endDate;
   final int numberOfDays;
 
   PastoralCycle({
+    required this.id,
     required this.typename,
     required this.startDate,
     required this.endDate,
