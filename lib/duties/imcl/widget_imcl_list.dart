@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:poimen/screens/membership/imcl/models_imcl.dart';
-import 'package:poimen/screens/membership/imcl/widget_imcl_report_form.dart';
+import 'package:poimen/duties/imcl/models_imcl.dart';
+import 'package:poimen/duties/imcl/widget_imcl_report_form.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';

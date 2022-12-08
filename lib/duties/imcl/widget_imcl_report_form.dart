@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/screens/membership/imcl/gql_imcls.dart';
+import 'package:poimen/duties/imcl/gql_imcls.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/alert_box.dart';
