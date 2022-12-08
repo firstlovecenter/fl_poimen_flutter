@@ -92,7 +92,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                             reportMutation.runMutation({
                               'memberId': widget.member.id,
                               'reason': reason,
-                              'roleLevel': ['Fellowship'],
+                              'roleLevel': 'Fellowship',
                             });
 
                             ScaffoldMessenger.of(context).showSnackBar(

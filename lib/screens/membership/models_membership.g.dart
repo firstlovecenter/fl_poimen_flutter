@@ -59,6 +59,9 @@ Member _$MemberFromJson(Map<String, dynamic> json) {
         ? null
         : Church.fromJson(json['ministry'] as Map<String, dynamic>),
     fellowship: Church.fromJson(json['fellowship'] as Map<String, dynamic>),
+    pastoralComments: (json['pastoralComments'] as List<dynamic>?)
+        ?.map((e) => PastoralComments.fromJson(e as Map<String, dynamic>))
+        .toList(),
   )
     ..id = json['id'] as String
     ..typename = json['typename'] as String
@@ -90,6 +93,7 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'stream': instance.stream,
       'fellowship': instance.fellowship,
       'ministry': instance.ministry,
+      'pastoralComments': instance.pastoralComments,
     };
 
 Node _$NodeFromJson(Map<String, dynamic> json) {

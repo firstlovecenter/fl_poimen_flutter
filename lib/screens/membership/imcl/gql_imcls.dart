@@ -20,6 +20,7 @@ final getFellowshipImcls = gql('''
           id
           typename
           timestamp
+          activity
           comment
           author {
             id
@@ -55,6 +56,7 @@ final getBacentaImcls = gql('''
           id
           typename
           timestamp
+          activity
           comment
           author {
             id
@@ -70,7 +72,7 @@ final getBacentaImcls = gql('''
 ''');
 
 final recordReasonForMemberAbsence = gql('''
-  mutation recordReasonForMemberAbsence(\$memberId: ID!, \$reason: String!, \$roleLevel: [String!]!){
+  mutation recordReasonForMemberAbsence(\$memberId: ID!, \$reason: String!, \$roleLevel: String!){
   RecordReasonForMemberAbsence(memberId: \$memberId, reason: \$reason, roleLevel: \$roleLevel) {
     id
     typename
@@ -82,6 +84,7 @@ final recordReasonForMemberAbsence = gql('''
       id
       typename
       timestamp
+      activity
       comment
       author {
         id
