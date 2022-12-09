@@ -17,9 +17,6 @@ OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
     status: json['status'] as String?,
     phoneNumber: json['phoneNumber'] as String?,
     whatsappNumber: json['whatsappNumber'] as String?,
-    comments: (json['comments'] as List<dynamic>)
-        .map((e) => PastoralComments.fromJson(e as Map<String, dynamic>))
-        .toList(),
   )..lost = json['lost'] as bool?;
 }
 
@@ -35,7 +32,6 @@ Map<String, dynamic> _$OutstandingVisitationForListToJson(
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'comments': instance.comments,
     };
 
 ChurchForOutstandingVisitationList _$ChurchForOutstandingVisitationListFromJson(

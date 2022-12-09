@@ -6,8 +6,6 @@ part 'models_visitation.g.dart';
 
 @JsonSerializable()
 class OutstandingVisitationForList extends MemberForList {
-  List<PastoralComments> comments = [];
-
   OutstandingVisitationForList({
     required String id,
     required String typename,
@@ -17,7 +15,6 @@ class OutstandingVisitationForList extends MemberForList {
     String? status,
     String? phoneNumber,
     String? whatsappNumber,
-    required this.comments,
   }) : super(
           id: id,
           typename: typename,
