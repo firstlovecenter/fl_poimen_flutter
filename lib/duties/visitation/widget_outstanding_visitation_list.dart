@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/duties/visitation/models_visitation.dart';
+import 'package:poimen/duties/visitation/widget_visitation_report_form.dart';
+import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/no_data.dart';
+import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 
 class ChurchOutstandingVisitationList extends StatelessWidget {
@@ -21,16 +24,27 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
       child: ListView(children: [
         const Padding(padding: EdgeInsets.all(10)),
         const Text(
-          'This is the list of those who were not at the last church service',
+          'These people have not been visited during the current sheperding cycle',
           style: TextStyle(fontSize: 16),
         ),
-        Center(
-          child: Text(
-            'You must contact them to find out why they were absent',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: PoimenTheme.brand,
+        // a centered card with the number of outstanding visitations
+        const Padding(padding: EdgeInsets.all(10)),
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6.0),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(FontAwesomeIcons.doorOpen),
+                  trailing: TrailingCardAlertNumber(
+                      number: church.outstandingVisitations.length,
+                      variant: TrailingCardAlertNumberVariant.red),
+                  title: const Text('Visits Remaining'),
+                ),
+              ],
             ),
           ),
         ),
@@ -86,6 +100,17 @@ Column _memberTile(BuildContext context, OutstandingVisitationForList member) {
                   ),
                 ]),
               ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  _bottomSheet(context, member);
+                },
+                style: _outstandingVisitationButtonStyle(),
+                icon: const Icon(
+                  FontAwesomeIcons.pencil,
+                  size: 15,
+                ),
+                label: const Text('Record Visit'),
+              ),
             ],
           ),
         ),
@@ -97,7 +122,7 @@ Column _memberTile(BuildContext context, OutstandingVisitationForList member) {
 ButtonStyle _outstandingVisitationButtonStyle() {
   return ButtonStyle(
     padding: MaterialStateProperty.all(
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     ),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
@@ -107,14 +132,14 @@ ButtonStyle _outstandingVisitationButtonStyle() {
   );
 }
 
-// _bottomSheet(BuildContext context, MemberForList member) {
-//   showModalBottomSheet(
-//       context: context,
-//       shape: const RoundedRectangleBorder(
-//         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-//       ),
-//       isScrollControlled: true,
-//       builder: (BuildContext context) {
-//         return IMCLReportForm(member: member);
-//       });
-// }
+_bottomSheet(BuildContext context, MemberForList member) {
+  showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return OutstandingVisitationReportForm(member: member);
+      });
+}
