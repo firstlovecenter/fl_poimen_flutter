@@ -49,6 +49,7 @@ dependencies:
   intl: ^0.17.0
   timeago: ^3.3.0
   flutter_hooks: ^0.18.5+1
+  location: ^4.4.0
 
   # display packages
   rive: 0.9.1
