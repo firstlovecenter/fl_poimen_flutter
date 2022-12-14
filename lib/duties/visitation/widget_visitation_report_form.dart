@@ -31,7 +31,8 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
   @override
   Widget build(BuildContext context) {
     String visitationReport = '';
-    var location = Location();
+    Location location = Location();
+
     final reportMutation = useMutation(
       MutationOptions(
         document: recordReasonForMemberAbsence,
