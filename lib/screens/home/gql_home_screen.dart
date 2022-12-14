@@ -26,6 +26,7 @@ final getBacentaHomeScreen = gql('''
       typename
       name
       imclTotal
+      outstandingVisitationsCount
       currentPastoralCycle {
         id
         typename
