@@ -19,3 +19,26 @@ final getFellowshipOutstandingVisitations = gql('''
     }
   }
 ''');
+
+final logVisitationActivity = gql('''
+mutation LogVisitationActivity(
+    \$latitude: Float!
+    \$longitude: Float!
+    \$picture: String!
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogVisitationActivity(
+    latitude: \$latitude, 
+    longitude: \$longitude, 
+    picture: \$picture, 
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+    id
+    picture
+  }
+}
+''');

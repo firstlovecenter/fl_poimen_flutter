@@ -27,6 +27,12 @@ class HomeScreenBody extends StatelessWidget {
     final churchLevel = convertToChurchEnum(level);
     final levelForUrl = churchLevel.name.toLowerCase();
 
+    Future.delayed(Duration.zero, () {
+      if (church.currentPastoralCycle != null) {
+        churchState.pastoralCycle = church.currentPastoralCycle!;
+      }
+    });
+
     var role = parseRole(churchState.role);
     final authUser = AuthService.instance.idToken;
 

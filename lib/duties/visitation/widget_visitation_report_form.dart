@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/duties/imcl/gql_imcls.dart';
+import 'package:poimen/duties/visitation/gql_visitation.dart';
 import 'package:poimen/helpers/constants.dart';
+import 'package:poimen/models/neo4j.dart';
+import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/image_upload_button.dart';
-import 'package:location/location.dart';
+import 'package:poimen/widgets/location_picker_button.dart';
+import 'package:provider/provider.dart';
 
 class OutstandingVisitationReportForm extends StatefulHookWidget {
   const OutstandingVisitationReportForm({Key? key, required this.member}) : super(key: key);
@@ -21,6 +26,7 @@ class OutstandingVisitationReportForm extends StatefulHookWidget {
 class _OutstandingVisitationReportFormState extends State<OutstandingVisitationReportForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _pictureUrl = '';
+  Neo4jPoint location = Neo4jPoint(latitude: 0.0, longitude: 0.0);
 
   void setPictureUrl(String url) {
     setState(() {
@@ -28,14 +34,24 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     });
   }
 
+  void setLocation(double latitude, double longitude) {
+    setState(() {
+      location = Neo4jPoint(latitude: latitude, longitude: longitude);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     String visitationReport = '';
-    Location location = Location();
+    bool locationSet = (location.latitude + location.longitude != 0.0);
+    var churchState = Provider.of<SharedState>(context);
+    String level = churchState.church.typename;
+    PastoralCycle cycle = churchState.pastoralCycle;
 
     final reportMutation = useMutation(
       MutationOptions(
-        document: recordReasonForMemberAbsence,
+        document: logVisitationActivity,
+
         // ignore: void_checks
         update: (cache, result) {
           return cache;
@@ -45,13 +61,14 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
         },
         onError: (error) => ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-                getGQLException(error),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+            content: Text(
+              getGQLException(error),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              backgroundColor: PoimenTheme.bad),
+            ),
+            backgroundColor: PoimenTheme.bad,
+          ),
         ),
       ),
     );
@@ -59,7 +76,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
-        height: 600,
+        height: 700,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -77,6 +94,26 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                       preset: visitationReportPreset,
                       setPictureUrl: setPictureUrl,
                       child: const Text('Upload Picture'),
+                    ),
+                    LocationPickerButton(
+                      setLocation: setLocation,
+                      child: locationSet
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text('Location Set'),
+                                Padding(padding: EdgeInsets.all(8.0)),
+                                CircleAvatar(
+                                  backgroundColor: Colors.green,
+                                  radius: 15,
+                                  child: Icon(
+                                    FontAwesomeIcons.check,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const Text('Get Location'),
                     ),
                     const Padding(padding: EdgeInsets.all(8.0)),
                     TextFormField(
@@ -113,13 +150,13 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                             _formKey.currentState!.save();
 
                             reportMutation.runMutation({
-                              'latitude': 0.0,
-                              'longitude': 0.0,
-                              'pciture': _pictureUrl,
+                              'latitude': location.latitude,
+                              'longitude': location.longitude,
+                              'picture': _pictureUrl,
                               'comment': visitationReport,
-                              'roleLevel': 'Fellowship',
+                              'roleLevel': level,
                               'memberId': widget.member.id,
-                              'cycleId': 'cycle-id'
+                              'cycleId': cycle.id
                             });
 
                             ScaffoldMessenger.of(context).showSnackBar(
