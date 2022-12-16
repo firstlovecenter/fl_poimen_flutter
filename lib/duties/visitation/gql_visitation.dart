@@ -6,6 +6,7 @@ final getFellowshipOutstandingVisitations = gql('''
       id
       typename
       name
+      completedVisitationsCount
       outstandingVisitations {
         id
         typename

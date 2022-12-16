@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:poimen/duties/imcl/models_imcl.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 
 part 'models_visitation.g.dart';
@@ -34,10 +33,12 @@ class OutstandingVisitationForList extends MemberForList {
 
 @JsonSerializable()
 class ChurchForOutstandingVisitationList extends Church {
+  int completedVisitationsCount = 0;
   List<OutstandingVisitationForList> outstandingVisitations = [];
 
   ChurchForOutstandingVisitationList({
     required this.outstandingVisitations,
+    required this.completedVisitationsCount,
   });
 
   factory ChurchForOutstandingVisitationList.fromJson(Map<String, dynamic> json) =>
