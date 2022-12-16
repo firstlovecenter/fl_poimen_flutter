@@ -16,18 +16,18 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
     churchLevel == ChurchLevel.fellowship
         ? {
-            'title': 'Attendance',
-            'icon': FontAwesomeIcons.userCheck,
-            'route': '/servicerecord-services',
+            'title': 'Sunday',
+            'icon': FontAwesomeIcons.busSimple,
+            'route': '/bussingrecord-services',
             'navKey': 'attendance'
           }
         : null,
-    churchLevel == ChurchLevel.fellowship || churchLevel == ChurchLevel.bacenta
+    churchLevel == ChurchLevel.fellowship
         ? {
-            'title': 'IMCLs',
-            'icon': FontAwesomeIcons.personCircleQuestion,
-            'route': '/$levelForUrl-imcls',
-            'navKey': 'imcls'
+            'title': 'Weekday',
+            'icon': FontAwesomeIcons.userCheck,
+            'route': '/servicerecord-services',
+            'navKey': 'attendance'
           }
         : null,
     churchLevel == ChurchLevel.fellowship
@@ -60,12 +60,54 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
 
   return [
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
-    churchLevel == ChurchLevel.fellowship || churchLevel == ChurchLevel.bacenta
+    [
+      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
+    ].contains(churchLevel)
         ? {
             'title': 'IMCLs',
             'icon': FontAwesomeIcons.personCircleQuestion,
             'route': '/$levelForUrl-imcls',
             'navKey': 'imcls'
+          }
+        : null,
+    [
+      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
+      ChurchLevel.constituency,
+      ChurchLevel.council,
+    ].contains(churchLevel)
+        ? {
+            'title': 'Visit',
+            'icon': FontAwesomeIcons.doorOpen,
+            'route': '/$levelForUrl/outstanding-visitation',
+            'navKey': 'visits'
+          }
+        : null,
+    [
+      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
+      ChurchLevel.constituency,
+      ChurchLevel.council,
+    ].contains(churchLevel)
+        ? {
+            'title': 'Prayer',
+            'icon': FontAwesomeIcons.personPraying,
+            'route': '/$levelForUrl/outstanding-prayer',
+            'navKey': 'prayers'
+          }
+        : null,
+    [
+      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
+      ChurchLevel.constituency,
+      ChurchLevel.council,
+    ].contains(churchLevel)
+        ? {
+            'title': 'Telepastoring',
+            'icon': FontAwesomeIcons.phone,
+            'route': '/$levelForUrl/outstanding-telepastoring',
+            'navKey': 'telepastoring'
           }
         : null,
     _higherChurches.contains(churchLevel)
@@ -76,11 +118,5 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
             'navKey': 'attendance-defaulters'
           }
         : null,
-    {
-      'title': 'Members',
-      'icon': FontAwesomeIcons.solidAddressBook,
-      'route': '/$levelForUrl-members',
-      'navKey': 'membership'
-    },
   ];
 }
