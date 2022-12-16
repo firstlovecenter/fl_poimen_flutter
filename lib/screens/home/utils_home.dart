@@ -64,14 +64,14 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
   return [
     HomePageButton(
       text: 'Sunday Attendance',
-      icon: FontAwesomeIcons.s,
+      icon: FontAwesomeIcons.busSimple,
       navKey: 'attendance',
       route: '/bussingrecord-services',
       permitted: [Role.values.byName('leader${level.properCase}')],
     ),
     HomePageButton(
       text: 'Weekday Attendance',
-      icon: FontAwesomeIcons.w,
+      icon: FontAwesomeIcons.userCheck,
       navKey: 'attendance',
       route: '/servicerecord-services',
       permitted: [Role.values.byName('leader${level.properCase}')],
