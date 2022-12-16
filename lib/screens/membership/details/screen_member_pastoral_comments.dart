@@ -88,10 +88,13 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
                                     children: [
                                       if (member.pastoralComments!.indexOf(comment) != 0)
                                         const Divider(),
-                                      Text(
-                                        comment.comment,
-                                        style: const TextStyle(color: PoimenTheme.whatsappColor),
-                                        overflow: TextOverflow.clip,
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          comment.comment,
+                                          style: const TextStyle(color: PoimenTheme.whatsappColor),
+                                          overflow: TextOverflow.clip,
+                                        ),
                                       ),
                                       Align(
                                         alignment: Alignment.centerRight,
