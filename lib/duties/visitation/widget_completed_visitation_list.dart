@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/duties/visitation/models_visitation.dart';
-import 'package:poimen/duties/visitation/widget_visitation_report_form.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
@@ -12,22 +10,16 @@ import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 
-class ChurchOutstandingVisitationList extends StatelessWidget {
-  const ChurchOutstandingVisitationList({Key? key, required this.church}) : super(key: key);
+class ChurchCompletedVisitationList extends StatelessWidget {
+  const ChurchCompletedVisitationList({Key? key, required this.church}) : super(key: key);
 
-  final ChurchForOutstandingVisitationList church;
+  final ChurchForCompletedVisitationList church;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ListView(children: [
-        const Padding(padding: EdgeInsets.all(10)),
-        const Text(
-          'These people have not been visited during the current sheperding cycle',
-          style: TextStyle(fontSize: 16),
-        ),
-        // a centered card with the number of outstanding visitations
         const Padding(padding: EdgeInsets.all(10)),
         Card(
           shape: RoundedRectangleBorder(
@@ -38,9 +30,15 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/${church.typename.toLowerCase()}/outstanding-visitation',
+                    );
+                  },
                   leading: const Icon(FontAwesomeIcons.doorOpen),
                   trailing: TrailingCardAlertNumber(
-                      number: church.outstandingVisitations.length,
+                      number: church.completedVisitations.length,
                       variant: TrailingCardAlertNumberVariant.red),
                   title: const Text('Visits Remaining'),
                 ),
@@ -57,18 +55,12 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/${church.typename.toLowerCase()}/completed-visitation',
-                    );
-                  },
                   leading: const Icon(
                     FontAwesomeIcons.solidThumbsUp,
                     color: Colors.green,
                   ),
                   trailing: TrailingCardAlertNumber(
-                    number: church.completedVisitationsCount,
+                    number: church.outstandingVisitationsCount,
                     variant: TrailingCardAlertNumberVariant.green,
                   ),
                   title: const Text('Visits Completed'),
@@ -78,7 +70,7 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.outstandingVisitations.map((member) {
+        ...noDataChecker(church.completedVisitations.map((member) {
           return _memberTile(context, member);
         }).toList()),
       ]),
@@ -86,7 +78,7 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
   }
 }
 
-Column _memberTile(BuildContext context, OutstandingVisitationForList member) {
+Column _memberTile(BuildContext context, CompletedVisitationForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
@@ -129,46 +121,10 @@ Column _memberTile(BuildContext context, OutstandingVisitationForList member) {
                   ),
                 ]),
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  _bottomSheet(context, member);
-                },
-                style: _outstandingVisitationButtonStyle(),
-                icon: const Icon(
-                  FontAwesomeIcons.pencil,
-                  size: 15,
-                ),
-                label: const Text('Record Visit'),
-              ),
             ],
           ),
         ),
       ),
     ],
   );
-}
-
-ButtonStyle _outstandingVisitationButtonStyle() {
-  return ButtonStyle(
-    padding: MaterialStateProperty.all(
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-    ),
-    shape: MaterialStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    ),
-  );
-}
-
-_bottomSheet(BuildContext context, MemberForList member) {
-  showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-      ),
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return OutstandingVisitationReportForm(member: member);
-      });
 }

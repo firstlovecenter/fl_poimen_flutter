@@ -21,6 +21,27 @@ final getFellowshipOutstandingVisitations = gql('''
   }
 ''');
 
+final getFellowshipCompletedVisitations = gql('''
+ query getFellowshipCompletedVisitations(\$id: ID!) {
+    fellowships(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingVisitationsCount
+      completedVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final logVisitationActivity = gql('''
 mutation LogVisitationActivity(
     \$latitude: Float!
