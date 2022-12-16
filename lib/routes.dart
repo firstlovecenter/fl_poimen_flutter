@@ -1,6 +1,6 @@
 import 'package:poimen/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/duties/imcl/screen_fellowship_imcls.dart';
-import 'package:poimen/duties/visitation/fellowship_oustanding_visitations.dart';
+import 'package:poimen/duties/visitation/fellowship_outstanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/council_bacenta_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/gathering_bacenta_attendance_defaulters.dart';

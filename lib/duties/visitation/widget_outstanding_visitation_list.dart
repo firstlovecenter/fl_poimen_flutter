@@ -48,6 +48,29 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6.0),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    FontAwesomeIcons.solidThumbsUp,
+                    color: Colors.green,
+                  ),
+                  trailing: TrailingCardAlertNumber(
+                    number: church.completedVisitationsCount,
+                    variant: TrailingCardAlertNumberVariant.green,
+                  ),
+                  title: const Text('Visits Completed'),
+                ),
+              ],
+            ),
+          ),
+        ),
         const Padding(padding: EdgeInsets.all(8.0)),
         ...noDataChecker(church.outstandingVisitations.map((member) {
           return _memberTile(context, member);

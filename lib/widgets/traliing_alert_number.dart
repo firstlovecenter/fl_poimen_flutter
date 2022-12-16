@@ -10,9 +10,15 @@ class TrailingCardAlertNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color cardBackground = const Color(0xff000000);
+    Color textColor = Colors.red;
 
     if (variant == TrailingCardAlertNumberVariant.red) {
       cardBackground = const Color(0x22C02F2F);
+    }
+
+    if (variant == TrailingCardAlertNumberVariant.green) {
+      cardBackground = const Color(0x2139C02F);
+      textColor = const Color(0xFF4CD551);
     }
 
     return Card(
@@ -24,11 +30,11 @@ class TrailingCardAlertNumber extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
         child: Text(
           '$number',
-          style: const TextStyle(color: Colors.red, fontSize: 15),
+          style: TextStyle(color: textColor, fontSize: 15),
         ),
       ),
     );
   }
 }
 
-enum TrailingCardAlertNumberVariant { red, black }
+enum TrailingCardAlertNumberVariant { red, black, green }
