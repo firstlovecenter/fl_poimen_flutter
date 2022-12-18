@@ -38,7 +38,7 @@ class ChurchCompletedVisitationList extends StatelessWidget {
                   },
                   leading: const Icon(FontAwesomeIcons.doorOpen),
                   trailing: TrailingCardAlertNumber(
-                      number: church.completedVisitations.length,
+                      number: church.outstandingVisitationsCount,
                       variant: TrailingCardAlertNumberVariant.red),
                   title: const Text('Visits Remaining'),
                 ),
@@ -60,7 +60,7 @@ class ChurchCompletedVisitationList extends StatelessWidget {
                     color: Colors.green,
                   ),
                   trailing: TrailingCardAlertNumber(
-                    number: church.outstandingVisitationsCount,
+                    number: church.completedVisitations.length,
                     variant: TrailingCardAlertNumberVariant.green,
                   ),
                   title: const Text('Visits Completed'),
