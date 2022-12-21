@@ -81,7 +81,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
             'title': 'Visit',
             'icon': FontAwesomeIcons.doorOpen,
             'route': '/$levelForUrl/outstanding-visitation',
-            'navKey': 'visits'
+            'navKey': 'outstanding-visitation'
           }
         : null,
     [
@@ -94,7 +94,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
             'title': 'Prayer',
             'icon': FontAwesomeIcons.personPraying,
             'route': '/$levelForUrl/outstanding-prayer',
-            'navKey': 'prayers'
+            'navKey': 'outstanding-prayer'
           }
         : null,
     [
@@ -107,7 +107,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
             'title': 'Telepastoring',
             'icon': FontAwesomeIcons.phone,
             'route': '/$levelForUrl/outstanding-telepastoring',
-            'navKey': 'telepastoring'
+            'navKey': 'outstanding-telepastoring'
           }
         : null,
     _higherChurches.contains(churchLevel)
