@@ -8,6 +8,8 @@ class HomeScreenChurch {
   String name;
   int imclTotal;
   int outstandingVisitationsCount;
+  int outstandingPrayerCount;
+  int outstandingTelepastoringCount;
   PastoralCycle? currentPastoralCycle;
 
   HomeScreenChurch({
@@ -16,6 +18,8 @@ class HomeScreenChurch {
     required this.name,
     required this.imclTotal,
     required this.outstandingVisitationsCount,
+    required this.outstandingPrayerCount,
+    required this.outstandingTelepastoringCount,
     this.currentPastoralCycle,
   });
   factory HomeScreenChurch.fromJson(Map<String, dynamic> json) => _$HomeScreenChurchFromJson(json);

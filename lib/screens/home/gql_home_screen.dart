@@ -8,6 +8,8 @@ final getFellowshipHomeScreen = gql('''
       name
       imclTotal
       outstandingVisitationsCount
+      outstandingPrayerCount
+      outstandingTelepastoringCount
       currentPastoralCycle {
         id
         typename
@@ -27,6 +29,8 @@ final getBacentaHomeScreen = gql('''
       name
       imclTotal
       outstandingVisitationsCount
+      outstandingPrayerCount
+      outstandingTelepastoringCount
       currentPastoralCycle {
         id
         typename

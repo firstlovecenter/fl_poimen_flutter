@@ -124,8 +124,8 @@ class HomeScreenBody extends StatelessWidget {
           ),
           imclLevels(churchLevel, church.imclTotal),
           outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
-          outstandingPrayerLevels(churchLevel, 3),
-          outstandingTelepastoringLevels(churchLevel, 5)
+          outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount),
+          outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount)
         ],
       ),
     );
