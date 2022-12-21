@@ -8,4 +8,4 @@ const refreshTokenKey = 'refresh_token';
 
 // Cloudinary Image Presets
 const membershipAttendancePreset = String.fromEnvironment('CLOUDINARY_MEMBER_ATTENDANCE_PRESET');
-const visitationReportPreset = String.fromEnvironment('CLOUDINARY_MEMBER_ATTENDANCE_PRESET');
+const visitationReportPreset = String.fromEnvironment('CLOUDINARY_VISITATION_REPORT_PRESET');
