@@ -194,7 +194,7 @@ Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingT
     text: 'Telepastoring Calls',
     icon: FontAwesomeIcons.phone,
     navKey: 'outstanding-telepastoring',
-    route: '/fellowship/outstanding-telepastoring',
+    route: '/${level.lowerCase}/outstanding-telepastoring',
     alertNumber: outstandingTelepastoringTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
