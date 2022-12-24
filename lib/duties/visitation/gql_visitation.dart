@@ -21,9 +21,51 @@ final getFellowshipOutstandingVisitations = gql('''
   }
 ''');
 
+final getBacentaOutstandingVisitations = gql('''
+ query getBacentaOutstandingVisitations(\$id: ID!) {
+    bacentas(where: { id: \$id }) {
+      id
+      typename
+      name
+      completedVisitationsCount
+      outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final getFellowshipCompletedVisitations = gql('''
  query getFellowshipCompletedVisitations(\$id: ID!) {
     fellowships(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingVisitationsCount
+      completedVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final getBacentaCompletedVisitations = gql('''
+ query getBacentaCompletedVisitations(\$id: ID!) {
+    bacentas(where: { id: \$id }) {
       id
       typename
       name

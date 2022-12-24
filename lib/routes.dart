@@ -2,6 +2,7 @@ import 'package:poimen/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/duties/telepastoring/fellowship_completed_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/fellowship_outstanding_telepastoring.dart';
+import 'package:poimen/duties/visitation/bacenta_outstanding_visitations.dart';
 import 'package:poimen/duties/visitation/fellowship_completed_visitations.dart';
 import 'package:poimen/duties/visitation/fellowship_outstanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
@@ -77,6 +78,8 @@ var appRoutes = {
 
   '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
   '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),
+  '/bacenta/outstanding-visitation': (context) => const BacentaOutstandingVisitationScreen(),
+  // '/bacenta/completed-visitation': (context) => const BacentaCompletedVisitationScreen(),
 
   '/fellowship/outstanding-telepastoring': (context) =>
       const FellowshipOutstandingTelepastoringScreen(),

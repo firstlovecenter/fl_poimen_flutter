@@ -146,7 +146,7 @@ Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisi
     text: 'Visitations',
     icon: FontAwesomeIcons.doorOpen,
     navKey: 'outstanding-visitation',
-    route: '/fellowship/outstanding-visitation',
+    route: '/${level.lowerCase}/outstanding-visitation',
     alertNumber: outstandingVisitationTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
