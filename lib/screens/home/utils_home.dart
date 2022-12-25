@@ -94,7 +94,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
   ChurchString level = ChurchString(churchLevel.name);
 
   return HomePageButton(
-    text: 'imcl Total',
+    text: 'IMCL Total',
     icon: FontAwesomeIcons.personCircleQuestion,
     navKey: 'imcl-total',
     route: '#',
