@@ -48,7 +48,10 @@ final getConstituencyHomeScreen = gql('''
       id
       typename
       name
-      imclTotal
+       imclTotal
+      outstandingVisitationsCount
+      outstandingPrayerCount
+      outstandingTelepastoringCount
       currentPastoralCycle {
         id
         typename
@@ -84,7 +87,10 @@ final getCouncilHomeScreen = gql('''
       id
       typename
       name
-      imclTotal
+       imclTotal
+      outstandingVisitationsCount
+      outstandingPrayerCount
+      outstandingTelepastoringCount
       currentPastoralCycle {
         id
         typename
