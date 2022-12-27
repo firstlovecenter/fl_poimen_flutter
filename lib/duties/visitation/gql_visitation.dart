@@ -42,6 +42,27 @@ final getBacentaOutstandingVisitations = gql('''
   }
 ''');
 
+final getConstituencyOutstandingVisitations = gql('''
+ query getConstituencyOutstandingVisitations(\$id: ID!) {
+    constituencies(where: { id: \$id }) {
+      id
+      typename
+      name
+      completedVisitationsCount
+      outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final getFellowshipCompletedVisitations = gql('''
  query getFellowshipCompletedVisitations(\$id: ID!) {
     fellowships(where: { id: \$id }) {
