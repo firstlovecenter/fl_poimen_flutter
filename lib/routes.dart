@@ -1,11 +1,15 @@
 import 'package:poimen/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/duties/telepastoring/bacenta_completed_telepastoring.dart';
+import 'package:poimen/duties/telepastoring/bacenta_outstanding_telepastoring%20copy.dart';
 import 'package:poimen/duties/telepastoring/bacenta_outstanding_telepastoring.dart';
+import 'package:poimen/duties/telepastoring/constituency_completed_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/fellowship_completed_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/fellowship_outstanding_telepastoring.dart';
 import 'package:poimen/duties/visitation/bacenta_completed_visitations.dart';
 import 'package:poimen/duties/visitation/bacenta_outstanding_visitations.dart';
+import 'package:poimen/duties/visitation/constituency_completed_visitations.dart';
+import 'package:poimen/duties/visitation/constituency_outstanding_visitations.dart';
 import 'package:poimen/duties/visitation/fellowship_completed_visitations.dart';
 import 'package:poimen/duties/visitation/fellowship_outstanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
@@ -83,6 +87,9 @@ var appRoutes = {
   '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),
   '/bacenta/outstanding-visitation': (context) => const BacentaOutstandingVisitationScreen(),
   '/bacenta/completed-visitation': (context) => const BacentaCompletedVisitationScreen(),
+  '/constituency/outstanding-visitation': (context) =>
+      const ConstituencyOutstandingVisitationScreen(),
+  '/constituency/completed-visitation': (context) => const ConstituencyCompletedVisitationScreen(),
 
   '/fellowship/outstanding-telepastoring': (context) =>
       const FellowshipOutstandingTelepastoringScreen(),
@@ -90,6 +97,10 @@ var appRoutes = {
       const FellowshipCompletedTelepastoringScreen(),
   '/bacenta/outstanding-telepastoring': (context) => const BacentaOutstandingTelepastoringScreen(),
   '/bacenta/completed-telepastoring': (context) => const BacentaCompletedTelepastoringScreen(),
+  '/constituency/outstanding-telepastoring': (context) =>
+      const ConstituencyOutstandingTelepastoringScreen(),
+  '/constituency/completed-telepastoring': (context) =>
+      const ConstituencyCompletedTelepastoringScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens

@@ -110,13 +110,5 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
             'navKey': 'outstanding-telepastoring'
           }
         : null,
-    _higherChurches.contains(churchLevel)
-        ? {
-            'title': 'Defaulters',
-            'icon': FontAwesomeIcons.userXmark,
-            'route': '/$levelForUrl/attendance-defaulters',
-            'navKey': 'attendance-defaulters'
-          }
-        : null,
   ];
 }

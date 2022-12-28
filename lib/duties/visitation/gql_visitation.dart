@@ -105,6 +105,27 @@ final getBacentaCompletedVisitations = gql('''
   }
 ''');
 
+final getConstituencyCompletedVisitations = gql('''
+ query getConstituencyCompletedVisitations(\$id: ID!) {
+    constituencies(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingVisitationsCount
+      completedVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final logVisitationActivity = gql('''
 mutation LogVisitationActivity(
     \$latitude: Float!
