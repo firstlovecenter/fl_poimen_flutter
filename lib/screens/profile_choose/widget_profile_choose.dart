@@ -63,6 +63,7 @@ class ProfileChooseWidget extends StatelessWidget {
               ],
             ),
           ),
+          const Padding(padding: EdgeInsets.all(8)),
           AuthButton(
               text: 'Sign Out',
               onPressed: () {
