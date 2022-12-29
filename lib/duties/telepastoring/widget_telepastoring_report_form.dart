@@ -136,6 +136,18 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
 
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text(
+                                  'Submitting...',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                backgroundColor: PoimenTheme.good,
+                              ),
+                            );
+
                             reportMutation.runMutation({
                               'latitude': location.latitude,
                               'longitude': location.longitude,
@@ -145,10 +157,6 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                               'memberId': widget.member.id,
                               'cycleId': cycle.id
                             });
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
                           }
                         },
                         child: const Text('Submit'),

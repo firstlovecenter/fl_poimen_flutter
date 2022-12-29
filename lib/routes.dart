@@ -1,7 +1,7 @@
 import 'package:poimen/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/duties/telepastoring/bacenta_completed_telepastoring.dart';
-import 'package:poimen/duties/telepastoring/bacenta_outstanding_telepastoring%20copy.dart';
+import 'package:poimen/duties/telepastoring/constituency_outstanding_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/bacenta_outstanding_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/constituency_completed_telepastoring.dart';
 import 'package:poimen/duties/telepastoring/fellowship_completed_telepastoring.dart';

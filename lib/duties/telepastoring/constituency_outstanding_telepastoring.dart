@@ -24,7 +24,8 @@ class ConstituencyOutstandingTelepastoringScreen extends StatelessWidget {
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency = ChurchForOutstandingTelepastoringList.fromJson(data?['constituencies'][0]);
+        final constituency =
+            ChurchForOutstandingTelepastoringList.fromJson(data?['constituencies'][0]);
 
         body = ChurchOutstandingTelepastoringList(church: constituency);
 
