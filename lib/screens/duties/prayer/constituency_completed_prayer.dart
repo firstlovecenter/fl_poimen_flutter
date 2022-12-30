@@ -20,12 +20,11 @@ class ConstituencyCompletedPrayerScreen extends StatelessWidget {
       query: getConstituencyCompletedPrayer,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Completed Prayers',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 3),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency =
-            ChurchForCompletedPrayerList.fromJson(data?['constituencies'][0]);
+        final constituency = ChurchForCompletedPrayerList.fromJson(data?['constituencies'][0]);
 
         body = ChurchCompletedPrayerList(church: constituency);
 

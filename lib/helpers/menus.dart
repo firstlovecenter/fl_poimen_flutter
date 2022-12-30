@@ -73,7 +73,6 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.fellowship,
-      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)
@@ -86,7 +85,6 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.fellowship,
-      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)
@@ -99,7 +97,6 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.fellowship,
-      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)

@@ -20,7 +20,7 @@ class FellowshipOutstandingPrayerScreen extends StatelessWidget {
       query: getFellowshipOutstandingPrayer,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship Outstanding Prayers',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 4),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 3),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
