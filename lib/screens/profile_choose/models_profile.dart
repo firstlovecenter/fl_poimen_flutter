@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'models_profile.g.dart';
 
-
-
 @JsonSerializable()
 class ProfileChurch {
   String id;
@@ -25,7 +23,6 @@ class Profile {
   String lastName;
   String pictureUrl;
   List<ProfileChurch> leadsFellowship;
-  List<ProfileChurch> leadsBacenta;
   List<ProfileChurch> leadsConstituency;
   List<ProfileChurch> leadsSonta;
   List<ProfileChurch> leadsCouncil;
@@ -39,7 +36,6 @@ class Profile {
     required this.lastName,
     required this.pictureUrl,
     required this.leadsFellowship,
-    required this.leadsBacenta,
     required this.leadsConstituency,
     required this.leadsSonta,
     required this.leadsCouncil,

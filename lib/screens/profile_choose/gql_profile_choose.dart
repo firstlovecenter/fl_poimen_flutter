@@ -13,11 +13,6 @@ final getUserRoles = gql('''
         typename
         name
       }
-      leadsBacenta {
-        id
-        typename
-        name
-      }
       leadsConstituency {
         id
         typename
