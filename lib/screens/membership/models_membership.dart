@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:poimen/duties/imcl/models_imcl.dart';
+import 'package:poimen/screens/duties/imcl/models_imcl.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 part 'models_membership.g.dart';

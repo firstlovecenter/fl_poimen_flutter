@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/duties/visitation/gql_visitation.dart';
+import 'package:poimen/screens/duties/visitation/gql_visitation.dart';
 import 'package:poimen/helpers/constants.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';

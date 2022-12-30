@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/duties/visitation/gql_visitation.dart';
-import 'package:poimen/duties/visitation/models_visitation.dart';
-import 'package:poimen/duties/visitation/widget_outstanding_visitation_list.dart';
+import 'package:poimen/screens/duties/visitation/gql_visitation.dart';
+import 'package:poimen/screens/duties/visitation/models_visitation.dart';
+import 'package:poimen/screens/duties/visitation/widget_outstanding_visitation_list.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';

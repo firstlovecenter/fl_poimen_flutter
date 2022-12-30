@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/duties/imcl/gql_imcls.dart';
-import 'package:poimen/duties/imcl/models_imcl.dart';
-import 'package:poimen/duties/imcl/widget_imcl_list.dart';
+import 'package:poimen/screens/duties/imcl/gql_imcls.dart';
+import 'package:poimen/screens/duties/imcl/models_imcl.dart';
+import 'package:poimen/screens/duties/imcl/widget_imcl_list.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/services/gql_query_container.dart';

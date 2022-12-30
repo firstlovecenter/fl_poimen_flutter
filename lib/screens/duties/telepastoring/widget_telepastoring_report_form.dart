@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/duties/telepastoring/gql_telepastoring.dart';
+import 'package:poimen/screens/duties/telepastoring/gql_telepastoring.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';

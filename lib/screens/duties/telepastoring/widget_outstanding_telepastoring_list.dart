@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:poimen/duties/telepastoring/models_telepastoring.dart';
-import 'package:poimen/duties/telepastoring/widget_telepastoring_report_form.dart';
+import 'package:poimen/screens/duties/telepastoring/models_telepastoring.dart';
+import 'package:poimen/screens/duties/telepastoring/widget_telepastoring_report_form.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';

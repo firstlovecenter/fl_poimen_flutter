@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:poimen/duties/visitation/models_visitation.dart';
+import 'package:poimen/screens/duties/telepastoring/models_telepastoring.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
@@ -10,10 +10,10 @@ import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 
-class ChurchCompletedVisitationList extends StatelessWidget {
-  const ChurchCompletedVisitationList({Key? key, required this.church}) : super(key: key);
+class ChurchCompletedTelepastoringList extends StatelessWidget {
+  const ChurchCompletedTelepastoringList({Key? key, required this.church}) : super(key: key);
 
-  final ChurchForCompletedVisitationList church;
+  final ChurchForCompletedTelepastoringList church;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,14 @@ class ChurchCompletedVisitationList extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      '/${church.typename.toLowerCase()}/outstanding-visitation',
+                      '/${church.typename.toLowerCase()}/outstanding-telepastoring',
                     );
                   },
-                  leading: const Icon(FontAwesomeIcons.doorOpen),
+                  leading: const Icon(FontAwesomeIcons.phone),
                   trailing: TrailingCardAlertNumber(
-                      number: church.outstandingVisitationsCount,
+                      number: church.outstandingTelepastoringCount,
                       variant: TrailingCardAlertNumberVariant.red),
-                  title: const Text('Visits Remaining'),
+                  title: const Text('Calls Remaining'),
                 ),
               ],
             ),
@@ -60,17 +60,17 @@ class ChurchCompletedVisitationList extends StatelessWidget {
                     color: Colors.green,
                   ),
                   trailing: TrailingCardAlertNumber(
-                    number: church.completedVisitations.length,
+                    number: church.completedTelepastoring.length,
                     variant: TrailingCardAlertNumberVariant.green,
                   ),
-                  title: const Text('Visits Completed'),
+                  title: const Text('Calls Completed'),
                 ),
               ],
             ),
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.completedVisitations.map((member) {
+        ...noDataChecker(church.completedTelepastoring.map((member) {
           return _memberTile(context, member);
         }).toList()),
       ]),
@@ -78,7 +78,7 @@ class ChurchCompletedVisitationList extends StatelessWidget {
   }
 }
 
-Column _memberTile(BuildContext context, CompletedVisitationForList member) {
+Column _memberTile(BuildContext context, CompletedTelepastoringForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
