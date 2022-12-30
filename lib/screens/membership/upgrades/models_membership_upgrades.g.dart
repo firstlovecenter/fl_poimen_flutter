@@ -6,34 +6,33 @@ part of 'models_membership_upgrades.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) {
-  return MemberWithUpgrades(
-    hasHolyGhostBaptism: json['hasHolyGhostBaptism'] as bool,
-    hasWaterBaptism: json['hasWaterBaptism'] as bool,
-    graduatedUnderstandingSchools:
-        (json['graduatedUnderstandingSchools'] as List<dynamic>)
-            .map((e) => e as String)
-            .toList(),
-    hasAudioCollections: json['hasAudioCollections'] as bool,
-    hasBibleTranslations: json['hasBibleTranslations'] as bool,
-    hasCampAttendance: json['hasCampAttendance'] as bool,
-    hasHolyGhostBaptismDate: json['hasHolyGhostBaptismDate'] == null
-        ? null
-        : DateTime.parse(json['hasHolyGhostBaptismDate'] as String),
-    hasWaterBaptismDate: json['hasWaterBaptismDate'] == null
-        ? null
-        : DateTime.parse(json['hasWaterBaptismDate'] as String),
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..status = json['status'] as String?
-    ..lost = json['lost'] as bool?
-    ..firstName = json['firstName'] as String
-    ..lastName = json['lastName'] as String
-    ..pictureUrl = json['pictureUrl'] as String
-    ..phoneNumber = json['phoneNumber'] as String?
-    ..whatsappNumber = json['whatsappNumber'] as String?;
-}
+MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) =>
+    MemberWithUpgrades(
+      hasHolyGhostBaptism: json['hasHolyGhostBaptism'] as bool,
+      hasWaterBaptism: json['hasWaterBaptism'] as bool,
+      graduatedUnderstandingSchools:
+          (json['graduatedUnderstandingSchools'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
+      hasAudioCollections: json['hasAudioCollections'] as bool,
+      hasBibleTranslations: json['hasBibleTranslations'] as bool,
+      hasCampAttendance: json['hasCampAttendance'] as bool,
+      hasHolyGhostBaptismDate: json['hasHolyGhostBaptismDate'] == null
+          ? null
+          : DateTime.parse(json['hasHolyGhostBaptismDate'] as String),
+      hasWaterBaptismDate: json['hasWaterBaptismDate'] == null
+          ? null
+          : DateTime.parse(json['hasWaterBaptismDate'] as String),
+    )
+      ..id = json['id'] as String
+      ..typename = json['typename'] as String
+      ..status = json['status'] as String?
+      ..lost = json['lost'] as bool?
+      ..firstName = json['firstName'] as String
+      ..lastName = json['lastName'] as String
+      ..pictureUrl = json['pictureUrl'] as String
+      ..phoneNumber = json['phoneNumber'] as String?
+      ..whatsappNumber = json['whatsappNumber'] as String?;
 
 Map<String, dynamic> _$MemberWithUpgradesToJson(MemberWithUpgrades instance) =>
     <String, dynamic>{

@@ -170,7 +170,7 @@ Widget outstandingPrayerLevels(ChurchLevel churchLevel, int? outstandingPrayerTo
     text: 'Prayer',
     icon: FontAwesomeIcons.personPraying,
     navKey: 'outstanding-prayer',
-    route: '#',
+    route: '/${level.lowerCase}/outstanding-prayer',
     alertNumber: outstandingPrayerTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );

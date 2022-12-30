@@ -6,19 +6,17 @@ part of 'auth0_user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Auth0User _$Auth0UserFromJson(Map<String, dynamic> json) {
-  return Auth0User(
-    nickname: json['nickname'] as String,
-    name: json['name'] as String,
-    email: json['email'] as String,
-    picture: json['picture'] as String,
-    updatedAt: json['updated_at'] as String,
-    sub: json['sub'] as String,
-    roles: (json['https://flcadmin.netlify.app/roles'] as List<dynamic>)
-        .map((e) => e as String)
-        .toList(),
-  );
-}
+Auth0User _$Auth0UserFromJson(Map<String, dynamic> json) => Auth0User(
+      nickname: json['nickname'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      picture: json['picture'] as String,
+      updatedAt: json['updated_at'] as String,
+      sub: json['sub'] as String,
+      roles: (json['https://flcadmin.netlify.app/roles'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
 
 Map<String, dynamic> _$Auth0UserToJson(Auth0User instance) => <String, dynamic>{
       'nickname': instance.nickname,

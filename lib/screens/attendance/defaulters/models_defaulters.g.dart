@@ -8,28 +8,27 @@ part of 'models_defaulters.dart';
 
 ChurchBySubChurchForAttendanceDefaulters
     _$ChurchBySubChurchForAttendanceDefaultersFromJson(
-        Map<String, dynamic> json) {
-  return ChurchBySubChurchForAttendanceDefaulters(
-    constituencies: (json['constituencies'] as List<dynamic>?)
-        ?.map((e) =>
-            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    councils: (json['councils'] as List<dynamic>?)
-        ?.map((e) =>
-            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    streams: (json['streams'] as List<dynamic>?)
-        ?.map((e) =>
-            ChurchForAttendanceDefaulters.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..name = json['name'] as String
-    ..leader = json['leader'] == null
-        ? null
-        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
-}
+            Map<String, dynamic> json) =>
+        ChurchBySubChurchForAttendanceDefaulters(
+          constituencies: (json['constituencies'] as List<dynamic>?)
+              ?.map((e) => ChurchForAttendanceDefaulters.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          councils: (json['councils'] as List<dynamic>?)
+              ?.map((e) => ChurchForAttendanceDefaulters.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          streams: (json['streams'] as List<dynamic>?)
+              ?.map((e) => ChurchForAttendanceDefaulters.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+        )
+          ..id = json['id'] as String
+          ..typename = json['typename'] as String
+          ..name = json['name'] as String
+          ..leader = json['leader'] == null
+              ? null
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchBySubChurchForAttendanceDefaultersToJson(
         ChurchBySubChurchForAttendanceDefaulters instance) =>
@@ -44,27 +43,26 @@ Map<String, dynamic> _$ChurchBySubChurchForAttendanceDefaultersToJson(
     };
 
 ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
-    Map<String, dynamic> json) {
-  return ChurchForAttendanceDefaulters(
-    fellowshipAttendanceDefaultersCount:
-        json['fellowshipAttendanceDefaultersCount'] as int,
-    bacentaAttendanceDefaultersCount:
-        json['bacentaAttendanceDefaultersCount'] as int,
-    bacentaCount: json['bacentaCount'] as int?,
-    constituencyCount: json['constituencyCount'] as int?,
-    councilCount: json['councilCount'] as int?,
-    streamCount: json['streamCount'] as int?,
-    fellowshipServicesThisWeekCount:
-        json['fellowshipServicesThisWeekCount'] as int?,
-    bacentaBussingThisWeekCount: json['bacentaBussingThisWeekCount'] as int?,
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..name = json['name'] as String
-    ..leader = json['leader'] == null
-        ? null
-        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
-}
+        Map<String, dynamic> json) =>
+    ChurchForAttendanceDefaulters(
+      fellowshipAttendanceDefaultersCount:
+          json['fellowshipAttendanceDefaultersCount'] as int,
+      bacentaAttendanceDefaultersCount:
+          json['bacentaAttendanceDefaultersCount'] as int,
+      bacentaCount: json['bacentaCount'] as int?,
+      constituencyCount: json['constituencyCount'] as int?,
+      councilCount: json['councilCount'] as int?,
+      streamCount: json['streamCount'] as int?,
+      fellowshipServicesThisWeekCount:
+          json['fellowshipServicesThisWeekCount'] as int?,
+      bacentaBussingThisWeekCount: json['bacentaBussingThisWeekCount'] as int?,
+    )
+      ..id = json['id'] as String
+      ..typename = json['typename'] as String
+      ..name = json['name'] as String
+      ..leader = json['leader'] == null
+          ? null
+          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
         ChurchForAttendanceDefaulters instance) =>
@@ -88,20 +86,19 @@ Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
 
 ChurchForFellowshipAttendanceDefaultersList
     _$ChurchForFellowshipAttendanceDefaultersListFromJson(
-        Map<String, dynamic> json) {
-  return ChurchForFellowshipAttendanceDefaultersList(
-    fellowshipAttendanceDefaulters:
-        (json['fellowshipAttendanceDefaulters'] as List<dynamic>)
-            .map((e) => Church.fromJson(e as Map<String, dynamic>))
-            .toList(),
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..name = json['name'] as String
-    ..leader = json['leader'] == null
-        ? null
-        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
-}
+            Map<String, dynamic> json) =>
+        ChurchForFellowshipAttendanceDefaultersList(
+          fellowshipAttendanceDefaulters:
+              (json['fellowshipAttendanceDefaulters'] as List<dynamic>)
+                  .map((e) => Church.fromJson(e as Map<String, dynamic>))
+                  .toList(),
+        )
+          ..id = json['id'] as String
+          ..typename = json['typename'] as String
+          ..name = json['name'] as String
+          ..leader = json['leader'] == null
+              ? null
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForFellowshipAttendanceDefaultersListToJson(
         ChurchForFellowshipAttendanceDefaultersList instance) =>
@@ -115,20 +112,19 @@ Map<String, dynamic> _$ChurchForFellowshipAttendanceDefaultersListToJson(
 
 ChurchForBacentaAttendanceDefaultersList
     _$ChurchForBacentaAttendanceDefaultersListFromJson(
-        Map<String, dynamic> json) {
-  return ChurchForBacentaAttendanceDefaultersList(
-    bacentaAttendanceDefaulters:
-        (json['bacentaAttendanceDefaulters'] as List<dynamic>)
-            .map((e) => Church.fromJson(e as Map<String, dynamic>))
-            .toList(),
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..name = json['name'] as String
-    ..leader = json['leader'] == null
-        ? null
-        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
-}
+            Map<String, dynamic> json) =>
+        ChurchForBacentaAttendanceDefaultersList(
+          bacentaAttendanceDefaulters:
+              (json['bacentaAttendanceDefaulters'] as List<dynamic>)
+                  .map((e) => Church.fromJson(e as Map<String, dynamic>))
+                  .toList(),
+        )
+          ..id = json['id'] as String
+          ..typename = json['typename'] as String
+          ..name = json['name'] as String
+          ..leader = json['leader'] == null
+              ? null
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForBacentaAttendanceDefaultersListToJson(
         ChurchForBacentaAttendanceDefaultersList instance) =>

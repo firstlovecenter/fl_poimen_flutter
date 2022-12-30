@@ -6,19 +6,18 @@ part of 'models_idl.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChurchForIdlList _$ChurchForIdlListFromJson(Map<String, dynamic> json) {
-  return ChurchForIdlList(
-    idls: (json['idls'] as List<dynamic>)
-        .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  )
-    ..id = json['id'] as String
-    ..typename = json['typename'] as String
-    ..name = json['name'] as String
-    ..leader = json['leader'] == null
-        ? null
-        : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
-}
+ChurchForIdlList _$ChurchForIdlListFromJson(Map<String, dynamic> json) =>
+    ChurchForIdlList(
+      idls: (json['idls'] as List<dynamic>)
+          .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..id = json['id'] as String
+      ..typename = json['typename'] as String
+      ..name = json['name'] as String
+      ..leader = json['leader'] == null
+          ? null
+          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForIdlListToJson(ChurchForIdlList instance) =>
     <String, dynamic>{

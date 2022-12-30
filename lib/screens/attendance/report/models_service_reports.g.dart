@@ -6,25 +6,24 @@ part of 'models_service_reports.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) {
-  return ServicesForReport(
-    id: json['id'] as String,
-    typename: json['typename'] as String,
-    serviceDate:
-        TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
-    membersPicture: (json['membersPicture'] as List<dynamic>)
-        .map((e) => e as String)
-        .toList(),
-    membersPresentFromFellowship:
-        (json['membersPresentFromFellowship'] as List<dynamic>)
-            .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-            .toList(),
-    membersAbsentFromFellowship:
-        (json['membersAbsentFromFellowship'] as List<dynamic>)
-            .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
-            .toList(),
-  );
-}
+ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) =>
+    ServicesForReport(
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      serviceDate:
+          TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+      membersPicture: (json['membersPicture'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      membersPresentFromFellowship:
+          (json['membersPresentFromFellowship'] as List<dynamic>)
+              .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      membersAbsentFromFellowship:
+          (json['membersAbsentFromFellowship'] as List<dynamic>)
+              .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    );
 
 Map<String, dynamic> _$ServicesForReportToJson(ServicesForReport instance) =>
     <String, dynamic>{

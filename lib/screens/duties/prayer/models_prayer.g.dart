@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'models_visitation.dart';
+part of 'models_prayer.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
+OutstandingPrayerForList _$OutstandingPrayerForListFromJson(
         Map<String, dynamic> json) =>
-    OutstandingVisitationForList(
+    OutstandingPrayerForList(
       id: json['id'] as String,
       typename: json['typename'] as String,
       firstName: json['firstName'] as String,
@@ -19,8 +19,8 @@ OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
       whatsappNumber: json['whatsappNumber'] as String?,
     )..lost = json['lost'] as bool?;
 
-Map<String, dynamic> _$OutstandingVisitationForListToJson(
-        OutstandingVisitationForList instance) =>
+Map<String, dynamic> _$OutstandingPrayerForListToJson(
+        OutstandingPrayerForList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
@@ -33,9 +33,9 @@ Map<String, dynamic> _$OutstandingVisitationForListToJson(
       'whatsappNumber': instance.whatsappNumber,
     };
 
-CompletedVisitationForList _$CompletedVisitationForListFromJson(
+CompletedPrayerForList _$CompletedPrayerForListFromJson(
         Map<String, dynamic> json) =>
-    CompletedVisitationForList(
+    CompletedPrayerForList(
       id: json['id'] as String,
       typename: json['typename'] as String,
       firstName: json['firstName'] as String,
@@ -46,8 +46,8 @@ CompletedVisitationForList _$CompletedVisitationForListFromJson(
       whatsappNumber: json['whatsappNumber'] as String?,
     )..lost = json['lost'] as bool?;
 
-Map<String, dynamic> _$CompletedVisitationForListToJson(
-        CompletedVisitationForList instance) =>
+Map<String, dynamic> _$CompletedPrayerForListToJson(
+        CompletedPrayerForList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
@@ -60,14 +60,14 @@ Map<String, dynamic> _$CompletedVisitationForListToJson(
       'whatsappNumber': instance.whatsappNumber,
     };
 
-ChurchForOutstandingVisitationList _$ChurchForOutstandingVisitationListFromJson(
+ChurchForOutstandingPrayerList _$ChurchForOutstandingPrayerListFromJson(
         Map<String, dynamic> json) =>
-    ChurchForOutstandingVisitationList(
-      outstandingVisitations: (json['outstandingVisitations'] as List<dynamic>)
+    ChurchForOutstandingPrayerList(
+      outstandingPrayer: (json['outstandingPrayer'] as List<dynamic>)
           .map((e) =>
-              OutstandingVisitationForList.fromJson(e as Map<String, dynamic>))
+              OutstandingPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      completedVisitationsCount: json['completedVisitationsCount'] as int,
+      completedPrayerCount: json['completedPrayerCount'] as int,
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -76,25 +76,25 @@ ChurchForOutstandingVisitationList _$ChurchForOutstandingVisitationListFromJson(
           ? null
           : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$ChurchForOutstandingVisitationListToJson(
-        ChurchForOutstandingVisitationList instance) =>
+Map<String, dynamic> _$ChurchForOutstandingPrayerListToJson(
+        ChurchForOutstandingPrayerList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
-      'completedVisitationsCount': instance.completedVisitationsCount,
-      'outstandingVisitations': instance.outstandingVisitations,
+      'completedPrayerCount': instance.completedPrayerCount,
+      'outstandingPrayer': instance.outstandingPrayer,
     };
 
-ChurchForCompletedVisitationList _$ChurchForCompletedVisitationListFromJson(
+ChurchForCompletedPrayerList _$ChurchForCompletedPrayerListFromJson(
         Map<String, dynamic> json) =>
-    ChurchForCompletedVisitationList(
-      completedVisitations: (json['completedVisitations'] as List<dynamic>)
-          .map((e) =>
-              CompletedVisitationForList.fromJson(e as Map<String, dynamic>))
+    ChurchForCompletedPrayerList(
+      completedPrayer: (json['completedPrayer'] as List<dynamic>)
+          .map(
+              (e) => CompletedPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      outstandingVisitationsCount: json['outstandingVisitationsCount'] as int,
+      outstandingPrayerCount: json['outstandingPrayerCount'] as int,
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -103,13 +103,13 @@ ChurchForCompletedVisitationList _$ChurchForCompletedVisitationListFromJson(
           ? null
           : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$ChurchForCompletedVisitationListToJson(
-        ChurchForCompletedVisitationList instance) =>
+Map<String, dynamic> _$ChurchForCompletedPrayerListToJson(
+        ChurchForCompletedPrayerList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
-      'outstandingVisitationsCount': instance.outstandingVisitationsCount,
-      'completedVisitations': instance.completedVisitations,
+      'outstandingPrayerCount': instance.outstandingPrayerCount,
+      'completedPrayer': instance.completedPrayer,
     };

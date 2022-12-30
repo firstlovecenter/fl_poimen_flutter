@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/screens/duties/telepastoring/gql_telepastoring.dart';
+import 'package:poimen/screens/duties/prayer/gql_prayer.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
@@ -11,29 +11,28 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:provider/provider.dart';
 
-class OutstandingTelepastoringReportForm extends StatefulHookWidget {
-  const OutstandingTelepastoringReportForm({Key? key, required this.member}) : super(key: key);
+class OutstandingPrayerReportForm extends StatefulHookWidget {
+  const OutstandingPrayerReportForm({Key? key, required this.member}) : super(key: key);
 
   final MemberForList member;
 
   @override
-  State<OutstandingTelepastoringReportForm> createState() =>
-      _OutstandingTelepastoringReportFormState();
+  State<OutstandingPrayerReportForm> createState() => _OutstandingPrayerReportFormState();
 }
 
-class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepastoringReportForm> {
+class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    String telepastoringReport = '';
+    String prayerReport = '';
     var churchState = Provider.of<SharedState>(context);
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 
     final reportMutation = useMutation(
       MutationOptions(
-        document: logTelepastoringActivity,
+        document: logPrayerActivity,
 
         // ignore: void_checks
         update: (cache, result) {
@@ -71,7 +70,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Text('Telepastoring Report', style: PoimenTheme.heading2),
+                    Text('Prayer Report', style: PoimenTheme.heading2),
                     const Padding(padding: EdgeInsets.all(15.0)),
                     Center(
                       child: Hero(
@@ -90,11 +89,11 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                     TextFormField(
                       maxLines: 4,
                       decoration: const InputDecoration(
-                        labelText: 'Comment',
-                        hintText: 'What is your report on this telepastoring?',
+                        labelText: 'What did you pray about?',
+                        hintText: 'What is your report on this prayer?',
                       ),
                       onSaved: (String? value) {
-                        telepastoringReport = value ?? '';
+                        prayerReport = value ?? '';
                       },
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
@@ -133,7 +132,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                             );
 
                             reportMutation.runMutation({
-                              'comment': telepastoringReport,
+                              'comment': prayerReport,
                               'roleLevel': level,
                               'memberId': widget.member.id,
                               'cycleId': cycle.id

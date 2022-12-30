@@ -1,5 +1,9 @@
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
+import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
+import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
+import 'package:poimen/screens/duties/prayer/fellowship_completed_prayer.dart';
+import 'package:poimen/screens/duties/prayer/fellowship_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_completed_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/constituency_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_outstanding_telepastoring.dart';
@@ -101,6 +105,11 @@ var appRoutes = {
       const ConstituencyOutstandingTelepastoringScreen(),
   '/constituency/completed-telepastoring': (context) =>
       const ConstituencyCompletedTelepastoringScreen(),
+
+  '/fellowship/outstanding-prayer': (context) => const FellowshipOutstandingPrayerScreen(),
+  '/fellowship/completed-prayer': (context) => const FellowshipCompletedPrayerScreen(),
+  '/constituency/outstanding-prayer': (context) => const ConstituencyOutstandingPrayerScreen(),
+  '/constituency/completed-prayer': (context) => const ConstituencyCompletedPrayerScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens

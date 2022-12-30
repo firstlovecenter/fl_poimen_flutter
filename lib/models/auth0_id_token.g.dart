@@ -6,26 +6,24 @@ part of 'auth0_id_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Auth0IdToken _$Auth0IdTokenFromJson(Map<String, dynamic> json) {
-  return Auth0IdToken(
-    nickname: json['nickname'] as String,
-    name: json['name'] as String,
-    given_name: json['given_name'] as String,
-    family_name: json['family_name'] as String,
-    email: json['email'] as String,
-    picture: json['picture'] as String,
-    updatedAt: json['updated_at'] as String,
-    iss: json['iss'] as String,
-    sub: json['sub'] as String,
-    aud: json['aud'] as String,
-    iat: json['iat'] as int,
-    exp: json['exp'] as int,
-    authTime: json['auth_time'] as int?,
-    roles: (json['https://flcadmin.netlify.app/roles'] as List<dynamic>)
-        .map((e) => e as String)
-        .toList(),
-  );
-}
+Auth0IdToken _$Auth0IdTokenFromJson(Map<String, dynamic> json) => Auth0IdToken(
+      nickname: json['nickname'] as String,
+      name: json['name'] as String,
+      given_name: json['given_name'] as String,
+      family_name: json['family_name'] as String,
+      email: json['email'] as String,
+      picture: json['picture'] as String,
+      updatedAt: json['updated_at'] as String,
+      iss: json['iss'] as String,
+      sub: json['sub'] as String,
+      aud: json['aud'] as String,
+      iat: json['iat'] as int,
+      exp: json['exp'] as int,
+      authTime: json['auth_time'] as int?,
+      roles: (json['https://flcadmin.netlify.app/roles'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
 
 Map<String, dynamic> _$Auth0IdTokenToJson(Auth0IdToken instance) =>
     <String, dynamic>{
