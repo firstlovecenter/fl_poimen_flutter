@@ -36,11 +36,10 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        Widget? pageTitle = Text(widget.defaultPageTitle);
+        Widget? pageTitle = ListTile(title: Text(widget.defaultPageTitle));
         Widget body;
 
         if (result.hasException) {
-          
           body = AlertBox(
             type: AlertType.error,
             text: getGQLException(result.exception),
@@ -58,12 +57,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         return Scaffold(
           appBar: pageTitle != null
               ? AppBar(
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      pageTitle,
-                    ],
-                  ),
+                  title: pageTitle,
                 )
               : null,
           body: body,

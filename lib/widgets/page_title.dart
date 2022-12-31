@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/theme.dart';
 
@@ -17,21 +18,20 @@ class PageTitle extends StatelessWidget {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
 
-    Widget title = Text(pageTitle);
+    Widget title = ListTile(title: Text(pageTitle));
 
     if (church != null) {
-      title = Column(
-        children: [
-          Text(pageTitle),
-          Text(
-            '${church?.name} ${church?.typename}',
-            style: TextStyle(
-              fontSize: 15,
-              color: isDarkMode ? PoimenTheme.brandTextPrimary : PoimenTheme.textSecondary,
-              fontWeight: FontWeight.bold,
-            ),
-          )
-        ],
+      title = ListTile(
+        title: Text(pageTitle),
+        subtitle: Text(
+          '${church?.name} ${church?.typename}',
+          style: TextStyle(
+            fontSize: 15,
+            color: isDarkMode ? PoimenTheme.brandTextPrimary : PoimenTheme.textSecondary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        trailing: const Icon(FontAwesomeIcons.search),
       );
     }
 
