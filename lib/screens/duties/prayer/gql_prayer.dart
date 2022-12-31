@@ -137,7 +137,17 @@ mutation LogPrayerActivity(
     roleLevel: \$roleLevel, 
     memberId: \$memberId, 
     cycleId: \$cycleId) {
-    id
+     id
+     outstandingPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
   }
 }
 ''');

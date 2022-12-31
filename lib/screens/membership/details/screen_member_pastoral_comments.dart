@@ -22,7 +22,7 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
     return GQLQueryContainer(
       query: getMemberPastoralComments,
       variables: {'id': state.memberId},
-      defaultPageTitle: 'Member Pastoral Comments',
+      defaultPageTitle: 'Pastoral Comments',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data, [fetchMore]) {
         final member = MemberWithComments.fromJson(data?['members'][0]);
@@ -34,7 +34,7 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
         );
 
         var returnValues = GQLQueryContainerReturnValue(
-          pageTitle: const PageTitle(pageTitle: 'Member PastoralComments'),
+          pageTitle: const PageTitle(pageTitle: 'Pastoral Comments'),
           body: ListView(
             padding: const EdgeInsets.all(8.0),
             children: [
