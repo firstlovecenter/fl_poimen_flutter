@@ -12,10 +12,10 @@ HomeScreenChurch _$HomeScreenChurchFromJson(Map<String, dynamic> json) =>
       typename: json['typename'] as String,
       name: json['name'] as String,
       imclTotal: json['imclTotal'] as int,
-      outstandingVisitationsCount: json['outstandingVisitationsCount'] as int,
-      outstandingPrayerCount: json['outstandingPrayerCount'] as int,
+      outstandingVisitationsCount: json['outstandingVisitationsCount'] as int?,
+      outstandingPrayerCount: json['outstandingPrayerCount'] as int?,
       outstandingTelepastoringCount:
-          json['outstandingTelepastoringCount'] as int,
+          json['outstandingTelepastoringCount'] as int?,
       currentPastoralCycle: json['currentPastoralCycle'] == null
           ? null
           : PastoralCycle.fromJson(
