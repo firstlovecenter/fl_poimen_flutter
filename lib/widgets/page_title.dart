@@ -31,12 +31,15 @@ class PageTitle extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: InkWell(
-          child: const Icon(FontAwesomeIcons.magnifyingGlass),
-          onTap: () {
-            Navigator.pushNamed(context, '/search');
-          },
-        ),
+        trailing: ModalRoute.of(context)!.settings.name != '/search' &&
+                ModalRoute.of(context)!.settings.name != '/home'
+            ? InkWell(
+                child: const Icon(FontAwesomeIcons.magnifyingGlass),
+                onTap: () {
+                  Navigator.pushNamed(context, '/search');
+                },
+              )
+            : null,
       );
     }
 
