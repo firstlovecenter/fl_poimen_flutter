@@ -31,7 +31,12 @@ class PageTitle extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: const Icon(FontAwesomeIcons.search),
+        trailing: InkWell(
+          child: const Icon(FontAwesomeIcons.magnifyingGlass),
+          onTap: () {
+            Navigator.pushNamed(context, '/search');
+          },
+        ),
       );
     }
 

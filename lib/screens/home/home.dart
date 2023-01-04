@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/home/screen_home.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
+import 'package:poimen/screens/search/search_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,7 +13,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0;
-  final List<Widget> screens = [const HomeScreen(), const ProfileChooseScreen()];
+  final List<Widget> screens = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const ProfileChooseScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +30,15 @@ class _HomeState extends State<Home> {
           currentIndex: currentIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(FontAwesomeIcons.house),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_sharp),
+              icon: Icon(FontAwesomeIcons.magnifyingGlass),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.solidCircleUser),
               label: 'Profiles',
             ),
           ],
