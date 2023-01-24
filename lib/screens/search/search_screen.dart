@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
         final church = ChurchForSearchList.fromJson(data?[pluralName][0]);
 
-        body = const SearchScreenWidget();
+        body = SearchScreenWidget(query: query);
 
         return GQLQueryContainerReturnValue(
           body: body,
