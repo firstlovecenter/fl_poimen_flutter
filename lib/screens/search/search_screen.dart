@@ -32,23 +32,23 @@ class _SearchScreenState extends State<SearchScreen> {
     }
     if (church.typename == 'Bacenta') {
       pluralName = 'bacentas';
-      // query = getBacentaHomeScreen;
+      query = searchBacenta;
     }
     if (church.typename == 'Constituency') {
       pluralName = 'constituencies';
-      // query = getConstituencyHomeScreen;
+      query = searchConstituency;
     }
     if (church.typename == 'Council') {
       pluralName = 'councils';
-      // query = getCouncilHomeScreen;
+      query = searchCouncil;
     }
     if (church.typename == 'Stream') {
       pluralName = 'streams';
-      // query = getStreamHomeScreen;
+      query = searchStream;
     }
     if (church.typename == 'GatheringService') {
       pluralName = 'gatheringServices';
-      // query = getGatheringServiceHomeScreen;
+      query = searchGatheringService;
     }
 
     return Scaffold(
@@ -78,7 +78,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     onRetry: () => refetch!(),
                   );
                 } else if (result.isLoading || result.data == null) {
-                  return const CircularProgressIndicator();
+                  return Column(
+                    children: const [
+                      Padding(padding: EdgeInsets.all(50)),
+                      CircularProgressIndicator(),
+                    ],
+                  );
                 } else {
                   final church = ChurchForSearchList.fromJson(result.data?[pluralName][0]);
 
