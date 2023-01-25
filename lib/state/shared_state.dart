@@ -5,6 +5,7 @@ import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/state/enums.dart';
 
 class SharedState with ChangeNotifier {
+  String _searchKey = '';
   Role _role = Role.leaderFellowship;
   ChurchLevel _roleLevel = ChurchLevel.fellowship;
   ProfileChurch _church = ProfileChurch(
@@ -40,6 +41,7 @@ class SharedState with ChangeNotifier {
   String _serviceRecordId = '';
   String _bottomNavSelected = '';
 
+  String get searchKey => _searchKey;
   Role get role => _role;
   ChurchLevel get roleLevel => _roleLevel;
   ProfileChurch get church => _church;
@@ -57,6 +59,11 @@ class SharedState with ChangeNotifier {
 
   String get bussingRecordId => _bussingRecordId;
   String get serviceRecordId => _serviceRecordId;
+
+  set searchKey(String searchKey) {
+    _searchKey = searchKey;
+    notifyListeners();
+  }
 
   set church(ProfileChurch church) {
     _church = church;

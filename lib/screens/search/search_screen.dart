@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/search/gql_search_screen.dart';
 import 'package:poimen/screens/search/models_search.dart';
 import 'package:poimen/screens/search/widget_search_screen.dart';
-import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -48,25 +51,49 @@ class _SearchScreenState extends State<SearchScreen> {
       // query = getGatheringServiceHomeScreen;
     }
 
-    return GQLQueryContainer(
-      query: query,
-      variables: {'id': church.id, 'searchKey': 'ed'},
-      defaultPageTitle: 'Home',
-      bodyFunction: (data, [fetchMore]) {
-        Widget body;
+    return Scaffold(
+      appBar: AppBar(
+        title: PageTitle(
+          church: church,
+          pageTitle: 'Search',
+        ),
+      ),
+      body: Column(
+        children: [
+          SearchFieldWidget(query: query),
+          Query(
+              options: QueryOptions(
+                document: query,
+                variables: {'id': church.id, 'searchKey': churchState.searchKey},
+              ),
+              builder: (
+                QueryResult result, {
+                VoidCallback? refetch,
+                FetchMore? fetchMore,
+              }) {
+                if (result.hasException) {
+                  return AlertBox(
+                    type: AlertType.error,
+                    text: getGQLException(result.exception),
+                    onRetry: () => refetch!(),
+                  );
+                } else if (result.isLoading || result.data == null) {
+                  return const CircularProgressIndicator();
+                } else {
+                  final church = ChurchForSearchList.fromJson(result.data?[pluralName][0]);
 
-        final church = ChurchForSearchList.fromJson(data?[pluralName][0]);
-
-        body = SearchScreenWidget(query: query);
-
-        return GQLQueryContainerReturnValue(
-          body: body,
-          pageTitle: PageTitle(
-            church: church,
-            pageTitle: 'Search',
-          ),
-        );
-      },
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                      ...noDataChecker(church.memberSearch.map((member) {
+                        return memberTile(context, member);
+                      }).toList()),
+                    ]),
+                  );
+                }
+              })
+        ],
+      ),
     );
   }
 }
