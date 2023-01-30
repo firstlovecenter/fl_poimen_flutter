@@ -43,7 +43,7 @@ class PoimenTheme {
 
 var lightTheme = ThemeData(
   // MAIN COLORS
-  primarySwatch: Colors.deepPurple,
+  primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
   scaffoldBackgroundColor: _colorFromHex('#F0F0F0'),
   brightness: Brightness.light,
   visualDensity: VisualDensity.adaptivePlatformDensity,
