@@ -76,11 +76,11 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
-        height: 700,
+        height: 600,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: ListView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             children: [
               Form(
                 key: _formKey,
@@ -89,7 +89,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                     Text('${widget.member.firstName} ${widget.member.lastName}',
                         style: PoimenTheme.heading2),
                     Text('Visitation Report', style: PoimenTheme.heading2),
-                    const Padding(padding: EdgeInsets.all(15.0)),
+                    const Padding(padding: EdgeInsets.all(12.0)),
                     ImageUploadButton(
                       preset: visitationReportPreset,
                       setPictureUrl: setPictureUrl,
@@ -117,7 +117,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                     ),
                     const Padding(padding: EdgeInsets.all(8.0)),
                     TextFormField(
-                      maxLines: 4,
+                      maxLines: 2,
                       decoration: const InputDecoration(
                         labelText: 'Comment',
                         hintText: 'What is your report on this visitation?',
