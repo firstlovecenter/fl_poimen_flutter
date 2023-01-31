@@ -53,6 +53,7 @@ var lightTheme = ThemeData(
     headline5: TextStyle(color: PoimenTheme.brand),
   ),
   cardColor: _colorFromHex("#FDFDFD"),
+
   buttonTheme: ButtonThemeData(
     buttonColor: PoimenTheme.brand,
   ),

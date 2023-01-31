@@ -22,7 +22,8 @@ class PageTitle extends StatelessWidget {
 
     if (church != null) {
       title = ListTile(
-        title: Text(pageTitle),
+        title: Text(pageTitle,
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         subtitle: Text(
           '${church?.name} ${church?.typename}',
           style: TextStyle(

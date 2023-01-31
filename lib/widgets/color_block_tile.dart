@@ -21,6 +21,11 @@ class ColorBlockTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
+    Color tileColor = isDarkMode ? PoimenTheme.darkCardColor : PoimenTheme.lightCardColor;
+
     return ListTile(
       onTap: () {
         if (to == '' || to == null) {
@@ -45,7 +50,7 @@ class ColorBlockTile extends StatelessWidget {
       ),
       title: Text(title),
       subtitle: subtitle != null ? Text(subtitle!) : null,
-      tileColor: color ?? PoimenTheme.darkCardColor,
+      tileColor: color ?? tileColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(5.0),
