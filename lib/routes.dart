@@ -117,7 +117,7 @@ var appRoutes = {
   // Fellowship Attendance Screens
   '/servicerecord-services': (context) => const FellowshipServicesScreen(),
   '/servicerecord/attendance-ticker': (context) => const FellowshipAttendanceTickerScreen(),
-  '/fellowship/attendance-report': (context) => const FellowshipAttendanceReportScreen(),
+  '/servicerecord/attendance-report': (context) => const FellowshipAttendanceReportScreen(),
 
   // Bacenta Attendance Screens
   '/bussingrecord-services': (context) => const SundayBussingScreen(),
