@@ -76,7 +76,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
-        height: 600,
+        height: 700,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ListView(
