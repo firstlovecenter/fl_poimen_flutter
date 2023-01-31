@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/duties/imcl/gql_imcls.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/alert_box.dart';
 
 class IMCLReportForm extends StatefulHookWidget {
@@ -29,17 +28,51 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
           return cache;
         },
         onCompleted: (resultData) {
-          Navigator.of(context).pop();
+          if (resultData == null) {
+            return;
+          }
+
+          if (resultData.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: 350),
+                    child: AlertBox(
+                      type: AlertType.success,
+                      title: 'IMCL Report',
+                      message: 'IMCL Report has been logged Successfully!',
+                      buttonText: 'OK',
+                      onRetry: () => // pop two screens from navigator
+                          Navigator.of(context).popUntil((route) => route.isFirst),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
-        onError: (error) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                getGQLException(error),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+        onError: (error) => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: const BoxConstraints(maxHeight: 350),
+                child: AlertBox(
+                  type: AlertType.error,
+                  title: 'Error Submitting IMCL Report',
+                  message: getGQLException(error),
+                  buttonText: 'OK',
+                  onRetry: () => Navigator.of(context).pop(),
                 ),
               ),
-              backgroundColor: PoimenTheme.bad),
+            );
+          },
         ),
       ),
     );
@@ -85,22 +118,36 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
+                        onPressed: reportMutation.result.isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
 
-                            reportMutation.runMutation({
-                              'memberId': widget.member.id,
-                              'reason': reason,
-                              'roleLevel': 'Fellowship',
-                            });
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-                          }
-                        },
-                        child: const Text('Submit'),
+                                  reportMutation.runMutation({
+                                    'memberId': widget.member.id,
+                                    'reason': reason,
+                                    'roleLevel': 'Fellowship',
+                                  });
+                                }
+                              },
+                        child: reportMutation.result.isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Text('Submitting'),
+                                  Padding(padding: EdgeInsets.all(5)),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const Text('Submit'),
                       ),
                     ),
                   ],

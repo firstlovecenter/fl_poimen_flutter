@@ -57,18 +57,51 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
           return cache;
         },
         onCompleted: (resultData) {
-          Navigator.of(context).pop();
+          if (resultData == null) {
+            return;
+          }
+
+          if (resultData.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: 350),
+                    child: AlertBox(
+                      type: AlertType.success,
+                      title: 'Visitation Report',
+                      message: 'Visitation Report has been logged Successfully!',
+                      buttonText: 'OK',
+                      onRetry: () => // pop two screens from navigator
+                          Navigator.of(context).popUntil((route) => route.isFirst),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
-        onError: (error) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              getGQLException(error),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        onError: (error) => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: const BoxConstraints(maxHeight: 350),
+                child: AlertBox(
+                  type: AlertType.error,
+                  title: 'Error Submitting Visitation Report',
+                  message: getGQLException(error),
+                  buttonText: 'OK',
+                  onRetry: () => Navigator.of(context).pop(),
+                ),
               ),
-            ),
-            backgroundColor: PoimenTheme.bad,
-          ),
+            );
+          },
         ),
       ),
     );
@@ -115,6 +148,16 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                             )
                           : const Text('Get Location'),
                     ),
+                    !locationSet
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Please set location',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 14,
+                                )),
+                          )
+                        : Container(),
                     const Padding(padding: EdgeInsets.all(8.0)),
                     TextFormField(
                       maxLines: 2,
@@ -145,26 +188,40 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
+                        onPressed: reportMutation.result.isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
 
-                            reportMutation.runMutation({
-                              'latitude': location.latitude,
-                              'longitude': location.longitude,
-                              'picture': _pictureUrl,
-                              'comment': visitationReport,
-                              'roleLevel': level,
-                              'memberId': widget.member.id,
-                              'cycleId': cycle.id
-                            });
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-                          }
-                        },
-                        child: const Text('Submit'),
+                                  reportMutation.runMutation({
+                                    'latitude': location.latitude,
+                                    'longitude': location.longitude,
+                                    'picture': _pictureUrl,
+                                    'comment': visitationReport,
+                                    'roleLevel': level,
+                                    'memberId': widget.member.id,
+                                    'cycleId': cycle.id
+                                  });
+                                }
+                              },
+                        child: reportMutation.result.isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Text('Submitting'),
+                                  Padding(padding: EdgeInsets.all(5)),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const Text('Submit'),
                       ),
                     ),
                   ],

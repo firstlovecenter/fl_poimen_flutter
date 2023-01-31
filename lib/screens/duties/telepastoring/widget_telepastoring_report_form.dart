@@ -40,18 +40,51 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
           return cache;
         },
         onCompleted: (resultData) {
-          Navigator.of(context).pop();
+          if (resultData == null) {
+            return;
+          }
+
+          if (resultData.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: 350),
+                    child: AlertBox(
+                      type: AlertType.success,
+                      title: 'Telepastoring Report',
+                      message: 'Telepastoring Report has been logged Successfully!',
+                      buttonText: 'OK',
+                      onRetry: () => // pop two screens from navigator
+                          Navigator.of(context).popUntil((route) => route.isFirst),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
-        onError: (error) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              getGQLException(error),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        onError: (error) => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: const BoxConstraints(maxHeight: 350),
+                child: AlertBox(
+                  type: AlertType.error,
+                  title: 'Error Submitting Telepastoring Report',
+                  message: getGQLException(error),
+                  buttonText: 'OK',
+                  onRetry: () => Navigator.of(context).pop(),
+                ),
               ),
-            ),
-            backgroundColor: PoimenTheme.bad,
-          ),
+            );
+          },
         ),
       ),
     );
@@ -116,31 +149,37 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
+                        onPressed: reportMutation.result.isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Text(
-                                  'Submitting...',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                  reportMutation.runMutation({
+                                    'comment': telepastoringReport,
+                                    'roleLevel': level,
+                                    'memberId': widget.member.id,
+                                    'cycleId': cycle.id
+                                  });
+                                }
+                              },
+                        child: reportMutation.result.isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Text('Submitting'),
+                                  Padding(padding: EdgeInsets.all(5)),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
-                                ),
-                                backgroundColor: PoimenTheme.good,
-                              ),
-                            );
-
-                            reportMutation.runMutation({
-                              'comment': telepastoringReport,
-                              'roleLevel': level,
-                              'memberId': widget.member.id,
-                              'cycleId': cycle.id
-                            });
-                          }
-                        },
-                        child: const Text('Submit'),
+                                ],
+                              )
+                            : const Text('Submit'),
                       ),
                     ),
                   ],

@@ -46,7 +46,6 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
           if (resultData == null) {
             return;
           }
-          print(refetchQuery.result);
 
           if (resultData.isNotEmpty) {
             showDialog(
@@ -153,8 +152,6 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
                             ),
                           ),
                         ),
-                        // disable button if susbmitting
-
                         onPressed: reportMutation.result.isLoading
                             ? null
                             : () {
@@ -169,7 +166,6 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
                                   });
                                 }
                               },
-
                         child: reportMutation.result.isLoading
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
