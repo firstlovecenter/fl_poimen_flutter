@@ -7,7 +7,6 @@ import 'package:poimen/services/cloudinary_service.dart' as cloudinary_custom;
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/attendance_image_carousel.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:provider/provider.dart';
@@ -97,29 +96,39 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(80),
           ),
-          onPressed: () {
-            if (!validate(context, [recordId])) {
-              return;
-            }
+          onPressed: widget.tickerMutation.result.isLoading
+              ? null
+              : () {
+                  if (!validate(context, [recordId])) {
+                    return;
+                  }
 
-            final absentMembers =
-                membership.where((member) => !_presentMembers.contains(member)).toList();
+                  final absentMembers =
+                      membership.where((member) => !_presentMembers.contains(member)).toList();
 
-            widget.tickerMutation.runMutation({
-              'presentMembers': _presentMembers,
-              'absentMembers': absentMembers,
-              'recordId': recordId,
-            });
-
-            var exception = widget.tickerMutation.result.exception != null
-                ? getGQLException(widget.tickerMutation.result.exception)
-                : null;
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(exception ?? 'Processing Data')),
-            );
-          },
-          child: const Text('Submit'),
+                  widget.tickerMutation.runMutation({
+                    'presentMembers': _presentMembers,
+                    'absentMembers': absentMembers,
+                    'recordId': recordId,
+                  });
+                },
+          child: widget.tickerMutation.result.isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text('Submitting'),
+                    Padding(padding: EdgeInsets.all(5)),
+                    SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ],
+                )
+              : const Text('Submit'),
         ),
       ],
     );

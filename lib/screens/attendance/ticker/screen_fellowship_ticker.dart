@@ -8,6 +8,7 @@ import 'package:poimen/screens/membership/gql_membership_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/services/gql_query_container.dart';
+import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
@@ -43,8 +44,49 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
                   return;
                 }
 
-                Navigator.of(context).pushReplacementNamed('/fellowship/attendance-report');
+                if (resultData.isNotEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          constraints: const BoxConstraints(maxHeight: 350),
+                          child: AlertBox(
+                              type: AlertType.success,
+                              message: 'Attendance Report has been submitted successfully!',
+                              buttonText: 'View Report',
+                              onRetry: () {
+                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/servicerecord/attendance-report');
+                              }),
+                        ),
+                      );
+                    },
+                  );
+                }
               },
+              onError: (error) => showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      constraints: const BoxConstraints(maxHeight: 350),
+                      child: AlertBox(
+                        type: AlertType.error,
+                        title: 'Error Submitting Telepastoring Report',
+                        message: getGQLException(error),
+                        buttonText: 'OK',
+                        onRetry: () => Navigator.of(context).pop(),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           );
 

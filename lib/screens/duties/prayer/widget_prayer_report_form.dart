@@ -59,7 +59,7 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Prayer Report',
-                      message: 'Prayer Report has been logged Successfully!',
+                      message: 'Prayer Report has been logged successfully!',
                       buttonText: 'OK',
                       onRetry: () => // pop two screens from navigator
                           Navigator.of(context).popUntil((route) => route.isFirst),

@@ -56,7 +56,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Telepastoring Report',
-                      message: 'Telepastoring Report has been logged Successfully!',
+                      message: 'Telepastoring Report has been logged successfully!',
                       buttonText: 'OK',
                       onRetry: () => // pop two screens from navigator
                           Navigator.of(context).popUntil((route) => route.isFirst),

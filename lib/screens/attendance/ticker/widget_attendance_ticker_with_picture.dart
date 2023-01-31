@@ -80,26 +80,40 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(80),
           ),
-          onPressed: () {
-            if (!validate(context, [recordId, _pictureUrl])) {
-              return;
-            }
+          onPressed: widget.tickerMutation.result.isLoading
+              ? null
+              : () {
+                  if (!validate(context, [recordId, _pictureUrl])) {
+                    return;
+                  }
 
-            final absentMembers =
-                membership.where((member) => !_presentMembers.contains(member)).toList();
+                  final absentMembers =
+                      membership.where((member) => !_presentMembers.contains(member)).toList();
 
-            widget.tickerMutation.runMutation({
-              'presentMembers': _presentMembers,
-              'absentMembers': absentMembers,
-              'recordId': recordId,
-              'membersPicture': _pictureUrl,
-            });
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Processing Data')),
-            );
-          },
-          child: const Text('Submit'),
+                  widget.tickerMutation.runMutation({
+                    'presentMembers': _presentMembers,
+                    'absentMembers': absentMembers,
+                    'recordId': recordId,
+                    'membersPicture': _pictureUrl,
+                  });
+                },
+          child: widget.tickerMutation.result.isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text('Submitting'),
+                    Padding(padding: EdgeInsets.all(5)),
+                    SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ],
+                )
+              : const Text('Submit'),
         ),
       ],
     );

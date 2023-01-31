@@ -73,7 +73,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Visitation Report',
-                      message: 'Visitation Report has been logged Successfully!',
+                      message: 'Visitation Report has been logged successfully!',
                       buttonText: 'OK',
                       onRetry: () => // pop two screens from navigator
                           Navigator.of(context).popUntil((route) => route.isFirst),

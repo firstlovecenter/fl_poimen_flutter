@@ -44,7 +44,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'IMCL Report',
-                      message: 'IMCL Report has been logged Successfully!',
+                      message: 'IMCL Report has been logged successfully!',
                       buttonText: 'OK',
                       onRetry: () => // pop two screens from navigator
                           Navigator.of(context).popUntil((route) => route.isFirst),
