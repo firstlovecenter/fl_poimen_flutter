@@ -44,7 +44,7 @@ dependencies:
   cupertino_icons: ^1.0.2 # Use with the CupertinoIcons class for iOS style icons.
 
   # utilities
-  graphql_flutter: ^5.1.0
+  graphql_flutter: ^5.1.2
   url_launcher: ^6.1.8
   intl: ^0.17.0
   timeago: ^3.3.0
