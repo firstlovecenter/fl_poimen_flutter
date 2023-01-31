@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (result.hasException) {
                   return AlertBox(
                     type: AlertType.error,
-                    text: getGQLException(result.exception),
+                    message: getGQLException(result.exception),
                     onRetry: () => refetch!(),
                   );
                 } else if (result.isLoading || result.data == null) {

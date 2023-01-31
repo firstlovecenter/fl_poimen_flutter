@@ -33,7 +33,7 @@ class GQLMutationContainer extends StatelessWidget {
         if (result.hasException) {
           body = AlertBox(
             type: AlertType.error,
-            text: result.exception?.graphqlErrors[0].message.toString() ??
+            message: result.exception?.graphqlErrors[0].message.toString() ??
                 result.exception.toString(),
             onRetry: () => runMutation(variables),
           );

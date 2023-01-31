@@ -42,7 +42,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         if (result.hasException) {
           body = AlertBox(
             type: AlertType.error,
-            text: getGQLException(result.exception),
+            message: getGQLException(result.exception),
             onRetry: () => refetch!(),
           );
         } else if (widget.infiniteScroll != true && (result.isLoading || result.data == null)) {

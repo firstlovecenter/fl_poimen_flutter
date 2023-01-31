@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poimen/theme.dart';
 
 enum AlertType {
   success,
@@ -8,13 +9,17 @@ enum AlertType {
 }
 
 class AlertBox extends StatelessWidget {
-  final String text;
+  final String message;
   final AlertType type;
+  final String title;
+  final String buttonText;
   final void Function()? onRetry;
 
   const AlertBox({
     Key? key,
-    required this.text,
+    required this.message,
+    this.title = '',
+    this.buttonText = '',
     this.type = AlertType.warning,
     this.onRetry,
   }) : super(key: key);
@@ -56,6 +61,11 @@ class AlertBox extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
+            Text(
+              title,
+              style: PoimenTheme.heading2,
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
             Row(
               children: [
                 Icon(
@@ -67,7 +77,7 @@ class AlertBox extends StatelessWidget {
                   width: 16.0,
                 ),
                 Flexible(
-                  child: Text(text),
+                  child: Text(message),
                 ),
               ],
             ),
@@ -75,7 +85,7 @@ class AlertBox extends StatelessWidget {
             onRetry != null
                 ? ElevatedButton(
                     onPressed: onRetry,
-                    child: const Text('Try Again'),
+                    child: Text(buttonText != '' ? buttonText : 'Try Again'),
                   )
                 : const SizedBox.shrink(),
           ],
