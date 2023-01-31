@@ -30,27 +30,65 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 
+    final refetchQuery = useQuery(QueryOptions(
+      document: getFellowshipOutstandingPrayer,
+      variables: {'id': churchState.fellowshipId},
+    ));
+
     final reportMutation = useMutation(
       MutationOptions(
-        document: logPrayerActivity,
-
+        document: logPrayerActivityFellowship,
         // ignore: void_checks
         update: (cache, result) {
           return cache;
         },
         onCompleted: (resultData) {
-          Navigator.of(context).pop();
+          if (resultData == null) {
+            print(refetchQuery.result);
+            return;
+          }
+
+          if (resultData.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: 350),
+                    child: AlertBox(
+                      type: AlertType.success,
+                      title: 'Prayer Report',
+                      message: 'Prayer Report has been logged Successfully!',
+                      buttonText: 'OK',
+                      onRetry: () => // pop two screens from navigator
+                          Navigator.of(context).popUntil((route) => route.isFirst),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
-        onError: (error) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              getGQLException(error),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+        onError: (error) => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: const BoxConstraints(maxHeight: 350),
+                child: AlertBox(
+                  type: AlertType.error,
+                  title: 'Error Submitting Prayer Report',
+                  message: getGQLException(error),
+                  buttonText: 'OK',
+                  onRetry: () => Navigator.of(context).pop(),
+                ),
               ),
-            ),
-            backgroundColor: PoimenTheme.bad,
-          ),
+            );
+          },
         ),
       ),
     );
@@ -115,31 +153,40 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
+                        // disable button if susbmitting
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Text(
-                                  'Submitting...',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                        onPressed: reportMutation.result.isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+
+                                  reportMutation.runMutation({
+                                    'comment': prayerReport,
+                                    'roleLevel': level,
+                                    'memberId': widget.member.id,
+                                    'cycleId': cycle.id
+                                  });
+                                }
+                              },
+
+                        child: reportMutation.result.isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Text('Submitting'),
+                                  Padding(padding: EdgeInsets.all(5)),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
-                                ),
-                                backgroundColor: PoimenTheme.good,
-                              ),
-                            );
-
-                            reportMutation.runMutation({
-                              'comment': prayerReport,
-                              'roleLevel': level,
-                              'memberId': widget.member.id,
-                              'cycleId': cycle.id
-                            });
-                          }
-                        },
-                        child: const Text('Submit'),
+                                ],
+                              )
+                            : const Text('Submit'),
                       ),
                     ),
                   ],

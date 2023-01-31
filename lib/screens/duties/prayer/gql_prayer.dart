@@ -126,7 +126,7 @@ final getConstituencyCompletedPrayer = gql('''
   }
 ''');
 
-final logPrayerActivity = gql('''
+final logPrayerActivityFellowship = gql('''
 mutation LogPrayerActivity(
     \$comment: String!
     \$roleLevel: String!
@@ -138,16 +138,12 @@ mutation LogPrayerActivity(
     memberId: \$memberId, 
     cycleId: \$cycleId) {
      id
-     outstandingPrayer {
+     datetime
+     comment {
         id
         typename
-        status
-        firstName
-        lastName
-        pictureUrl
-        phoneNumber
-        whatsappNumber
-      }
+        comment
+     }
   }
 }
 ''');
