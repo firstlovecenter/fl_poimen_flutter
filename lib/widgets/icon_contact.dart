@@ -105,10 +105,8 @@ Future<void> _makePhoneCall(String? phoneNumber) async {
   if (phoneNumber == null) {
     return;
   }
-  final Uri launchUri = Uri(
-    scheme: 'tel',
-    path: phoneNumber,
-  );
+
+  final Uri launchUri = Uri.parse('tel://$phoneNumber');
 
   if (await canLaunchUrl(launchUri)) {
     await launchUrl(launchUri);
@@ -121,14 +119,9 @@ Future<void> _sendWhatsappMessage(WhatsAppInfo? whatsapp) async {
   if (whatsapp == null) {
     return;
   }
-  final Uri launchUri = Uri(
-    scheme: 'https',
-    path: 'api.whatsapp.com/send',
-    queryParameters: {
-      'phone': whatsapp.number,
-      'text': 'Hey there ${whatsapp.firstName}',
-      'app_absent': '0',
-    },
+
+  final launchUri = Uri.parse(
+    'https://api.whatsapp.com/send?phone=${whatsapp.number}&text=Hey there ${whatsapp.firstName}&app_absent=0',
   );
 
   if (await canLaunchUrl(launchUri)) {
