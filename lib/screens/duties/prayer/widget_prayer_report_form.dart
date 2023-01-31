@@ -44,9 +44,9 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
         },
         onCompleted: (resultData) {
           if (resultData == null) {
-            print(refetchQuery.result);
             return;
           }
+          print(refetchQuery.result);
 
           if (resultData.isNotEmpty) {
             showDialog(
