@@ -62,8 +62,6 @@ class _LocationPickerButtonState extends State<LocationPickerButton> {
                             locationData = await location.getLocation();
 
                             widget.setLocation(locationData.latitude, locationData.longitude);
-
-                            print("Location: ${locationData.latitude}, ${locationData.longitude}");
                           },
                     child: widget.child,
                   )

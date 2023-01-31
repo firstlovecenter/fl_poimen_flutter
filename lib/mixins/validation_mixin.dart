@@ -1,6 +1,5 @@
 class ValidationMixin {
   String validateText(String? value) {
-    print('value $value');
     if (value == null || value.isEmpty) {
       return 'You cannot leave this field empty';
     }

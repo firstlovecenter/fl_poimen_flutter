@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/state/enums.dart';
 part 'models_membership_upgrades.g.dart';
 
 @JsonSerializable()
