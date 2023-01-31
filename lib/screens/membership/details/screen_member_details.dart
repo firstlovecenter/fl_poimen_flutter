@@ -53,14 +53,20 @@ class MemberDetailsScreen extends StatelessWidget {
                 ),
               ),
               Chip(
-                label: Text(member.status ?? 'No Status',
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                label: Text(
+                  member.status ?? 'No Status',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
                 backgroundColor: member.status == 'Sheep'
                     ? PoimenTheme.good
                     : member.status == 'Goat'
                         ? PoimenTheme.warning
                         : member.status == 'Deer'
-                            ? PoimenTheme.darkBrand
+                            ? PoimenTheme.brand
                             : PoimenTheme.bad,
               ),
               Center(
