@@ -3,7 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/details/widget_scaffold_with_member_avatar.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
 class UnderstandingCampaignWidget extends StatefulWidget {
@@ -80,20 +80,14 @@ class _UnderstandingCampaignWidgetState extends State<UnderstandingCampaignWidge
               const Padding(padding: EdgeInsets.all(10)),
               submitButton(
                 label: 'Submit',
-                onPressed: () {
-                  widget.understandingCampaignMutation.runMutation({
-                    'memberId': appState.memberId,
-                    'graduatedUnderstandingSchools': selectedSchools,
-                  });
-
-                  var exception = widget.understandingCampaignMutation.result.exception != null
-                      ? getGQLException(widget.understandingCampaignMutation.result.exception)
-                      : null;
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(exception ?? 'Processing Data')),
-                  );
-                },
+                onPressed: widget.understandingCampaignMutation.result.isLoading
+                    ? null
+                    : () {
+                        widget.understandingCampaignMutation.runMutation({
+                          'memberId': appState.memberId,
+                          'graduatedUnderstandingSchools': selectedSchools,
+                        });
+                      },
               ),
             ],
           ),
@@ -106,7 +100,9 @@ class _UnderstandingCampaignWidgetState extends State<UnderstandingCampaignWidge
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
+        backgroundColor: widget.understandingCampaignMutation.result.isLoading
+            ? const MaterialStatePropertyAll<Color>(PoimenTheme.darkCardColor)
+            : MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
         padding: MaterialStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         ),
@@ -116,7 +112,9 @@ class _UnderstandingCampaignWidgetState extends State<UnderstandingCampaignWidge
           ),
         ),
       ),
-      child: Text(label),
+      child: widget.understandingCampaignMutation.result.isLoading
+          ? const SubmittingButtonText()
+          : Text(label),
     );
   }
 }

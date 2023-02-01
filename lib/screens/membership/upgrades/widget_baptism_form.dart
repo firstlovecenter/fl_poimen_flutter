@@ -5,7 +5,7 @@ import 'package:poimen/mixins/validation_mixin.dart';
 import 'package:poimen/screens/membership/details/widget_scaffold_with_member_avatar.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
 class BaptismFormWidget extends StatefulWidget {
@@ -49,45 +49,34 @@ class _BaptismFormWidgetState extends State<BaptismFormWidget> with ValidationMi
               const Padding(padding: EdgeInsets.all(10)),
               submitButton(
                 label: 'Submit',
-                onPressed: () {
-                  if (_baptismDate != '') {
-                    widget.baptismMutation.runMutation({
-                      'memberId': appState.memberId,
-                      'has$hasBaptismVariable': _baptismDate != '',
-                      'has${hasBaptismVariable}Date': _baptismDate,
-                    });
-
-                    var exception = widget.baptismMutation.result.exception != null
-                        ? getGQLException(widget.baptismMutation.result.exception)
-                        : null;
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(exception ?? 'Processing Data')),
-                    );
-                  }
-                },
+                onPressed: widget.baptismMutation.result.isLoading
+                    ? null
+                    : () {
+                        if (_baptismDate != '') {
+                          widget.baptismMutation.runMutation({
+                            'memberId': appState.memberId,
+                            'has$hasBaptismVariable': _baptismDate != '',
+                            'has${hasBaptismVariable}Date': _baptismDate,
+                          });
+                        }
+                      },
               ),
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
                   label: 'I don\'t remember the date',
-                  onPressed: () {
-                    widget.baptismMutation.runMutation({
-                      'memberId': appState.memberId,
-                      'has$hasBaptismVariable': true,
-                    });
-
-                    var exception = widget.baptismMutation.result.exception != null
-                        ? getGQLException(widget.baptismMutation.result.exception)
-                        : null;
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(exception ?? 'Processing Data')),
-                    );
-                  }),
+                  onPressed: widget.baptismMutation.result.isLoading
+                      ? null
+                      : () {
+                          widget.baptismMutation.runMutation({
+                            'memberId': appState.memberId,
+                            'has$hasBaptismVariable': true,
+                          });
+                        }),
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
                 label: 'Not been baptised',
-                onPressed: () => Navigator.pop(context),
+                onPressed:
+                    widget.baptismMutation.result.isLoading ? null : () => Navigator.pop(context),
                 color: PoimenTheme.darkCardColor,
               ),
             ],
@@ -130,7 +119,9 @@ class _BaptismFormWidgetState extends State<BaptismFormWidget> with ValidationMi
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
+        backgroundColor: widget.baptismMutation.result.isLoading
+            ? const MaterialStatePropertyAll<Color>(PoimenTheme.darkCardColor)
+            : MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
         padding: MaterialStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         ),
@@ -140,7 +131,9 @@ class _BaptismFormWidgetState extends State<BaptismFormWidget> with ValidationMi
           ),
         ),
       ),
-      child: Text(label),
+      child: widget.baptismMutation.result.isLoading && label == 'Submit'
+          ? const SubmittingButtonText()
+          : Text(label),
     );
   }
 }

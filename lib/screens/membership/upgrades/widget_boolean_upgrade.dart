@@ -69,7 +69,8 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
                 label: '$label ${widget.upgradeRequirements}',
-                onPressed: () => Navigator.pop(context),
+                onPressed:
+                    widget.booleanMutation.result.isLoading ? null : () => Navigator.pop(context),
                 color: PoimenTheme.darkCardColor,
               ),
             ],
@@ -83,7 +84,9 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
+        backgroundColor: widget.booleanMutation.result.isLoading
+            ? const MaterialStatePropertyAll<Color>(PoimenTheme.darkCardColor)
+            : MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
         padding: MaterialStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         ),
@@ -93,7 +96,9 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
           ),
         ),
       ),
-      child: widget.booleanMutation.result.isLoading ? const SubmittingButtonText() : Text(label),
+      child: widget.booleanMutation.result.isLoading && color == null
+          ? const SubmittingButtonText()
+          : Text(label),
     );
   }
 }
