@@ -31,14 +31,9 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 
-    final refetchQuery = useQuery(QueryOptions(
-      document: getFellowshipOutstandingPrayer,
-      variables: {'id': churchState.fellowshipId},
-    ));
-
     final reportMutation = useMutation(
       MutationOptions(
-        document: logPrayerActivityFellowship,
+        document: logFellowshipPrayerActivity,
         // ignore: void_checks
         update: (cache, result) {
           return cache;
