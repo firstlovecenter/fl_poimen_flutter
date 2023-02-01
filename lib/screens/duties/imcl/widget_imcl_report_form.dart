@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/duties/imcl/gql_imcls.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 
 class IMCLReportForm extends StatefulHookWidget {
   const IMCLReportForm({Key? key, required this.member}) : super(key: key);
@@ -132,21 +133,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                                 }
                               },
                         child: reportMutation.result.isLoading
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Text('Submitting'),
-                                  Padding(padding: EdgeInsets.all(5)),
-                                  SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                    ),
-                                  ),
-                                ],
-                              )
+                            ? const SubmittingButtonText()
                             : const Text('Submit'),
                       ),
                     ),

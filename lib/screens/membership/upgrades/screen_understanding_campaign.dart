@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/upgrades/gql_member_upgrades.dart';
 import 'package:poimen/screens/membership/upgrades/widget_understanding_campaign.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -31,8 +32,49 @@ class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScree
             return;
           }
 
-          Navigator.of(context).popUntil(ModalRoute.withName('/membership-upgrades'));
+          if (resultData.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: 350),
+                    child: AlertBox(
+                      type: AlertType.success,
+                      title: 'Understanding Campaign Upgrade',
+                      message: 'Member upgraded successfully!',
+                      buttonText: 'OK',
+                      onRetry: () => // pop two screens from navigator
+                          Navigator.of(context)
+                              .popUntil(ModalRoute.withName('/membership-upgrades')),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
+        onError: (error) => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                constraints: const BoxConstraints(maxHeight: 350),
+                child: AlertBox(
+                  type: AlertType.error,
+                  title: 'Error Submitting Understanding Campaign Report',
+                  message: getGQLException(error),
+                  buttonText: 'OK',
+                  onRetry: () => Navigator.of(context).pop(),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
 

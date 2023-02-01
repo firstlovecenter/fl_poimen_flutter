@@ -12,6 +12,7 @@ import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/image_upload_button.dart';
 import 'package:poimen/widgets/location_picker_button.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
 class OutstandingVisitationReportForm extends StatefulHookWidget {
@@ -206,21 +207,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                                 }
                               },
                         child: reportMutation.result.isLoading
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Text('Submitting'),
-                                  Padding(padding: EdgeInsets.all(5)),
-                                  SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                    ),
-                                  ),
-                                ],
-                              )
+                            ? const SubmittingButtonText()
                             : const Text('Submit'),
                       ),
                     ),

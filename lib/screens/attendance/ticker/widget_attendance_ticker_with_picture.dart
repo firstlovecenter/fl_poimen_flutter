@@ -7,6 +7,7 @@ import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/image_upload_button.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
 class AttendanceTickerWithPictureScreen extends StatefulWidget {
@@ -98,21 +99,7 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
                   });
                 },
           child: widget.tickerMutation.result.isLoading
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text('Submitting'),
-                    Padding(padding: EdgeInsets.all(5)),
-                    SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    ),
-                  ],
-                )
+              ? const SubmittingButtonText()
               : const Text('Submit'),
         ),
       ],

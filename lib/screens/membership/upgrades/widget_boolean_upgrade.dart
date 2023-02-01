@@ -4,7 +4,7 @@ import 'package:poimen/mixins/validation_mixin.dart';
 import 'package:poimen/screens/membership/details/widget_scaffold_with_member_avatar.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
 class BooleanUpgradeWidget extends StatefulWidget {
@@ -58,20 +58,14 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
               const Padding(padding: EdgeInsets.all(8.0)),
               submitButton(
                   label: 'Has ${widget.upgradeRequirements}',
-                  onPressed: () {
-                    widget.booleanMutation.runMutation({
-                      'memberId': appState.memberId,
-                      'has$hasUpgradeVariable': true,
-                    });
-
-                    var exception = widget.booleanMutation.result.exception != null
-                        ? getGQLException(widget.booleanMutation.result.exception)
-                        : null;
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(exception ?? 'Processing Data')),
-                    );
-                  }),
+                  onPressed: widget.booleanMutation.result.isLoading
+                      ? null
+                      : () {
+                          widget.booleanMutation.runMutation({
+                            'memberId': appState.memberId,
+                            'has$hasUpgradeVariable': true,
+                          });
+                        }),
               const Padding(padding: EdgeInsets.all(4.0)),
               submitButton(
                 label: '$label ${widget.upgradeRequirements}',
@@ -99,7 +93,7 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
           ),
         ),
       ),
-      child: Text(label),
+      child: widget.booleanMutation.result.isLoading ? const SubmittingButtonText() : Text(label),
     );
   }
 }
