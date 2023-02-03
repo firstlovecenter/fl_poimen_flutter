@@ -10,6 +10,8 @@ import 'package:poimen/screens/duties/telepastoring/bacenta_completed_telepastor
 import 'package:poimen/screens/duties/telepastoring/constituency_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/constituency_completed_telepastoring.dart';
+import 'package:poimen/screens/duties/telepastoring/council_completed_telepastoring.dart';
+import 'package:poimen/screens/duties/telepastoring/council_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/fellowship_completed_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/fellowship_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/visitation/bacenta_completed_visitations.dart';
@@ -109,6 +111,8 @@ var appRoutes = {
       const ConstituencyOutstandingTelepastoringScreen(),
   '/constituency/completed-telepastoring': (context) =>
       const ConstituencyCompletedTelepastoringScreen(),
+  '/council/outstanding-telepastoring': (context) => const CouncilOutstandingTelepastoringScreen(),
+  '/council/completed-telepastoring': (context) => const CouncilCompletedTelepastoringScreen(),
 
   '/fellowship/outstanding-prayer': (context) => const FellowshipOutstandingPrayerScreen(),
   '/fellowship/completed-prayer': (context) => const FellowshipCompletedPrayerScreen(),

@@ -28,6 +28,8 @@ final getFellowshipImcls = gql('''
             firstName
             lastName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }
         }
       }

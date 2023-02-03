@@ -63,6 +63,27 @@ final getConstituencyOutstandingTelepastoring = gql('''
   }
 ''');
 
+final getCouncilOutstandingTelepastoring = gql('''
+ query getCouncilOutstandingTelepastoring(\$id: ID!) {
+    councils(where: { id: \$id }) {
+      id
+      typename
+      name
+      completedTelepastoringCount
+      outstandingTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final getFellowshipCompletedTelepastoring = gql('''
  query getFellowshipCompletedTelepastoring(\$id: ID!) {
     fellowships(where: { id: \$id }) {
@@ -126,6 +147,26 @@ final getConstituencyCompletedTelepastoring = gql('''
   }
 ''');
 
+final getCouncilCompletedTelepastoring = gql('''
+ query getCouncilCompletedTelepastoring(\$id: ID!) {
+    councils(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingTelepastoringCount
+      completedTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
 
 final logFellowshipTelepastoringActivity = gql('''
 mutation LogFellowshipTelepastoringActivity(
@@ -242,4 +283,3 @@ mutation LogCouncilTelepastoringActivity(
     }
   }
 ''');
-
