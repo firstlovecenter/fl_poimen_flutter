@@ -7,9 +7,11 @@ import 'package:poimen/helpers/constants.dart';
 import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/image_upload_button.dart';
 import 'package:poimen/widgets/location_picker_button.dart';
 import 'package:poimen/widgets/submit_button_text.dart';
@@ -49,9 +51,25 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 
+    var church = churchState.church;
+    var query = logFellowshipVisitationActivity;
+
+    if (church.typename == 'Fellowship') {
+      query = logFellowshipVisitationActivity;
+    }
+    if (church.typename == 'Bacenta') {
+      query = logBacentaVisitationActivity;
+    }
+    if (church.typename == 'Constituency') {
+      query = logConstituencyVisitationActivity;
+    }
+    if (church.typename == 'Council') {
+      query = logCouncilVisitationActivity;
+    }
+
     final reportMutation = useMutation(
       MutationOptions(
-        document: logVisitationActivity,
+        document: query,
 
         // ignore: void_checks
         update: (cache, result) {
@@ -106,6 +124,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
         ),
       ),
     );
+    final picture = CloudinaryImage(url: widget.member.pictureUrl, size: ImageSize.lg);
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -120,10 +139,27 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Text('${widget.member.firstName} ${widget.member.lastName}',
-                        style: PoimenTheme.heading2),
+                    const Padding(padding: EdgeInsets.all(10.0)),
                     Text('Visitation Report', style: PoimenTheme.heading2),
-                    const Padding(padding: EdgeInsets.all(12.0)),
+                    const Padding(padding: EdgeInsets.all(10.0)),
+                    Row(
+                      children: [
+                        Hero(
+                          tag: 'member-${widget.member.id}',
+                          child: AvatarWithInitials(
+                            foregroundImage: picture.image,
+                            member: widget.member,
+                            radius: 35,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(4),
+                        ),
+                        Text('${widget.member.firstName} ${widget.member.lastName}',
+                            style: PoimenTheme.heading2),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(8.0)),
                     ImageUploadButton(
                       preset: visitationReportPreset,
                       setPictureUrl: setPictureUrl,
@@ -192,7 +228,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                         onPressed: reportMutation.result.isLoading
                             ? null
                             : () {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() && locationSet) {
                                   _formKey.currentState!.save();
 
                                   reportMutation.runMutation({

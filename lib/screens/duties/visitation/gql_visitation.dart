@@ -63,6 +63,27 @@ final getConstituencyOutstandingVisitations = gql('''
   }
 ''');
 
+final getCouncilOutstandingVisitations = gql('''
+ query getCouncilOutstandingVisitations(\$id: ID!) {
+    councils(where: { id: \$id }) {
+      id
+      typename
+      name
+      completedVisitationsCount
+      outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final getFellowshipCompletedVisitations = gql('''
  query getFellowshipCompletedVisitations(\$id: ID!) {
     fellowships(where: { id: \$id }) {
@@ -126,8 +147,29 @@ final getConstituencyCompletedVisitations = gql('''
   }
 ''');
 
-final logVisitationActivity = gql('''
-mutation LogVisitationActivity(
+final getCouncilCompletedVisitations = gql('''
+ query getCouncilCompletedVisitations(\$id: ID!) {
+    councils(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingVisitationsCount
+      completedVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logFellowshipVisitationActivity = gql('''
+mutation LogFellowshipVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
     \$picture: String!
@@ -135,16 +177,133 @@ mutation LogVisitationActivity(
     \$roleLevel: String!
     \$memberId: ID!
     \$cycleId: ID!){
-  LogVisitationActivity(
-    latitude: \$latitude, 
-    longitude: \$longitude, 
-    picture: \$picture, 
+  LogFellowshipVisitationActivity(
+    latitude: \$latitude,
+    longitude: \$longitude,
+    picture: \$picture,
     comment: \$comment, 
     roleLevel: \$roleLevel, 
     memberId: \$memberId, 
     cycleId: \$cycleId) {
-    id
-    picture
+     id
+     typename
+     name
+     completedVisitationsCount
+     outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
   }
-}
+''');
+
+final logBacentaVisitationActivity = gql('''
+mutation LogBacentaVisitationActivity(
+    \$latitude: Float!
+    \$longitude: Float!
+    \$picture: String!
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogBacentaVisitationActivity(
+    latitude: \$latitude,
+    longitude: \$longitude,
+    picture: \$picture,
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedVisitationsCount
+     outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logConstituencyVisitationActivity = gql('''
+mutation LogConstituencyVisitationActivity(
+    \$latitude: Float!
+    \$longitude: Float!
+    \$picture: String!
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogConstituencyVisitationActivity(
+    latitude: \$latitude,
+    longitude: \$longitude,
+    picture: \$picture,
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedVisitationsCount
+     outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logCouncilVisitationActivity = gql('''
+mutation LogCouncilVisitationActivity(
+    \$latitude: Float!
+    \$longitude: Float!
+    \$picture: String!
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogCouncilVisitationActivity(
+    latitude: \$latitude,
+    longitude: \$longitude,
+    picture: \$picture,
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedVisitationsCount
+     outstandingVisitations {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
 ''');
