@@ -18,6 +18,8 @@ import 'package:poimen/screens/duties/visitation/bacenta_completed_visitations.d
 import 'package:poimen/screens/duties/visitation/bacenta_outstanding_visitations.dart';
 import 'package:poimen/screens/duties/visitation/constituency_completed_visitations.dart';
 import 'package:poimen/screens/duties/visitation/constituency_outstanding_visitations.dart';
+import 'package:poimen/screens/duties/visitation/council_completed_visitations.dart';
+import 'package:poimen/screens/duties/visitation/council_outstanding_visitations.dart';
 import 'package:poimen/screens/duties/visitation/fellowship_completed_visitations.dart';
 import 'package:poimen/screens/duties/visitation/fellowship_outstanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
@@ -100,6 +102,8 @@ var appRoutes = {
   '/constituency/outstanding-visitation': (context) =>
       const ConstituencyOutstandingVisitationScreen(),
   '/constituency/completed-visitation': (context) => const ConstituencyCompletedVisitationScreen(),
+  '/council/outstanding-visitation': (context) => const CouncilOutstandingVisitationScreen(),
+  '/council/completed-visitation': (context) => const CouncilCompletedVisitationScreen(),
 
   '/fellowship/outstanding-telepastoring': (context) =>
       const FellowshipOutstandingTelepastoringScreen(),
