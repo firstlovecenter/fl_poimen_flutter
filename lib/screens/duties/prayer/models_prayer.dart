@@ -11,9 +11,9 @@ class OutstandingPrayerForList extends MemberForList {
     required String firstName,
     required String lastName,
     required String pictureUrl,
+    required String phoneNumber,
+    required String whatsappNumber,
     String? status,
-    String? phoneNumber,
-    String? whatsappNumber,
   }) : super(
           id: id,
           typename: typename,
@@ -39,9 +39,9 @@ class CompletedPrayerForList extends MemberForList {
     required String firstName,
     required String lastName,
     required String pictureUrl,
+    required String phoneNumber,
+    required String whatsappNumber,
     String? status,
-    String? phoneNumber,
-    String? whatsappNumber,
   }) : super(
           id: id,
           typename: typename,

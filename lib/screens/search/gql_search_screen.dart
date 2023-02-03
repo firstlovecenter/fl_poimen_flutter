@@ -14,6 +14,8 @@ final searchFellowship = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -33,6 +35,8 @@ final searchBacenta = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -52,6 +56,8 @@ final searchConstituency = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -71,6 +77,8 @@ final searchCouncil = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -90,6 +98,8 @@ final searchStream = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -109,6 +119,8 @@ final searchGatheringService = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }

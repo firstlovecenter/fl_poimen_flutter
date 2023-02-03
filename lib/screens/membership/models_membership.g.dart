@@ -29,9 +29,9 @@ MemberForList _$MemberForListFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       pictureUrl: json['pictureUrl'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      whatsappNumber: json['whatsappNumber'] as String,
       status: json['status'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      whatsappNumber: json['whatsappNumber'] as String?,
     )..lost = json['lost'] as bool?;
 
 Map<String, dynamic> _$MemberForListToJson(MemberForList instance) =>
@@ -60,8 +60,8 @@ MemberWithComments _$MemberWithCommentsFromJson(Map<String, dynamic> json) =>
       ..firstName = json['firstName'] as String
       ..lastName = json['lastName'] as String
       ..pictureUrl = json['pictureUrl'] as String
-      ..phoneNumber = json['phoneNumber'] as String?
-      ..whatsappNumber = json['whatsappNumber'] as String?;
+      ..phoneNumber = json['phoneNumber'] as String
+      ..whatsappNumber = json['whatsappNumber'] as String;
 
 Map<String, dynamic> _$MemberWithCommentsToJson(MemberWithComments instance) =>
     <String, dynamic>{
@@ -96,8 +96,8 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..firstName = json['firstName'] as String
       ..lastName = json['lastName'] as String
       ..pictureUrl = json['pictureUrl'] as String
-      ..phoneNumber = json['phoneNumber'] as String?
-      ..whatsappNumber = json['whatsappNumber'] as String?
+      ..phoneNumber = json['phoneNumber'] as String
+      ..whatsappNumber = json['whatsappNumber'] as String
       ..lastSixServices = (json['lastSixServices'] as List<dynamic>)
           .map((e) => e as bool)
           .toList();

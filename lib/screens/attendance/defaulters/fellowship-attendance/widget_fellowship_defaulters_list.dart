@@ -88,7 +88,7 @@ Column _showAttendanceDefaultersList(Church church) {
                 icon: FontAwesomeIcons.whatsapp,
                 color: PoimenTheme.whatsappColor,
                 whatsAppInfo:
-                    WhatsAppInfo(number: leader.whatsappNumber ?? '', firstName: leader.firstName),
+                    WhatsAppInfo(number: leader.whatsappNumber, firstName: leader.firstName),
               ),
             ],
           ),

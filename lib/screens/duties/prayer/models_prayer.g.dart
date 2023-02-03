@@ -14,9 +14,9 @@ OutstandingPrayerForList _$OutstandingPrayerForListFromJson(
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       pictureUrl: json['pictureUrl'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      whatsappNumber: json['whatsappNumber'] as String,
       status: json['status'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      whatsappNumber: json['whatsappNumber'] as String?,
     )..lost = json['lost'] as bool?;
 
 Map<String, dynamic> _$OutstandingPrayerForListToJson(
@@ -41,9 +41,9 @@ CompletedPrayerForList _$CompletedPrayerForListFromJson(
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       pictureUrl: json['pictureUrl'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      whatsappNumber: json['whatsappNumber'] as String,
       status: json['status'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      whatsappNumber: json['whatsappNumber'] as String?,
     )..lost = json['lost'] as bool?;
 
 Map<String, dynamic> _$CompletedPrayerForListToJson(

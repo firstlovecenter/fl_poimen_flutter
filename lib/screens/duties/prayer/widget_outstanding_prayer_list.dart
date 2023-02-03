@@ -124,8 +124,8 @@ Column _memberTile(BuildContext context, OutstandingPrayerForList member) {
                   ContactIcon(
                     icon: FontAwesomeIcons.whatsapp,
                     color: PoimenTheme.whatsappColor,
-                    whatsAppInfo: WhatsAppInfo(
-                        number: member.whatsappNumber ?? '', firstName: member.firstName),
+                    whatsAppInfo:
+                        WhatsAppInfo(number: member.whatsappNumber, firstName: member.firstName),
                   ),
                 ]),
               ),

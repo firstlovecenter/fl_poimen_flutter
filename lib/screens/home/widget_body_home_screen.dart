@@ -43,6 +43,7 @@ class HomeScreenBody extends StatelessWidget {
       firstName: authUser.given_name,
       lastName: authUser.family_name,
       pictureUrl: authUser.picture,
+      phoneNumber: '0000',
       whatsappNumber: '0000',
     );
     final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);

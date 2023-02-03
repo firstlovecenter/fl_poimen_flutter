@@ -116,8 +116,8 @@ Column _memberTile(BuildContext context, CompletedTelepastoringForList member) {
                   ContactIcon(
                     icon: FontAwesomeIcons.whatsapp,
                     color: PoimenTheme.whatsappColor,
-                    whatsAppInfo: WhatsAppInfo(
-                        number: member.whatsappNumber ?? '', firstName: member.firstName),
+                    whatsAppInfo:
+                        WhatsAppInfo(number: member.whatsappNumber, firstName: member.firstName),
                   ),
                 ]),
               ),

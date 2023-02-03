@@ -20,6 +20,8 @@ class SharedState with ChangeNotifier {
     lastName: '',
     pictureUrl: '',
     status: '',
+    phoneNumber: '',
+    whatsappNumber: '',
   );
 
   PastoralCycle _pastoralCycle = PastoralCycle(

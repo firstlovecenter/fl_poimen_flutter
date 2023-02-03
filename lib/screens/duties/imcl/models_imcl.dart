@@ -13,9 +13,9 @@ class ImclForList extends MemberForList {
     required String firstName,
     required String lastName,
     required String pictureUrl,
+    required String phoneNumber,
+    required String whatsappNumber,
     String? status,
-    String? phoneNumber,
-    String? whatsappNumber,
     required this.imclChecked,
     required this.missedChurchComments,
   }) : super(
@@ -61,6 +61,8 @@ class PastoralComments {
     firstName: '',
     lastName: '',
     pictureUrl: '',
+    phoneNumber: '',
+    whatsappNumber: '',
   );
 
   PastoralComments({
@@ -91,6 +93,8 @@ class MissedChurchComment extends PastoralComments {
             firstName: '',
             lastName: '',
             pictureUrl: '',
+            phoneNumber: '',
+            whatsappNumber: '',
           ),
         );
 

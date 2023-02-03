@@ -12,9 +12,9 @@ ImclForList _$ImclForListFromJson(Map<String, dynamic> json) => ImclForList(
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       pictureUrl: json['pictureUrl'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      whatsappNumber: json['whatsappNumber'] as String,
       status: json['status'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      whatsappNumber: json['whatsappNumber'] as String?,
       imclChecked: json['imclChecked'] as bool,
       missedChurchComments: (json['missedChurchComments'] as List<dynamic>)
           .map((e) => MissedChurchComment.fromJson(e as Map<String, dynamic>))

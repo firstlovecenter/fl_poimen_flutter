@@ -31,8 +31,8 @@ MemberWithUpgrades _$MemberWithUpgradesFromJson(Map<String, dynamic> json) =>
       ..firstName = json['firstName'] as String
       ..lastName = json['lastName'] as String
       ..pictureUrl = json['pictureUrl'] as String
-      ..phoneNumber = json['phoneNumber'] as String?
-      ..whatsappNumber = json['whatsappNumber'] as String?;
+      ..phoneNumber = json['phoneNumber'] as String
+      ..whatsappNumber = json['whatsappNumber'] as String;
 
 Map<String, dynamic> _$MemberWithUpgradesToJson(MemberWithUpgrades instance) =>
     <String, dynamic>{

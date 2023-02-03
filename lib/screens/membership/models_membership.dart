@@ -28,8 +28,8 @@ class MemberForList {
   String firstName = '';
   String lastName = '';
   String pictureUrl = '';
-  String? phoneNumber;
-  String? whatsappNumber;
+  String phoneNumber;
+  String whatsappNumber;
 
   MemberForList({
     required this.id,
@@ -37,9 +37,9 @@ class MemberForList {
     required this.firstName,
     required this.lastName,
     required this.pictureUrl,
+    required this.phoneNumber,
+    required this.whatsappNumber,
     this.status,
-    this.phoneNumber,
-    this.whatsappNumber,
   });
 
   factory MemberForList.fromJson(Map<String, dynamic> json) => _$MemberForListFromJson(json);
@@ -58,6 +58,8 @@ class MemberWithComments extends MemberForList {
           firstName: '',
           lastName: '',
           pictureUrl: '',
+          phoneNumber: '',
+          whatsappNumber: '',
         );
 
   factory MemberWithComments.fromJson(Map<String, dynamic> json) =>
@@ -90,6 +92,8 @@ class Member extends MemberForList {
           firstName: '',
           lastName: '',
           pictureUrl: '',
+          phoneNumber: '',
+          whatsappNumber: '',
         );
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
@@ -105,6 +109,8 @@ class Node {
     firstName: '',
     lastName: '',
     pictureUrl: '',
+    phoneNumber: '',
+    whatsappNumber: '',
   );
 
   Node({required this.node});

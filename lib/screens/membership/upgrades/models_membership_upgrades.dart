@@ -29,6 +29,8 @@ class MemberWithUpgrades extends MemberForList {
           firstName: '',
           lastName: '',
           pictureUrl: '',
+          phoneNumber: '',
+          whatsappNumber: '',
         );
 
   factory MemberWithUpgrades.fromJson(Map<String, dynamic> json) =>
