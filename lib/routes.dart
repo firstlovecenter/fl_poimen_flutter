@@ -2,6 +2,8 @@ import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
+import 'package:poimen/screens/duties/prayer/council_completed_prayer.dart';
+import 'package:poimen/screens/duties/prayer/council_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/prayer/fellowship_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/fellowship_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_completed_telepastoring.dart';

@@ -63,6 +63,27 @@ final getConstituencyOutstandingPrayer = gql('''
   }
 ''');
 
+final getCouncilOutstandingPrayer = gql('''
+ query getCouncilOutstandingPrayer(\$id: ID!) {
+    councils(where: { id: \$id }) {
+      id
+      typename
+      name
+      completedPrayerCount
+      outstandingPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
 final getFellowshipCompletedPrayer = gql('''
  query getFellowshipCompletedPrayer(\$id: ID!) {
     fellowships(where: { id: \$id }) {
@@ -108,6 +129,27 @@ final getBacentaCompletedPrayer = gql('''
 final getConstituencyCompletedPrayer = gql('''
  query getConstituencyCompletedPrayer(\$id: ID!) {
     constituencies(where: { id: \$id }) {
+      id
+      typename
+      name
+      outstandingPrayerCount
+      completedPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final getCouncilCompletedPrayer = gql('''
+ query getCouncilCompletedPrayer(\$id: ID!) {
+    councils(where: { id: \$id }) {
       id
       typename
       name
