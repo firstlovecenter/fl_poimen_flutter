@@ -126,18 +126,120 @@ final getConstituencyCompletedTelepastoring = gql('''
   }
 ''');
 
-final logTelepastoringActivity = gql('''
-mutation LogTelepastoringActivity(
+
+final logFellowshipTelepastoringActivity = gql('''
+mutation LogFellowshipTelepastoringActivity(
     \$comment: String!
     \$roleLevel: String!
     \$memberId: ID!
     \$cycleId: ID!){
-  LogTelepastoringActivity(
+  LogFellowshipTelepastoringActivity(
     comment: \$comment, 
     roleLevel: \$roleLevel, 
     memberId: \$memberId, 
     cycleId: \$cycleId) {
-    id
+     id
+     typename
+     name
+     completedTelepastoringCount
+     outstandingTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
   }
-}
 ''');
+
+final logBacentaTelepastoringActivity = gql('''
+mutation LogBacentaTelepastoringActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogBacentaTelepastoringActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedTelepastoringCount
+     outstandingTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logConstituencyTelepastoringActivity = gql('''
+mutation LogConstituencyTelepastoringActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogConstituencyTelepastoringActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedTelepastoringCount
+     outstandingTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logCouncilTelepastoringActivity = gql('''
+mutation LogCouncilTelepastoringActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogCouncilTelepastoringActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedTelepastoringCount
+     outstandingTelepastoring {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+

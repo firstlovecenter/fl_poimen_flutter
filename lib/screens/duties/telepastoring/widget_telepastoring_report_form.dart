@@ -32,9 +32,25 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 
+    var church = churchState.church;
+    var query = logFellowshipTelepastoringActivity;
+
+    if (church.typename == 'Fellowship') {
+      query = logFellowshipTelepastoringActivity;
+    }
+    if (church.typename == 'Bacenta') {
+      query = logBacentaTelepastoringActivity;
+    }
+    if (church.typename == 'Constituency') {
+      query = logConstituencyTelepastoringActivity;
+    }
+    if (church.typename == 'Council') {
+      query = logCouncilTelepastoringActivity;
+    }
+
     final reportMutation = useMutation(
       MutationOptions(
-        document: logTelepastoringActivity,
+        document: query,
 
         // ignore: void_checks
         update: (cache, result) {

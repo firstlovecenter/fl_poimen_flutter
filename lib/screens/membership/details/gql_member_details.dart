@@ -73,6 +73,8 @@ final getMemberPastoralComments = gql('''
       firstName
       lastName
       pictureUrl
+      phoneNumber
+      whatsappNumber
       pastoralComments (limit: 10) {
         id
         typename
@@ -84,6 +86,8 @@ final getMemberPastoralComments = gql('''
           firstName
           lastName
           pictureUrl
+          phoneNumber
+          whatsappNumber
         }
         activity
       }

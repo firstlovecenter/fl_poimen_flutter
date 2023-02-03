@@ -30,8 +30,8 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
     var churchState = Provider.of<SharedState>(context);
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
-    var church = churchState.church;
 
+    var church = churchState.church;
     var query = logFellowshipPrayerActivity;
 
     if (church.typename == 'Fellowship') {
