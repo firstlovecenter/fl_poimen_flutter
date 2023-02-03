@@ -9,6 +9,8 @@ final getMemberDetails = gql('''
       lastName
       status
       pictureUrl
+      phoneNumber
+      whatsappNumber
       lastSixServices
       gender {
         gender
@@ -16,8 +18,6 @@ final getMemberDetails = gql('''
       dob {
         date
       }
-      phoneNumber
-      whatsappNumber
       ministry {
         id
         typename
@@ -40,6 +40,8 @@ final getMemberDetails = gql('''
           firstName
           lastName
           pictureUrl
+          phoneNumber
+          whatsappNumber
         }
         activity
       }
@@ -54,6 +56,8 @@ final getMemberDetails = gql('''
           lastName
           fullName
           pictureUrl
+          phoneNumber
+          whatsappNumber
         }
       }
     }

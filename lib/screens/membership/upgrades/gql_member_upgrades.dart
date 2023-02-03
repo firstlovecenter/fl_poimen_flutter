@@ -9,6 +9,8 @@ final getMemberUpgradesDetails = gql('''
       firstName
       lastName
       pictureUrl
+      phoneNumber
+      whatsappNumber
       hasHolyGhostBaptism
       hasHolyGhostBaptismDate
       hasWaterBaptism
