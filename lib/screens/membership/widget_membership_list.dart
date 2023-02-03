@@ -26,14 +26,14 @@ class ChurchMembershipList extends StatelessWidget {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
     const headerStyle = TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold);
-    const double accordionHeight = 340;
+    double accordionHeight = MediaQuery.of(context).size.width > 500 ? 600.0 : 300.0;
 
     int totalCount = church.sheepCount + church.goatCount + church.deerCount;
 
-    return Column(
+    return ListView(
       children: [
         const Padding(padding: EdgeInsets.all(10)),
-        Text('Total Members: $totalCount'),
+        Center(child: Text('Total Members: $totalCount')),
         Accordion(
           maxOpenSections: 1,
           scaleWhenAnimating: true,

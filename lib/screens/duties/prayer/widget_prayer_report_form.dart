@@ -96,8 +96,8 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
         height: 550,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: ListView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             children: [
               Form(
                 key: _formKey,

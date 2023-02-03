@@ -17,7 +17,7 @@ class AttendanceImageCarousel extends StatelessWidget {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200.0,
+        height: MediaQuery.of(context).size.width > 500 ? 500.0 : 300.0,
         autoPlay: isSingle ? false : true,
         enableInfiniteScroll: isSingle ? false : true,
         autoPlayInterval: const Duration(seconds: 3),
