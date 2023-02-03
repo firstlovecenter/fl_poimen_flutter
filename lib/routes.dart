@@ -112,6 +112,8 @@ var appRoutes = {
   '/fellowship/completed-prayer': (context) => const FellowshipCompletedPrayerScreen(),
   '/constituency/outstanding-prayer': (context) => const ConstituencyOutstandingPrayerScreen(),
   '/constituency/completed-prayer': (context) => const ConstituencyCompletedPrayerScreen(),
+  '/council/outstanding-prayer': (context) => const CouncilOutstandingPrayerScreen(),
+  '/council/completed-prayer': (context) => const CouncilCompletedPrayerScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens

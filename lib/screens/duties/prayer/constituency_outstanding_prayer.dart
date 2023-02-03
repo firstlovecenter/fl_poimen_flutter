@@ -20,12 +20,11 @@ class ConstituencyOutstandingPrayerScreen extends StatelessWidget {
       query: getConstituencyOutstandingPrayer,
       variables: {'id': churchState.constituencyId},
       defaultPageTitle: 'Constituency Outstanding Prayers',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 3),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 2),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency =
-            ChurchForOutstandingPrayerList.fromJson(data?['constituencies'][0]);
+        final constituency = ChurchForOutstandingPrayerList.fromJson(data?['constituencies'][0]);
 
         body = ChurchOutstandingPrayerList(church: constituency);
 
