@@ -63,6 +63,8 @@ final getGatheringGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -89,6 +91,8 @@ final getGatheringDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -135,6 +139,8 @@ final getStreamSheepForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -161,6 +167,8 @@ final getStreamGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -187,6 +195,8 @@ final getStreamDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -233,6 +243,8 @@ final getCouncilSheepForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -259,6 +271,8 @@ final getCouncilGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -285,6 +299,8 @@ final getCouncilDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -331,6 +347,8 @@ final getConstituencySheepForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -357,6 +375,8 @@ final getConstituencyGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -383,6 +403,8 @@ final getConstituencyDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -429,6 +451,8 @@ final getBacentaSheepForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -455,6 +479,8 @@ final getBacentaGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -481,6 +507,8 @@ final getBacentaDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -527,6 +555,8 @@ final getFellowshipSheepForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -553,6 +583,8 @@ final getFellowshipGoatsForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount
@@ -579,6 +611,8 @@ final getFellowshipDeerForList = gql('''
             lastName
             fullName
             pictureUrl
+            phoneNumber
+            whatsappNumber
           }  
         }
         totalCount

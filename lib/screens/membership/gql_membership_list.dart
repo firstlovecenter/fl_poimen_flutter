@@ -23,6 +23,8 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -32,6 +34,8 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -41,6 +45,8 @@ final getFellowshipMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -68,6 +74,8 @@ final getFellowshipMembersForBussing = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -76,6 +84,8 @@ final getFellowshipMembersForBussing = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -84,6 +94,8 @@ final getFellowshipMembersForBussing = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -103,6 +115,8 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -111,6 +125,8 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -119,6 +135,8 @@ final getBacentaMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -144,6 +162,8 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -152,6 +172,8 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -160,6 +182,8 @@ final getConstituencyMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -185,6 +209,8 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -193,6 +219,8 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -201,6 +229,8 @@ final getCouncilMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
@@ -226,6 +256,8 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       goats {
         id
@@ -234,6 +266,8 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
       deer {
         id
@@ -242,6 +276,8 @@ final getStreamMembers = gql('''
         lastName
         fullName
         pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
