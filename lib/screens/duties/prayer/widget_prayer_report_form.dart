@@ -30,10 +30,26 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
     var churchState = Provider.of<SharedState>(context);
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
+    var church = churchState.church;
+
+    var query = logFellowshipPrayerActivity;
+
+    if (church.typename == 'Fellowship') {
+      query = logFellowshipPrayerActivity;
+    }
+    if (church.typename == 'Bacenta') {
+      query = logBacentaPrayerActivity;
+    }
+    if (church.typename == 'Constituency') {
+      query = logConstituencyPrayerActivity;
+    }
+    if (church.typename == 'Council') {
+      query = logCouncilPrayerActivity;
+    }
 
     final reportMutation = useMutation(
       MutationOptions(
-        document: logFellowshipPrayerActivity,
+        document: query,
         // ignore: void_checks
         update: (cache, result) {
           return cache;

@@ -154,3 +154,90 @@ mutation LogFellowshipPrayerActivity(
     }
   }
 ''');
+
+final logBacentaPrayerActivity = gql('''
+mutation LogBacentaPrayerActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogBacentaPrayerActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedPrayerCount
+     outstandingPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logConstituencyPrayerActivity = gql('''
+mutation LogConstituencyPrayerActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogConstituencyPrayerActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedPrayerCount
+     outstandingPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
+
+final logCouncilPrayerActivity = gql('''
+mutation LogCouncilPrayerActivity(
+    \$comment: String!
+    \$roleLevel: String!
+    \$memberId: ID!
+    \$cycleId: ID!){
+  LogCouncilPrayerActivity(
+    comment: \$comment, 
+    roleLevel: \$roleLevel, 
+    memberId: \$memberId, 
+    cycleId: \$cycleId) {
+     id
+     typename
+     name
+     completedPrayerCount
+     outstandingPrayer {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');
