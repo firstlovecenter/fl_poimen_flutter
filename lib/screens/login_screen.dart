@@ -36,6 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    Color textColor = isDark ? Colors.white : Colors.black;
+
     return Scaffold(
       body: Center(
         // in the middle of the parent.
@@ -55,19 +58,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
                     RichText(
-                      text: const TextSpan(
-                          style: TextStyle(
+                      text: TextSpan(
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                           children: [
-                            TextSpan(text: 'Welcome to the'),
+                            TextSpan(
+                                text: 'Welcome to the',
+                                style: TextStyle(
+                                  color: textColor,
+                                )),
                             TextSpan(
                               text: ' POIMEN',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
+                                color: textColor,
                               ),
                             ),
-                            TextSpan(text: ' App'),
+                            TextSpan(text: ' App', style: TextStyle(color: textColor)),
                           ]),
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
