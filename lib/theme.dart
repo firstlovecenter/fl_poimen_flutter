@@ -43,7 +43,6 @@ class PoimenTheme {
 
 var lightTheme = ThemeData(
   // MAIN COLORS
-  primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
   scaffoldBackgroundColor: _colorFromHex('#F0F0F0'),
   brightness: Brightness.light,
   visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -72,12 +71,13 @@ var lightTheme = ThemeData(
     selectedItemColor: PoimenTheme.brand,
     unselectedItemColor: Colors.grey,
   ),
-  backgroundColor: const Color(0x00242424),
+  colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands))
+      .copyWith(background: const Color(0x00242424)),
 );
 
 var darkTheme = ThemeData(
   // MAIN COLORS
-  primarySwatch: Colors.red,
   scaffoldBackgroundColor: _colorFromHex('#1E1E1E'),
   brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -105,5 +105,6 @@ var darkTheme = ThemeData(
     selectedItemColor: PoimenTheme.brand,
     unselectedItemColor: Colors.grey,
   ),
-  backgroundColor: const Color(0x00242424),
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+      .copyWith(background: const Color(0x00242424)),
 );
