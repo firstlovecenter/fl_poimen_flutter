@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as notification;
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/theme.dart';
@@ -25,7 +25,7 @@ class AvatarWithInitials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Badge(
+    return notification.Badge(
       showBadge: member.lost ?? false,
       // position: const BadgePosition(end: 0),
       child: CircleAvatar(

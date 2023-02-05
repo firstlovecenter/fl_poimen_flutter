@@ -50,7 +50,7 @@ var lightTheme = ThemeData(
 
   // TYPOGRAPHY & TEXT
   textTheme: TextTheme(
-    headline5: TextStyle(color: PoimenTheme.brand),
+    headlineSmall: TextStyle(color: PoimenTheme.brand),
   ),
   cardColor: _colorFromHex("#FDFDFD"),
 
@@ -84,7 +84,7 @@ var darkTheme = ThemeData(
 
   // TYPOGRAPHY & TEXT
   textTheme: TextTheme(
-    headline5: TextStyle(color: PoimenTheme.brand),
+    headlineSmall: TextStyle(color: PoimenTheme.brand),
   ),
   cardColor: _colorFromHex("#2A2A2A"),
   buttonTheme: ButtonThemeData(

@@ -261,7 +261,7 @@ class BioDetailsCard extends StatelessWidget {
     if (whatsAppInfo != null) {
       contacts.add(
         ContactIcon(
-          icon: Icons.whatsapp,
+          icon: FontAwesomeIcons.whatsapp,
           color: PoimenTheme.whatsappColor,
           whatsAppInfo: whatsAppInfo,
         ),

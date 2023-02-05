@@ -39,9 +39,9 @@ dependencies:
   provider: ^6.0.3
 
   # fonts and icons
-  google_fonts: 3.0.1
-  font_awesome_flutter: 10.1.0
-  cupertino_icons: ^1.0.2 # Use with the CupertinoIcons class for iOS style icons.
+  google_fonts: 4.0.3
+  font_awesome_flutter: 10.3.0
+  cupertino_icons: ^1.0.5 # Use with the CupertinoIcons class for iOS style icons.
 
   # utilities
   graphql_flutter: ^5.1.2
