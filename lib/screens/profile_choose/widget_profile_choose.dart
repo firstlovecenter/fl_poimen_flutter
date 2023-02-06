@@ -25,11 +25,11 @@ class ProfileChooseWidget extends StatelessWidget {
             children: [
               Text(
                 'Welcome ',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text(
                 user.firstName,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               )
             ],
           ),
