@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/attendance/report/models_service_reports.dart';
-import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/theme.dart';
+import 'package:poimen/widgets/member_tile.dart';
 import 'package:poimen/widgets/attendance_image_carousel.dart';
 import 'package:timeago/timeago.dart' as timeago;
 

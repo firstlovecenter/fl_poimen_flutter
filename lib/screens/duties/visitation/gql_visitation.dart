@@ -199,6 +199,16 @@ mutation LogFellowshipVisitationActivity(
         phoneNumber
         whatsappNumber
       }
+      idls {
+        id
+        typename
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
     }
   }
 ''');

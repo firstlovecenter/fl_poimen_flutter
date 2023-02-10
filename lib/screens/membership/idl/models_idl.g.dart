@@ -9,7 +9,8 @@ part of 'models_idl.dart';
 ChurchForIdlList _$ChurchForIdlListFromJson(Map<String, dynamic> json) =>
     ChurchForIdlList(
       idls: (json['idls'] as List<dynamic>)
-          .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              OutstandingVisitationForList.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
       ..id = json['id'] as String

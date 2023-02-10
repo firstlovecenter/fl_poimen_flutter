@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/screens/search/gql_search_screen.dart';
 import 'package:poimen/screens/search/models_search.dart';
 import 'package:poimen/screens/search/widget_search_screen.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/alert_box.dart';
+import 'package:poimen/widgets/member_tile.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';

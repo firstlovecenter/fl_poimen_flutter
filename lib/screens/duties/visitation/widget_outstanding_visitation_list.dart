@@ -79,14 +79,14 @@ class ChurchOutstandingVisitationList extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
         ...noDataChecker(church.outstandingVisitations.map((member) {
-          return _memberTile(context, member);
+          return visitationMemberTile(context, member);
         }).toList()),
       ]),
     );
   }
 }
 
-Column _memberTile(BuildContext context, OutstandingVisitationForList member) {
+Column visitationMemberTile(BuildContext context, OutstandingVisitationForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 

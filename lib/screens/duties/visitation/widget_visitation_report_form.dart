@@ -75,7 +75,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
         update: (cache, result) {
           return cache;
         },
-        onCompleted: (resultData) {
+        onCompleted: (dynamic resultData) {
           if (resultData == null) {
             return;
           }
