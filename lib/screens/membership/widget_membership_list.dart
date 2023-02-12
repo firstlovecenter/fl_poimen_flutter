@@ -40,13 +40,14 @@ class ChurchMembershipList extends StatelessWidget {
           openAndCloseAnimation: true,
           paddingListHorizontal: 0,
           headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-          headerBackgroundColor: isDarkMode ? const Color(0xFF181818) : null,
+          headerBackgroundColor: isDarkMode ? const Color(0xFF181818) : PoimenTheme.brand,
           headerBackgroundColorOpened: isDarkMode ? const Color(0xFF1A1A1A) : null,
           contentBackgroundColor:
               isDarkMode ? PoimenTheme.darkCardColor : PoimenTheme.lightCardColor,
           headerBorderRadius: 0,
           contentHorizontalPadding: 5,
           contentBorderWidth: 1,
+          contentBorderColor: isDarkMode ? PoimenTheme.darkCardColor : PoimenTheme.lightCardColor,
           sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
           sectionClosingHapticFeedback: SectionHapticFeedback.light,
           children: [

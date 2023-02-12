@@ -70,6 +70,13 @@ var lightTheme = ThemeData(
     selectedItemColor: PoimenTheme.brand,
     unselectedItemColor: Colors.grey,
   ),
+  // appBarTheme: AppBarTheme(
+  //   color: _colorFromHex("#FDFDFD"),
+  //   elevation: 0,
+  //   iconTheme: IconThemeData(
+  //     color: PoimenTheme.brand,
+  //   ),
+  // ),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
     primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
@@ -104,8 +111,16 @@ var darkTheme = ThemeData(
     selectedItemColor: PoimenTheme.brand,
     unselectedItemColor: Colors.grey,
   ),
-  colorScheme:
-      ColorScheme.fromSwatch(brightness: Brightness.dark, primarySwatch: Colors.red).copyWith(
+  appBarTheme: AppBarTheme(
+    color: _colorFromHex("#1A1A1A"),
+    iconTheme: IconThemeData(
+      color: PoimenTheme.brand,
+    ),
+  ),
+  colorScheme: ColorScheme.fromSwatch(
+    brightness: Brightness.dark,
+    primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
+  ).copyWith(
     background: const Color(0x00242424),
   ),
 );

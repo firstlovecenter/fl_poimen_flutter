@@ -58,7 +58,12 @@ class ChurchServicesList extends StatelessWidget {
                 'Attendance: ${service.attendance ?? 0.toString()}',
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              trailing: service.markedAttendance ? const Icon(FontAwesomeIcons.circleCheck) : null,
+              trailing: service.markedAttendance
+                  ? const Icon(
+                      FontAwesomeIcons.solidCircleCheck,
+                      color: Colors.green,
+                    )
+                  : null,
             ),
           );
         }).toList()),
