@@ -18,7 +18,11 @@ class PageTitle extends StatelessWidget {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
 
-    Widget title = ListTile(title: Text(pageTitle));
+    Widget title = ListTile(
+        title: Text(
+      pageTitle,
+      style: const TextStyle(color: Colors.white),
+    ));
 
     if (church != null) {
       title = ListTile(

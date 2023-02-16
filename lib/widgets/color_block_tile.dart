@@ -48,7 +48,7 @@ class ColorBlockTile extends StatelessWidget {
           ),
         ),
       ),
-      title: Text(title),
+      title: Text(title, style: const TextStyle(color: Colors.white)),
       subtitle: subtitle != null ? Text(subtitle!) : null,
       tileColor: color ?? tileColor,
       shape: const RoundedRectangleBorder(

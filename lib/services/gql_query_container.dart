@@ -36,7 +36,11 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        Widget? pageTitle = ListTile(title: Text(widget.defaultPageTitle));
+        Widget? pageTitle = ListTile(
+            title: Text(
+          widget.defaultPageTitle,
+          style: const TextStyle(color: Colors.white),
+        ));
         Widget body;
 
         if (result.hasException) {
