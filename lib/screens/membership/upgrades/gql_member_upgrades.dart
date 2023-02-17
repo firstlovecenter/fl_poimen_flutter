@@ -39,9 +39,11 @@ mutation (
     lastName
     hasHolyGhostBaptism
     hasHolyGhostBaptismDate
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }
@@ -63,9 +65,11 @@ mutation (
     lastName
     hasWaterBaptism
     hasWaterBaptismDate
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }
@@ -84,9 +88,11 @@ mutation (
     firstName
     lastName
     hasAudioCollections
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }
@@ -105,9 +111,11 @@ mutation (
     firstName
     lastName
     hasBibleTranslations
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }
@@ -126,9 +134,11 @@ mutation (
     firstName
     lastName
     hasCampAttendance
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }
@@ -147,9 +157,11 @@ mutation (
     firstName
     lastName
     graduatedUnderstandingSchools
-    history (options: {limit: 5}) {
-      id
-      historyRecord
+    pastoralComments (limit: 5) {
+        id
+        timestamp
+        comment
+        activity
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/duties/telepastoring/models_telepastoring.dart';
-import 'package:poimen/screens/membership/idl/widget_idl_list.dart';
 import 'package:poimen/widgets/member_tile.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
