@@ -41,10 +41,20 @@ mutation (
     hasHolyGhostBaptismDate
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
@@ -67,10 +77,20 @@ mutation (
     hasWaterBaptismDate
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
@@ -90,10 +110,20 @@ mutation (
     hasAudioCollections
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
@@ -113,10 +143,20 @@ mutation (
     hasBibleTranslations
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
@@ -136,10 +176,20 @@ mutation (
     hasCampAttendance
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
@@ -159,10 +209,20 @@ mutation (
     graduatedUnderstandingSchools
     pastoralComments (limit: 5) {
         id
+        typename
         timestamp
         comment
+        author {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
         activity
-    }
+      }
   }
 }
 ''');
