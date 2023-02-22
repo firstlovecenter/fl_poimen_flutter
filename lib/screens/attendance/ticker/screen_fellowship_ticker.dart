@@ -78,7 +78,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
                       constraints: const BoxConstraints(maxHeight: 350),
                       child: AlertBox(
                         type: AlertType.error,
-                        title: 'Error Submitting Telepastoring Report',
+                        title: 'Error Submitting Attendance Report',
                         message: getGQLException(error),
                         buttonText: 'OK',
                         onRetry: () => Navigator.of(context).pop(),

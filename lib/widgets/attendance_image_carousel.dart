@@ -36,7 +36,7 @@ class AttendanceImageCarousel extends StatelessWidget {
                 color: Color.fromARGB(112, 69, 49, 72),
               ),
               child: Image.network(
-                CloudinaryImage(url: picture, size: ImageSize.lg).url,
+                CloudinaryImage(url: picture, size: ImageSize.fixedHeight).url,
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) {

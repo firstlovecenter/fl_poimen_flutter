@@ -8,6 +8,7 @@ final recordMembershipAttendance = gql('''
   \$recordId: ID!
 ) {
   RecordMembershipAttendance(
+    fellowshipId: \$fellowshipId
     presentMembers: \$presentMembers
     absentMembers: \$absentMembers
     recordId: \$recordId
