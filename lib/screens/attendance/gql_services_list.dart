@@ -10,7 +10,7 @@ final getFellowshipServices = gql('''
         id
         typename
         attendance
-        markedAttendance
+        markedAttendance(fellowshipId: \$id)
         serviceDate {
             date
          } 
@@ -29,7 +29,7 @@ final getSundayBussing = gql('''
           id
           typename
           attendance
-          markedAttendance
+          markedAttendance(fellowshipId: \$id)
           serviceDate {
             date
          } 
