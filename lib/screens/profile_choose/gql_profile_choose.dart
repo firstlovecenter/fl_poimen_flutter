@@ -18,16 +18,17 @@ final getUserRoles = gql('''
         typename
         name
       }
-      leadsSonta {
-        id
-        name
-      }
       leadsCouncil {
         id
         typename
         name
       }
       leadsStream {
+        id
+        typename
+        name
+      }
+      leadsSonta {
         id
         typename
         name

@@ -14,7 +14,7 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         date
       }
       membersPicture
-      membersPresentFromFellowship(id: \$fellowshipId) {
+      membersPresent {
         id
         status
         typename
@@ -25,7 +25,7 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         whatsappNumber
         pictureUrl
       }
-      membersAbsentFromFellowship(id: \$fellowshipId) {
+      membersAbsent {
         id
         status
         typename

@@ -10,7 +10,9 @@ class ServicesForReport {
   TimeGraph serviceDate = TimeGraph();
   List<String> membersPicture = [];
   List<MemberForList> membersPresentFromFellowship = [];
+  List<MemberForList>? membersPresent = [];
   List<MemberForList> membersAbsentFromFellowship = [];
+  List<MemberForList>? membersAbsent = [];
 
   ServicesForReport({
     required this.id,
@@ -19,6 +21,8 @@ class ServicesForReport {
     required this.membersPicture,
     required this.membersPresentFromFellowship,
     required this.membersAbsentFromFellowship,
+    this.membersAbsent,
+    this.membersPresent,
   });
 
   factory ServicesForReport.fromJson(Map<String, dynamic> json) =>

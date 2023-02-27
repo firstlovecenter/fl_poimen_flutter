@@ -23,6 +23,12 @@ ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) =>
           (json['membersAbsentFromFellowship'] as List<dynamic>)
               .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
               .toList(),
+      membersAbsent: (json['membersAbsent'] as List<dynamic>?)
+          ?.map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      membersPresent: (json['membersPresent'] as List<dynamic>?)
+          ?.map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ServicesForReportToJson(ServicesForReport instance) =>
@@ -32,5 +38,7 @@ Map<String, dynamic> _$ServicesForReportToJson(ServicesForReport instance) =>
       'serviceDate': instance.serviceDate,
       'membersPicture': instance.membersPicture,
       'membersPresentFromFellowship': instance.membersPresentFromFellowship,
+      'membersPresent': instance.membersPresent,
       'membersAbsentFromFellowship': instance.membersAbsentFromFellowship,
+      'membersAbsent': instance.membersAbsent,
     };
