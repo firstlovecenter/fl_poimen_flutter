@@ -8,7 +8,7 @@ import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:provider/provider.dart';
 
-Column memberTile(BuildContext context, MemberForList member) {
+Column memberTile(BuildContext context, MemberForList member, [Church? church]) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
@@ -33,7 +33,13 @@ Column memberTile(BuildContext context, MemberForList member) {
           ),
           title:
               Text('${member.firstName} ${member.lastName}', style: const TextStyle(fontSize: 15)),
-          subtitle: Text(member.status ?? member.typename),
+          subtitle: church != null
+              ? Text(
+                  '${church.name} ${church.typename}',
+                  style:
+                      TextStyle(color: church.id == memberState.church.id ? Colors.yellow : null),
+                )
+              : Text(member.status ?? member.typename),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             ContactIcon(
               icon: Icons.phone,

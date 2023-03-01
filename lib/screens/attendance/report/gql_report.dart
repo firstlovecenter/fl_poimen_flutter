@@ -24,8 +24,40 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
       }
       membersAbsent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
+      }
+      membersPresentFromFellowship(id: \$fellowshipId) {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+      }
+      membersAbsentFromFellowship(id: \$fellowshipId) {
         id
         status
         typename
@@ -54,6 +86,38 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         date
       }
       membersPicture
+      membersPresent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
+      }
+      membersAbsent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
+      }
       membersPresentFromFellowship(id: \$fellowshipId) {
         id
         status

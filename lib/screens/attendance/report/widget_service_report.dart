@@ -15,8 +15,7 @@ class ChurchServicesReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int totalMembership =
-        record.membersAbsentFromFellowship.length + record.membersPresentFromFellowship.length;
+    final int totalMembership = record.membersAbsent.length + record.membersPresent.length;
 
     return ListView(
       children: [
@@ -43,15 +42,13 @@ class ChurchServicesReport extends StatelessWidget {
         AttendanceImageCarousel(membersPicture: record.membersPicture),
         const Padding(padding: EdgeInsets.all(8.0)),
         _ShowMembers(
-          members: record.membersAbsentFromFellowship,
-          title:
-              'Members Who Were Absent: ${record.membersAbsentFromFellowship.length}/$totalMembership',
+          members: record.membersAbsent,
+          title: 'Members Who Were Absent: ${record.membersAbsent.length}/$totalMembership',
         ),
         const Padding(padding: EdgeInsets.all(15.0)),
         _ShowMembers(
-          title:
-              'Members Who Were Present: ${record.membersPresentFromFellowship.length}/$totalMembership',
-          members: record.membersPresentFromFellowship,
+          title: 'Members Who Were Present: ${record.membersPresent.length}/$totalMembership',
+          members: record.membersPresent,
         ),
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -71,7 +68,7 @@ class ChurchServicesReport extends StatelessWidget {
 class _ShowMembers extends StatelessWidget {
   const _ShowMembers({Key? key, required this.members, required this.title}) : super(key: key);
 
-  final List<MemberForList> members;
+  final List<MemberForListWithFellowship> members;
   final String title;
 
   @override
@@ -83,7 +80,7 @@ class _ShowMembers extends StatelessWidget {
           style: const TextStyle(fontSize: 18),
         ),
         ...members.map((member) {
-          return memberTile(context, member);
+          return memberTile(context, member, member.fellowship);
         }).toList()
       ],
     );

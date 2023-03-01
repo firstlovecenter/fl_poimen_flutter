@@ -4,15 +4,38 @@ import 'package:poimen/screens/membership/models_membership.dart';
 part 'models_service_reports.g.dart';
 
 @JsonSerializable()
+class MemberForListWithFellowship extends MemberForList {
+  Church fellowship;
+
+  MemberForListWithFellowship({
+    required this.fellowship,
+  }) : super(
+          id: '',
+          typename: '',
+          status: '',
+          firstName: '',
+          lastName: '',
+          pictureUrl: '',
+          phoneNumber: '',
+          whatsappNumber: '',
+        );
+
+  factory MemberForListWithFellowship.fromJson(Map<String, dynamic> json) =>
+      _$MemberForListWithFellowshipFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$MemberForListWithFellowshipToJson(this);
+}
+
+@JsonSerializable()
 class ServicesForReport {
   String id = '';
   String typename = '';
   TimeGraph serviceDate = TimeGraph();
   List<String> membersPicture = [];
   List<MemberForList> membersPresentFromFellowship = [];
-  List<MemberForList>? membersPresent = [];
   List<MemberForList> membersAbsentFromFellowship = [];
-  List<MemberForList>? membersAbsent = [];
+  List<MemberForListWithFellowship> membersPresent = [];
+  List<MemberForListWithFellowship> membersAbsent = [];
 
   ServicesForReport({
     required this.id,
@@ -21,8 +44,8 @@ class ServicesForReport {
     required this.membersPicture,
     required this.membersPresentFromFellowship,
     required this.membersAbsentFromFellowship,
-    this.membersAbsent,
-    this.membersPresent,
+    required this.membersAbsent,
+    required this.membersPresent,
   });
 
   factory ServicesForReport.fromJson(Map<String, dynamic> json) =>
