@@ -124,6 +124,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
         ),
       ),
     );
+
     final picture = CloudinaryImage(url: widget.member.pictureUrl, size: ImageSize.lg);
 
     return Padding(

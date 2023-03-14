@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poimen/theme.dart';
 
 class ColorBlockTile extends StatelessWidget {
-  ColorBlockTile(
+  const ColorBlockTile(
       {Key? key,
       required this.leadingColor,
       this.color,
@@ -13,11 +13,11 @@ class ColorBlockTile extends StatelessWidget {
       : super(key: key);
 
   final Color leadingColor;
-  Color? color;
+  final Color? color;
   final IconData icon;
   final String title;
-  String? subtitle;
-  String? to;
+  final String? subtitle;
+  final String? to;
 
   @override
   Widget build(BuildContext context) {
