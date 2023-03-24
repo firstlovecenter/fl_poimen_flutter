@@ -37,12 +37,11 @@ class _UnderstandingCampaignWidgetState extends State<UnderstandingCampaignWidge
     var appState = Provider.of<SharedState>(context);
 
     const understandingSchools = [
-      'How to Hear God\'s Voice',
-      'School of Prosperity',
-      'How to Choose a Marriage Partner',
-      'Total Emotional Recovery & Healing',
-      'The Controversies of Christianity',
-      'School of the Supernatural'
+      'School of the Word',
+      'School of Victorious Living',
+      'School of Solid Foundation',
+      'School of Evangelism',
+      'School of Apologetics',
     ];
 
     return ScaffoldWithMemberAvatar(
