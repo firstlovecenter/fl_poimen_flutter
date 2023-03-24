@@ -77,14 +77,14 @@ Map<String, dynamic> _$MemberWithCommentsToJson(MemberWithComments instance) =>
       'pastoralComments': instance.pastoralComments,
     };
 
-Last6Services _$Last6ServicesFromJson(Map<String, dynamic> json) =>
-    Last6Services(
+Last4Services _$Last4ServicesFromJson(Map<String, dynamic> json) =>
+    Last4Services(
       date: DateTime.parse(json['date'] as String),
       service: json['service'] as String,
       present: json['present'] as bool,
     );
 
-Map<String, dynamic> _$Last6ServicesToJson(Last6Services instance) =>
+Map<String, dynamic> _$Last4ServicesToJson(Last4Services instance) =>
     <String, dynamic>{
       'date': instance.date.toIso8601String(),
       'service': instance.service,
@@ -112,13 +112,13 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..pictureUrl = json['pictureUrl'] as String
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
-      ..lastSixWeekdayServices =
-          (json['lastSixWeekdayServices'] as List<dynamic>)
-              .map((e) => Last6Services.fromJson(e as Map<String, dynamic>))
+      ..lastFourWeekdayServices =
+          (json['lastFourWeekdayServices'] as List<dynamic>)
+              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
               .toList()
-      ..lastSixWeekendServices =
-          (json['lastSixWeekendServices'] as List<dynamic>)
-              .map((e) => Last6Services.fromJson(e as Map<String, dynamic>))
+      ..lastFourWeekendServices =
+          (json['lastFourWeekendServices'] as List<dynamic>)
+              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
@@ -131,8 +131,8 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'lastSixWeekdayServices': instance.lastSixWeekdayServices,
-      'lastSixWeekendServices': instance.lastSixWeekendServices,
+      'lastFourWeekdayServices': instance.lastFourWeekdayServices,
+      'lastFourWeekendServices': instance.lastFourWeekendServices,
       'gender': instance.gender,
       'dob': instance.dob,
       'stream': instance.stream,

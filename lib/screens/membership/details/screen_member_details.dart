@@ -83,7 +83,7 @@ class MemberDetailsScreen extends StatelessWidget {
                       const WeekendCard(
                         text: 'WEEKDAY',
                       ),
-                      ...member.lastSixWeekdayServices.map((service) {
+                      ...member.lastFourWeekdayServices.map((service) {
                         return Row(
                           children: [
                             service.present
@@ -124,7 +124,7 @@ class MemberDetailsScreen extends StatelessWidget {
                       const WeekendCard(
                         text: 'WEEKEND',
                       ),
-                      ...member.lastSixWeekendServices.map((service) {
+                      ...member.lastFourWeekendServices.map((service) {
                         return Row(
                           children: [
                             service.present
