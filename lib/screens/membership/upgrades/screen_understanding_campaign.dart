@@ -79,7 +79,7 @@ class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScree
     );
 
     final understandingCampaignQuery =
-        useQuery(QueryOptions(document: memberUnderstandingCampaings, variables: {
+        useQuery(QueryOptions(document: memberUnderstandingCampaigns, variables: {
       'memberId': appState.memberId,
     }));
 

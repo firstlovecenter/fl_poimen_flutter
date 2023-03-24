@@ -37,6 +37,7 @@ mutation (
     id
     firstName
     lastName
+    status
     hasHolyGhostBaptism
     hasHolyGhostBaptismDate
     pastoralComments (limit: 5) {
@@ -73,6 +74,7 @@ mutation (
     id
     firstName
     lastName
+    status
     hasWaterBaptism
     hasWaterBaptismDate
     pastoralComments (limit: 5) {
@@ -107,6 +109,7 @@ mutation (
     id
     firstName
     lastName
+    status
     hasAudioCollections
     pastoralComments (limit: 5) {
         id
@@ -140,6 +143,7 @@ mutation (
     id
     firstName
     lastName
+    status
     hasBibleTranslations
     pastoralComments (limit: 5) {
         id
@@ -173,6 +177,7 @@ mutation (
     id
     firstName
     lastName
+    status
     hasCampAttendance
     pastoralComments (limit: 5) {
         id
@@ -206,6 +211,7 @@ mutation (
     id
     firstName
     lastName
+    status
     graduatedUnderstandingSchools
     pastoralComments (limit: 5) {
         id
@@ -227,10 +233,11 @@ mutation (
 }
 ''');
 
-final memberUnderstandingCampaings = gql('''
+final memberUnderstandingCampaigns = gql('''
 query (\$memberId: ID!) {
   members (where: {id: \$memberId}){
     id
+    status
     graduatedUnderstandingSchools
   }
 }
