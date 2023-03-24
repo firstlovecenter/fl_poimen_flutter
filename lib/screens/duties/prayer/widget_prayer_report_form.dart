@@ -137,6 +137,7 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
                     const Padding(padding: EdgeInsets.all(15.0)),
                     TextFormField(
                       maxLines: 4,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: const InputDecoration(
                         labelText: 'What did you pray about?',
                         hintText: 'What is your report on this prayer?',

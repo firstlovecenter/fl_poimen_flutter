@@ -139,6 +139,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                     const Padding(padding: EdgeInsets.all(15.0)),
                     TextFormField(
                       maxLines: 4,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: const InputDecoration(
                         labelText: 'Comment',
                         hintText: 'What is your report on this telepastoring?',

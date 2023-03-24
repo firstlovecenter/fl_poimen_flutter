@@ -96,6 +96,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                       decoration: InputDecoration(
                         hintText: 'Why Was ${widget.member.firstName} Not In Church?',
                       ),
+                      textCapitalization: TextCapitalization.sentences,
                       onSaved: (String? value) {
                         reason = value ?? '';
                       },

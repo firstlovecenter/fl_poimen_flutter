@@ -199,6 +199,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                     const Padding(padding: EdgeInsets.all(8.0)),
                     TextFormField(
                       maxLines: 2,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: const InputDecoration(
                         labelText: 'Comment',
                         hintText: 'What is your report on this visitation?',
