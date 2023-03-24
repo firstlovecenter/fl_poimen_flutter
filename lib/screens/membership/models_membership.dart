@@ -69,8 +69,21 @@ class MemberWithComments extends MemberForList {
 }
 
 @JsonSerializable()
+class Last6Services {
+  DateTime date = DateTime.now();
+  String service = '';
+  bool present = false;
+
+  Last6Services({required this.date, required this.service, required this.present});
+
+  factory Last6Services.fromJson(Map<String, dynamic> json) => _$Last6ServicesFromJson(json);
+  Map<String, dynamic> toJson() => _$Last6ServicesToJson(this);
+}
+
+@JsonSerializable()
 class Member extends MemberForList {
-  List<bool> lastSixServices = [];
+  List<Last6Services> lastSixWeekdayServices = [];
+  List<Last6Services> lastSixWeekendServices = [];
   Gender gender = Gender();
   TimeGraph dob = TimeGraph();
   Church stream;

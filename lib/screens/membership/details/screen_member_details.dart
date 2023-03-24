@@ -75,40 +75,94 @@ class MemberDetailsScreen extends StatelessWidget {
                 style: headerStyle,
               )),
               const Padding(padding: EdgeInsets.all(8.0)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ...member.lastSixServices.map((present) {
-                    if (present) {
-                      return Row(
-                        children: const [
-                          Padding(padding: EdgeInsets.all(4.0)),
-                          CircleAvatar(
-                            backgroundColor: Colors.green,
-                            radius: 15,
-                            child: Icon(
-                              FontAwesomeIcons.check,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return Row(
-                      children: const [
-                        Padding(padding: EdgeInsets.all(4.0)),
-                        CircleAvatar(
-                          backgroundColor: Colors.red,
-                          radius: 15,
-                          child: Icon(
-                            FontAwesomeIcons.xmark,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Column(
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      const WeekendCard(
+                        text: 'WEEKDAY',
+                      ),
+                      ...member.lastSixWeekdayServices.map((service) {
+                        return Row(
+                          children: [
+                            service.present
+                                ? Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: CircleAvatar(
+                                      backgroundColor:
+                                          service.present ? PoimenTheme.good : PoimenTheme.bad,
+                                      radius: 15,
+                                      child: Icon(
+                                        service.present
+                                            ? FontAwesomeIcons.check
+                                            : FontAwesomeIcons.xmark,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                : Row(
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.red,
+                                          radius: 15,
+                                          child: Icon(
+                                            FontAwesomeIcons.xmark,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                          ],
+                        );
+                      }),
+                    ]),
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      const WeekendCard(
+                        text: 'WEEKEND',
+                      ),
+                      ...member.lastSixWeekendServices.map((service) {
+                        return Row(
+                          children: [
+                            service.present
+                                ? Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: CircleAvatar(
+                                      backgroundColor:
+                                          service.present ? PoimenTheme.good : PoimenTheme.bad,
+                                      radius: 15,
+                                      child: Icon(
+                                        service.present
+                                            ? FontAwesomeIcons.check
+                                            : FontAwesomeIcons.xmark,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                : Row(
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.red,
+                                          radius: 15,
+                                          child: Icon(
+                                            FontAwesomeIcons.xmark,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                          ],
+                        );
+                      }),
+                    ]),
+                  ],
+                ),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
               Padding(
@@ -222,6 +276,28 @@ class MemberDetailsScreen extends StatelessWidget {
         return returnValues;
       },
     );
+  }
+}
+
+class WeekendCard extends StatelessWidget {
+  const WeekendCard({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
+    return Card(
+        color: isDarkMode ? Colors.grey[800] : Colors.grey[300],
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Text(text),
+        ));
   }
 }
 

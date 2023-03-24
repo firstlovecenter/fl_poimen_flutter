@@ -11,7 +11,16 @@ final getMemberDetails = gql('''
       pictureUrl
       phoneNumber
       whatsappNumber
-      lastSixServices
+      lastSixWeekdayServices {
+        date
+        service
+        present
+      }
+      lastSixWeekendServices {
+        date
+        service
+        present
+      }
       gender {
         gender
       }

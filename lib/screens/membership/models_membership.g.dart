@@ -77,6 +77,20 @@ Map<String, dynamic> _$MemberWithCommentsToJson(MemberWithComments instance) =>
       'pastoralComments': instance.pastoralComments,
     };
 
+Last6Services _$Last6ServicesFromJson(Map<String, dynamic> json) =>
+    Last6Services(
+      date: DateTime.parse(json['date'] as String),
+      service: json['service'] as String,
+      present: json['present'] as bool,
+    );
+
+Map<String, dynamic> _$Last6ServicesToJson(Last6Services instance) =>
+    <String, dynamic>{
+      'date': instance.date.toIso8601String(),
+      'service': instance.service,
+      'present': instance.present,
+    };
+
 Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       gender: Gender.fromJson(json['gender'] as Map<String, dynamic>),
       dob: TimeGraph.fromJson(json['dob'] as Map<String, dynamic>),
@@ -98,9 +112,14 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..pictureUrl = json['pictureUrl'] as String
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
-      ..lastSixServices = (json['lastSixServices'] as List<dynamic>)
-          .map((e) => e as bool)
-          .toList();
+      ..lastSixWeekdayServices =
+          (json['lastSixWeekdayServices'] as List<dynamic>)
+              .map((e) => Last6Services.fromJson(e as Map<String, dynamic>))
+              .toList()
+      ..lastSixWeekendServices =
+          (json['lastSixWeekendServices'] as List<dynamic>)
+              .map((e) => Last6Services.fromJson(e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'id': instance.id,
@@ -112,7 +131,8 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'lastSixServices': instance.lastSixServices,
+      'lastSixWeekdayServices': instance.lastSixWeekdayServices,
+      'lastSixWeekendServices': instance.lastSixWeekendServices,
       'gender': instance.gender,
       'dob': instance.dob,
       'stream': instance.stream,
