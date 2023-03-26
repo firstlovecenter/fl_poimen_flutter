@@ -37,6 +37,8 @@ class _UnderstandingCampaignWidgetState extends State<UnderstandingCampaignWidge
     var appState = Provider.of<SharedState>(context);
 
     const understandingSchools = [
+      'New Believers School',
+      'Fruitful Believers School',
       'School of the Word',
       'School of Victorious Living',
       'School of Solid Foundation',
