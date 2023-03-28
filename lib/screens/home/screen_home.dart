@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final church = HomeScreenChurch.fromJson(data?[pluralName][0]);
+        final church = HomeScreenChurch.fromJson(data?[pluralName]?[0]);
 
         body = HomeScreenBody(church: church);
 
