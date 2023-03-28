@@ -125,7 +125,17 @@ Future<void> _sendWhatsappMessage(WhatsAppInfo? whatsapp) async {
   );
 
   if (await canLaunchUrl(launchUri)) {
-    await launchUrl(launchUri);
+    final bool nativeAppLaunchSucceeded = await launchUrl(
+      launchUri,
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+
+    if (!nativeAppLaunchSucceeded) {
+      await launchUrl(
+        launchUri,
+        mode: LaunchMode.externalApplication,
+      );
+    }
   } else {
     throw 'Could not launch $launchUri';
   }
