@@ -56,7 +56,9 @@ class HomePageButton extends StatelessWidget {
             trailing: alertNumber != null
                 ? TrailingCardAlertNumber(
                     number: alertNumber ?? 0,
-                    variant: TrailingCardAlertNumberVariant.red,
+                    variant: alertNumber! != 0
+                        ? TrailingCardAlertNumberVariant.red
+                        : TrailingCardAlertNumberVariant.green,
                   )
                 : null,
           ),

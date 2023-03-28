@@ -136,7 +136,7 @@ Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisi
     ChurchLevel.council,
   ];
 
-  if (!permittedLevels.contains(churchLevel) || outstandingVisitationTotal == 0) {
+  if (!permittedLevels.contains(churchLevel)) {
     return Container();
   }
 
@@ -160,7 +160,7 @@ Widget outstandingPrayerLevels(ChurchLevel churchLevel, int? outstandingPrayerTo
     ChurchLevel.council,
   ];
 
-  if (!permittedLevels.contains(churchLevel) || outstandingPrayerTotal == 0) {
+  if (!permittedLevels.contains(churchLevel)) {
     return Container();
   }
 
@@ -184,7 +184,7 @@ Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingT
     ChurchLevel.council,
   ];
 
-  if (!permittedLevels.contains(churchLevel) || outstandingTelepastoringTotal == 0) {
+  if (!permittedLevels.contains(churchLevel)) {
     return Container();
   }
 
