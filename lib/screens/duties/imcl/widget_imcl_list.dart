@@ -8,6 +8,7 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
+import 'package:poimen/widgets/no_data.dart';
 import 'package:provider/provider.dart';
 
 class ChurchImclList extends StatefulWidget {
@@ -32,7 +33,7 @@ class ChurchImclListState extends State<ChurchImclList> {
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Column(
+      child: ListView(
         children: [
           const Padding(padding: EdgeInsets.all(10)),
           const Text(
@@ -68,14 +69,10 @@ class ChurchImclListState extends State<ChurchImclList> {
             },
           ),
           const SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredList.length,
-              itemBuilder: (context, index) {
-                return _memberTile(context, filteredList[index]);
-              },
-            ),
-          ),
+          const Padding(padding: EdgeInsets.all(8.0)),
+          ...noDataChecker(filteredList.map((member) {
+            return _memberTile(context, member);
+          }).toList()),
         ],
       ),
     );
