@@ -12,77 +12,132 @@ import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 
-class ChurchOutstandingVisitationList extends StatelessWidget {
+class ChurchOutstandingVisitationList extends StatefulWidget {
   const ChurchOutstandingVisitationList({Key? key, required this.church}) : super(key: key);
 
   final ChurchForOutstandingVisitationList church;
 
   @override
+  ChurchOutstandingVisitationListState createState() => ChurchOutstandingVisitationListState();
+}
+
+class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisitationList> {
+  final TextEditingController _searchController = TextEditingController();
+  List<OutstandingVisitationForList> _filteredMembers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredMembers = widget.church.outstandingVisitations;
+    _searchController.addListener(_filterMembers);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterMembers() {
+    final String query = _searchController.text.toLowerCase();
+    List<OutstandingVisitationForList> filteredList = [];
+    for (OutstandingVisitationForList member in widget.church.outstandingVisitations) {
+      final String memberName = '${member.firstName} ${member.lastName}'.toLowerCase();
+      if (memberName.contains(query)) {
+        filteredList.add(member);
+      }
+    }
+    setState(() {
+      _filteredMembers = filteredList;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView(children: [
-        const Padding(padding: EdgeInsets.all(10)),
-        const Text(
-          'These people have not been visited during the current sheperding cycle',
-          style: TextStyle(fontSize: 16),
-        ),
-        // a centered card with the number of outstanding visitations
-        const Padding(padding: EdgeInsets.all(10)),
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: Column(
-              children: [
-                ListTile(
-                  leading: const Icon(FontAwesomeIcons.doorOpen),
-                  trailing: TrailingCardAlertNumber(
-                      number: church.outstandingVisitations.length,
-                      variant: TrailingCardAlertNumberVariant.red),
-                  title: const Text('Visits Remaining'),
+        padding: const EdgeInsets.all(10.0),
+        child: Column(children: [
+          Expanded(
+            child: ListView(children: [
+              const Padding(padding: EdgeInsets.all(10)),
+              const Text(
+                'These people have not been visited during the current sheperding cycle',
+                style: TextStyle(fontSize: 16),
+              ),
+              // a centered card with the number of outstanding visitations
+              const Padding(padding: EdgeInsets.all(10)),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: Column(
-              children: [
-                ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/${church.typename.toLowerCase()}/completed-visitation',
-                    );
-                  },
-                  leading: const Icon(
-                    FontAwesomeIcons.solidThumbsUp,
-                    color: Colors.green,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(FontAwesomeIcons.doorOpen),
+                        trailing: TrailingCardAlertNumber(
+                            number: widget.church.outstandingVisitations.length,
+                            variant: TrailingCardAlertNumberVariant.red),
+                        title: const Text('Visits Remaining'),
+                      ),
+                    ],
                   ),
-                  trailing: TrailingCardAlertNumber(
-                    number: church.completedVisitationsCount,
-                    variant: TrailingCardAlertNumberVariant.green,
-                  ),
-                  title: const Text('Visits Completed'),
                 ),
-              ],
-            ),
-          ),
-        ),
-        const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.outstandingVisitations.map((member) {
-          return visitationMemberTile(context, member);
-        }).toList()),
-      ]),
-    );
+              ),
+
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/${widget.church.typename.toLowerCase()}/completed-visitation',
+                          );
+                        },
+                        leading: const Icon(
+                          FontAwesomeIcons.solidThumbsUp,
+                          color: Colors.green,
+                        ),
+                        trailing: TrailingCardAlertNumber(
+                          number: widget.church.completedVisitationsCount,
+                          variant: TrailingCardAlertNumberVariant.green,
+                        ),
+                        title: const Text('Visits Completed'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    labelText: 'Search by member name',
+                    prefixIcon: Icon(
+                      FontAwesomeIcons.magnifyingGlass,
+                      color: PoimenTheme.brand,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              ...noDataChecker(_filteredMembers.map((member) {
+                return visitationMemberTile(context, member);
+              }).toList()),
+            ]),
+          )
+        ]));
   }
 }
 

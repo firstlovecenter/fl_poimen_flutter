@@ -12,81 +12,136 @@ import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 
-class ChurchOutstandingPrayerList extends StatelessWidget {
+class ChurchOutstandingPrayerList extends StatefulWidget {
   const ChurchOutstandingPrayerList({Key? key, required this.church}) : super(key: key);
 
   final ChurchForOutstandingPrayerList church;
 
   @override
+  ChurchOutstandingPrayerListState createState() => ChurchOutstandingPrayerListState();
+}
+
+class ChurchOutstandingPrayerListState extends State<ChurchOutstandingPrayerList> {
+  final TextEditingController _searchController = TextEditingController();
+  List<OutstandingPrayerForList> _filteredMembers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredMembers = widget.church.outstandingPrayer;
+    _searchController.addListener(_filterMembers);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterMembers() {
+    final String query = _searchController.text.toLowerCase();
+    List<OutstandingPrayerForList> filteredList = [];
+    for (OutstandingPrayerForList member in widget.church.outstandingPrayer) {
+      final String memberName = '${member.firstName} ${member.lastName}'.toLowerCase();
+      if (memberName.contains(query)) {
+        filteredList.add(member);
+      }
+    }
+    setState(() {
+      _filteredMembers = filteredList;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView(children: [
-        const Padding(padding: EdgeInsets.all(10)),
-        const Text(
-          'These people have not been prayed for during the current sheperding cycle',
-          style: TextStyle(fontSize: 16),
-        ),
-        // a centered card with the number of outstanding prayer
-        const Padding(padding: EdgeInsets.all(10)),
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: Column(
-              children: [
-                ListTile(
-                  leading: const Icon(FontAwesomeIcons.phone),
-                  trailing: TrailingCardAlertNumber(
-                      number: church.outstandingPrayer.length,
-                      variant: TrailingCardAlertNumberVariant.red),
-                  title: const Text('Prayers Remaining'),
+        padding: const EdgeInsets.all(10.0),
+        child: Column(children: [
+          Expanded(
+            child: ListView(children: [
+              const Padding(padding: EdgeInsets.all(10)),
+              const Text(
+                'These people have not been prayed for during the current sheperding cycle',
+                style: TextStyle(fontSize: 16),
+              ),
+              // a centered card with the number of outstanding prayers
+              const Padding(padding: EdgeInsets.all(10)),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: Column(
-              children: [
-                ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/${church.typename.toLowerCase()}/completed-prayer',
-                    );
-                  },
-                  leading: const Icon(
-                    FontAwesomeIcons.solidThumbsUp,
-                    color: Colors.green,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(FontAwesomeIcons.personPraying),
+                        trailing: TrailingCardAlertNumber(
+                            number: widget.church.outstandingPrayer.length,
+                            variant: TrailingCardAlertNumberVariant.red),
+                        title: const Text('Prayers Remaining'),
+                      ),
+                    ],
                   ),
-                  trailing: TrailingCardAlertNumber(
-                    number: church.completedPrayerCount,
-                    variant: TrailingCardAlertNumberVariant.green,
-                  ),
-                  title: const Text('Prayers Completed'),
                 ),
-              ],
-            ),
-          ),
-        ),
-        const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.outstandingPrayer.map((member) {
-          return _memberTile(context, member);
-        }).toList()),
-      ]),
-    );
+              ),
+
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/${widget.church.typename.toLowerCase()}/completed-prayer',
+                          );
+                        },
+                        leading: const Icon(
+                          FontAwesomeIcons.solidThumbsUp,
+                          color: Colors.green,
+                        ),
+                        trailing: TrailingCardAlertNumber(
+                          number: widget.church.completedPrayerCount,
+                          variant: TrailingCardAlertNumberVariant.green,
+                        ),
+                        title: const Text('Prayers Completed'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    labelText: 'Search by member name',
+                    prefixIcon: Icon(
+                      FontAwesomeIcons.magnifyingGlass,
+                      color: PoimenTheme.brand,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              ...noDataChecker(_filteredMembers.map((member) {
+                return prayerMemberTile(context, member);
+              }).toList()),
+            ]),
+          )
+        ]));
   }
 }
 
-Column _memberTile(BuildContext context, OutstandingPrayerForList member) {
+Column prayerMemberTile(BuildContext context, OutstandingPrayerForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = Provider.of<SharedState>(context);
 
