@@ -8,39 +8,76 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
-import 'package:poimen/widgets/no_data.dart';
 import 'package:provider/provider.dart';
 
-class ChurchImclList extends StatelessWidget {
+class ChurchImclList extends StatefulWidget {
   const ChurchImclList({Key? key, required this.church}) : super(key: key);
 
   final ChurchForImclList church;
 
   @override
+  ChurchImclListState createState() => ChurchImclListState();
+}
+
+class ChurchImclListState extends State<ChurchImclList> {
+  String _searchText = '';
+
+  @override
   Widget build(BuildContext context) {
+    final filteredList = widget.church.imcls
+        .where((member) => '${member.firstName} ${member.lastName}'
+            .toLowerCase()
+            .contains(_searchText.toLowerCase()))
+        .toList();
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: ListView(children: [
-        const Padding(padding: EdgeInsets.all(10)),
-        const Text(
-          'This is the list of those who were not at the last church service',
-          style: TextStyle(fontSize: 16),
-        ),
-        Center(
-          child: Text(
-            'You must contact them to find out why they were absent',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: PoimenTheme.brand,
+      child: Column(
+        children: [
+          const Padding(padding: EdgeInsets.all(10)),
+          const Text(
+            'This is the list of those who were not at the last church service',
+            style: TextStyle(fontSize: 16),
+          ),
+          Center(
+            child: Text(
+              'You must contact them to find out why they were absent',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: PoimenTheme.brand,
+              ),
             ),
           ),
-        ),
-        const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.imcls.map((member) {
-          return _memberTile(context, member);
-        }).toList()),
-      ]),
+          const Padding(padding: EdgeInsets.all(8.0)),
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Search by member name',
+              prefixIcon: Icon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: PoimenTheme.brand,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            onChanged: (value) {
+              setState(() {
+                _searchText = value;
+              });
+            },
+          ),
+          const SizedBox(height: 8.0),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredList.length,
+              itemBuilder: (context, index) {
+                return _memberTile(context, filteredList[index]);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
