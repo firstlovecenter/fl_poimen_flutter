@@ -31,13 +31,22 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       leadsConstituency: (json['leadsConstituency'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isAdminForConstituency: (json['isAdminForConstituency'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
       leadsSonta: (json['leadsSonta'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
       leadsCouncil: (json['leadsCouncil'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isAdminForCouncil: (json['isAdminForCouncil'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
       leadsStream: (json['leadsStream'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      isAdminForStream: (json['isAdminForStream'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
       leadsGatheringService: (json['leadsGatheringService'] as List<dynamic>)
@@ -56,9 +65,12 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'leadsFellowship': instance.leadsFellowship,
       'leadsConstituency': instance.leadsConstituency,
+      'isAdminForConstituency': instance.isAdminForConstituency,
       'leadsSonta': instance.leadsSonta,
       'leadsCouncil': instance.leadsCouncil,
+      'isAdminForCouncil': instance.isAdminForCouncil,
       'leadsStream': instance.leadsStream,
+      'isAdminForStream': instance.isAdminForStream,
       'leadsGatheringService': instance.leadsGatheringService,
       'isAdminForGatheringService': instance.isAdminForGatheringService,
     };

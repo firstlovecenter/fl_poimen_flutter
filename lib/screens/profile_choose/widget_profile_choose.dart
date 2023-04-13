@@ -45,11 +45,20 @@ class ProfileChooseWidget extends StatelessWidget {
                 ...user.leadsConstituency.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
+                ...user.isAdminForConstituency.map((church) {
+                  return ProfileCard(church: church, role: 'Admin');
+                }).toList(),
                 ...user.leadsCouncil.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
+                ...user.isAdminForCouncil.map((church) {
+                  return ProfileCard(church: church, role: 'Admin');
+                }).toList(),
                 ...user.leadsStream.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
+                }).toList(),
+                ...user.isAdminForStream.map((church) {
+                  return ProfileCard(church: church, role: 'Admin');
                 }).toList(),
                 ...user.leadsGatheringService.map((church) {
                   return ProfileCard(church: church, role: 'Leader');

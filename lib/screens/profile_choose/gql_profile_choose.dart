@@ -18,12 +18,27 @@ final getUserRoles = gql('''
         typename
         name
       }
+      isAdminForConstituency {
+        id
+        typename
+        name
+      }
       leadsCouncil {
         id
         typename
         name
       }
+      isAdminForCouncil {
+        id
+        typename
+        name
+      }
       leadsStream {
+        id
+        typename
+        name
+      }
+      isAdminForStream {
         id
         typename
         name

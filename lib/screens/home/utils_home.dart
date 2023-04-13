@@ -14,12 +14,20 @@ String parseRole(Role role) {
       return 'Bacenta Leader';
     case Role.leaderConstituency:
       return 'Constituency Leader';
+    case Role.adminConstituency:
+      return 'Constituency Admin';
     case Role.leaderCouncil:
       return 'Council Leader';
+    case Role.adminCouncil:
+      return 'Council Admin';
     case Role.leaderStream:
       return 'Stream Leader';
+    case Role.adminStream:
+      return 'Stream Admin';
     case Role.leaderGathering:
       return 'Gathering Service Leader';
+    case Role.adminGathering:
+      return 'Gathering Service Admin';
     default:
       return '';
   }

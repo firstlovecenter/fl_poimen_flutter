@@ -8,6 +8,7 @@ class SharedState with ChangeNotifier {
   String _searchKey = '';
   Role _role = Role.leaderFellowship;
   ChurchLevel _roleLevel = ChurchLevel.fellowship;
+  ChurchRole _roleType = ChurchRole.leader;
   ProfileChurch _church = ProfileChurch(
     id: '',
     typename: '',
@@ -46,6 +47,7 @@ class SharedState with ChangeNotifier {
   String get searchKey => _searchKey;
   Role get role => _role;
   ChurchLevel get roleLevel => _roleLevel;
+  ChurchRole get roleType => _roleType;
   ProfileChurch get church => _church;
   MemberForList get member => _member;
   String get bottomNavSelected => _bottomNavSelected;
@@ -84,6 +86,11 @@ class SharedState with ChangeNotifier {
 
   set roleLevel(ChurchLevel roleLevel) {
     _roleLevel = roleLevel;
+    notifyListeners();
+  }
+
+  set roleType(ChurchRole roleType) {
+    _roleType = roleType;
     notifyListeners();
   }
 

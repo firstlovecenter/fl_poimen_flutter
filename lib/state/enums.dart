@@ -9,6 +9,11 @@ enum ChurchLevel {
   gathering,
 }
 
+enum ChurchRole {
+  admin,
+  leader,
+}
+
 ChurchLevel getChurchLevelFromAuth(List<String> role) {
   if (role
       .where((element) => ['leaderGatheringService', 'adminGatheringService'].contains(element))
@@ -35,6 +40,32 @@ ChurchLevel getChurchLevelFromAuth(List<String> role) {
   }
 }
 
+Role getRoleEnum(ChurchLevel churchLevel, ChurchRole role) {
+  if (churchLevel == ChurchLevel.fellowship && role == ChurchRole.leader) {
+    return Role.leaderFellowship;
+  } else if (churchLevel == ChurchLevel.bacenta && role == ChurchRole.leader) {
+    return Role.leaderBacenta;
+  } else if (churchLevel == ChurchLevel.constituency && role == ChurchRole.leader) {
+    return Role.leaderConstituency;
+  } else if (churchLevel == ChurchLevel.constituency && role == ChurchRole.admin) {
+    return Role.adminConstituency;
+  } else if (churchLevel == ChurchLevel.council && role == ChurchRole.leader) {
+    return Role.leaderCouncil;
+  } else if (churchLevel == ChurchLevel.council && role == ChurchRole.admin) {
+    return Role.adminCouncil;
+  } else if (churchLevel == ChurchLevel.stream && role == ChurchRole.leader) {
+    return Role.leaderStream;
+  } else if (churchLevel == ChurchLevel.stream && role == ChurchRole.admin) {
+    return Role.adminStream;
+  } else if (churchLevel == ChurchLevel.gathering && role == ChurchRole.leader) {
+    return Role.leaderGathering;
+  } else if (churchLevel == ChurchLevel.gathering && role == ChurchRole.admin) {
+    return Role.adminGathering;
+  }
+
+  return Role.leaderFellowship;
+}
+
 ChurchLevel convertToChurchEnum(String churchLevel) {
   switch (churchLevel) {
     case 'fellowship':
@@ -51,6 +82,20 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
       return ChurchLevel.gathering;
     default:
       return ChurchLevel.fellowship;
+  }
+}
+
+ChurchRole convertToRoleEnum(String churchRole) {
+  switch (churchRole) {
+    case 'Leader':
+    case 'leader':
+      return ChurchRole.leader;
+    case 'Admin':
+    case 'admin':
+      return ChurchRole.admin;
+
+    default:
+      return ChurchRole.leader;
   }
 }
 
@@ -100,5 +145,9 @@ enum Role {
   leaderCouncil,
   leaderStream,
   leaderGathering,
+  adminConstituency,
+  adminCouncil,
+  adminStream,
+  adminGathering,
   all
 }

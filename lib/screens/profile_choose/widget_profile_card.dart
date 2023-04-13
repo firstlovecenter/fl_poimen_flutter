@@ -20,24 +20,25 @@ class ProfileCard extends StatelessWidget {
         onTap: () {
           userState.church = church;
           userState.roleLevel = getChurchLevelFromAuth((AuthService.instance.idToken?.roles ?? []));
+          userState.roleType = convertToRoleEnum(role);
 
           if (church.typename == 'Fellowship') {
-            userState.role = Role.leaderFellowship;
+            userState.role = getRoleEnum(ChurchLevel.fellowship, convertToRoleEnum(role));
             userState.fellowshipId = church.id;
           } else if (church.typename == 'Bacenta') {
-            userState.role = Role.leaderBacenta;
+            userState.role = getRoleEnum(ChurchLevel.bacenta, convertToRoleEnum(role));
             userState.bacentaId = church.id;
           } else if (church.typename == 'Constituency') {
-            userState.role = Role.leaderConstituency;
+            userState.role = getRoleEnum(ChurchLevel.constituency, convertToRoleEnum(role));
             userState.constituencyId = church.id;
           } else if (church.typename == 'Council') {
-            userState.role = Role.leaderCouncil;
+            userState.role = getRoleEnum(ChurchLevel.council, convertToRoleEnum(role));
             userState.councilId = church.id;
           } else if (church.typename == 'Stream') {
-            userState.role = Role.leaderStream;
+            userState.role = getRoleEnum(ChurchLevel.stream, convertToRoleEnum(role));
             userState.streamId = church.id;
           } else if (church.typename == 'GatheringService') {
-            userState.role = Role.leaderGathering;
+            userState.role = getRoleEnum(ChurchLevel.gathering, convertToRoleEnum(role));
             userState.gatheringId = church.id;
           }
 
