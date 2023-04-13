@@ -103,7 +103,7 @@ class HomeScreenBody extends StatelessWidget {
             route: '/$levelForUrl-members',
             permitted: const [Role.all],
           ),
-          defaultersLevels(churchLevel),
+          defaultersLevels(churchLevel, church.fellowshipAttendanceDefaultersCount),
           const Padding(padding: EdgeInsets.all(6.0)),
           const Center(
             child: Text(

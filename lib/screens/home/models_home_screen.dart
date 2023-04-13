@@ -7,6 +7,7 @@ class HomeScreenChurch {
   String typename;
   String name;
   int imclTotal;
+  int? fellowshipAttendanceDefaultersCount;
   int? outstandingVisitationsCount;
   int? outstandingPrayerCount;
   int? outstandingTelepastoringCount;
@@ -17,6 +18,7 @@ class HomeScreenChurch {
     required this.typename,
     required this.name,
     required this.imclTotal,
+    this.fellowshipAttendanceDefaultersCount,
     this.outstandingVisitationsCount,
     this.outstandingPrayerCount,
     this.outstandingTelepastoringCount,

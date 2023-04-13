@@ -111,7 +111,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
   );
 }
 
-Widget defaultersLevels(ChurchLevel churchLevel) {
+Widget defaultersLevels(ChurchLevel churchLevel, int? defaulterCount) {
   const permittedLevels = [
     ChurchLevel.constituency,
     ChurchLevel.council,
@@ -130,7 +130,11 @@ Widget defaultersLevels(ChurchLevel churchLevel) {
     icon: FontAwesomeIcons.userXmark,
     navKey: 'attendance-defaulters',
     route: '/${level.lowerCase}/attendance-defaulters',
-    permitted: [Role.values.byName('leader${level.properCase}')],
+    alertNumber: defaulterCount,
+    permitted: [
+      Role.values.byName('leader${level.properCase}'),
+      Role.values.byName('admin${level.properCase}')
+    ],
   );
 }
 
