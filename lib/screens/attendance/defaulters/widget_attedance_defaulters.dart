@@ -17,8 +17,8 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
     ChurchString subChurchString = ChurchString(subChurchLevel.name.toLowerCase());
     int? subChurchCount;
 
-    if (church.bacentaCount != null) {
-      subChurchCount = church.bacentaCount;
+    if (church.fellowshipCount != null) {
+      subChurchCount = church.fellowshipCount;
     }
 
     if (church.constituencyCount != null) {
@@ -37,7 +37,12 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
-          const Padding(padding: EdgeInsets.all(30)),
+          const Padding(padding: EdgeInsets.all(20)),
+          const Text(
+            'This Week',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const Padding(padding: EdgeInsets.all(10)),
           InkWell(
             onTap: () => Navigator.of(context)
                 .pushNamed('/${churchLevel.name}-by-${subChurchLevel.name}/attendance-defaulters'),
@@ -48,7 +53,7 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 12, bottom: 12),
                 child: ListTile(
-                  title: Center(child: Text(subChurchString.pluralProperCase)),
+                  title: const Center(child: Text('Fellowships')),
                   subtitle: Center(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -68,16 +73,16 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.all(5)),
           DefaultersMenuCard(
-            number: church.bacentaAttendanceDefaultersCount,
+            number: church.fellowshipBussingAttendanceDefaultersCount,
             churchLevel: church.typename.toLowerCase(),
-            attendanceCategory: 'bacenta',
-            title: 'Did Not Fill Bacenta Attendance',
+            attendanceCategory: 'bussing',
+            title: 'Did Not Fill Bussing Attendance',
           ),
           const Padding(padding: EdgeInsets.all(10)),
           DefaultersMenuCard(
-            number: church.fellowshipAttendanceDefaultersCount,
+            number: church.fellowshipServiceAttendanceDefaultersCount,
             churchLevel: church.typename.toLowerCase(),
-            attendanceCategory: 'fellowship',
+            attendanceCategory: 'service',
             title: 'Did Not Fill Fellowship Attendance',
           ),
         ],

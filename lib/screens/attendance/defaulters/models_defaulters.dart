@@ -23,8 +23,9 @@ class ChurchBySubChurchForAttendanceDefaulters extends Church {
 
 @JsonSerializable()
 class ChurchForAttendanceDefaulters extends Church {
-  int fellowshipAttendanceDefaultersCount = 0;
-  int bacentaAttendanceDefaultersCount = 0;
+  int fellowshipServiceAttendanceDefaultersCount = 0;
+  int fellowshipBussingAttendanceDefaultersCount = 0;
+  int? fellowshipCount = 0;
   int? bacentaCount = 0;
   int? constituencyCount = 0;
   int? councilCount = 0;
@@ -33,8 +34,8 @@ class ChurchForAttendanceDefaulters extends Church {
   int? bacentaBussingThisWeekCount = 0;
 
   ChurchForAttendanceDefaulters({
-    required this.fellowshipAttendanceDefaultersCount,
-    required this.bacentaAttendanceDefaultersCount,
+    required this.fellowshipServiceAttendanceDefaultersCount,
+    required this.fellowshipBussingAttendanceDefaultersCount,
     required this.bacentaCount,
     required this.constituencyCount,
     required this.councilCount,
@@ -50,29 +51,29 @@ class ChurchForAttendanceDefaulters extends Church {
 }
 
 @JsonSerializable()
-class ChurchForFellowshipAttendanceDefaultersList extends Church {
-  List<Church> fellowshipAttendanceDefaulters;
+class ChurchForServiceAttendanceDefaultersList extends Church {
+  List<Church> fellowshipServiceAttendanceDefaulters;
 
-  ChurchForFellowshipAttendanceDefaultersList({
-    required this.fellowshipAttendanceDefaulters,
+  ChurchForServiceAttendanceDefaultersList({
+    required this.fellowshipServiceAttendanceDefaulters,
   });
 
-  factory ChurchForFellowshipAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
-      _$ChurchForFellowshipAttendanceDefaultersListFromJson(json);
+  factory ChurchForServiceAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForServiceAttendanceDefaultersListFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$ChurchForFellowshipAttendanceDefaultersListToJson(this);
+  Map<String, dynamic> toJson() => _$ChurchForServiceAttendanceDefaultersListToJson(this);
 }
 
 @JsonSerializable()
-class ChurchForBacentaAttendanceDefaultersList extends Church {
-  List<Church> bacentaAttendanceDefaulters;
+class ChurchForBussingAttendanceDefaultersList extends Church {
+  List<Church> fellowshipBussingAttendanceDefaulters;
 
-  ChurchForBacentaAttendanceDefaultersList({
-    required this.bacentaAttendanceDefaulters,
+  ChurchForBussingAttendanceDefaultersList({
+    required this.fellowshipBussingAttendanceDefaulters,
   });
 
-  factory ChurchForBacentaAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
-      _$ChurchForBacentaAttendanceDefaultersListFromJson(json);
+  factory ChurchForBussingAttendanceDefaultersList.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForBussingAttendanceDefaultersListFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$ChurchForBacentaAttendanceDefaultersListToJson(this);
+  Map<String, dynamic> toJson() => _$ChurchForBussingAttendanceDefaultersListToJson(this);
 }

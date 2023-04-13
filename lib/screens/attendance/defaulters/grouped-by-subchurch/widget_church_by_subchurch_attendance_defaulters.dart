@@ -114,10 +114,11 @@ class DefaulterSubChurchCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Did Not Mark Fellowship Attendance ${church.fellowshipAttendanceDefaultersCount}',
+                'Did Not Mark Service Attendance ${church.fellowshipServiceAttendanceDefaultersCount}',
                 style: TextStyle(
                     fontSize: 16,
-                    color: _setSemanticColour(church.fellowshipAttendanceDefaultersCount == 0)),
+                    color:
+                        _setSemanticColour(church.fellowshipServiceAttendanceDefaultersCount == 0)),
               ),
               Text(
                 'Number of Bacentas Bussed ${church.bacentaBussingThisWeekCount}',
@@ -127,10 +128,10 @@ class DefaulterSubChurchCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Did Not Mark Bacenta Attendance ${church.bacentaAttendanceDefaultersCount}',
+                'Did Not Mark Bussing Attendance ${church.fellowshipBussingAttendanceDefaultersCount}',
                 style: TextStyle(
                   fontSize: 16,
-                  color: _setSemanticColour(church.bacentaAttendanceDefaultersCount == 0),
+                  color: _setSemanticColour(church.fellowshipBussingAttendanceDefaultersCount == 0),
                 ),
               ),
               const Padding(padding: EdgeInsets.all(6)),

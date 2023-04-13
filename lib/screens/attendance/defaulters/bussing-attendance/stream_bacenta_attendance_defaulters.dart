@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/widget_bacenta_defaulters_list.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/widget_bacenta_defaulters_list.dart';
 import 'package:poimen/screens/attendance/defaulters/gql_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/models_defaulters.dart';
 import 'package:poimen/services/gql_query_container.dart';
@@ -15,15 +15,15 @@ class StreamBacentaAttendanceDefaultersScreen extends StatelessWidget {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getStreamBacentaAttendanceDefaultersList,
+      query: getStreamBussingAttendanceDefaultersList,
       variables: {'id': churchState.streamId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final stream = ChurchForBacentaAttendanceDefaultersList.fromJson(data?['streams'][0]);
+        final stream = ChurchForBussingAttendanceDefaultersList.fromJson(data?['streams'][0]);
 
-        body = BacentaAttendanceDefaultersList(
+        body = BussingAttendanceDefaultersList(
           church: stream,
         );
 

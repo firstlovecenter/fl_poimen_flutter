@@ -8,10 +8,10 @@ import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/no_data.dart';
 
-class FellowshipAttendanceDefaultersList extends StatelessWidget {
-  const FellowshipAttendanceDefaultersList({Key? key, required this.church}) : super(key: key);
+class BussingAttendanceDefaultersList extends StatelessWidget {
+  const BussingAttendanceDefaultersList({Key? key, required this.church}) : super(key: key);
 
-  final ChurchForFellowshipAttendanceDefaultersList church;
+  final ChurchForBussingAttendanceDefaultersList church;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class FellowshipAttendanceDefaultersList extends StatelessWidget {
           const Padding(padding: EdgeInsets.all(16.0)),
           const Center(
             child: Text(
-              "Did Not Fill Fellowship Attendance",
+              "Did Not Fill Bussing Attendance",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -31,8 +31,8 @@ class FellowshipAttendanceDefaultersList extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.all(16.0)),
           ...noDataChecker(
-            church.fellowshipAttendanceDefaulters.map((fellowship) {
-              return _showAttendanceDefaultersList(fellowship);
+            church.fellowshipBussingAttendanceDefaulters.map((bacenta) {
+              return _showAttendanceDefaultersList(bacenta);
             }).toList(),
           ),
         ],

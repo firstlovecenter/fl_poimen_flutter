@@ -6,20 +6,20 @@ final getConstituencyAttendanceDefaulters = gql('''
        id
        name
        typename
-       bacentaCount
-       fellowshipAttendanceDefaultersCount
-       bacentaAttendanceDefaultersCount
+       fellowshipCount 
+       fellowshipServiceAttendanceDefaultersCount
+       fellowshipBussingAttendanceDefaultersCount
      }
    }
   ''');
 
-final getConstituencyFellowshipAttendanceDefaultersList = gql('''
- query getConstituencyFellowshipAttendanceDefaultersList(\$id: ID!) {
+final getConstituencyFellowshipServiceAttendanceDefaultersList = gql('''
+ query getConstituencyFellowshipServiceAttendanceDefaultersList(\$id: ID!) {
   constituencies(where: { id: \$id }) {
     id
     name
     typename
-    fellowshipAttendanceDefaulters {
+    fellowshipServiceAttendanceDefaulters {
       id
       name
       typename
@@ -37,13 +37,13 @@ final getConstituencyFellowshipAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getConstituencyBacentaAttendanceDefaultersList = gql('''
- query getConstituencyBacentaAttendanceDefaultersList(\$id: ID!) {
+final getConstituencyBussingAttendanceDefaultersList = gql('''
+ query getConstituencyBussingAttendanceDefaultersList(\$id: ID!) {
   constituencies(where: { id: \$id }) {
     id
     name
     typename
-    bacentaAttendanceDefaulters {
+    fellowshipBussingAttendanceDefaulters {
       id
       name
       typename
@@ -68,8 +68,8 @@ final getCouncilAttendanceDefaulters = gql('''
        name
        typename
        constituencyCount
-       fellowshipAttendanceDefaultersCount
-       bacentaAttendanceDefaultersCount
+       fellowshipServiceAttendanceDefaultersCount
+       fellowshipBussingAttendanceDefaultersCount
      }
    }
   ''');
@@ -80,7 +80,7 @@ final getCouncilFellowshipAttendanceDefaultersList = gql('''
     id
     name
     typename
-    fellowshipAttendanceDefaulters {
+    fellowshipServiceAttendanceDefaulters {
       id
       name
       typename
@@ -98,13 +98,13 @@ final getCouncilFellowshipAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getCouncilBacentaAttendanceDefaultersList = gql('''
- query getCouncilBacentaAttendanceDefaultersList(\$id: ID!) {
+final getCouncilBussingAttendanceDefaultersList = gql('''
+ query getCouncilBussingAttendanceDefaultersList(\$id: ID!) {
   councils(where: { id: \$id }) {
     id
     name
     typename
-    bacentaAttendanceDefaulters {
+    fellowshipBussingAttendanceDefaulters {
       id
       name
       typename
@@ -129,8 +129,8 @@ final getStreamAttendanceDefaulters = gql('''
        name
        typename
        councilCount
-       fellowshipAttendanceDefaultersCount
-       bacentaAttendanceDefaultersCount
+       fellowshipServiceAttendanceDefaultersCount
+       fellowshipBussingAttendanceDefaultersCount
      }
    }
   ''');
@@ -141,7 +141,7 @@ final getStreamFellowshipAttendanceDefaultersList = gql('''
     id
     name
     typename
-    fellowshipAttendanceDefaulters {
+    fellowshipServiceAttendanceDefaulters {
       id
       name
       typename
@@ -159,13 +159,13 @@ final getStreamFellowshipAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getStreamBacentaAttendanceDefaultersList = gql('''
- query getStreamBacentaAttendanceDefaultersList(\$id: ID!) {
+final getStreamBussingAttendanceDefaultersList = gql('''
+ query getStreamBussingAttendanceDefaultersList(\$id: ID!) {
   streams(where: { id: \$id }) {
     id
     name
     typename
-    bacentaAttendanceDefaulters {
+    fellowshipBussingAttendanceDefaulters {
       id
       name
       typename
@@ -190,8 +190,8 @@ final getGatheringAttendanceDefaulters = gql('''
        name
        typename
        streamCount
-       fellowshipAttendanceDefaultersCount
-       bacentaAttendanceDefaultersCount
+       fellowshipServiceAttendanceDefaultersCount
+       fellowshipBussingAttendanceDefaultersCount
      }
    }
   ''');
@@ -202,7 +202,7 @@ final getGatheringFellowshipAttendanceDefaultersList = gql('''
     id
     name
     typename
-    fellowshipAttendanceDefaulters {
+    fellowshipServiceAttendanceDefaulters {
       id
       name
       typename
@@ -220,13 +220,13 @@ final getGatheringFellowshipAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getGatheringBacentaAttendanceDefaultersList = gql('''
- query getGatheringBacentaAttendanceDefaultersList(\$id: ID!) {
+final getGatheringBussingAttendanceDefaultersList = gql('''
+ query getGatheringBussingAttendanceDefaultersList(\$id: ID!) {
   gatheringServices(where: { id: \$id }) {
     id
     name
     typename
-    bacentaAttendanceDefaulters {
+    fellowshipBussingAttendanceDefaulters {
       id
       name
       typename

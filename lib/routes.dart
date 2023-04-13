@@ -22,14 +22,14 @@ import 'package:poimen/screens/duties/visitation/council_completed_visitations.d
 import 'package:poimen/screens/duties/visitation/council_outstanding_visitations.dart';
 import 'package:poimen/screens/duties/visitation/fellowship_completed_visitations.dart';
 import 'package:poimen/screens/duties/visitation/fellowship_outstanding_visitations.dart';
-import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/constituency_bacenta_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/council_bacenta_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/gathering_bacenta_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/bacenta-attendance/stream_bacenta_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/constituency_fellowship_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/council_fellowship_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/gathering_fellowship_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/fellowship-attendance/stream_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/constituency_bacenta_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/council_bacenta_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/gathering_bacenta_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/stream_bacenta_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/constituency_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/council_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/gathering_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/gathering_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/council_by_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/gathering_by_stream_defaulters.dart';
@@ -137,20 +137,19 @@ var appRoutes = {
   '/bussingrecord/attendance-report': (context) => const BussingAttendanceReportScreen(),
 
 // Attendance Defaulters
-  '/constituency/fellowship-attendance-defaulters': (context) =>
-      const ConstituencyFellowshipAttendanceDefaultersScreen(),
-  '/constituency/bacenta-attendance-defaulters': (context) =>
-      const ConstituencyBacentaAttendanceDefaultersScreen(),
+  '/constituency/service-attendance-defaulters': (context) =>
+      const ConstituencyServiceAttendanceDefaultersScreen(),
+  '/constituency/bussing-attendance-defaulters': (context) =>
+      const ConstituencyBussingAttendanceDefaultersScreen(),
   '/council/fellowship-attendance-defaulters': (context) =>
-      const CouncilFellowshipAttendanceDefaultersScreen(),
+      const CouncilAttendanceDefaultersScreen(),
   '/council/bacenta-attendance-defaulters': (context) =>
       const CouncilBacentaAttendanceDefaultersScreen(),
-  '/stream/fellowship-attendance-defaulters': (context) =>
-      const StreamFellowshipAttendanceDefaultersScreen(),
+  '/stream/fellowship-attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),
   '/stream/bacenta-attendance-defaulters': (context) =>
       const StreamBacentaAttendanceDefaultersScreen(),
   '/gatheringservice/fellowship-attendance-defaulters': (context) =>
-      const GatheringFellowshipAttendanceDefaultersScreen(),
+      const GatheringAttendanceDefaultersScreen(),
   '/gatheringservice/bacenta-attendance-defaulters': (context) =>
       const GatheringBacentaAttendanceDefaultersScreen(),
 
