@@ -19,10 +19,19 @@ final getCouncilAttendanceDefaultersByConstituency = gql('''
             whatsappNumber
             pictureUrl
           }
+          admin {
+            id
+            firstName
+            lastName
+            typename
+            phoneNumber
+            whatsappNumber
+            pictureUrl
+          }
           fellowshipServicesThisWeekCount
-          fellowshipAttendanceDefaultersCount
-          bacentaBussingThisWeekCount
-          bacentaAttendanceDefaultersCount
+          fellowshipServiceAttendanceDefaultersCount
+          fellowshipBussingThisWeekCount
+          fellowshipBussingAttendanceDefaultersCount
        }
      }
    }
@@ -47,10 +56,19 @@ final getStreamAttendanceDefaultersByCouncil = gql('''
             whatsappNumber
             pictureUrl
           }
+          admin {
+            id
+            firstName
+            lastName
+            typename
+            phoneNumber
+            whatsappNumber
+            pictureUrl
+          }
           fellowshipServicesThisWeekCount
-          fellowshipAttendanceDefaultersCount
-          bacentaBussingThisWeekCount
-          bacentaAttendanceDefaultersCount
+          fellowshipServiceAttendanceDefaultersCount
+          fellowshipBussingThisWeekCount
+          fellowshipBussingAttendanceDefaultersCount
        }
      }
    }
@@ -75,10 +93,19 @@ final getGatheringAttendanceDefaultersByStream = gql('''
             whatsappNumber
             pictureUrl
           }
+          admin {
+            id
+            firstName
+            lastName
+            typename
+            phoneNumber
+            whatsappNumber
+            pictureUrl
+          }
           fellowshipServicesThisWeekCount
-          fellowshipAttendanceDefaultersCount
-          bacentaBussingThisWeekCount
-          bacentaAttendanceDefaultersCount
+          fellowshipServiceAttendanceDefaultersCount
+          fellowshipBussingThisWeekCount
+          fellowshipBussingAttendanceDefaultersCount
        }
      }
    }

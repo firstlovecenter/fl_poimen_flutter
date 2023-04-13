@@ -9,6 +9,7 @@ part 'models_membership.g.dart';
 @JsonSerializable()
 class Church extends ProfileChurch {
   MemberForList? leader;
+  MemberForList? admin;
 
   Church({
     this.leader,

@@ -108,9 +108,8 @@ class DefaulterSubChurchCard extends StatelessWidget {
               const Padding(padding: EdgeInsets.all(5)),
               Text(
                 'Total Number of Services ${church.fellowshipServicesThisWeekCount}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
-                  color: _setSemanticColour(church.fellowshipServicesThisWeekCount != 0),
                 ),
               ),
               Text(
@@ -121,10 +120,9 @@ class DefaulterSubChurchCard extends StatelessWidget {
                         _setSemanticColour(church.fellowshipServiceAttendanceDefaultersCount == 0)),
               ),
               Text(
-                'Number of Bacentas Bussed ${church.bacentaBussingThisWeekCount}',
-                style: TextStyle(
+                'Number of Fellowships Bussed This Week ${church.fellowshipBussingThisWeekCount}',
+                style: const TextStyle(
                   fontSize: 16,
-                  color: _setSemanticColour(church.bacentaBussingThisWeekCount != 0),
                 ),
               ),
               Text(
@@ -136,7 +134,9 @@ class DefaulterSubChurchCard extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.all(6)),
               Text(
-                '${church.leader?.firstName} ${church.leader?.lastName}',
+                churchState.roleType == ChurchRole.admin && church.admin != null
+                    ? '${church.admin?.firstName} ${church.admin?.lastName}'
+                    : '${church.leader?.firstName} ${church.leader?.lastName}',
                 style: const TextStyle(
                   fontSize: 16,
                 ),
@@ -146,14 +146,20 @@ class DefaulterSubChurchCard extends StatelessWidget {
                   ContactIconRect(
                     icon: FontAwesomeIcons.phone,
                     color: PoimenTheme.phoneColor,
-                    phoneNumber: church.leader?.phoneNumber,
+                    phoneNumber: churchState.roleType == ChurchRole.admin
+                        ? church.admin?.phoneNumber
+                        : church.leader?.phoneNumber,
                   ),
                   ContactIconRect(
                     icon: FontAwesomeIcons.whatsapp,
                     color: PoimenTheme.whatsappColor,
                     whatsAppInfo: WhatsAppInfo(
-                      firstName: church.leader?.firstName ?? '',
-                      number: church.leader?.whatsappNumber ?? '',
+                      firstName: churchState.roleType == ChurchRole.admin
+                          ? church.admin?.firstName ?? ''
+                          : church.leader?.firstName ?? '',
+                      number: churchState.roleType == ChurchRole.admin
+                          ? church.admin?.whatsappNumber ?? ''
+                          : church.leader?.whatsappNumber ?? '',
                     ),
                   )
                 ],

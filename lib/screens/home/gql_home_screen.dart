@@ -88,7 +88,7 @@ final getCouncilHomeScreen = gql('''
       id
       typename
       name
-       imclTotal
+      imclTotal
       outstandingVisitationsCount
       outstandingPrayerCount
       outstandingTelepastoringCount

@@ -20,6 +20,9 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
     if (church.fellowshipCount != null) {
       subChurchCount = church.fellowshipCount;
     }
+    if (church.bacentaCount != null) {
+      subChurchCount = church.bacentaCount;
+    }
 
     if (church.constituencyCount != null) {
       subChurchCount = church.constituencyCount;
@@ -53,7 +56,7 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 12, bottom: 12),
                 child: ListTile(
-                  title: const Center(child: Text('Fellowships')),
+                  title: Center(child: Text(subChurchString.pluralProperCase)),
                   subtitle: Center(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),

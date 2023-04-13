@@ -77,7 +77,10 @@ ChurchForOutstandingTelepastoringList
           ..name = json['name'] as String
           ..leader = json['leader'] == null
               ? null
-              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
+          ..admin = json['admin'] == null
+              ? null
+              : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForOutstandingTelepastoringListToJson(
         ChurchForOutstandingTelepastoringList instance) =>
@@ -86,6 +89,7 @@ Map<String, dynamic> _$ChurchForOutstandingTelepastoringListToJson(
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
+      'admin': instance.admin,
       'completedTelepastoringCount': instance.completedTelepastoringCount,
       'outstandingTelepastoring': instance.outstandingTelepastoring,
     };
@@ -106,7 +110,10 @@ ChurchForCompletedTelepastoringList
           ..name = json['name'] as String
           ..leader = json['leader'] == null
               ? null
-              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
+          ..admin = json['admin'] == null
+              ? null
+              : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForCompletedTelepastoringListToJson(
         ChurchForCompletedTelepastoringList instance) =>
@@ -115,6 +122,7 @@ Map<String, dynamic> _$ChurchForCompletedTelepastoringListToJson(
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
+      'admin': instance.admin,
       'outstandingTelepastoringCount': instance.outstandingTelepastoringCount,
       'completedTelepastoring': instance.completedTelepastoring,
     };

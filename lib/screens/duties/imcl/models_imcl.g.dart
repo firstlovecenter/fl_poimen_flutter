@@ -47,7 +47,10 @@ ChurchForImclList _$ChurchForImclListFromJson(Map<String, dynamic> json) =>
       ..name = json['name'] as String
       ..leader = json['leader'] == null
           ? null
-          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>);
+          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
+      ..admin = json['admin'] == null
+          ? null
+          : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ChurchForImclListToJson(ChurchForImclList instance) =>
     <String, dynamic>{
@@ -55,6 +58,7 @@ Map<String, dynamic> _$ChurchForImclListToJson(ChurchForImclList instance) =>
       'typename': instance.typename,
       'name': instance.name,
       'leader': instance.leader,
+      'admin': instance.admin,
       'imcls': instance.imcls,
     };
 
