@@ -31,7 +31,7 @@ class ChurchForAttendanceDefaulters extends Church {
   int? councilCount = 0;
   int? streamCount = 0;
   int? fellowshipServicesThisWeekCount = 0;
-  int? fellowshipBussingThisWeekCount = 0;
+  int? fellowshipBussingLastWeekCount = 0;
 
   ChurchForAttendanceDefaulters({
     required this.fellowshipServiceAttendanceDefaultersCount,
@@ -41,7 +41,7 @@ class ChurchForAttendanceDefaulters extends Church {
     required this.councilCount,
     required this.streamCount,
     required this.fellowshipServicesThisWeekCount,
-    required this.fellowshipBussingThisWeekCount,
+    required this.fellowshipBussingLastWeekCount,
   });
 
   factory ChurchForAttendanceDefaulters.fromJson(Map<String, dynamic> json) =>

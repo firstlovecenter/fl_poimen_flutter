@@ -59,8 +59,8 @@ ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
       streamCount: json['streamCount'] as int?,
       fellowshipServicesThisWeekCount:
           json['fellowshipServicesThisWeekCount'] as int?,
-      fellowshipBussingThisWeekCount:
-          json['fellowshipBussingThisWeekCount'] as int?,
+      fellowshipBussingLastWeekCount:
+          json['fellowshipBussingLastWeekCount'] as int?,
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -92,7 +92,7 @@ Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
       'streamCount': instance.streamCount,
       'fellowshipServicesThisWeekCount':
           instance.fellowshipServicesThisWeekCount,
-      'fellowshipBussingThisWeekCount': instance.fellowshipBussingThisWeekCount,
+      'fellowshipBussingLastWeekCount': instance.fellowshipBussingLastWeekCount,
     };
 
 ChurchForServiceAttendanceDefaultersList

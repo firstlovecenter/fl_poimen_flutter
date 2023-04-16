@@ -12,8 +12,10 @@ HomeScreenChurch _$HomeScreenChurchFromJson(Map<String, dynamic> json) =>
       typename: json['typename'] as String,
       name: json['name'] as String,
       imclTotal: json['imclTotal'] as int,
-      fellowshipAttendanceDefaultersCount:
-          json['fellowshipAttendanceDefaultersCount'] as int?,
+      fellowshipServiceAttendanceDefaultersCount:
+          json['fellowshipServiceAttendanceDefaultersCount'] as int?,
+      fellowshipBussingAttendanceDefaultersCount:
+          json['fellowshipBussingAttendanceDefaultersCount'] as int?,
       outstandingVisitationsCount: json['outstandingVisitationsCount'] as int?,
       outstandingPrayerCount: json['outstandingPrayerCount'] as int?,
       outstandingTelepastoringCount:
@@ -30,8 +32,10 @@ Map<String, dynamic> _$HomeScreenChurchToJson(HomeScreenChurch instance) =>
       'typename': instance.typename,
       'name': instance.name,
       'imclTotal': instance.imclTotal,
-      'fellowshipAttendanceDefaultersCount':
-          instance.fellowshipAttendanceDefaultersCount,
+      'fellowshipServiceAttendanceDefaultersCount':
+          instance.fellowshipServiceAttendanceDefaultersCount,
+      'fellowshipBussingAttendanceDefaultersCount':
+          instance.fellowshipBussingAttendanceDefaultersCount,
       'outstandingVisitationsCount': instance.outstandingVisitationsCount,
       'outstandingPrayerCount': instance.outstandingPrayerCount,
       'outstandingTelepastoringCount': instance.outstandingTelepastoringCount,

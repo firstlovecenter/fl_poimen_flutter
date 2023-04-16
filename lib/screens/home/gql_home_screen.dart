@@ -52,7 +52,8 @@ final getConstituencyHomeScreen = gql('''
       outstandingVisitationsCount
       outstandingPrayerCount
       outstandingTelepastoringCount
-      fellowshipAttendanceDefaultersCount
+      fellowshipServiceAttendanceDefaultersCount
+      fellowshipBussingAttendanceDefaultersCount
       currentPastoralCycle {
         id
         typename
@@ -92,7 +93,8 @@ final getCouncilHomeScreen = gql('''
       outstandingVisitationsCount
       outstandingPrayerCount
       outstandingTelepastoringCount
-      fellowshipAttendanceDefaultersCount
+      fellowshipServiceAttendanceDefaultersCount
+      fellowshipBussingAttendanceDefaultersCount
       currentPastoralCycle {
         id
         typename
@@ -111,7 +113,8 @@ final getStreamHomeScreen = gql('''
       typename
       name
       imclTotal
-      fellowshipAttendanceDefaultersCount
+      fellowshipServiceAttendanceDefaultersCount
+      fellowshipBussingAttendanceDefaultersCount
     }
   }
 ''');
@@ -123,7 +126,8 @@ final getGatheringServiceHomeScreen = gql('''
       typename
       name
       imclTotal
-      fellowshipAttendanceDefaultersCount
+      fellowshipServiceAttendanceDefaultersCount
+      fellowshipBussingAttendanceDefaultersCount
     }
   }
 ''');

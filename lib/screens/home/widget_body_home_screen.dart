@@ -47,6 +47,13 @@ class HomeScreenBody extends StatelessWidget {
       whatsappNumber: '0000',
     );
     final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);
+    int? totalFellowshipAttendanceDefaulters;
+
+    if (church.fellowshipBussingAttendanceDefaultersCount != null &&
+        church.fellowshipBussingAttendanceDefaultersCount != null) {
+      totalFellowshipAttendanceDefaulters = church.fellowshipBussingAttendanceDefaultersCount! +
+          church.fellowshipServiceAttendanceDefaultersCount!;
+    }
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -103,7 +110,7 @@ class HomeScreenBody extends StatelessWidget {
             route: '/$levelForUrl-members',
             permitted: const [Role.all],
           ),
-          defaultersLevels(churchLevel, church.fellowshipAttendanceDefaultersCount),
+          defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters),
           const Padding(padding: EdgeInsets.all(6.0)),
           const Center(
             child: Text(

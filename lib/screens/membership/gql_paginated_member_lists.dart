@@ -36,6 +36,8 @@ final getGatheringSheepForList = gql('''
             firstName
             lastName
             fullName
+            phoneNumber
+            whatsappNumber
             pictureUrl
           }  
         }

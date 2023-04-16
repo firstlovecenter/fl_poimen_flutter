@@ -1,3 +1,6 @@
+import 'package:poimen/screens/attendance/defaulters/service-attendance/council_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/gathering_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
@@ -138,16 +141,17 @@ var appRoutes = {
       const ConstituencyServiceAttendanceDefaultersScreen(),
   '/constituency/bussing-attendance-defaulters': (context) =>
       const ConstituencyBussingAttendanceDefaultersScreen(),
-  '/council/fellowship-attendance-defaulters': (context) =>
-      const CouncilAttendanceDefaultersScreen(),
-  '/council/bacenta-attendance-defaulters': (context) =>
+  '/council/service-attendance-defaulters': (context) =>
+      const CouncilServiceAttendanceDefaultersScreen(),
+  '/council/bussing-attendance-defaulters': (context) =>
       const CouncilBussingAttendanceDefaultersScreen(),
-  '/stream/fellowship-attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),
-  '/stream/bacenta-attendance-defaulters': (context) =>
+  '/stream/service-attendance-defaulters': (context) =>
+      const StreamServiceAttendanceDefaultersScreen(),
+  '/stream/bussing-attendance-defaulters': (context) =>
       const StreamBussingAttendanceDefaultersScreen(),
-  '/gatheringservice/fellowship-attendance-defaulters': (context) =>
-      const GatheringAttendanceDefaultersScreen(),
-  '/gatheringservice/bacenta-attendance-defaulters': (context) =>
+  '/gatheringservice/service-attendance-defaulters': (context) =>
+      const GatheringServiceAttendanceDefaultersScreen(),
+  '/gatheringservice/bussing-attendance-defaulters': (context) =>
       const GatheringBussingAttendanceDefaultersScreen(),
 
   '/constituency/attendance-defaulters': (context) =>

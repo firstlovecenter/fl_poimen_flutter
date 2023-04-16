@@ -30,7 +30,7 @@ final getCouncilAttendanceDefaultersByConstituency = gql('''
           }
           fellowshipServicesThisWeekCount
           fellowshipServiceAttendanceDefaultersCount
-          fellowshipBussingThisWeekCount
+          fellowshipBussingLastWeekCount
           fellowshipBussingAttendanceDefaultersCount
        }
      }
@@ -67,7 +67,7 @@ final getStreamAttendanceDefaultersByCouncil = gql('''
           }
           fellowshipServicesThisWeekCount
           fellowshipServiceAttendanceDefaultersCount
-          fellowshipBussingThisWeekCount
+          fellowshipBussingLastWeekCount
           fellowshipBussingAttendanceDefaultersCount
        }
      }
@@ -104,7 +104,7 @@ final getGatheringAttendanceDefaultersByStream = gql('''
           }
           fellowshipServicesThisWeekCount
           fellowshipServiceAttendanceDefaultersCount
-          fellowshipBussingThisWeekCount
+          fellowshipBussingLastWeekCount
           fellowshipBussingAttendanceDefaultersCount
        }
      }

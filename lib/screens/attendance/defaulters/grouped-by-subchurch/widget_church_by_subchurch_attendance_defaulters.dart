@@ -120,7 +120,7 @@ class DefaulterSubChurchCard extends StatelessWidget {
                         _setSemanticColour(church.fellowshipServiceAttendanceDefaultersCount == 0)),
               ),
               Text(
-                'Number of Fellowships Bussed This Week ${church.fellowshipBussingThisWeekCount}',
+                'Number of Fellowships Bussed This Week ${church.fellowshipBussingLastWeekCount}',
                 style: const TextStyle(
                   fontSize: 16,
                 ),
