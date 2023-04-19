@@ -61,7 +61,7 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
             child: ListView(children: [
               const Padding(padding: EdgeInsets.all(10)),
               const Text(
-                'These people have not been visited during the current sheperding cycle',
+                'These people have not been visited during the current shepherding cycle',
                 style: TextStyle(fontSize: 16),
               ),
               // a centered card with the number of outstanding visitations
