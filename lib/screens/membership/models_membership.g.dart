@@ -116,6 +116,9 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..pictureUrl = json['pictureUrl'] as String
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
+      ..idlLocation = json['idlLocation'] as String
+      ..howYouJoined = json['howYouJoined'] as String
+      ..location = Neo4jPoint.fromJson(json['location'] as Map<String, dynamic>)
       ..lastFourWeekdayServices =
           (json['lastFourWeekdayServices'] as List<dynamic>)
               .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
@@ -135,6 +138,9 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
+      'idlLocation': instance.idlLocation,
+      'howYouJoined': instance.howYouJoined,
+      'location': instance.location,
       'lastFourWeekdayServices': instance.lastFourWeekdayServices,
       'lastFourWeekendServices': instance.lastFourWeekendServices,
       'gender': instance.gender,

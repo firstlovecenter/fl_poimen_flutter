@@ -11,6 +11,12 @@ final getMemberDetails = gql('''
       pictureUrl
       phoneNumber
       whatsappNumber
+      idlLocation
+      howYouJoined
+      location {
+        latitude
+        longitude
+      }
       lastFourWeekdayServices {
         date
         service
