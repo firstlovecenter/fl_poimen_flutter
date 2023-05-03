@@ -6,8 +6,7 @@ part of 'models_visitation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
-        Map<String, dynamic> json) =>
+OutstandingVisitationForList _$OutstandingVisitationForListFromJson(Map<String, dynamic> json) =>
     OutstandingVisitationForList(
       id: json['id'] as String,
       typename: json['typename'] as String,
@@ -16,12 +15,11 @@ OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
       pictureUrl: json['pictureUrl'] as String,
       phoneNumber: json['phoneNumber'] as String,
       whatsappNumber: json['whatsappNumber'] as String,
-      visitationLocation: json['visitationLocation'] as String,
+      visitationArea: json['visitationArea'] as String,
       status: json['status'] as String?,
     )..lost = json['lost'] as bool?;
 
-Map<String, dynamic> _$OutstandingVisitationForListToJson(
-        OutstandingVisitationForList instance) =>
+Map<String, dynamic> _$OutstandingVisitationForListToJson(OutstandingVisitationForList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
@@ -32,11 +30,10 @@ Map<String, dynamic> _$OutstandingVisitationForListToJson(
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'visitationLocation': instance.visitationLocation,
+      'visitationArea': instance.visitationArea,
     };
 
-CompletedVisitationForList _$CompletedVisitationForListFromJson(
-        Map<String, dynamic> json) =>
+CompletedVisitationForList _$CompletedVisitationForListFromJson(Map<String, dynamic> json) =>
     CompletedVisitationForList(
       id: json['id'] as String,
       typename: json['typename'] as String,
@@ -48,8 +45,7 @@ CompletedVisitationForList _$CompletedVisitationForListFromJson(
       status: json['status'] as String?,
     )..lost = json['lost'] as bool?;
 
-Map<String, dynamic> _$CompletedVisitationForListToJson(
-        CompletedVisitationForList instance) =>
+Map<String, dynamic> _$CompletedVisitationForListToJson(CompletedVisitationForList instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
@@ -66,8 +62,7 @@ ChurchForOutstandingVisitationList _$ChurchForOutstandingVisitationListFromJson(
         Map<String, dynamic> json) =>
     ChurchForOutstandingVisitationList(
       outstandingVisitations: (json['outstandingVisitations'] as List<dynamic>)
-          .map((e) =>
-              OutstandingVisitationForList.fromJson(e as Map<String, dynamic>))
+          .map((e) => OutstandingVisitationForList.fromJson(e as Map<String, dynamic>))
           .toList(),
       completedVisitationsCount: json['completedVisitationsCount'] as int,
     )
@@ -97,8 +92,7 @@ ChurchForCompletedVisitationList _$ChurchForCompletedVisitationListFromJson(
         Map<String, dynamic> json) =>
     ChurchForCompletedVisitationList(
       completedVisitations: (json['completedVisitations'] as List<dynamic>)
-          .map((e) =>
-              CompletedVisitationForList.fromJson(e as Map<String, dynamic>))
+          .map((e) => CompletedVisitationForList.fromJson(e as Map<String, dynamic>))
           .toList(),
       outstandingVisitationsCount: json['outstandingVisitationsCount'] as int,
     )

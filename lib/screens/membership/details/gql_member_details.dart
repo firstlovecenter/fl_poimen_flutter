@@ -11,7 +11,7 @@ final getMemberDetails = gql('''
       pictureUrl
       phoneNumber
       whatsappNumber
-      visitationLocation
+      visitationArea
       howYouJoined
       location {
         latitude

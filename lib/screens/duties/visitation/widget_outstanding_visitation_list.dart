@@ -43,7 +43,7 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
     List<OutstandingVisitationForList> filteredList = [];
     for (OutstandingVisitationForList member in widget.church.outstandingVisitations) {
       final String memberName =
-          '${member.firstName} ${member.lastName} ${member.visitationLocation}'.toLowerCase();
+          '${member.firstName} ${member.lastName} ${member.visitationArea}'.toLowerCase();
       if (memberName.contains(query)) {
         filteredList.add(member);
       }
@@ -173,7 +173,7 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(member.visitationLocation),
+                    Text(member.visitationArea),
                     Text(member.status!),
                   ],
                 ),
