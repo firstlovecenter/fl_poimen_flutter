@@ -83,7 +83,7 @@ class Last4Services {
 
 @JsonSerializable()
 class Member extends MemberForList {
-  String idlLocation = '';
+  String visitationLocation = '';
   String howYouJoined = '';
   Neo4jPoint location = Neo4jPoint();
   List<Last4Services> lastFourWeekdayServices = [];

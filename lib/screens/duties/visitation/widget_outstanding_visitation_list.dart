@@ -42,7 +42,8 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
     final String query = _searchController.text.toLowerCase();
     List<OutstandingVisitationForList> filteredList = [];
     for (OutstandingVisitationForList member in widget.church.outstandingVisitations) {
-      final String memberName = '${member.firstName} ${member.lastName}'.toLowerCase();
+      final String memberName =
+          '${member.firstName} ${member.lastName} ${member.visitationLocation}'.toLowerCase();
       if (memberName.contains(query)) {
         filteredList.add(member);
       }
@@ -169,7 +170,14 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                   ),
                 ),
                 title: Text('${member.firstName} ${member.lastName}'),
-                subtitle: Text(member.status!),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(member.visitationLocation),
+                    Text(member.status!),
+                  ],
+                ),
+                isThreeLine: true,
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                   ContactIcon(
                     icon: Icons.phone,

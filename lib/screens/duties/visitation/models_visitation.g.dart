@@ -16,6 +16,7 @@ OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
       pictureUrl: json['pictureUrl'] as String,
       phoneNumber: json['phoneNumber'] as String,
       whatsappNumber: json['whatsappNumber'] as String,
+      visitationLocation: json['visitationLocation'] as String,
       status: json['status'] as String?,
     )..lost = json['lost'] as bool?;
 
@@ -31,6 +32,7 @@ Map<String, dynamic> _$OutstandingVisitationForListToJson(
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
+      'visitationLocation': instance.visitationLocation,
     };
 
 CompletedVisitationForList _$CompletedVisitationForListFromJson(

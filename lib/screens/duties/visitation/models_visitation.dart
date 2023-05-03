@@ -5,6 +5,8 @@ part 'models_visitation.g.dart';
 
 @JsonSerializable()
 class OutstandingVisitationForList extends MemberForList {
+  String visitationLocation = '';
+
   OutstandingVisitationForList({
     required String id,
     required String typename,
@@ -13,6 +15,7 @@ class OutstandingVisitationForList extends MemberForList {
     required String pictureUrl,
     required String phoneNumber,
     required String whatsappNumber,
+    required this.visitationLocation,
     String? status,
   }) : super(
           id: id,
