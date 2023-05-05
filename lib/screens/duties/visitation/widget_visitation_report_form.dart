@@ -30,6 +30,8 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _pictureUrl = '';
   Neo4jPoint location = Neo4jPoint(latitude: 0.0, longitude: 0.0);
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   void setPictureUrl(String url) {
     setState(() {
@@ -41,11 +43,14 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     setState(() {
       location = Neo4jPoint(latitude: latitude, longitude: longitude);
     });
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     String visitationReport = '';
+    String visitationArea = '';
+
     bool locationSet = (location.latitude + location.longitude != 0.0);
     var churchState = Provider.of<SharedState>(context);
     String level = churchState.church.typename;
@@ -130,7 +135,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
-        height: 700,
+        height: 750,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ListView(
@@ -166,25 +171,109 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                       setPictureUrl: setPictureUrl,
                       child: const Text('Upload Picture'),
                     ),
-                    LocationPickerButton(
-                      setLocation: setLocation,
-                      child: locationSet
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('Location Set'),
-                                Padding(padding: EdgeInsets.all(8.0)),
-                                CircleAvatar(
-                                  backgroundColor: Colors.green,
-                                  radius: 15,
-                                  child: Icon(
-                                    FontAwesomeIcons.check,
-                                    color: Colors.white,
+                    const Padding(padding: EdgeInsets.all(8.0)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            backgroundColor: Colors.blueGrey,
+                          ),
+                          child: locationSet
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('Location Set'),
+                                    Padding(padding: EdgeInsets.all(8.0)),
+                                    CircleAvatar(
+                                      backgroundColor: Colors.green,
+                                      radius: 15,
+                                      child: Icon(
+                                        FontAwesomeIcons.check,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : const Text('Update Location'),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0)),
+                                  title: const Text('Input Location Data'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextFormField(
+                                        initialValue: location.latitude.toString(),
+                                        keyboardType:
+                                            const TextInputType.numberWithOptions(decimal: true),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter a value';
+                                          }
+                                          double? doubleValue = double.tryParse(value);
+                                          if (doubleValue == null) {
+                                            return 'Please enter a valid double value';
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          latitude = double.parse(value);
+                                        },
+                                        decoration: const InputDecoration(
+                                          labelText: 'Latitude',
+                                          hintText: 'Latitude',
+                                        ),
+                                      ),
+                                      TextFormField(
+                                        initialValue: location.longitude.toString(),
+                                        keyboardType:
+                                            const TextInputType.numberWithOptions(decimal: true),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter a value';
+                                          }
+                                          double? doubleValue = double.tryParse(value);
+                                          if (doubleValue == null) {
+                                            return 'Please enter a valid double value';
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          longitude = double.parse(value);
+                                        },
+                                        decoration: const InputDecoration(
+                                          labelText: 'Longitude',
+                                          hintText: 'Longitude',
+                                        ),
+                                      ),
+                                      LocationPickerButton(
+                                        setLocation: setLocation,
+                                        child: locationSet
+                                            ? const Text('Change Location')
+                                            : const Text('Use Current Locations'),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            )
-                          : const Text('Get Location'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        setLocation(latitude, longitude);
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
                     ),
                     !locationSet
                         ? const Padding(
@@ -197,6 +286,22 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                           )
                         : Container(),
                     const Padding(padding: EdgeInsets.all(8.0)),
+                    TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        labelText: 'Name of Area',
+                        hintText: 'What is the name of the area?',
+                      ),
+                      onSaved: (String? value) {
+                        visitationArea = value ?? '';
+                      },
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                    ),
                     TextFormField(
                       maxLines: 2,
                       textCapitalization: TextCapitalization.sentences,
@@ -236,6 +341,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                                   reportMutation.runMutation({
                                     'latitude': location.latitude,
                                     'longitude': location.longitude,
+                                    'visitationArea': visitationArea,
                                     'picture': _pictureUrl,
                                     'comment': visitationReport,
                                     'roleLevel': level,

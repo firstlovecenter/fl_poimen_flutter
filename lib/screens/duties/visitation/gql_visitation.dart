@@ -176,6 +176,7 @@ final logFellowshipVisitationActivity = gql('''
 mutation LogFellowshipVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
+    \$visitationArea: String!
     \$picture: String!
     \$comment: String!
     \$roleLevel: String!
@@ -184,6 +185,7 @@ mutation LogFellowshipVisitationActivity(
   LogFellowshipVisitationActivity(
     latitude: \$latitude,
     longitude: \$longitude,
+    visitationArea: \$visitationArea,
     picture: \$picture,
     comment: \$comment, 
     roleLevel: \$roleLevel, 
@@ -221,6 +223,7 @@ final logBacentaVisitationActivity = gql('''
 mutation LogBacentaVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
+    \$visitationArea: String!
     \$picture: String!
     \$comment: String!
     \$roleLevel: String!
@@ -229,6 +232,7 @@ mutation LogBacentaVisitationActivity(
   LogBacentaVisitationActivity(
     latitude: \$latitude,
     longitude: \$longitude,
+    visitationArea: \$visitationArea,
     picture: \$picture,
     comment: \$comment, 
     roleLevel: \$roleLevel, 
@@ -256,6 +260,7 @@ final logConstituencyVisitationActivity = gql('''
 mutation LogConstituencyVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
+    \$visitationArea: String!
     \$picture: String!
     \$comment: String!
     \$roleLevel: String!
@@ -264,6 +269,7 @@ mutation LogConstituencyVisitationActivity(
   LogConstituencyVisitationActivity(
     latitude: \$latitude,
     longitude: \$longitude,
+    visitationArea: \$visitationArea,
     picture: \$picture,
     comment: \$comment, 
     roleLevel: \$roleLevel, 
@@ -291,6 +297,7 @@ final logCouncilVisitationActivity = gql('''
 mutation LogCouncilVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
+    \$visitationArea: String!
     \$picture: String!
     \$comment: String!
     \$roleLevel: String!
@@ -299,6 +306,7 @@ mutation LogCouncilVisitationActivity(
   LogCouncilVisitationActivity(
     latitude: \$latitude,
     longitude: \$longitude,
+    visitationArea: \$visitationArea,
     picture: \$picture,
     comment: \$comment, 
     roleLevel: \$roleLevel, 
