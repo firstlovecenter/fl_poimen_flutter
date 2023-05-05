@@ -61,7 +61,7 @@ class ChurchOutstandingPrayerListState extends State<ChurchOutstandingPrayerList
             child: ListView(children: [
               const Padding(padding: EdgeInsets.all(10)),
               const Text(
-                'These people have not been prayed for during the current sheperding cycle',
+                'These people have not been prayed for during the current shepherding cycle',
                 style: TextStyle(fontSize: 16),
               ),
               // a centered card with the number of outstanding prayers
