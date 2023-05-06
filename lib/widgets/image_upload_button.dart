@@ -81,7 +81,7 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
                           CloudinaryFile.fromFile(
                             image?.path ?? '',
                             publicId:
-                                '${authUser?.given_name}-${authUser?.family_name}-$memberId/${date}_${getRandomString(16)}',
+                                'poimen/${authUser?.given_name}-${authUser?.family_name}-$memberId/${date}_${getRandomString(16)}',
                             identifier: 'user/user-$memberId',
                             tags: ['membership picture', 'face-detection'],
                             context: {

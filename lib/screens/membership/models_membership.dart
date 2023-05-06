@@ -85,7 +85,7 @@ class Last4Services {
 class Member extends MemberForList {
   String visitationArea = '';
   String howYouJoined = '';
-  Neo4jPoint location = Neo4jPoint();
+  Neo4jPoint? location = Neo4jPoint();
   List<Last4Services> lastFourWeekdayServices = [];
   List<Last4Services> lastFourWeekendServices = [];
   Gender gender = Gender();
