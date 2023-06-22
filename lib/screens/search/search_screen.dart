@@ -46,9 +46,9 @@ class _SearchScreenState extends State<SearchScreen> {
       pluralName = 'streams';
       query = searchStream;
     }
-    if (church.typename == 'GatheringService') {
-      pluralName = 'gatheringServices';
-      query = searchGatheringService;
+    if (church.typename == 'Campus') {
+      pluralName = 'campuses';
+      query = searchCampus;
     }
 
     return Scaffold(

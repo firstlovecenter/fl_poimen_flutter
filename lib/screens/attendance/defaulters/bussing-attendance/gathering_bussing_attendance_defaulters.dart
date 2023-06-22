@@ -21,8 +21,7 @@ class GatheringBussingAttendanceDefaultersScreen extends StatelessWidget {
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final gathering =
-            ChurchForBussingAttendanceDefaultersList.fromJson(data?['gatheringServices'][0]);
+        final gathering = ChurchForBussingAttendanceDefaultersList.fromJson(data?['campuses'][0]);
 
         body = BussingAttendanceDefaultersList(
           church: gathering,

@@ -37,7 +37,7 @@ class ProfileCard extends StatelessWidget {
           } else if (church.typename == 'Stream') {
             userState.role = getRoleEnum(ChurchLevel.stream, convertToRoleEnum(role));
             userState.streamId = church.id;
-          } else if (church.typename == 'GatheringService') {
+          } else if (church.typename == 'Campus') {
             userState.role = getRoleEnum(ChurchLevel.gathering, convertToRoleEnum(role));
             userState.gatheringId = church.id;
           }
@@ -85,7 +85,7 @@ _getRoleImage(String level) {
       return 'assets/images/profile-choose/council-leader.jpeg';
     case 'Stream':
       return 'assets/images/profile-choose/council-leader.jpeg';
-    case 'GatheringService':
+    case 'Campus':
       return 'assets/images/profile-choose/gathering-admin.jpg';
 
     default:

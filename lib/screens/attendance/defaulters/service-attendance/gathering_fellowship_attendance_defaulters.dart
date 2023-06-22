@@ -7,8 +7,8 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class GatheringServiceAttendanceDefaultersScreen extends StatelessWidget {
-  const GatheringServiceAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class CampusAttendanceDefaultersScreen extends StatelessWidget {
+  const CampusAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class GatheringServiceAttendanceDefaultersScreen extends StatelessWidget {
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final gathering =
-            ChurchForServiceAttendanceDefaultersList.fromJson(data?['gatheringServices'][0]);
+        final gathering = ChurchForServiceAttendanceDefaultersList.fromJson(data?['campuses'][0]);
 
         body = FellowshipAttendanceDefaultersList(
           church: gathering,

@@ -15,9 +15,7 @@ enum ChurchRole {
 }
 
 ChurchLevel getChurchLevelFromAuth(List<String> role) {
-  if (role
-      .where((element) => ['leaderGatheringService', 'adminGatheringService'].contains(element))
-      .isNotEmpty) {
+  if (role.where((element) => ['leaderCampus', 'adminCampus'].contains(element)).isNotEmpty) {
     return ChurchLevel.council;
   } else if (role
       .where((element) => ['leaderStream', 'adminStream'].contains(element))
@@ -78,7 +76,7 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
       return ChurchLevel.council;
     case 'stream':
       return ChurchLevel.stream;
-    case 'gatheringservice':
+    case 'campus':
       return ChurchLevel.gathering;
     default:
       return ChurchLevel.fellowship;
@@ -106,7 +104,7 @@ class ChurchString {
   String _pluralProperCase = '';
 
   ChurchString(String levelLowerCase) {
-    _lowerCase = _lowerCase == 'gatheringservice' ? 'gatheringService' : levelLowerCase;
+    _lowerCase = _lowerCase == 'campus' ? 'campus' : levelLowerCase;
     _properCase = levelLowerCase[0].toUpperCase() + levelLowerCase.substring(1);
     _pluralLowerCase = _convertToPluralLowerCase(_lowerCase);
     _pluralProperCase = _properCase == 'Constituency' ? 'Constituencies' : '${_properCase}s';
@@ -122,8 +120,8 @@ String _convertToPluralLowerCase(String churchString) {
   if (churchString == 'constituency') {
     return 'constituencies';
   }
-  if (churchString == 'gatheringservice') {
-    return 'gatheringServices';
+  if (churchString == 'campus') {
+    return 'campuses';
   }
 
   return '${churchString}s';

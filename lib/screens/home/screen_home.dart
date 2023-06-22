@@ -38,9 +38,9 @@ class HomeScreen extends StatelessWidget {
       pluralName = 'streams';
       query = getStreamHomeScreen;
     }
-    if (church.typename == 'GatheringService') {
-      pluralName = 'gatheringServices';
-      query = getGatheringServiceHomeScreen;
+    if (church.typename == 'Campus') {
+      pluralName = 'campuses';
+      query = getCampusHomeScreen;
     }
 
     return GQLQueryContainer(

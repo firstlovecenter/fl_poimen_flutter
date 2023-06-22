@@ -2,7 +2,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 final getGatheringMembershipNumbers = gql('''
 query getGatheringMembershipNumbers(\$id: ID!) {
-  gatheringServices(where: { id: \$id }) {
+  campuses(where: { id: \$id }) {
     id
     typename
     name
@@ -22,7 +22,7 @@ query getGatheringMembershipNumbers(\$id: ID!) {
 
 final getGatheringSheepForList = gql('''
    query getGatheringSheep(\$id: ID!, \$first: Int! \$after: Int!) {
-    gatheringServices(where: { id: \$id }) {
+    campuses(where: { id: \$id }) {
       id
       typename
       name
@@ -50,7 +50,7 @@ final getGatheringSheepForList = gql('''
 
 final getGatheringGoatsForList = gql('''
    query getGatheringGoats(\$id: ID!, \$first: Int! \$after: Int!) {
-    gatheringServices(where: { id: \$id }) {
+    campuses(where: { id: \$id }) {
       id
       typename
       name
@@ -78,7 +78,7 @@ final getGatheringGoatsForList = gql('''
 
 final getGatheringDeerForList = gql('''
    query getGatheringDeer(\$id: ID!, \$first: Int! \$after: Int!) {
-    gatheringServices(where: { id: \$id }) {
+    campuses(where: { id: \$id }) {
       id
       typename
       name

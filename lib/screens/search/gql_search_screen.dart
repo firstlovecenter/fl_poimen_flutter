@@ -105,9 +105,9 @@ final searchStream = gql('''
   }
 ''');
 
-final searchGatheringService = gql('''
-  query searchGatheringService(\$id: ID!, \$searchKey: String!){
-    gatheringServices(where: {id: \$id}){
+final searchCampus = gql('''
+  query searchCampus(\$id: ID!, \$searchKey: String!){
+    campuses(where: {id: \$id}){
       id
       typename
       name

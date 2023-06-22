@@ -25,7 +25,7 @@ class GatheringMembershipScreen extends StatelessWidget {
       bodyFunction: (data) {
         Widget body;
 
-        final gathering = ChurchForPaginatedMemberCounts.fromJson(data?['gatheringServices'][0]);
+        final gathering = ChurchForPaginatedMemberCounts.fromJson(data?['campuses'][0]);
 
         ChurchWithPaginatedMemberQueries gatheringWithQueries = ChurchWithPaginatedMemberQueries(
           id: gathering.id,

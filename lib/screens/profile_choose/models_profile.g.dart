@@ -6,15 +6,13 @@ part of 'models_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) =>
-    ProfileChurch(
+ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) => ProfileChurch(
       id: json['id'] as String,
       typename: json['typename'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) => <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
@@ -49,13 +47,12 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       isAdminForStream: (json['isAdminForStream'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
-      leadsGatheringService: (json['leadsGatheringService'] as List<dynamic>)
+      leadsCampus: (json['leadsCampus'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isAdminForGatheringService:
-          (json['isAdminForGatheringService'] as List<dynamic>)
-              .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      isAdminForCampus: (json['isAdminForCampus'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
@@ -71,6 +68,6 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'isAdminForCouncil': instance.isAdminForCouncil,
       'leadsStream': instance.leadsStream,
       'isAdminForStream': instance.isAdminForStream,
-      'leadsGatheringService': instance.leadsGatheringService,
-      'isAdminForGatheringService': instance.isAdminForGatheringService,
+      'leadsCampus': instance.leadsCampus,
+      'isAdminForCampus': instance.isAdminForCampus,
     };

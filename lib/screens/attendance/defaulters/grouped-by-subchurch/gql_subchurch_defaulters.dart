@@ -76,7 +76,7 @@ final getStreamAttendanceDefaultersByCouncil = gql('''
 
 final getGatheringAttendanceDefaultersByStream = gql('''
    query getGatheringAttendanceDefaultersByStream(\$id: ID!) {
-     gatheringServices(where: { id: \$id }) {
+     campuses(where: { id: \$id }) {
        id
        name
        typename

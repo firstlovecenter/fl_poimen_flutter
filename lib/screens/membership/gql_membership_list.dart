@@ -291,7 +291,7 @@ final getGatheringMembers = gql('''
         date
       }
     }
-    gatheringServices(where: { id: \$id }) {
+    campuses(where: { id: \$id }) {
       id
       typename
       name

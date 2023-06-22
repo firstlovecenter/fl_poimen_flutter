@@ -149,9 +149,8 @@ var appRoutes = {
       const StreamServiceAttendanceDefaultersScreen(),
   '/stream/bussing-attendance-defaulters': (context) =>
       const StreamBussingAttendanceDefaultersScreen(),
-  '/gatheringservice/service-attendance-defaulters': (context) =>
-      const GatheringServiceAttendanceDefaultersScreen(),
-  '/gatheringservice/bussing-attendance-defaulters': (context) =>
+  '/campus/service-attendance-defaulters': (context) => const CampusAttendanceDefaultersScreen(),
+  '/campus/bussing-attendance-defaulters': (context) =>
       const GatheringBussingAttendanceDefaultersScreen(),
 
   '/constituency/attendance-defaulters': (context) =>

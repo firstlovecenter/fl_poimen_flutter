@@ -119,9 +119,9 @@ final getStreamHomeScreen = gql('''
   }
 ''');
 
-final getGatheringServiceHomeScreen = gql('''
-  query getGatheringServiceHomeScreen(\$id: ID!){
-    gatheringServices(where: {id: \$id}){
+final getCampusHomeScreen = gql('''
+  query getCampusHomeScreen(\$id: ID!){
+    campuses(where: {id: \$id}){
       id
       typename
       name

@@ -49,12 +49,12 @@ final getUserRoles = gql('''
         name
       }
    
-      leadsGatheringService {
+      leadsCampus {
         id
         typename
         name
       }
-      isAdminForGatheringService {
+      isAdminForCampus {
         id
         typename
         name
