@@ -6,13 +6,15 @@ part of 'models_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) => ProfileChurch(
+ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) =>
+    ProfileChurch(
       id: json['id'] as String,
       typename: json['typename'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,

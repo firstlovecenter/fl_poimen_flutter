@@ -193,7 +193,6 @@ class MemberDetailsScreen extends StatelessWidget {
               BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
               BioDetailsCard(title: 'Basonta', detail: member.ministry?.name ?? ''),
               BioDetailsCard(title: 'IDL Location', detail: member.visitationArea),
-              BioDetailsCard(title: 'How You Joined', detail: member.howYouJoined),
               const BioDetailsCard(title: 'Notes', detail: ''),
               const BioDetailsCard(title: 'Invited By', detail: ''),
               const BioDetailsCard(title: 'Last Visited', detail: ''),
