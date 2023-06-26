@@ -15,22 +15,22 @@ class CampusAttendanceDefaultersScreen extends StatelessWidget {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getGatheringFellowshipAttendanceDefaultersList,
-      variables: {'id': churchState.gatheringId},
+      query: getCampusFellowshipAttendanceDefaultersList,
+      variables: {'id': churchState.campusId},
       defaultPageTitle: 'Fellowship Attendance Defaulters',
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final gathering = ChurchForServiceAttendanceDefaultersList.fromJson(data?['campuses'][0]);
+        final campus = ChurchForServiceAttendanceDefaultersList.fromJson(data?['campuses'][0]);
 
         body = FellowshipAttendanceDefaultersList(
-          church: gathering,
+          church: campus,
         );
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: gathering,
+            church: campus,
           ),
           body: body,
         );

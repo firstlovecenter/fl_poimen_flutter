@@ -6,7 +6,7 @@ const _higherChurches = [
   ChurchLevel.constituency,
   ChurchLevel.council,
   ChurchLevel.stream,
-  ChurchLevel.gathering
+  ChurchLevel.campus
 ];
 
 List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {

@@ -7,30 +7,30 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class GatheringBussingAttendanceDefaultersScreen extends StatelessWidget {
-  const GatheringBussingAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class CampusBussingAttendanceDefaultersScreen extends StatelessWidget {
+  const CampusBussingAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getGatheringBussingAttendanceDefaultersList,
-      variables: {'id': churchState.gatheringId},
+      query: getCampusBussingAttendanceDefaultersList,
+      variables: {'id': churchState.campusId},
       defaultPageTitle: 'Bacenta Attendance Defaulters',
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final gathering = ChurchForBussingAttendanceDefaultersList.fromJson(data?['campuses'][0]);
+        final campus = ChurchForBussingAttendanceDefaultersList.fromJson(data?['campuses'][0]);
 
         body = BussingAttendanceDefaultersList(
-          church: gathering,
+          church: campus,
         );
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: gathering,
+            church: campus,
           ),
           body: body,
         );

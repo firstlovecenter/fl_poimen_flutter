@@ -283,8 +283,8 @@ final getStreamMembers = gql('''
   }
 ''');
 
-final getGatheringMembers = gql('''
-   query getGatheringMembers(\$id: ID!, \$serviceRecordId: ID, \$first: Int! \$after: Int!) {
+final getCampusMembers = gql('''
+   query getCampusMembers(\$id: ID!, \$serviceRecordId: ID, \$first: Int! \$after: Int!) {
     serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
       id
       serviceDate {

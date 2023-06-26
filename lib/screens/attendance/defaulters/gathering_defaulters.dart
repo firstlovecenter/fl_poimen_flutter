@@ -9,29 +9,29 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class GatheringAttendanceDefaultersScreen extends StatelessWidget {
-  const GatheringAttendanceDefaultersScreen({Key? key}) : super(key: key);
+class CampusAttendanceDefaultersScreen extends StatelessWidget {
+  const CampusAttendanceDefaultersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getGatheringAttendanceDefaulters,
-      variables: {'id': churchState.gatheringId},
-      defaultPageTitle: 'Gathering Attendance Defaulters',
+      query: getCampusAttendanceDefaulters,
+      variables: {'id': churchState.campusId},
+      defaultPageTitle: 'Campus Attendance Defaulters',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final gathering = ChurchForAttendanceDefaulters.fromJson(data?['campuses'][0]);
+        final campus = ChurchForAttendanceDefaulters.fromJson(data?['campuses'][0]);
 
-        body = ChurchAttendanceDefaulters(church: gathering);
+        body = ChurchAttendanceDefaulters(church: campus);
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Attendance Defaulters',
-            church: gathering,
+            church: campus,
           ),
           body: body,
         );

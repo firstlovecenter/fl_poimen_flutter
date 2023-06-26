@@ -10,39 +10,39 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class GatheringMembershipScreen extends StatelessWidget {
-  const GatheringMembershipScreen({Key? key}) : super(key: key);
+class CampusMembershipScreen extends StatelessWidget {
+  const CampusMembershipScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getGatheringMembershipNumbers,
-      variables: {'id': churchState.gatheringId},
-      defaultPageTitle: 'Gathering Members',
+      query: getCampusMembershipNumbers,
+      variables: {'id': churchState.campusId},
+      defaultPageTitle: 'Campus Members',
       bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 4),
       bodyFunction: (data) {
         Widget body;
 
-        final gathering = ChurchForPaginatedMemberCounts.fromJson(data?['campuses'][0]);
+        final campus = ChurchForPaginatedMemberCounts.fromJson(data?['campuses'][0]);
 
-        ChurchWithPaginatedMemberQueries gatheringWithQueries = ChurchWithPaginatedMemberQueries(
-          id: gathering.id,
-          name: gathering.name,
-          typename: gathering.typename,
-          sheepCount: gathering.sheepPaginated?.totalCount ?? 0,
-          sheepQuery: getGatheringSheepForList,
-          goatCount: gathering.goatsPaginated?.totalCount ?? 0,
-          goatQuery: getGatheringGoatsForList,
-          deerCount: gathering.deerPaginated?.totalCount ?? 0,
-          deerQuery: getGatheringDeerForList,
+        ChurchWithPaginatedMemberQueries campusWithQueries = ChurchWithPaginatedMemberQueries(
+          id: campus.id,
+          name: campus.name,
+          typename: campus.typename,
+          sheepCount: campus.sheepPaginated?.totalCount ?? 0,
+          sheepQuery: getCampusSheepForList,
+          goatCount: campus.goatsPaginated?.totalCount ?? 0,
+          goatQuery: getCampusGoatsForList,
+          deerCount: campus.deerPaginated?.totalCount ?? 0,
+          deerQuery: getCampusDeerForList,
         );
 
-        body = ChurchMembershipList(church: gatheringWithQueries);
+        body = ChurchMembershipList(church: campusWithQueries);
 
         var returnValues = GQLQueryContainerReturnValue(
-          pageTitle: PageTitle(church: gathering, pageTitle: 'Membership'),
+          pageTitle: PageTitle(church: campus, pageTitle: 'Membership'),
           body: body,
         );
 

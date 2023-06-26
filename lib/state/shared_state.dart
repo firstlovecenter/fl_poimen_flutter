@@ -38,7 +38,7 @@ class SharedState with ChangeNotifier {
   String _constituencyId = '';
   String _councilId = '';
   String _streamId = '';
-  String _gatheringId = '';
+  String _campusId = '';
 
   String _bussingRecordId = '';
   String _serviceRecordId = '';
@@ -59,7 +59,7 @@ class SharedState with ChangeNotifier {
   String get constituencyId => _constituencyId;
   String get councilId => _councilId;
   String get streamId => _streamId;
-  String get gatheringId => _gatheringId;
+  String get campusId => _campusId;
 
   String get bussingRecordId => _bussingRecordId;
   String get serviceRecordId => _serviceRecordId;
@@ -134,8 +134,8 @@ class SharedState with ChangeNotifier {
     notifyListeners();
   }
 
-  set gatheringId(String gatheringId) {
-    _gatheringId = gatheringId;
+  set campusId(String campusId) {
+    _campusId = campusId;
     notifyListeners();
   }
 

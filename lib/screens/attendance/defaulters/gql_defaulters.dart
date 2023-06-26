@@ -183,8 +183,8 @@ final getStreamBussingAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getGatheringAttendanceDefaulters = gql('''
-   query getGatheringAttendanceDefaulters(\$id: ID!) {
+final getCampusAttendanceDefaulters = gql('''
+   query getCampusAttendanceDefaulters(\$id: ID!) {
      campuses(where: { id: \$id }) {
        id
        name
@@ -196,8 +196,8 @@ final getGatheringAttendanceDefaulters = gql('''
    }
   ''');
 
-final getGatheringFellowshipAttendanceDefaultersList = gql('''
- query getGatheringFellowshipAttendanceDefaultersList(\$id: ID!) {
+final getCampusFellowshipAttendanceDefaultersList = gql('''
+ query getCampusFellowshipAttendanceDefaultersList(\$id: ID!) {
   campuses(where: { id: \$id }) {
     id
     name
@@ -220,8 +220,8 @@ final getGatheringFellowshipAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getGatheringBussingAttendanceDefaultersList = gql('''
- query getGatheringBussingAttendanceDefaultersList(\$id: ID!) {
+final getCampusBussingAttendanceDefaultersList = gql('''
+ query getCampusBussingAttendanceDefaultersList(\$id: ID!) {
   campuses(where: { id: \$id }) {
     id
     name

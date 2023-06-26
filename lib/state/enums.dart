@@ -6,7 +6,7 @@ enum ChurchLevel {
   constituency,
   council,
   stream,
-  gathering,
+  campus,
 }
 
 enum ChurchRole {
@@ -55,10 +55,10 @@ Role getRoleEnum(ChurchLevel churchLevel, ChurchRole role) {
     return Role.leaderStream;
   } else if (churchLevel == ChurchLevel.stream && role == ChurchRole.admin) {
     return Role.adminStream;
-  } else if (churchLevel == ChurchLevel.gathering && role == ChurchRole.leader) {
-    return Role.leaderGathering;
-  } else if (churchLevel == ChurchLevel.gathering && role == ChurchRole.admin) {
-    return Role.adminGathering;
+  } else if (churchLevel == ChurchLevel.campus && role == ChurchRole.leader) {
+    return Role.leaderCampus;
+  } else if (churchLevel == ChurchLevel.campus && role == ChurchRole.admin) {
+    return Role.adminCampus;
   }
 
   return Role.leaderFellowship;
@@ -77,7 +77,7 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
     case 'stream':
       return ChurchLevel.stream;
     case 'campus':
-      return ChurchLevel.gathering;
+      return ChurchLevel.campus;
     default:
       return ChurchLevel.fellowship;
   }
@@ -142,10 +142,10 @@ enum Role {
   leaderConstituency,
   leaderCouncil,
   leaderStream,
-  leaderGathering,
+  leaderCampus,
   adminConstituency,
   adminCouncil,
   adminStream,
-  adminGathering,
+  adminCampus,
   all
 }

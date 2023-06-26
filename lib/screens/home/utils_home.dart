@@ -24,10 +24,10 @@ String parseRole(Role role) {
       return 'Stream Leader';
     case Role.adminStream:
       return 'Stream Admin';
-    case Role.leaderGathering:
-      return 'Gathering Service Leader';
-    case Role.adminGathering:
-      return 'Gathering Service Admin';
+    case Role.leaderCampus:
+      return 'Campus Service Leader';
+    case Role.adminCampus:
+      return 'Campus Service Admin';
     default:
       return '';
   }
@@ -92,7 +92,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
     ChurchLevel.constituency,
     ChurchLevel.council,
     ChurchLevel.stream,
-    ChurchLevel.gathering
+    ChurchLevel.campus
   ];
 
   if (!permittedLevels.contains(churchLevel) || imclTotal == 0) {
@@ -116,7 +116,7 @@ Widget defaultersLevels(ChurchLevel churchLevel, int? defaulterCount) {
     ChurchLevel.constituency,
     ChurchLevel.council,
     ChurchLevel.stream,
-    ChurchLevel.gathering
+    ChurchLevel.campus
   ];
 
   if (!permittedLevels.contains(churchLevel)) {

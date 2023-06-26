@@ -10,7 +10,7 @@ ChurchLevel getSubChurch(ChurchLevel level) {
       return ChurchLevel.constituency;
     case ChurchLevel.stream:
       return ChurchLevel.council;
-    case ChurchLevel.gathering:
+    case ChurchLevel.campus:
       return ChurchLevel.stream;
     default:
       return ChurchLevel.fellowship;
