@@ -65,6 +65,46 @@ final getBacentaImcls = gql('''
             typename
             firstName
             lastName
+            phoneNumber
+            whatsappNumber
+            pictureUrl
+          }
+        }
+      }
+    }
+  }
+''');
+
+final getConstituencyImcls = gql('''
+ query getConstituencyImcls(\$id: ID!) {
+    constituencies(where: { id: \$id }) {
+      id
+      typename
+      name
+      imcls {
+        id
+        typename
+        imclChecked
+        status
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+
+        missedChurchComments(options: { sort: [{ timestamp: DESC }], limit: 1 }) {
+          id
+          typename
+          timestamp
+          activity
+          comment
+          author {
+            id
+            typename
+            firstName
+            lastName
+            phoneNumber
+            whatsappNumber
             pictureUrl
           }
         }

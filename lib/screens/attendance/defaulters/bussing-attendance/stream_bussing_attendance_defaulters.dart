@@ -17,7 +17,7 @@ class StreamBussingAttendanceDefaultersScreen extends StatelessWidget {
     return GQLQueryContainer(
       query: getStreamBussingAttendanceDefaultersList,
       variables: {'id': churchState.streamId},
-      defaultPageTitle: 'Bacenta Attendance Defaulters',
+      defaultPageTitle: 'Stream Attendance Defaulters',
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 

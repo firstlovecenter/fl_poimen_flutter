@@ -2,6 +2,7 @@ import 'package:poimen/screens/attendance/defaulters/service-attendance/council_
 import 'package:poimen/screens/attendance/defaulters/service-attendance/campus_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
+import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
@@ -27,16 +28,16 @@ import 'package:poimen/screens/duties/visitation/fellowship_completed_visitation
 import 'package:poimen/screens/duties/visitation/fellowship_outstanding_visitations.dart';
 import 'package:poimen/screens/attendance/defaulters/bussing-attendance/constituency_bussing_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bussing-attendance/council_bussing_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/bussing-attendance/campus_bussing_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/bussing-attendance/stream_bussing_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/bussing-attendance/campus_bussing_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/constituency_fellowship_attendance_defaulters.dart';
-import 'package:poimen/screens/attendance/defaulters/campus_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/council_by_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/campus_by_stream_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/grouped-by-subchurch/stream_by_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_constituency_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.dart';
+import 'package:poimen/screens/attendance/defaulters/screen_campus_defaulters.dart';
 import 'package:poimen/screens/attendance/report/screen_fellowship_report.dart';
 import 'package:poimen/screens/attendance/report/screen_sunday_bussing_report.dart';
 import 'package:poimen/screens/attendance/screen_sunday_bussing.dart';
@@ -94,6 +95,7 @@ var appRoutes = {
   // Display IMCL for Fellowship and Bacenta Levels
   '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
+  '/constituency-imcls': (context) => const ConstituencyIMCLScreen(),
 
   '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
   '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),
@@ -149,7 +151,8 @@ var appRoutes = {
       const StreamServiceAttendanceDefaultersScreen(),
   '/stream/bussing-attendance-defaulters': (context) =>
       const StreamBussingAttendanceDefaultersScreen(),
-  '/campus/service-attendance-defaulters': (context) => const CampusAttendanceDefaultersScreen(),
+  '/campus/service-attendance-defaulters': (context) =>
+      const CampusFellowshipAttendanceDefaultersScreen(),
   '/campus/bussing-attendance-defaulters': (context) =>
       const CampusBussingAttendanceDefaultersScreen(),
 

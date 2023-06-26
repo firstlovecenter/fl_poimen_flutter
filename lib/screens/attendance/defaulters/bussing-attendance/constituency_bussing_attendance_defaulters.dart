@@ -17,7 +17,7 @@ class ConstituencyBussingAttendanceDefaultersScreen extends StatelessWidget {
     return GQLQueryContainer(
       query: getConstituencyBussingAttendanceDefaultersList,
       variables: {'id': churchState.constituencyId},
-      defaultPageTitle: 'Bacenta Attendance Defaulters',
+      defaultPageTitle: 'Bussing Attendance Defaulters',
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 

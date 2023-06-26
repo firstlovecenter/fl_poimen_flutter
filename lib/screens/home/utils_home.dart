@@ -105,7 +105,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
     text: 'IMCL Total',
     icon: FontAwesomeIcons.personCircleQuestion,
     navKey: 'imcl-total',
-    route: '#',
+    route: '/${level.lowerCase}-imcls',
     alertNumber: imclTotal,
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
