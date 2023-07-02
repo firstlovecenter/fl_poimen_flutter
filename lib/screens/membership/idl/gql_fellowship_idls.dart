@@ -15,6 +15,7 @@ final getFellowshipIdls = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
+        visitationArea
       }
     }
   }
