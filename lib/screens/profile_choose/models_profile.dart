@@ -25,7 +25,6 @@ class Profile {
   List<ProfileChurch> leadsFellowship;
   List<ProfileChurch> leadsConstituency;
   List<ProfileChurch> isAdminForConstituency;
-  List<ProfileChurch> leadsSonta;
   List<ProfileChurch> leadsCouncil;
   List<ProfileChurch> isAdminForCouncil;
   List<ProfileChurch> leadsStream;
@@ -41,7 +40,6 @@ class Profile {
     required this.leadsFellowship,
     required this.leadsConstituency,
     required this.isAdminForConstituency,
-    required this.leadsSonta,
     required this.leadsCouncil,
     required this.isAdminForCouncil,
     required this.leadsStream,

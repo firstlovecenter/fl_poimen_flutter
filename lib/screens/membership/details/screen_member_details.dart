@@ -191,7 +191,7 @@ class MemberDetailsScreen extends StatelessWidget {
                       WhatsAppInfo(firstName: member.firstName, number: member.whatsappNumber)),
               BioDetailsCard(title: 'Stream', detail: member.stream.name),
               BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
-              BioDetailsCard(title: 'Basonta', detail: member.ministry?.name ?? ''),
+              BioDetailsCard(title: 'Ministry', detail: member.ministry?.name ?? ''),
               BioDetailsCard(title: 'IDL Location', detail: member.visitationArea),
               const BioDetailsCard(title: 'Notes', detail: ''),
               const BioDetailsCard(title: 'Invited By', detail: ''),

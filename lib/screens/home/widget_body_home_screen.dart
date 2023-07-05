@@ -3,13 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/home/utils_home.dart';
 import 'package:poimen/screens/home/widget_home_page_button.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/services/auth_service.dart';
-import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
-import 'package:poimen/widgets/avatar_with_initials.dart';
+import 'package:poimen/widgets/user_header_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenBody extends StatelessWidget {
@@ -33,20 +30,6 @@ class HomeScreenBody extends StatelessWidget {
       }
     });
 
-    var role = parseRole(churchState.role);
-    final authUser = AuthService.instance.idToken;
-
-    final user = MemberForList(
-      id: authUser!.sub,
-      typename: 'Member',
-      status: 'Sheep',
-      firstName: authUser.given_name,
-      lastName: authUser.family_name,
-      pictureUrl: authUser.picture,
-      phoneNumber: '0000',
-      whatsappNumber: '0000',
-    );
-    final picture = CloudinaryImage(url: authUser.picture, size: ImageSize.lg);
     int? totalFellowshipAttendanceDefaulters;
 
     if (church.fellowshipBussingAttendanceDefaultersCount != null &&
@@ -59,34 +42,7 @@ class HomeScreenBody extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: ListView(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    authUser.name,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  Text(
-                    role,
-                    style: const TextStyle(color: PoimenTheme.textSecondary),
-                  )
-                ],
-              ),
-              const Padding(padding: EdgeInsets.all(10.0)),
-              Column(
-                children: [
-                  AvatarWithInitials(
-                    foregroundImage: picture.image,
-                    member: user,
-                    radius: 45,
-                  ),
-                ],
-              )
-            ],
-          ),
+          const UserHeaderWidget(),
           ...countdownLevels(church),
           const Padding(padding: EdgeInsets.all(20.0)),
           Text(
@@ -110,7 +66,13 @@ class HomeScreenBody extends StatelessWidget {
             route: '/$levelForUrl-members',
             permitted: const [Role.all],
           ),
-          defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters),
+          HomePageButton(
+            text: 'My Trends',
+            icon: FontAwesomeIcons.chartSimple,
+            route: '/$levelForUrl-trends-menu',
+            navKey: 'trends',
+            permitted: const [Role.all],
+          ),
           const Padding(padding: EdgeInsets.all(6.0)),
           const Center(
             child: Text(
@@ -122,6 +84,8 @@ class HomeScreenBody extends StatelessWidget {
             ),
           ),
           const Padding(padding: EdgeInsets.all(6.0)),
+          outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount),
+          defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters),
           HomePageButton(
             text: 'Missing Persons Call List',
             icon: FontAwesomeIcons.personCircleQuestion,
@@ -133,7 +97,6 @@ class HomeScreenBody extends StatelessWidget {
           imclLevels(churchLevel, church.imclTotal),
           outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
           outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount),
-          outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount)
         ],
       ),
     );

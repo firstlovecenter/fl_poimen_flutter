@@ -65,24 +65,6 @@ final getConstituencyHomeScreen = gql('''
   }
 ''');
 
-final getSontaHomeScreen = gql('''
-  query getSontaHomeScreen(\$id: ID!){
-    sonatas(where: {id: \$id}){
-      id
-      typename
-      name
-      imclTotal
-      currentPastoralCycle {
-        id
-        typename
-        startDate
-        endDate
-        numberOfDays
-      }
-    }
-  }
-''');
-
 final getCouncilHomeScreen = gql('''
   query getCouncilHomeScreen(\$id: ID!){
     councils(where: {id: \$id}){

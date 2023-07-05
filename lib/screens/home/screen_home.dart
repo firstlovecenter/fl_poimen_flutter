@@ -4,7 +4,6 @@ import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/home/widget_body_home_screen.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
-
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

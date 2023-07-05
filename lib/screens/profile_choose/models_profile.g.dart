@@ -34,9 +34,6 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       isAdminForConstituency: (json['isAdminForConstituency'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
-      leadsSonta: (json['leadsSonta'] as List<dynamic>)
-          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
-          .toList(),
       leadsCouncil: (json['leadsCouncil'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -65,7 +62,6 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'leadsFellowship': instance.leadsFellowship,
       'leadsConstituency': instance.leadsConstituency,
       'isAdminForConstituency': instance.isAdminForConstituency,
-      'leadsSonta': instance.leadsSonta,
       'leadsCouncil': instance.leadsCouncil,
       'isAdminForCouncil': instance.isAdminForCouncil,
       'leadsStream': instance.leadsStream,

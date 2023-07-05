@@ -63,6 +63,7 @@ import 'package:poimen/screens/membership/details/screen_member_details.dart';
 import 'package:poimen/screens/membership/screen_stream_list.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 import 'package:poimen/screens/search/search_screen.dart';
+import 'package:poimen/screens/trends/screen_fellowship_trends.dart';
 
 var appRoutes = {
   '/home': (context) => const Home(),
@@ -169,4 +170,7 @@ var appRoutes = {
       const StreamByCouncilAttendanceDefaultersScreen(),
   '/campus-by-stream/attendance-defaulters': (context) =>
       const CampusByStreamAttendanceDefaultersScreen(),
+
+  // Trends Screens
+  '/fellowship-trends-menu': (context) => const FellowshipTrendsScreen(),
 };

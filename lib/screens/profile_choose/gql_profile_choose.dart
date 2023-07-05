@@ -43,11 +43,6 @@ final getUserRoles = gql('''
         typename
         name
       }
-      leadsSonta {
-        id
-        typename
-        name
-      }
    
       leadsCampus {
         id
