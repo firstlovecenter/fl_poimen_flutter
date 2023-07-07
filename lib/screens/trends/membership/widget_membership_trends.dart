@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:poimen/screens/trends/models_trends.dart';
 import 'package:poimen/widgets/user_header_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class MembershipTrendsWidget extends StatefulWidget {
   const MembershipTrendsWidget({Key? key, required this.church}) : super(key: key);
   final ChurchForMembershipAttendanceTrends church;
 
-  final Color leftBarColor = Colors.yellowAccent;
-  final Color rightBarColor = Colors.redAccent;
-  final Color avgColor = Colors.greenAccent;
+  final Color presentBarColor = Colors.greenAccent;
+  final Color absentBarColor = Colors.redAccent;
+  final Color avgColor = Colors.yellowAccent;
   @override
   State<MembershipTrendsWidget> createState() => _MembershipTrendsWidgetState();
 }
 
 class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
-  final double width = 7;
+  final double width = 20;
 
   late List<BarChartGroupData> rawBarGroups = [];
   late List<BarChartGroupData> showingBarGroups = [];
@@ -25,25 +26,16 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
   @override
   void initState() {
     super.initState();
-    final barGroup1 = makeGroupData(0, 5, 12);
-    final barGroup2 = makeGroupData(1, 16, 12);
-    final barGroup3 = makeGroupData(2, 18, 5);
-    final barGroup4 = makeGroupData(3, 20, 16);
-    final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 19, 1.5);
-    final barGroup7 = makeGroupData(6, 10, 1.5);
 
-    final items = [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-    ];
+    final items = widget.church.services.map((service) {
+      return makeGroupData(
+        widget.church.services.indexOf(service),
+        service.membersPresentFromFellowshipCount.toDouble(),
+        service.membersAbsentFromFellowshipCount.toDouble(),
+      );
+    }).toList();
 
-    rawBarGroups = items;
+    rawBarGroups = items.reversed.toList();
 
     showingBarGroups = rawBarGroups;
   }
@@ -53,7 +45,6 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
     return ListView(
       children: [
         const UserHeaderWidget(),
-        const Text('Membership Attendance Trends'),
         AspectRatio(
           aspectRatio: 1,
           child: Padding(
@@ -66,17 +57,17 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                   children: <Widget>[
                     makeTransactionsIcon(),
                     const SizedBox(
-                      width: 38,
+                      width: 30,
                     ),
                     const Text(
-                      'Transactions',
+                      'Weekday Service',
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                     const SizedBox(
                       width: 4,
                     ),
                     const Text(
-                      'state',
+                      'in Weeks',
                       style: TextStyle(color: Color(0xff77839a), fontSize: 16),
                     ),
                   ],
@@ -90,43 +81,22 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                       maxY: 20,
                       barTouchData: BarTouchData(
                         touchTooltipData: BarTouchTooltipData(
-                          tooltipBgColor: Colors.grey,
-                          getTooltipItem: (a, b, c, d) => null,
+                          tooltipBgColor: const Color.fromARGB(0, 5, 4, 4),
+                          getTooltipItem: (
+                            BarChartGroupData group,
+                            int groupIndex,
+                            BarChartRodData rod,
+                            int rodIndex,
+                          ) {
+                            return BarTooltipItem(
+                              rod.toY.round().toString(),
+                              const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          },
                         ),
-                        touchCallback: (FlTouchEvent event, response) {
-                          if (response == null || response.spot == null) {
-                            setState(() {
-                              touchedGroupIndex = -1;
-                              showingBarGroups = List.of(rawBarGroups);
-                            });
-                            return;
-                          }
-
-                          touchedGroupIndex = response.spot!.touchedBarGroupIndex;
-
-                          setState(() {
-                            if (!event.isInterestedForInteractions) {
-                              touchedGroupIndex = -1;
-                              showingBarGroups = List.of(rawBarGroups);
-                              return;
-                            }
-                            showingBarGroups = List.of(rawBarGroups);
-                            if (touchedGroupIndex != -1) {
-                              var sum = 0.0;
-                              for (final rod in showingBarGroups[touchedGroupIndex].barRods) {
-                                sum += rod.toY;
-                              }
-                              final avg = sum / showingBarGroups[touchedGroupIndex].barRods.length;
-
-                              showingBarGroups[touchedGroupIndex] =
-                                  showingBarGroups[touchedGroupIndex].copyWith(
-                                barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
-                                  return rod.copyWith(toY: avg, color: widget.avgColor);
-                                }).toList(),
-                              );
-                            }
-                          });
-                        },
                       ),
                       titlesData: FlTitlesData(
                         show: true,
@@ -195,7 +165,13 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
   }
 
   Widget bottomTitles(double value, TitleMeta meta) {
-    final titles = <String>['Mn', 'Te', 'Wd', 'Tu', 'Fr', 'St', 'Su'];
+    // show serviceDate for the bottomTitles
+
+    final titles = widget.church.services.map((service) {
+      final DateTime date = service.serviceDate.date;
+      final DateFormat formatter = DateFormat.MMMd();
+      return formatter.format(date);
+    }).toList();
 
     final Widget text = Text(
       titles[value.toInt()],
@@ -217,15 +193,16 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
     return BarChartGroupData(
       barsSpace: 4,
       x: x,
+      showingTooltipIndicators: [0, 1],
       barRods: [
         BarChartRodData(
           toY: y1,
-          color: widget.leftBarColor,
+          color: widget.presentBarColor,
           width: width,
         ),
         BarChartRodData(
           toY: y2,
-          color: widget.rightBarColor,
+          color: widget.absentBarColor,
           width: width,
         ),
       ],
