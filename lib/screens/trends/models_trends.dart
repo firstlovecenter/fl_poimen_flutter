@@ -46,6 +46,10 @@ class ServicesForTrends {
 
 @JsonSerializable()
 class ChurchForMembershipAttendanceTrends extends Church {
+  int sheepCount = 0;
+  int goatsCount = 0;
+  int deerCount = 0;
+  int lostCount = 0;
   List<ServicesForTrends> services = [];
   List<ServicesForTrends> bussing = [];
   @override
@@ -53,6 +57,10 @@ class ChurchForMembershipAttendanceTrends extends Church {
   final MemberForList leader;
 
   ChurchForMembershipAttendanceTrends({
+    required this.sheepCount,
+    required this.goatsCount,
+    required this.deerCount,
+    required this.lostCount,
     required this.services,
     required this.bussing,
     required this.leader,

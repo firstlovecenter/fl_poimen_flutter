@@ -22,7 +22,7 @@ class WidgetTrendsMenu extends StatelessWidget {
           const Padding(padding: EdgeInsets.all(16.0)),
           HomePageButton(
             text: 'Pastoral Work',
-            icon: FontAwesomeIcons.s,
+            icon: FontAwesomeIcons.solidClock,
             route: '/trends/fellowship/pastoral-work',
             navKey: 'fellowshipPastoralWork',
             permitted: permittedRoles,

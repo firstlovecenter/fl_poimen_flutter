@@ -57,6 +57,10 @@ Map<String, dynamic> _$ServicesForTrendsToJson(ServicesForTrends instance) =>
 ChurchForMembershipAttendanceTrends
     _$ChurchForMembershipAttendanceTrendsFromJson(Map<String, dynamic> json) =>
         ChurchForMembershipAttendanceTrends(
+          sheepCount: json['sheepCount'] as int,
+          goatsCount: json['goatsCount'] as int,
+          deerCount: json['deerCount'] as int,
+          lostCount: json['lostCount'] as int,
           services: (json['services'] as List<dynamic>)
               .map((e) => ServicesForTrends.fromJson(e as Map<String, dynamic>))
               .toList(),
@@ -80,6 +84,10 @@ Map<String, dynamic> _$ChurchForMembershipAttendanceTrendsToJson(
       'typename': instance.typename,
       'name': instance.name,
       'admin': instance.admin,
+      'sheepCount': instance.sheepCount,
+      'goatsCount': instance.goatsCount,
+      'deerCount': instance.deerCount,
+      'lostCount': instance.lostCount,
       'services': instance.services,
       'bussing': instance.bussing,
       'leader': instance.leader,

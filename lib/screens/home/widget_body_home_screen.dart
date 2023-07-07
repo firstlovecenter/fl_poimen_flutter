@@ -51,6 +51,13 @@ class HomeScreenBody extends StatelessWidget {
             style: const TextStyle(fontSize: 22),
           ),
           const Padding(padding: EdgeInsets.all(5.0)),
+          const Text(
+            'Reports',
+            style: TextStyle(
+              fontSize: 18,
+              color: PoimenTheme.textSecondary,
+            ),
+          ),
           ...attendanceLevels(churchLevel),
           HomePageButton(
             text: 'First Timers and New Converts',
@@ -66,21 +73,12 @@ class HomeScreenBody extends StatelessWidget {
             route: '/$levelForUrl-members',
             permitted: const [Role.all],
           ),
-          HomePageButton(
-            text: 'My Trends',
-            icon: FontAwesomeIcons.chartSimple,
-            route: '/$levelForUrl-trends-menu',
-            navKey: 'trends',
-            permitted: const [Role.all],
-          ),
           const Padding(padding: EdgeInsets.all(6.0)),
-          const Center(
-            child: Text(
-              'Outstanding Work',
-              style: TextStyle(
-                fontSize: 18,
-                color: PoimenTheme.textSecondary,
-              ),
+          const Text(
+            'Outstanding Work',
+            style: TextStyle(
+              fontSize: 18,
+              color: PoimenTheme.textSecondary,
             ),
           ),
           const Padding(padding: EdgeInsets.all(6.0)),
@@ -97,6 +95,21 @@ class HomeScreenBody extends StatelessWidget {
           imclLevels(churchLevel, church.imclTotal),
           outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
           outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount),
+          const Padding(padding: EdgeInsets.all(8.0)),
+          const Text(
+            'Trends',
+            style: TextStyle(
+              fontSize: 18,
+              color: PoimenTheme.textSecondary,
+            ),
+          ),
+          HomePageButton(
+            text: 'My Trends',
+            icon: FontAwesomeIcons.chartSimple,
+            route: '/$levelForUrl-trends-menu',
+            navKey: 'trends',
+            permitted: const [Role.all],
+          ),
         ],
       ),
     );

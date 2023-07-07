@@ -33,6 +33,11 @@ final getFellowshipMembershipAttendanceTrends = gql('''
       typename
       name
 
+      sheepCount
+      goatsCount
+      deerCount
+      lostCount
+
       leader {
         id
         typename

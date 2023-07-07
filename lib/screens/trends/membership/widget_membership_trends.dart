@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/trends/models_trends.dart';
 import 'package:poimen/state/enums.dart';
+import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/member_header_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -193,7 +195,6 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                             showTitles: false,
                             reservedSize: 28,
                             interval: 1,
-                            getTitlesWidget: leftTitles,
                           ),
                         ),
                       ),
@@ -235,30 +236,9 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
             ),
           ],
         ),
+        const Padding(padding: EdgeInsets.all(10)),
+        MembershipSummaryDisplay(church: widget.church)
       ],
-    );
-  }
-
-  Widget leftTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Color(0xff7589a2),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
-    if (value == 0) {
-      text = '1K';
-    } else if (value == 10) {
-      text = '5K';
-    } else if (value == 19) {
-      text = '10K';
-    } else {
-      return Container();
-    }
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 0,
-      child: Text(text, style: style),
     );
   }
 
@@ -360,6 +340,98 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
           width: width,
           height: 10,
           color: Colors.white.withOpacity(0.4),
+        ),
+      ],
+    );
+  }
+}
+
+class MembershipSummaryDisplay extends StatelessWidget {
+  const MembershipSummaryDisplay({
+    super.key,
+    required this.church,
+  });
+
+  final ChurchForMembershipAttendanceTrends church;
+
+  @override
+  Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
+    return Column(
+      children: [
+        const Text('Membership Summary',
+            style: TextStyle(fontSize: 18, color: PoimenTheme.textSecondary)),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Sheep ${church.sheepCount}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 215, 246, 181),
+                  ),
+                ),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(4.0)),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Goats ${church.goatsCount}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 248, 248, 158),
+                  ),
+                ),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(4.0)),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Deer ${church.deerCount}',
+                  style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 254, 142, 142)),
+                ),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(4.0)),
+            IntrinsicWidth(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                tileColor: isDarkMode ? PoimenTheme.darkCardColor : PoimenTheme.lightCardColor,
+                leading: const Icon(
+                  FontAwesomeIcons.magnifyingGlassLocation,
+                  color: Colors.white,
+                ),
+                minLeadingWidth: 20,
+                title: church.lostCount == 0
+                    ? const Text(
+                        'No Lost Members',
+                      )
+                    : Text(
+                        '${church.lostCount} Lost ${church.lostCount == 1 ? 'Member' : 'Members'}',
+                      ),
+              ),
+            ),
+          ],
         ),
       ],
     );
