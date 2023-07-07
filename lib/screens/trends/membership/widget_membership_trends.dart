@@ -373,7 +373,7 @@ class MembershipSummaryDisplay extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Sheep ${church.sheepCount}',
+                  '${church.sheepCount} Sheep',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Color.fromARGB(255, 215, 246, 181),
@@ -389,7 +389,7 @@ class MembershipSummaryDisplay extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Goats ${church.goatsCount}',
+                  '${church.goatsCount} Goats',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Color.fromARGB(255, 248, 248, 158),
@@ -405,7 +405,7 @@ class MembershipSummaryDisplay extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Deer ${church.deerCount}',
+                  '${church.deerCount} Deer',
                   style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 254, 142, 142)),
                 ),
               ),
