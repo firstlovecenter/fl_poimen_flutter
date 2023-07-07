@@ -12,6 +12,7 @@ class HomePageButton extends StatelessWidget {
   final String route;
   final List<Role> permitted;
   final int? alertNumber;
+  final bool? navigateBack;
 
   const HomePageButton({
     Key? key,
@@ -21,6 +22,7 @@ class HomePageButton extends StatelessWidget {
     required this.navKey,
     required this.permitted,
     this.alertNumber,
+    this.navigateBack,
   }) : super(key: key);
 
   @override
@@ -36,7 +38,11 @@ class HomePageButton extends StatelessWidget {
           child: ListTile(
             onTap: () {
               userState.bottomNavSelected = navKey;
-              Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
+              if (navigateBack != null && navigateBack == true) {
+                Navigator.pushNamed(context, route);
+              } else {
+                Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
+              }
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10), // <-- Radius

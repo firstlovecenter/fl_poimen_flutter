@@ -109,3 +109,43 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
   ];
 }
+
+List<Map<String, dynamic>?> getTrendsMenus(ChurchLevel churchLevel) {
+  final levelForUrl = churchLevel.name.toLowerCase();
+
+  return [
+    {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
+    {
+      'title': 'My Trends',
+      'icon': FontAwesomeIcons.p,
+      'route': '/$levelForUrl-trends-menu',
+      'navKey': 'pastoral-work'
+    },
+    {
+      'title': 'My Leaders Trends',
+      'icon': FontAwesomeIcons.arrowDown,
+      'route': '/trends/$levelForUrl-subleaders-trends',
+      'navKey': 'membership-attendance'
+    },
+  ];
+}
+
+List<Map<String, dynamic>?> getMyTrendsMenus(ChurchLevel churchLevel) {
+  final levelForUrl = churchLevel.name.toLowerCase();
+
+  return [
+    {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
+    {
+      'title': 'Pastoral Work',
+      'icon': FontAwesomeIcons.p,
+      'route': '/trends/$levelForUrl/pastoral-work',
+      'navKey': 'pastoral-work'
+    },
+    {
+      'title': 'Membership',
+      'icon': FontAwesomeIcons.solidChartBar,
+      'route': '/trends/$levelForUrl/membership-attendance',
+      'navKey': 'membership-attendance'
+    },
+  ];
+}
