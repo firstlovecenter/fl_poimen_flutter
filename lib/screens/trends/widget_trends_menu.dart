@@ -14,25 +14,29 @@ class WidgetTrendsMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        const UserHeaderWidget(),
-        const Padding(padding: EdgeInsets.all(8.0)),
-        HomePageButton(
-          text: 'Pastoral Work',
-          icon: FontAwesomeIcons.p,
-          route: '/trends/fellowship/pastoral-work',
-          navKey: 'fellowshipPastoralWork',
-          permitted: permittedRoles,
-        ),
-        HomePageButton(
-          text: 'Membership Attendance',
-          icon: FontAwesomeIcons.m,
-          route: '/trends/fellowship/membership-attendance',
-          navKey: 'fellowshipMembershipAttendance',
-          permitted: permittedRoles,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        children: [
+          const UserHeaderWidget(),
+          const Padding(padding: EdgeInsets.all(16.0)),
+          HomePageButton(
+            text: 'Pastoral Work',
+            icon: FontAwesomeIcons.p,
+            route: '/trends/fellowship/pastoral-work',
+            navKey: 'fellowshipPastoralWork',
+            permitted: permittedRoles,
+          ),
+          const Padding(padding: EdgeInsets.all(4.0)),
+          HomePageButton(
+            text: 'Membership Attendance',
+            icon: FontAwesomeIcons.m,
+            route: '/trends/fellowship/membership-attendance',
+            navKey: 'fellowshipMembershipAttendance',
+            permitted: permittedRoles,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -63,13 +63,12 @@ ChurchForMembershipAttendanceTrends
           bussing: (json['bussing'] as List<dynamic>)
               .map((e) => ServicesForTrends.fromJson(e as Map<String, dynamic>))
               .toList(),
+          leader:
+              MemberForList.fromJson(json['leader'] as Map<String, dynamic>),
         )
           ..id = json['id'] as String
           ..typename = json['typename'] as String
           ..name = json['name'] as String
-          ..leader = json['leader'] == null
-              ? null
-              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
           ..admin = json['admin'] == null
               ? null
               : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
@@ -80,8 +79,8 @@ Map<String, dynamic> _$ChurchForMembershipAttendanceTrendsToJson(
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
-      'leader': instance.leader,
       'admin': instance.admin,
       'services': instance.services,
       'bussing': instance.bussing,
+      'leader': instance.leader,
     };

@@ -48,10 +48,14 @@ class ServicesForTrends {
 class ChurchForMembershipAttendanceTrends extends Church {
   List<ServicesForTrends> services = [];
   List<ServicesForTrends> bussing = [];
+  @override
+  // ignore: overridden_fields
+  final MemberForList leader;
 
   ChurchForMembershipAttendanceTrends({
     required this.services,
     required this.bussing,
+    required this.leader,
   });
 
   factory ChurchForMembershipAttendanceTrends.fromJson(Map<String, dynamic> json) =>

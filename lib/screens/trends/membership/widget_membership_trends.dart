@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/trends/models_trends.dart';
-import 'package:poimen/widgets/user_header_widget.dart';
+import 'package:poimen/state/enums.dart';
+import 'package:poimen/widgets/member_header_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class MembershipTrendsWidget extends StatefulWidget {
-  const MembershipTrendsWidget({Key? key, required this.church}) : super(key: key);
+  MembershipTrendsWidget({Key? key, required this.church}) : super(key: key);
   final ChurchForMembershipAttendanceTrends church;
 
   final Color presentBarColor = Colors.greenAccent;
+  final Color presentBarColor2 = Colors.greenAccent.shade700;
   final Color absentBarColor = Colors.redAccent;
+  final Color absentBarColor2 = Colors.redAccent.shade700;
   final Color avgColor = Colors.yellowAccent;
   @override
   State<MembershipTrendsWidget> createState() => _MembershipTrendsWidgetState();
@@ -20,23 +24,58 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
 
   late List<BarChartGroupData> rawBarGroups = [];
   late List<BarChartGroupData> showingBarGroups = [];
+  List<DateTime> rawData = [];
 
   int touchedGroupIndex = -1;
+  final categoryOptions = ['Bussing', 'Services'];
+  String category = 'Bussing';
+
+  void setCategory(String newCategory) {
+    setState(() {
+      category = newCategory;
+
+      if (category == 'Services') {
+        var serviceData = widget.church.services.map((service) {
+          return makeGroupData(
+            widget.church.services.indexOf(service),
+            service.membersPresentFromFellowshipCount.toDouble(),
+            service.membersAbsentFromFellowshipCount.toDouble(),
+          );
+        }).toList();
+
+        rawBarGroups = serviceData.reversed.toList();
+        showingBarGroups = rawBarGroups;
+      }
+      if (category == 'Bussing') {
+        var bussingData = widget.church.bussing.map((bussing) {
+          return makeGroupData(
+            widget.church.bussing.indexOf(bussing),
+            bussing.membersPresentFromFellowshipCount.toDouble(),
+            bussing.membersAbsentFromFellowshipCount.toDouble(),
+          );
+        }).toList();
+
+        rawBarGroups = bussingData.reversed.toList();
+        showingBarGroups = rawBarGroups;
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
 
-    final items = widget.church.services.map((service) {
+    List<BarChartGroupData> items = [];
+
+    items = widget.church.bussing.map((service) {
       return makeGroupData(
-        widget.church.services.indexOf(service),
+        widget.church.bussing.indexOf(service),
         service.membersPresentFromFellowshipCount.toDouble(),
         service.membersAbsentFromFellowshipCount.toDouble(),
       );
     }).toList();
 
     rawBarGroups = items.reversed.toList();
-
     showingBarGroups = rawBarGroups;
   }
 
@@ -44,7 +83,10 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const UserHeaderWidget(),
+        MemberHeaderWidget(
+          member: widget.church.leader,
+          role: Role.leaderFellowship,
+        ),
         AspectRatio(
           aspectRatio: 1,
           child: Padding(
@@ -61,7 +103,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                     ),
                     const Text(
                       'Weekday Service',
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      style: TextStyle(fontSize: 22),
                     ),
                     const SizedBox(
                       width: 4,
@@ -75,6 +117,38 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                 const SizedBox(
                   height: 38,
                 ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 8,
+                      backgroundColor: widget.presentBarColor,
+                      child: Center(child: Container()),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text(
+                      'Members Present',
+                      style: TextStyle(color: Color(0xff77839a), fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    CircleAvatar(
+                      radius: 8,
+                      backgroundColor: widget.absentBarColor,
+                      child: Center(child: Container()),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text(
+                      'Members Absent',
+                      style: TextStyle(color: Color(0xff77839a), fontSize: 16),
+                    ),
+                  ],
+                ),
+                const Padding(padding: EdgeInsets.all(8)),
                 Expanded(
                   child: BarChart(
                     BarChartData(
@@ -91,7 +165,6 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                             return BarTooltipItem(
                               rod.toY.round().toString(),
                               const TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             );
@@ -104,7 +177,9 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                           sideTitles: SideTitles(showTitles: false),
                         ),
                         topTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
+                          sideTitles: SideTitles(
+                            showTitles: false,
+                          ),
                         ),
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
@@ -115,7 +190,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                         ),
                         leftTitles: AxisTitles(
                           sideTitles: SideTitles(
-                            showTitles: true,
+                            showTitles: false,
                             reservedSize: 28,
                             interval: 1,
                             getTitlesWidget: leftTitles,
@@ -136,6 +211,29 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
               ],
             ),
           ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ToggleSwitch(
+              minWidth: 100,
+              initialLabelIndex: categoryOptions.indexOf(category),
+              activeBgColors: [
+                [widget.presentBarColor, widget.presentBarColor2],
+                [widget.absentBarColor, widget.absentBarColor2]
+              ],
+              inactiveBgColor: const Color.fromARGB(255, 43, 43, 43),
+              totalSwitches: categoryOptions.length,
+              radiusStyle: true,
+              cornerRadius: 20.0,
+              labels: categoryOptions,
+              animate: true,
+              animationDuration: 200,
+              onToggle: (index) {
+                return setCategory(categoryOptions[index!]);
+              },
+            ),
+          ],
         ),
       ],
     );
@@ -165,13 +263,23 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
   }
 
   Widget bottomTitles(double value, TitleMeta meta) {
-    // show serviceDate for the bottomTitles
+    List<String> titles = [];
 
-    final titles = widget.church.services.map((service) {
-      final DateTime date = service.serviceDate.date;
-      final DateFormat formatter = DateFormat.MMMd();
-      return formatter.format(date);
-    }).toList();
+    if (category == 'Services') {
+      titles = widget.church.services.map((service) {
+        final DateTime date = service.serviceDate.date;
+        final DateFormat formatter = DateFormat.MMMd();
+        return formatter.format(date);
+      }).toList();
+    }
+
+    if (category == 'Bussing') {
+      titles = widget.church.bussing.map((bussing) {
+        final DateTime date = bussing.serviceDate.date;
+        final DateFormat formatter = DateFormat.MMMd();
+        return formatter.format(date);
+      }).toList();
+    }
 
     final Widget text = Text(
       titles[value.toInt()],
@@ -184,7 +292,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 16, //margin top
+      space: 16, // margin top
       child: text,
     );
   }
@@ -212,6 +320,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
   Widget makeTransactionsIcon() {
     const width = 4.5;
     const space = 3.5;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

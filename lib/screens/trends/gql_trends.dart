@@ -32,6 +32,16 @@ final getFellowshipMembershipAttendanceTrends = gql('''
       id
       typename
       name
+
+      leader {
+        id
+        typename
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
       
       services(limit: 6) {
         id
