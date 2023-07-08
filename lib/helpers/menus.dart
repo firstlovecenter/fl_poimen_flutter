@@ -138,8 +138,8 @@ List<Map<String, dynamic>?> getMyTrendsMenus(ChurchLevel churchLevel) {
     {
       'title': 'Pastoral Work',
       'icon': FontAwesomeIcons.solidClock,
-      'route': '/trends/$levelForUrl/pastoral-work',
-      'navKey': 'pastoral-work'
+      'route': '/trends/$levelForUrl/pastoral-work-cycles',
+      'navKey': 'pastoral-work-cycles'
     },
     {
       'title': 'Membership',

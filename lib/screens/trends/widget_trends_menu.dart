@@ -23,7 +23,7 @@ class WidgetTrendsMenu extends StatelessWidget {
           HomePageButton(
             text: 'Pastoral Work',
             icon: FontAwesomeIcons.solidClock,
-            route: '/trends/fellowship/pastoral-work',
+            route: '/trends/fellowship/pastoral-work-cycles',
             navKey: 'fellowshipPastoralWork',
             permitted: permittedRoles,
             navigateBack: true,
