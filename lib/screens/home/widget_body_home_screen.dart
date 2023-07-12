@@ -82,7 +82,6 @@ class HomeScreenBody extends StatelessWidget {
             ),
           ),
           const Padding(padding: EdgeInsets.all(6.0)),
-          outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount),
           defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters),
           HomePageButton(
             text: 'Missing Persons Call List',
@@ -93,6 +92,7 @@ class HomeScreenBody extends StatelessWidget {
             permitted: const [Role.leaderFellowship, Role.leaderBacenta],
           ),
           imclLevels(churchLevel, church.imclTotal),
+          outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount),
           outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
           outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount),
           const Padding(padding: EdgeInsets.all(8.0)),
