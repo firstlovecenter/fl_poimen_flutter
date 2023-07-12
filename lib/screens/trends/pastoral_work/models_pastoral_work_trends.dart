@@ -1,104 +1,96 @@
+// ignore_for_file: overridden_fields
+
 import 'package:json_annotation/json_annotation.dart';
-import 'package:poimen/screens/duties/imcl/models_imcl.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 part 'models_pastoral_work_trends.g.dart';
 
 @JsonSerializable()
-class VisitationActivity {
+class VisitationActivityForTrends {
   String id;
   String typename;
   DateTime datetime;
-  String location;
-  String picture;
-  PastoralComments comment;
-  MemberForList memberVisited;
-  PastoralCycle pastoralCycle;
 
-  VisitationActivity({
+  VisitationActivityForTrends({
     required this.id,
     required this.typename,
     required this.datetime,
-    required this.location,
-    required this.picture,
-    required this.comment,
-    required this.memberVisited,
-    required this.pastoralCycle,
   });
 
-  factory VisitationActivity.fromJson(Map<String, dynamic> json) =>
-      _$VisitationActivityFromJson(json);
-  Map<String, dynamic> toJson() => _$VisitationActivityToJson(this);
+  factory VisitationActivityForTrends.fromJson(Map<String, dynamic> json) =>
+      _$VisitationActivityForTrendsFromJson(json);
+  Map<String, dynamic> toJson() => _$VisitationActivityForTrendsToJson(this);
 }
 
 @JsonSerializable()
-class PrayerActivity {
+class PrayerActivityForTrends {
   String id;
   DateTime datetime;
-  PastoralComments comment;
-  MemberForList memberPrayedFor;
-  PastoralCycle pastoralCycle;
 
-  PrayerActivity({
+  PrayerActivityForTrends({
     required this.id,
     required this.datetime,
-    required this.comment,
-    required this.memberPrayedFor,
-    required this.pastoralCycle,
   });
 
-  factory PrayerActivity.fromJson(Map<String, dynamic> json) => _$PrayerActivityFromJson(json);
-  Map<String, dynamic> toJson() => _$PrayerActivityToJson(this);
+  factory PrayerActivityForTrends.fromJson(Map<String, dynamic> json) =>
+      _$PrayerActivityForTrendsFromJson(json);
+  Map<String, dynamic> toJson() => _$PrayerActivityForTrendsToJson(this);
 }
 
 @JsonSerializable()
-class TelepastoringActivity {
+class TelepastoringActivityForTrends {
   String id;
   DateTime datetime;
-  PastoralComments comment;
-  MemberForList memberTelepastored;
-  PastoralCycle pastoralCycle;
 
-  TelepastoringActivity({
+  TelepastoringActivityForTrends({
     required this.id,
     required this.datetime,
-    required this.comment,
-    required this.memberTelepastored,
-    required this.pastoralCycle,
   });
 
-  factory TelepastoringActivity.fromJson(Map<String, dynamic> json) =>
-      _$TelepastoringActivityFromJson(json);
-  Map<String, dynamic> toJson() => _$TelepastoringActivityToJson(this);
+  factory TelepastoringActivityForTrends.fromJson(Map<String, dynamic> json) =>
+      _$TelepastoringActivityForTrendsFromJson(json);
+  Map<String, dynamic> toJson() => _$TelepastoringActivityForTrendsToJson(this);
 }
 
 @JsonSerializable()
 class PastoralCycleForTrends extends PastoralCycle {
-  VisitationActivity visitationsByChurch;
-  PrayerActivity prayersByChurch;
-  TelepastoringActivity telepastoringsByChurch;
+  @override
+  final String id;
+  @override
+  final String typename;
+  @override
+  final String startDate;
+  @override
+  final String endDate;
+  @override
+  final int numberOfDays;
+  final List<VisitationActivityForTrends> visitationsByChurch;
 
   PastoralCycleForTrends({
+    required this.id,
+    required this.typename,
+    required this.startDate,
+    required this.endDate,
+    required this.numberOfDays,
     required this.visitationsByChurch,
-    required this.prayersByChurch,
-    required this.telepastoringsByChurch,
   }) : super(
-          id: '',
-          typename: '',
-          startDate: '',
-          endDate: '',
-          numberOfDays: 0,
+          id: id,
+          typename: typename,
+          startDate: startDate,
+          endDate: endDate,
+          numberOfDays: numberOfDays,
         );
 
   factory PastoralCycleForTrends.fromJson(Map<String, dynamic> json) =>
       _$PastoralCycleForTrendsFromJson(json);
+
   @override
   Map<String, dynamic> toJson() => _$PastoralCycleForTrendsToJson(this);
 }
 
 @JsonSerializable()
 class ChurchForPastoralWorkTrends extends Church {
-  PastoralCycleForTrends pastoralCycles;
+  List<PastoralCycleForTrends> pastoralCycles;
 
   ChurchForPastoralWorkTrends({
     required this.pastoralCycles,

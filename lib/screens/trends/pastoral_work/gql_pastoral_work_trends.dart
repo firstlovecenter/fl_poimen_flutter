@@ -20,6 +20,7 @@ final getFellowshipPastoralWorkCycles = gql('''
       pastoralCycles {
         id
         typename
+        numberOfDays
         startDate
         endDate
         month
@@ -28,6 +29,8 @@ final getFellowshipPastoralWorkCycles = gql('''
         visitationsByChurch(churchId: \$id) {
           id
           typename
+          datetime
+          
           memberVisited {
            id
            typename

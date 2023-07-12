@@ -204,6 +204,7 @@ mutation LogFellowshipVisitationActivity(
         pictureUrl
         phoneNumber
         whatsappNumber
+        visitationArea
       }
       idls {
         id
@@ -251,6 +252,7 @@ mutation LogBacentaVisitationActivity(
         pictureUrl
         phoneNumber
         whatsappNumber
+        visitationArea
       }
     }
   }
@@ -288,6 +290,7 @@ mutation LogConstituencyVisitationActivity(
         pictureUrl
         phoneNumber
         whatsappNumber
+        visitationArea
       }
     }
   }
@@ -325,6 +328,7 @@ mutation LogCouncilVisitationActivity(
         pictureUrl
         phoneNumber
         whatsappNumber
+        visitationArea
       }
     }
   }

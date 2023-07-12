@@ -6,101 +6,82 @@ part of 'models_pastoral_work_trends.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VisitationActivity _$VisitationActivityFromJson(Map<String, dynamic> json) =>
-    VisitationActivity(
+VisitationActivityForTrends _$VisitationActivityForTrendsFromJson(
+        Map<String, dynamic> json) =>
+    VisitationActivityForTrends(
       id: json['id'] as String,
       typename: json['typename'] as String,
       datetime: DateTime.parse(json['datetime'] as String),
-      location: json['location'] as String,
-      picture: json['picture'] as String,
-      comment:
-          PastoralComments.fromJson(json['comment'] as Map<String, dynamic>),
-      memberVisited:
-          MemberForList.fromJson(json['memberVisited'] as Map<String, dynamic>),
-      pastoralCycle:
-          PastoralCycle.fromJson(json['pastoralCycle'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$VisitationActivityToJson(VisitationActivity instance) =>
+Map<String, dynamic> _$VisitationActivityForTrendsToJson(
+        VisitationActivityForTrends instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'datetime': instance.datetime.toIso8601String(),
-      'location': instance.location,
-      'picture': instance.picture,
-      'comment': instance.comment,
-      'memberVisited': instance.memberVisited,
-      'pastoralCycle': instance.pastoralCycle,
     };
 
-PrayerActivity _$PrayerActivityFromJson(Map<String, dynamic> json) =>
-    PrayerActivity(
-      id: json['id'] as String,
-      datetime: DateTime.parse(json['datetime'] as String),
-      comment:
-          PastoralComments.fromJson(json['comment'] as Map<String, dynamic>),
-      memberPrayedFor: MemberForList.fromJson(
-          json['memberPrayedFor'] as Map<String, dynamic>),
-      pastoralCycle:
-          PastoralCycle.fromJson(json['pastoralCycle'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$PrayerActivityToJson(PrayerActivity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'datetime': instance.datetime.toIso8601String(),
-      'comment': instance.comment,
-      'memberPrayedFor': instance.memberPrayedFor,
-      'pastoralCycle': instance.pastoralCycle,
-    };
-
-TelepastoringActivity _$TelepastoringActivityFromJson(
+PrayerActivityForTrends _$PrayerActivityForTrendsFromJson(
         Map<String, dynamic> json) =>
-    TelepastoringActivity(
+    PrayerActivityForTrends(
       id: json['id'] as String,
       datetime: DateTime.parse(json['datetime'] as String),
-      comment:
-          PastoralComments.fromJson(json['comment'] as Map<String, dynamic>),
-      memberTelepastored: MemberForList.fromJson(
-          json['memberTelepastored'] as Map<String, dynamic>),
-      pastoralCycle:
-          PastoralCycle.fromJson(json['pastoralCycle'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$TelepastoringActivityToJson(
-        TelepastoringActivity instance) =>
+Map<String, dynamic> _$PrayerActivityForTrendsToJson(
+        PrayerActivityForTrends instance) =>
     <String, dynamic>{
       'id': instance.id,
       'datetime': instance.datetime.toIso8601String(),
-      'comment': instance.comment,
-      'memberTelepastored': instance.memberTelepastored,
-      'pastoralCycle': instance.pastoralCycle,
+    };
+
+TelepastoringActivityForTrends _$TelepastoringActivityForTrendsFromJson(
+        Map<String, dynamic> json) =>
+    TelepastoringActivityForTrends(
+      id: json['id'] as String,
+      datetime: DateTime.parse(json['datetime'] as String),
+    );
+
+Map<String, dynamic> _$TelepastoringActivityForTrendsToJson(
+        TelepastoringActivityForTrends instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'datetime': instance.datetime.toIso8601String(),
     };
 
 PastoralCycleForTrends _$PastoralCycleForTrendsFromJson(
         Map<String, dynamic> json) =>
     PastoralCycleForTrends(
-      visitationsByChurch: VisitationActivity.fromJson(
-          json['visitationsByChurch'] as Map<String, dynamic>),
-      prayersByChurch: PrayerActivity.fromJson(
-          json['prayersByChurch'] as Map<String, dynamic>),
-      telepastoringsByChurch: TelepastoringActivity.fromJson(
-          json['telepastoringsByChurch'] as Map<String, dynamic>),
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      startDate: json['startDate'] as String,
+      endDate: json['endDate'] as String,
+      numberOfDays: json['numberOfDays'] as int,
+      visitationsByChurch: (json['visitationsByChurch'] as List<dynamic>)
+          .map((e) =>
+              VisitationActivityForTrends.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$PastoralCycleForTrendsToJson(
         PastoralCycleForTrends instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'startDate': instance.startDate,
+      'endDate': instance.endDate,
+      'numberOfDays': instance.numberOfDays,
       'visitationsByChurch': instance.visitationsByChurch,
-      'prayersByChurch': instance.prayersByChurch,
-      'telepastoringsByChurch': instance.telepastoringsByChurch,
     };
 
 ChurchForPastoralWorkTrends _$ChurchForPastoralWorkTrendsFromJson(
         Map<String, dynamic> json) =>
     ChurchForPastoralWorkTrends(
-      pastoralCycles: PastoralCycleForTrends.fromJson(
-          json['pastoralCycles'] as Map<String, dynamic>),
+      pastoralCycles: (json['pastoralCycles'] as List<dynamic>)
+          .map(
+              (e) => PastoralCycleForTrends.fromJson(e as Map<String, dynamic>))
+          .toList(),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
