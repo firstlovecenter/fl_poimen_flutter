@@ -41,6 +41,38 @@ final getFellowshipPastoralWorkCycles = gql('''
            whatsappNumber
          }
         }
+
+        prayersByChurch(churchId: \$id) {
+          id
+          typename
+          datetime
+          
+          memberPrayedFor {
+           id
+           typename
+           firstName
+           lastName
+           pictureUrl
+           phoneNumber
+           whatsappNumber
+         }
+        }
+
+        telepastoringsByChurch(churchId: \$id) {
+          id
+          typename
+          datetime
+          
+          memberTelepastored {
+           id
+           typename
+           firstName
+           lastName
+           pictureUrl
+           phoneNumber
+           whatsappNumber
+         }
+        }
       }
     }
   }

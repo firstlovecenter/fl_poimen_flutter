@@ -65,6 +65,8 @@ class PastoralCycleForTrends extends PastoralCycle {
   @override
   final int numberOfDays;
   final List<VisitationActivityForTrends> visitationsByChurch;
+  final List<PrayerActivityForTrends> prayersByChurch;
+  final List<TelepastoringActivityForTrends> telepastoringsByChurch;
 
   PastoralCycleForTrends({
     required this.id,
@@ -73,6 +75,8 @@ class PastoralCycleForTrends extends PastoralCycle {
     required this.endDate,
     required this.numberOfDays,
     required this.visitationsByChurch,
+    required this.prayersByChurch,
+    required this.telepastoringsByChurch,
   }) : super(
           id: id,
           typename: typename,

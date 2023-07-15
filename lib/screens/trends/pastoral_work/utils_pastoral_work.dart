@@ -44,7 +44,7 @@ String nameCycle(DateTime startDate, DateTime endDate) {
   }
 
   if (numberOfWeeksBetweenDates(startDate, endDate) >= 1) {
-    return ('Month ${DateFormat.MMMM().format(startDate)}');
+    return ('${DateFormat.MMMM().format(startDate)} ${startDate.year}');
   }
   return 'Not Known';
 }

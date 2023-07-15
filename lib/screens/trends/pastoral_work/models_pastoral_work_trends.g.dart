@@ -62,6 +62,14 @@ PastoralCycleForTrends _$PastoralCycleForTrendsFromJson(
           .map((e) =>
               VisitationActivityForTrends.fromJson(e as Map<String, dynamic>))
           .toList(),
+      prayersByChurch: (json['prayersByChurch'] as List<dynamic>)
+          .map((e) =>
+              PrayerActivityForTrends.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      telepastoringsByChurch: (json['telepastoringsByChurch'] as List<dynamic>)
+          .map((e) => TelepastoringActivityForTrends.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$PastoralCycleForTrendsToJson(
@@ -73,6 +81,8 @@ Map<String, dynamic> _$PastoralCycleForTrendsToJson(
       'endDate': instance.endDate,
       'numberOfDays': instance.numberOfDays,
       'visitationsByChurch': instance.visitationsByChurch,
+      'prayersByChurch': instance.prayersByChurch,
+      'telepastoringsByChurch': instance.telepastoringsByChurch,
     };
 
 ChurchForPastoralWorkTrends _$ChurchForPastoralWorkTrendsFromJson(
