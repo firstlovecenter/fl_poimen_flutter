@@ -86,7 +86,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
       children: [
         MemberHeaderWidget(
           member: widget.church.leader,
-          role: Role.leaderFellowship,
+          role: Role.values.byName('leader${widget.church.typename}'),
         ),
         AspectRatio(
           aspectRatio: 1,

@@ -52,18 +52,12 @@ final getConstituencyTrendsMenu = gql('''
   }
 ''');
 
-final getFellowshipMembershipAttendanceTrends = gql('''
-  query getFellowshipMembershipAttendanceTrends(\$id: ID!) {
-    fellowships(where: {id: \$id}) {
+final getCouncilTrendsMenu = gql('''
+  query getCouncilTrendsMenu(\$id: ID!) {
+    councils(where: {id: \$id}) {
       id
       typename
       name
-
-      sheepCount
-      goatsCount
-      deerCount
-      lostCount
-
       leader {
         id
         typename
@@ -73,38 +67,42 @@ final getFellowshipMembershipAttendanceTrends = gql('''
         phoneNumber
         whatsappNumber
       }
-      
-      serviceWeeks(limit: 6) {
-        week 
+      currentPastoralCycle {
+        id
         typename
-        attendance
-        membersPresentAtWeekdayCount
-        membersAbsentAtWeekdayCount
-      }
-      bussingWeeks(limit: 6) {
-        week
+        startDate
+        endDate
+        numberOfDays
+      } 
+    }
+  }
+''');
+
+final getStreamTrendsMenu = gql('''
+  query getStreamTrendsMenu(\$id: ID!) {
+    streams(where: {id: \$id}) {
+      id
+      typename
+      name
+      leader {
+        id
         typename
-        attendance
-        membersPresentAtWeekendCount
-        membersAbsentAtWeekendCount
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
       }
     }
   }
 ''');
 
-
-final getConstituencyMembershipAttendanceTrends = gql('''
-  query getConstituencyMembershipAttendanceTrends(\$id: ID!) {
-    constituencies(where: {id: \$id}) {
+final getCampusTrendsMenu = gql('''
+  query getCampusTrendsMenu(\$id: ID!) {
+    campuses(where: {id: \$id}) {
       id
       typename
       name
-
-      sheepCount
-      goatsCount
-      deerCount
-      lostCount
-
       leader {
         id
         typename
@@ -113,21 +111,6 @@ final getConstituencyMembershipAttendanceTrends = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
-      }
-      
-      serviceWeeks(limit: 6) {
-        week 
-        typename
-        attendance
-        membersPresentAtWeekdayCount
-        membersAbsentAtWeekdayCount
-      }
-      bussingWeeks(limit: 6) {
-        week
-        typename
-        attendance
-        membersPresentAtWeekendCount
-        membersAbsentAtWeekendCount
       }
     }
   }

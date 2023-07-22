@@ -25,9 +25,9 @@ String parseRole(Role role) {
     case Role.adminStream:
       return 'Stream Admin';
     case Role.leaderCampus:
-      return 'Campus Service Leader';
+      return 'Campus Leader';
     case Role.adminCampus:
-      return 'Campus Service Admin';
+      return 'Campus Admin';
     default:
       return '';
   }

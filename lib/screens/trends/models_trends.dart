@@ -5,13 +5,13 @@ part 'models_trends.g.dart';
 
 @JsonSerializable()
 class ChurchForTrendsMenu extends Church {
-  PastoralCycle currentPastoralCycle;
+  PastoralCycle? currentPastoralCycle;
   @override
   // ignore: overridden_fields
   final MemberForList leader;
 
   ChurchForTrendsMenu({
-    required this.currentPastoralCycle,
+    this.currentPastoralCycle,
     required this.leader,
   });
 

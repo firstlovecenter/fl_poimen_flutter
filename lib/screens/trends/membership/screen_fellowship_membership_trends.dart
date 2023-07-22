@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/helpers/menus.dart';
-import 'package:poimen/screens/trends/gql_trends.dart';
 import 'package:poimen/screens/trends/membership/widget_membership_trends.dart';
 import 'package:poimen/screens/trends/models_trends.dart';
+import 'package:poimen/screens/trends/membership/gql_membership_trends.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';

@@ -8,8 +8,10 @@ part of 'models_trends.dart';
 
 ChurchForTrendsMenu _$ChurchForTrendsMenuFromJson(Map<String, dynamic> json) =>
     ChurchForTrendsMenu(
-      currentPastoralCycle: PastoralCycle.fromJson(
-          json['currentPastoralCycle'] as Map<String, dynamic>),
+      currentPastoralCycle: json['currentPastoralCycle'] == null
+          ? null
+          : PastoralCycle.fromJson(
+              json['currentPastoralCycle'] as Map<String, dynamic>),
       leader: MemberForList.fromJson(json['leader'] as Map<String, dynamic>),
     )
       ..id = json['id'] as String
