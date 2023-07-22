@@ -30,16 +30,16 @@ String nameCycle(DateTime startDate, DateTime endDate) {
   if (numberOfMonthsBetweenDates(startDate, endDate) < 6 &&
       numberOfMonthsBetweenDates(startDate, endDate) >= 1) {
     if (startDate.month <= 3) {
-      return 'Quarter 1';
+      return 'Quarter 1 of ${startDate.year}';
     }
     if (startDate.month <= 6) {
-      return 'Quarter 2';
+      return 'Quarter 2 of ${startDate.year}';
     }
     if (startDate.month <= 9) {
-      return 'Quarter 3';
+      return 'Quarter 3 of ${startDate.year}';
     }
     if (startDate.month <= 12) {
-      return 'Quarter 4';
+      return 'Quarter 4 of ${startDate.year}';
     }
   }
 
