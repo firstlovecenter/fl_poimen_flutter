@@ -102,9 +102,9 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                     const SizedBox(
                       width: 30,
                     ),
-                    const Text(
-                      'Weekday Service',
-                      style: TextStyle(fontSize: 22),
+                    Text(
+                      category == 'Bussing' ? 'Weekend Service' : 'Weekday Service',
+                      style: const TextStyle(fontSize: 22),
                     ),
                     const SizedBox(
                       width: 4,
