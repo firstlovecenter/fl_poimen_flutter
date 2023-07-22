@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/models/neo4j.dart';
 part 'models_trends.g.dart';
 
 @JsonSerializable()
@@ -23,25 +22,46 @@ class ChurchForTrendsMenu extends Church {
 }
 
 @JsonSerializable()
-class ServicesForTrends {
-  String id = '';
+class ServiceWeeksForTrends {
+  int week = 0;
   String typename = '';
-  TimeGraph serviceDate = TimeGraph();
   int attendance = 0;
-  int membersPresentFromFellowshipCount = 0;
-  int membersAbsentFromFellowshipCount = 0;
+  int membersPresentAtWeekdayCount = 0;
+  int membersAbsentAtWeekdayCount = 0;
 
-  ServicesForTrends({
-    required this.id,
-    required this.serviceDate,
+  ServiceWeeksForTrends({
+    required this.week,
+    required this.typename,
     required this.attendance,
-    required this.membersPresentFromFellowshipCount,
-    required this.membersAbsentFromFellowshipCount,
+    required this.membersPresentAtWeekdayCount,
+    required this.membersAbsentAtWeekdayCount,
   });
 
-  factory ServicesForTrends.fromJson(Map<String, dynamic> json) =>
-      _$ServicesForTrendsFromJson(json);
-  Map<String, dynamic> toJson() => _$ServicesForTrendsToJson(this);
+  factory ServiceWeeksForTrends.fromJson(Map<String, dynamic> json) =>
+      _$ServiceWeeksForTrendsFromJson(json);
+  Map<String, dynamic> toJson() => _$ServiceWeeksForTrendsToJson(this);
+}
+
+@JsonSerializable()
+class BussingWeeksForTrends {
+  int week = 0;
+  String typename = '';
+  int attendance = 0;
+  int membersPresentAtWeekendCount = 0;
+  int membersAbsentAtWeekendCount = 0;
+
+  BussingWeeksForTrends({
+    required this.week,
+    required this.typename,
+    required this.attendance,
+    required this.membersPresentAtWeekendCount,
+    required this.membersAbsentAtWeekendCount,
+  });
+
+  factory BussingWeeksForTrends.fromJson(Map<String, dynamic> json) =>
+      _$BussingWeeksForTrendsFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BussingWeeksForTrendsToJson(this);
 }
 
 @JsonSerializable()
@@ -50,8 +70,8 @@ class ChurchForMembershipAttendanceTrends extends Church {
   int goatsCount = 0;
   int deerCount = 0;
   int lostCount = 0;
-  List<ServicesForTrends> services = [];
-  List<ServicesForTrends> bussing = [];
+  List<ServiceWeeksForTrends> serviceWeeks = [];
+  List<BussingWeeksForTrends> bussingWeeks = [];
   @override
   // ignore: overridden_fields
   final MemberForList leader;
@@ -61,8 +81,8 @@ class ChurchForMembershipAttendanceTrends extends Church {
     required this.goatsCount,
     required this.deerCount,
     required this.lostCount,
-    required this.services,
-    required this.bussing,
+    required this.serviceWeeks,
+    required this.bussingWeeks,
     required this.leader,
   });
 

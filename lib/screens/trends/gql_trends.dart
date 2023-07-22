@@ -74,25 +74,19 @@ final getFellowshipMembershipAttendanceTrends = gql('''
         whatsappNumber
       }
       
-      services(limit: 6) {
-        id
+      serviceWeeks(limit: 6) {
+        week 
         typename
-        serviceDate {
-          date
-        }
         attendance
-        membersPresentFromFellowshipCount(id: \$id)
-        membersAbsentFromFellowshipCount(id: \$id)
+        membersPresentAtWeekdayCount
+        membersAbsentAtWeekdayCount
       }
-      bussing(limit: 6) {
-        id
+      bussingWeeks(limit: 6) {
+        week
         typename
-        serviceDate {
-          date
-        }
         attendance
-        membersPresentFromFellowshipCount(id: \$id)
-        membersAbsentFromFellowshipCount(id: \$id)
+        membersPresentAtWeekendCount
+        membersAbsentAtWeekendCount
       }
     }
   }
@@ -121,25 +115,19 @@ final getConstituencyMembershipAttendanceTrends = gql('''
         whatsappNumber
       }
       
-      services(limit: 6) {
-        id
+      serviceWeeks(limit: 6) {
+        week 
         typename
-        serviceDate {
-          date
-        }
         attendance
-        membersPresentFromFellowshipCount(id: \$id)
-        membersAbsentFromFellowshipCount(id: \$id)
+        membersPresentAtWeekdayCount
+        membersAbsentAtWeekdayCount
       }
-      bussing(limit: 6) {
-        id
+      bussingWeeks(limit: 6) {
+        week
         typename
-        serviceDate {
-          date
-        }
         attendance
-        membersPresentFromFellowshipCount(id: \$id)
-        membersAbsentFromFellowshipCount(id: \$id)
+        membersPresentAtWeekendCount
+        membersAbsentAtWeekendCount
       }
     }
   }

@@ -30,28 +30,44 @@ Map<String, dynamic> _$ChurchForTrendsMenuToJson(
       'leader': instance.leader,
     };
 
-ServicesForTrends _$ServicesForTrendsFromJson(Map<String, dynamic> json) =>
-    ServicesForTrends(
-      id: json['id'] as String,
-      serviceDate:
-          TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+ServiceWeeksForTrends _$ServiceWeeksForTrendsFromJson(
+        Map<String, dynamic> json) =>
+    ServiceWeeksForTrends(
+      week: json['week'] as int,
+      typename: json['typename'] as String,
       attendance: json['attendance'] as int,
-      membersPresentFromFellowshipCount:
-          json['membersPresentFromFellowshipCount'] as int,
-      membersAbsentFromFellowshipCount:
-          json['membersAbsentFromFellowshipCount'] as int,
-    )..typename = json['typename'] as String;
+      membersPresentAtWeekdayCount: json['membersPresentAtWeekdayCount'] as int,
+      membersAbsentAtWeekdayCount: json['membersAbsentAtWeekdayCount'] as int,
+    );
 
-Map<String, dynamic> _$ServicesForTrendsToJson(ServicesForTrends instance) =>
+Map<String, dynamic> _$ServiceWeeksForTrendsToJson(
+        ServiceWeeksForTrends instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'week': instance.week,
       'typename': instance.typename,
-      'serviceDate': instance.serviceDate,
       'attendance': instance.attendance,
-      'membersPresentFromFellowshipCount':
-          instance.membersPresentFromFellowshipCount,
-      'membersAbsentFromFellowshipCount':
-          instance.membersAbsentFromFellowshipCount,
+      'membersPresentAtWeekdayCount': instance.membersPresentAtWeekdayCount,
+      'membersAbsentAtWeekdayCount': instance.membersAbsentAtWeekdayCount,
+    };
+
+BussingWeeksForTrends _$BussingWeeksForTrendsFromJson(
+        Map<String, dynamic> json) =>
+    BussingWeeksForTrends(
+      week: json['week'] as int,
+      typename: json['typename'] as String,
+      attendance: json['attendance'] as int,
+      membersPresentAtWeekendCount: json['membersPresentAtWeekendCount'] as int,
+      membersAbsentAtWeekendCount: json['membersAbsentAtWeekendCount'] as int,
+    );
+
+Map<String, dynamic> _$BussingWeeksForTrendsToJson(
+        BussingWeeksForTrends instance) =>
+    <String, dynamic>{
+      'week': instance.week,
+      'typename': instance.typename,
+      'attendance': instance.attendance,
+      'membersPresentAtWeekendCount': instance.membersPresentAtWeekendCount,
+      'membersAbsentAtWeekendCount': instance.membersAbsentAtWeekendCount,
     };
 
 ChurchForMembershipAttendanceTrends
@@ -61,11 +77,13 @@ ChurchForMembershipAttendanceTrends
           goatsCount: json['goatsCount'] as int,
           deerCount: json['deerCount'] as int,
           lostCount: json['lostCount'] as int,
-          services: (json['services'] as List<dynamic>)
-              .map((e) => ServicesForTrends.fromJson(e as Map<String, dynamic>))
+          serviceWeeks: (json['serviceWeeks'] as List<dynamic>)
+              .map((e) =>
+                  ServiceWeeksForTrends.fromJson(e as Map<String, dynamic>))
               .toList(),
-          bussing: (json['bussing'] as List<dynamic>)
-              .map((e) => ServicesForTrends.fromJson(e as Map<String, dynamic>))
+          bussingWeeks: (json['bussingWeeks'] as List<dynamic>)
+              .map((e) =>
+                  BussingWeeksForTrends.fromJson(e as Map<String, dynamic>))
               .toList(),
           leader:
               MemberForList.fromJson(json['leader'] as Map<String, dynamic>),
@@ -88,7 +106,7 @@ Map<String, dynamic> _$ChurchForMembershipAttendanceTrendsToJson(
       'goatsCount': instance.goatsCount,
       'deerCount': instance.deerCount,
       'lostCount': instance.lostCount,
-      'services': instance.services,
-      'bussing': instance.bussing,
+      'serviceWeeks': instance.serviceWeeks,
+      'bussingWeeks': instance.bussingWeeks,
       'leader': instance.leader,
     };

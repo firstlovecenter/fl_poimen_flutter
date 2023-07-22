@@ -5,7 +5,6 @@ import 'package:poimen/state/enums.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/member_header_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class MembershipTrendsWidget extends StatefulWidget {
@@ -37,11 +36,11 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
       category = newCategory;
 
       if (category == 'Services') {
-        var serviceData = widget.church.services.map((service) {
+        var serviceData = widget.church.serviceWeeks.map((service) {
           return makeGroupData(
-            widget.church.services.indexOf(service),
-            service.membersPresentFromFellowshipCount.toDouble(),
-            service.membersAbsentFromFellowshipCount.toDouble(),
+            widget.church.serviceWeeks.indexOf(service),
+            service.membersPresentAtWeekdayCount.toDouble(),
+            service.membersAbsentAtWeekdayCount.toDouble(),
           );
         }).toList();
 
@@ -49,11 +48,11 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
         showingBarGroups = rawBarGroups;
       }
       if (category == 'Bussing') {
-        var bussingData = widget.church.bussing.map((bussing) {
+        var bussingData = widget.church.bussingWeeks.map((bussing) {
           return makeGroupData(
-            widget.church.bussing.indexOf(bussing),
-            bussing.membersPresentFromFellowshipCount.toDouble(),
-            bussing.membersAbsentFromFellowshipCount.toDouble(),
+            widget.church.bussingWeeks.indexOf(bussing),
+            bussing.membersPresentAtWeekendCount.toDouble(),
+            bussing.membersAbsentAtWeekendCount.toDouble(),
           );
         }).toList();
 
@@ -69,11 +68,11 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
 
     List<BarChartGroupData> items = [];
 
-    items = widget.church.bussing.map((service) {
+    items = widget.church.bussingWeeks.map((service) {
       return makeGroupData(
-        widget.church.bussing.indexOf(service),
-        service.membersPresentFromFellowshipCount.toDouble(),
-        service.membersAbsentFromFellowshipCount.toDouble(),
+        widget.church.bussingWeeks.indexOf(service),
+        service.membersPresentAtWeekendCount.toDouble(),
+        service.membersAbsentAtWeekendCount.toDouble(),
       );
     }).toList();
 
@@ -246,19 +245,11 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
     List<String> titles = [];
 
     if (category == 'Services') {
-      titles = widget.church.services.map((service) {
-        final DateTime date = service.serviceDate.date;
-        final DateFormat formatter = DateFormat.MMMd();
-        return formatter.format(date);
-      }).toList();
+      titles = widget.church.serviceWeeks.map((service) => 'Week ${service.week}').toList();
     }
 
     if (category == 'Bussing') {
-      titles = widget.church.bussing.map((bussing) {
-        final DateTime date = bussing.serviceDate.date;
-        final DateFormat formatter = DateFormat.MMMd();
-        return formatter.format(date);
-      }).toList();
+      titles = widget.church.bussingWeeks.map((bussing) => 'Week ${bussing.week}').toList();
     }
 
     final Widget text = Text(
