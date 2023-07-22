@@ -63,7 +63,10 @@ import 'package:poimen/screens/membership/details/screen_member_details.dart';
 import 'package:poimen/screens/membership/screen_stream_list.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 import 'package:poimen/screens/search/search_screen.dart';
+import 'package:poimen/screens/trends/membership/screen_constituency_membership_trends.dart';
+import 'package:poimen/screens/trends/pastoral_work/screen_constituency_pastoral_work_cycles.dart';
 import 'package:poimen/screens/trends/screen_fellowship_trends_menu.dart';
+import 'package:poimen/screens/trends/screen_constituency_trends_menu.dart';
 import 'package:poimen/screens/trends/membership/screen_fellowship_membership_trends.dart';
 import 'package:poimen/screens/trends/pastoral_work/screen_fellowship_pastoral_work_cycles.dart';
 
@@ -175,10 +178,15 @@ var appRoutes = {
 
   // Trends Screens
   '/fellowship-trends-menu': (context) => const FellowshipTrendsScreen(),
+  '/constituency-trends-menu': (context) => const ConstituencyTrendsScreen(),
   '/trends/fellowship/membership-attendance': (context) =>
       const FellowshipMembershipAttendanceScreen(),
+  '/trends/constituency/membership-attendance': (context) =>
+      const ConstituencyMembershipAttendanceScreen(),
 
   // Pastoral Care
   '/trends/fellowship/pastoral-work-cycles': (context) =>
       const FellowshipPastoralWorkCyclesScreen(),
+  '/trends/constituency/pastoral-work-cycles': (context) =>
+      const ConstituencyPastoralWorkCyclesScreen(),
 };

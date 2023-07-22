@@ -14,6 +14,8 @@ class WidgetTrendsMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final levelForUrl = church.typename.toLowerCase();
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
@@ -23,8 +25,8 @@ class WidgetTrendsMenu extends StatelessWidget {
           HomePageButton(
             text: 'Pastoral Work',
             icon: FontAwesomeIcons.solidClock,
-            route: '/trends/fellowship/pastoral-work-cycles',
-            navKey: 'fellowshipPastoralWork',
+            route: '/trends/$levelForUrl/pastoral-work-cycles',
+            navKey: '${levelForUrl}PastoralWork',
             permitted: permittedRoles,
             navigateBack: true,
           ),
@@ -32,8 +34,8 @@ class WidgetTrendsMenu extends StatelessWidget {
           HomePageButton(
             text: 'Membership Attendance',
             icon: FontAwesomeIcons.userCheck,
-            route: '/trends/fellowship/membership-attendance',
-            navKey: 'fellowshipMembershipAttendance',
+            route: '/trends/$levelForUrl/membership-attendance',
+            navKey: '${levelForUrl}MembershipAttendance',
             permitted: permittedRoles,
             navigateBack: true,
           ),
