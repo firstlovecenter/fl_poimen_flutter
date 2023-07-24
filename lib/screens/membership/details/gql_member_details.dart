@@ -6,6 +6,7 @@ final getMemberDetails = gql('''
       id
       typename
       firstName
+      middleName
       lastName
       status
       pictureUrl
@@ -37,7 +38,7 @@ final getMemberDetails = gql('''
         typename
         name
       }
-      stream {
+      council {
         id
         typename
         name

@@ -83,13 +83,14 @@ class Last4Services {
 
 @JsonSerializable()
 class Member extends MemberForList {
+  String middleName = '';
   String visitationArea = '';
   Neo4jPoint? location = Neo4jPoint();
   List<Last4Services> lastFourWeekdayServices = [];
   List<Last4Services> lastFourWeekendServices = [];
   Gender gender = Gender();
   TimeGraph dob = TimeGraph();
-  Church stream;
+  Church council;
   Church fellowship;
   Church? ministry;
   List<PastoralComments>? pastoralComments = [];
@@ -97,7 +98,7 @@ class Member extends MemberForList {
   Member(
       {required this.gender,
       required this.dob,
-      required this.stream,
+      required this.council,
       required this.ministry,
       required this.fellowship,
       this.pastoralComments})

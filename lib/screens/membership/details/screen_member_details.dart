@@ -178,8 +178,21 @@ class MemberDetailsScreen extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Text(
+                'Bio Data',
+                style: PoimenTheme.heading2,
+              ),
+              BioDetailsCard(title: 'First Name', detail: member.firstName),
+              BioDetailsCard(title: 'Middle Name', detail: member.middleName),
+              BioDetailsCard(title: 'Last Name', detail: member.lastName),
               BioDetailsCard(title: 'Sex', detail: member.gender.gender.name),
               BioDetailsCard(title: 'Date of Birth', detail: member.dob.humanReadable),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Text(
+                'Contact Information',
+                style: PoimenTheme.heading2,
+              ),
               BioDetailsCard(
                   title: 'Phone Number',
                   detail: '+${member.phoneNumber}',
@@ -189,13 +202,38 @@ class MemberDetailsScreen extends StatelessWidget {
                   detail: '+${member.whatsappNumber}',
                   whatsAppInfo:
                       WhatsAppInfo(firstName: member.firstName, number: member.whatsappNumber)),
-              BioDetailsCard(title: 'Stream', detail: member.stream.name),
+              const Padding(padding: EdgeInsets.all(8.0)),
+              Text(
+                'Church Information',
+                style: PoimenTheme.heading2,
+              ),
+              BioDetailsCard(title: 'Council', detail: member.council.name),
               BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
+              if (member.fellowship.leader != null && member.fellowship.leader!.id != member.id)
+                InkWell(
+                  onTap: () {
+                    state.memberId = member.fellowship.leader!.id;
+                    Navigator.pushNamed(
+                      context,
+                      '/member-details',
+                      arguments: member.fellowship.leader,
+                    );
+                  },
+                  child: BioDetailsCard(
+                      title: 'Fellowship Leader',
+                      detail:
+                          '${member.fellowship.leader!.firstName} ${member.fellowship.leader!.lastName}',
+                      phoneNumber: member.fellowship.leader!.phoneNumber,
+                      whatsAppInfo: WhatsAppInfo(
+                          firstName: member.fellowship.leader!.firstName,
+                          number: member.fellowship.leader!.whatsappNumber)),
+                )
+              else
+                Container(),
               BioDetailsCard(title: 'Ministry', detail: member.ministry?.name ?? ''),
-              BioDetailsCard(title: 'IDL Location', detail: member.visitationArea),
-              const BioDetailsCard(title: 'Notes', detail: ''),
-              const BioDetailsCard(title: 'Invited By', detail: ''),
+              BioDetailsCard(title: 'Visitation Area', detail: member.visitationArea),
               const BioDetailsCard(title: 'Last Visited', detail: ''),
+              const BioDetailsCard(title: 'Notes', detail: ''),
               const Padding(padding: EdgeInsets.all(8.0)),
               member.pastoralComments == null || member.pastoralComments!.isEmpty
                   ? Container()

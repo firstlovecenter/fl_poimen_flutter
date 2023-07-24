@@ -98,7 +98,7 @@ Map<String, dynamic> _$Last4ServicesToJson(Last4Services instance) =>
 Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       gender: Gender.fromJson(json['gender'] as Map<String, dynamic>),
       dob: TimeGraph.fromJson(json['dob'] as Map<String, dynamic>),
-      stream: Church.fromJson(json['stream'] as Map<String, dynamic>),
+      council: Church.fromJson(json['council'] as Map<String, dynamic>),
       ministry: json['ministry'] == null
           ? null
           : Church.fromJson(json['ministry'] as Map<String, dynamic>),
@@ -116,6 +116,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..pictureUrl = json['pictureUrl'] as String
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
+      ..middleName = json['middleName'] as String
       ..visitationArea = json['visitationArea'] as String
       ..location = json['location'] == null
           ? null
@@ -139,13 +140,14 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
+      'middleName': instance.middleName,
       'visitationArea': instance.visitationArea,
       'location': instance.location,
       'lastFourWeekdayServices': instance.lastFourWeekdayServices,
       'lastFourWeekendServices': instance.lastFourWeekendServices,
       'gender': instance.gender,
       'dob': instance.dob,
-      'stream': instance.stream,
+      'council': instance.council,
       'fellowship': instance.fellowship,
       'ministry': instance.ministry,
       'pastoralComments': instance.pastoralComments,

@@ -290,7 +290,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                       textCapitalization: TextCapitalization.sentences,
                       decoration: const InputDecoration(
                         labelText: 'Name of Area',
-                        hintText: 'What is the name of the area?',
+                        hintText: 'Put Hostel and Room Number if Student',
                       ),
                       onSaved: (String? value) {
                         visitationArea = value ?? '';
