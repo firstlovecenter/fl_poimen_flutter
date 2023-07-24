@@ -24,7 +24,7 @@ class FellowshipPastoralWorkCyclesScreen extends StatelessWidget {
         bodyFunction: (data) {
           Widget body;
 
-          final fellowship = ChurchForPastoralWorkTrends.fromJson(data?['fellowships'][0]);
+          final fellowship = ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['fellowships'][0]);
 
           body = PastoralWorkTrendsWidget(
             church: fellowship,

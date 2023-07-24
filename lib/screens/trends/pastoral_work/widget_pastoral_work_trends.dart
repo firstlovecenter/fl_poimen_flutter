@@ -5,7 +5,7 @@ import 'package:poimen/screens/trends/pastoral_work/utils_pastoral_work.dart';
 
 class PastoralWorkTrendsWidget extends StatelessWidget {
   const PastoralWorkTrendsWidget({Key? key, required this.church}) : super(key: key);
-  final ChurchForPastoralWorkTrends church;
+  final ChurchForPastoralWorkTrendsWithCounts church;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class PastoralWorkTrendsWidget extends StatelessWidget {
                       cycle: cycle,
                       duty: Duty(
                           name: 'Visitation',
-                          number: cycle.visitationsByChurch.length,
+                          number: cycle.visitationsByChurchCount,
                           icon: FontAwesomeIcons.doorOpen),
                     ),
                     PastoralWorkCycleTile(
@@ -43,7 +43,7 @@ class PastoralWorkTrendsWidget extends StatelessWidget {
                       cycle: cycle,
                       duty: Duty(
                           name: 'Prayer',
-                          number: cycle.prayersByChurch.length,
+                          number: cycle.prayersByChurchCount,
                           icon: FontAwesomeIcons.personPraying),
                     ),
                     PastoralWorkCycleTile(
@@ -51,7 +51,7 @@ class PastoralWorkTrendsWidget extends StatelessWidget {
                       cycle: cycle,
                       duty: Duty(
                           name: 'Telepastoring',
-                          number: cycle.telepastoringsByChurch.length,
+                          number: cycle.telepastoringsByChurchCount,
                           icon: FontAwesomeIcons.phone),
                     ),
                   ],
@@ -81,8 +81,8 @@ class PastoralWorkCycleTile extends StatelessWidget {
     required this.duty,
   });
 
-  final ChurchForPastoralWorkTrends church;
-  final PastoralCycleForTrends cycle;
+  final ChurchForPastoralWorkTrendsWithCounts church;
+  final PastoralCycleCountsForTrends cycle;
   final Duty duty;
 
   @override

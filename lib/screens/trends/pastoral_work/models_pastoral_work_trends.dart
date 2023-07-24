@@ -93,15 +93,55 @@ class PastoralCycleForTrends extends PastoralCycle {
 }
 
 @JsonSerializable()
-class ChurchForPastoralWorkTrends extends Church {
-  List<PastoralCycleForTrends> pastoralCycles;
+class PastoralCycleCountsForTrends extends PastoralCycle {
+  @override
+  final String id;
+  @override
+  final String typename;
+  @override
+  final String startDate;
+  @override
+  final String endDate;
+  @override
+  final int numberOfDays;
+  final int visitationsByChurchCount;
+  final int prayersByChurchCount;
+  final int telepastoringsByChurchCount;
 
-  ChurchForPastoralWorkTrends({
+  PastoralCycleCountsForTrends({
+    required this.id,
+    required this.typename,
+    required this.startDate,
+    required this.endDate,
+    required this.numberOfDays,
+    required this.visitationsByChurchCount,
+    required this.prayersByChurchCount,
+    required this.telepastoringsByChurchCount,
+  }) : super(
+          id: id,
+          typename: typename,
+          startDate: startDate,
+          endDate: endDate,
+          numberOfDays: numberOfDays,
+        );
+
+  factory PastoralCycleCountsForTrends.fromJson(Map<String, dynamic> json) =>
+      _$PastoralCycleCountsForTrendsFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PastoralCycleCountsForTrendsToJson(this);
+}
+
+@JsonSerializable()
+class ChurchForPastoralWorkTrendsWithCounts extends Church {
+  List<PastoralCycleCountsForTrends> pastoralCycles;
+
+  ChurchForPastoralWorkTrendsWithCounts({
     required this.pastoralCycles,
   });
 
-  factory ChurchForPastoralWorkTrends.fromJson(Map<String, dynamic> json) =>
-      _$ChurchForPastoralWorkTrendsFromJson(json);
+  factory ChurchForPastoralWorkTrendsWithCounts.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForPastoralWorkTrendsWithCountsFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$ChurchForPastoralWorkTrendsToJson(this);
+  Map<String, dynamic> toJson() => _$ChurchForPastoralWorkTrendsWithCountsToJson(this);
 }

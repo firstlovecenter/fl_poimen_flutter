@@ -85,26 +85,53 @@ Map<String, dynamic> _$PastoralCycleForTrendsToJson(
       'telepastoringsByChurch': instance.telepastoringsByChurch,
     };
 
-ChurchForPastoralWorkTrends _$ChurchForPastoralWorkTrendsFromJson(
+PastoralCycleCountsForTrends _$PastoralCycleCountsForTrendsFromJson(
         Map<String, dynamic> json) =>
-    ChurchForPastoralWorkTrends(
-      pastoralCycles: (json['pastoralCycles'] as List<dynamic>)
-          .map(
-              (e) => PastoralCycleForTrends.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    )
-      ..id = json['id'] as String
-      ..typename = json['typename'] as String
-      ..name = json['name'] as String
-      ..leader = json['leader'] == null
-          ? null
-          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
-      ..admin = json['admin'] == null
-          ? null
-          : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
+    PastoralCycleCountsForTrends(
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      startDate: json['startDate'] as String,
+      endDate: json['endDate'] as String,
+      numberOfDays: json['numberOfDays'] as int,
+      visitationsByChurchCount: json['visitationsByChurchCount'] as int,
+      prayersByChurchCount: json['prayersByChurchCount'] as int,
+      telepastoringsByChurchCount: json['telepastoringsByChurchCount'] as int,
+    );
 
-Map<String, dynamic> _$ChurchForPastoralWorkTrendsToJson(
-        ChurchForPastoralWorkTrends instance) =>
+Map<String, dynamic> _$PastoralCycleCountsForTrendsToJson(
+        PastoralCycleCountsForTrends instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'startDate': instance.startDate,
+      'endDate': instance.endDate,
+      'numberOfDays': instance.numberOfDays,
+      'visitationsByChurchCount': instance.visitationsByChurchCount,
+      'prayersByChurchCount': instance.prayersByChurchCount,
+      'telepastoringsByChurchCount': instance.telepastoringsByChurchCount,
+    };
+
+ChurchForPastoralWorkTrendsWithCounts
+    _$ChurchForPastoralWorkTrendsWithCountsFromJson(
+            Map<String, dynamic> json) =>
+        ChurchForPastoralWorkTrendsWithCounts(
+          pastoralCycles: (json['pastoralCycles'] as List<dynamic>)
+              .map((e) => PastoralCycleCountsForTrends.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+        )
+          ..id = json['id'] as String
+          ..typename = json['typename'] as String
+          ..name = json['name'] as String
+          ..leader = json['leader'] == null
+              ? null
+              : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
+          ..admin = json['admin'] == null
+              ? null
+              : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ChurchForPastoralWorkTrendsWithCountsToJson(
+        ChurchForPastoralWorkTrendsWithCounts instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,

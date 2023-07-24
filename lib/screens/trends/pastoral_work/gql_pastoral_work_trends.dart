@@ -24,53 +24,9 @@ final getFellowshipPastoralWorkCycles = gql('''
         startDate
         endDate
 
-        visitationsByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberVisited {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
-
-        prayersByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberPrayedFor {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
-
-        telepastoringsByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberTelepastored {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
+        visitationsByChurchCount(churchId: \$id)
+        prayersByChurchCount(churchId: \$id)
+        telepastoringsByChurchCount(churchId: \$id)
       }
     }
   }
@@ -100,54 +56,44 @@ final getConstituencyPastoralWorkCycles = gql('''
         startDate
         endDate
 
-        visitationsByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberVisited {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
-
-        prayersByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberPrayedFor {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
-
-        telepastoringsByChurch(churchId: \$id) {
-          id
-          typename
-          datetime
-          
-          memberTelepastored {
-           id
-           typename
-           firstName
-           lastName
-           pictureUrl
-           phoneNumber
-           whatsappNumber
-         }
-        }
+        visitationsByChurchCount(churchId: \$id)
+        prayersByChurchCount(churchId: \$id)
+        telepastoringsByChurchCount(churchId: \$id)
       }
     }
   }
 ''');
+
+getCouncilPastoralWorkCycles(String id) {
+  return gql('''
+    query getCouncilPastoralWorkCycles {
+      councils(where: {id: "$id"}) {
+        id
+        typename
+        name
+
+        leader {
+          id
+          typename
+          firstName
+          lastName
+          pictureUrl
+          phoneNumber
+          whatsappNumber
+        }
+
+        pastoralCycles {
+          id
+          typename
+          numberOfDays
+          startDate
+          endDate
+
+          visitationsByChurchCount(churchId: "$id")
+          prayersByChurchCount(churchId: "$id")
+          telepastoringsByChurchCount(churchId: "$id")
+        }
+      }
+    }
+  ''');
+}

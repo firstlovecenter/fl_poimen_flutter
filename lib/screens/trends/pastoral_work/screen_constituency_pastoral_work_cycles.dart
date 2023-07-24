@@ -24,7 +24,7 @@ class ConstituencyPastoralWorkCyclesScreen extends StatelessWidget {
         bodyFunction: (data) {
           Widget body;
 
-          final constituency = ChurchForPastoralWorkTrends.fromJson(data?['constituencies'][0]);
+          final constituency = ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['constituencies'][0]);
 
           body = PastoralWorkTrendsWidget(
             church: constituency,
