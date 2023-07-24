@@ -82,6 +82,9 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
     return ListView(
       children: [
         MemberHeaderWidget(
@@ -222,7 +225,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                 [widget.presentBarColor, widget.presentBarColor2],
                 [widget.absentBarColor, widget.absentBarColor2]
               ],
-              inactiveBgColor: const Color.fromARGB(255, 43, 43, 43),
+              inactiveBgColor: isDarkMode ? const Color.fromARGB(255, 43, 43, 43) : Colors.grey,
               totalSwitches: categoryOptions.length,
               radiusStyle: true,
               cornerRadius: 20.0,
@@ -245,11 +248,11 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
     List<String> titles = [];
 
     if (category == 'Services') {
-      titles = widget.church.serviceWeeks.map((service) => 'Week ${service.week}').toList();
+      titles = widget.church.serviceWeeks.map((service) => 'Wk ${service.week}').toList();
     }
 
     if (category == 'Bussing') {
-      titles = widget.church.bussingWeeks.map((bussing) => 'Week ${bussing.week}').toList();
+      titles = widget.church.bussingWeeks.map((bussing) => 'Wk ${bussing.week}').toList();
     }
 
     final Widget text = Text(
