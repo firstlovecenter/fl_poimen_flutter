@@ -15,6 +15,17 @@ class PastoralWorkTrendsWidget extends StatelessWidget {
 
     return ListView(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+          child: Text(
+            'Pastoral Work Cycles',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: kPrimaryColor,
+            ),
+          ),
+        ),
         ...church.pastoralCycles.map(
           (cycle) {
             return Card(

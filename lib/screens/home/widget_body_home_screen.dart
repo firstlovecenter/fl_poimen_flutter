@@ -110,6 +110,13 @@ class HomeScreenBody extends StatelessWidget {
             navKey: 'trends',
             permitted: const [Role.all],
           ),
+          HomePageButton(
+            text: 'My Leaders Trends',
+            icon: FontAwesomeIcons.chartPie,
+            route: '/$levelForUrl-subleaders-trends',
+            navKey: 'trends',
+            permitted: const [Role.all],
+          ),
         ],
       ),
     );

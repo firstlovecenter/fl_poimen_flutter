@@ -142,6 +142,4 @@ class ChurchForPastoralWorkTrendsWithCounts extends Church {
 
   factory ChurchForPastoralWorkTrendsWithCounts.fromJson(Map<String, dynamic> json) =>
       _$ChurchForPastoralWorkTrendsWithCountsFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$ChurchForPastoralWorkTrendsWithCountsToJson(this);
 }
