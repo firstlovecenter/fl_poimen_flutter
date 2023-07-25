@@ -7,10 +7,18 @@ import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 
 class MemberHeaderWidget extends StatelessWidget {
-  const MemberHeaderWidget({Key? key, required this.member, required this.role}) : super(key: key);
+  const MemberHeaderWidget({
+    Key? key,
+    required this.member,
+    required this.role,
+    this.secondaryHeading,
+    this.avatarRadius,
+  }) : super(key: key);
 
   final MemberForList member;
   final Role role;
+  final String? secondaryHeading;
+  final double? avatarRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +36,16 @@ class MemberHeaderWidget extends StatelessWidget {
               style: const TextStyle(fontSize: 20),
             ),
             Text(
-              memberRole,
+              secondaryHeading ?? memberRole,
               style: const TextStyle(color: PoimenTheme.textSecondary),
             )
           ],
         ),
         const Padding(padding: EdgeInsets.all(10.0)),
-        Column(
-          children: [
-            AvatarWithInitials(
-              foregroundImage: picture.image,
-              member: member,
-              radius: 45,
-            ),
-          ],
+        AvatarWithInitials(
+          foregroundImage: picture.image,
+          member: member,
+          radius: avatarRadius ?? 45,
         )
       ],
     );

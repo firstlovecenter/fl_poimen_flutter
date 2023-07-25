@@ -117,13 +117,13 @@ List<Map<String, dynamic>?> getTrendsMenus(ChurchLevel churchLevel) {
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
     {
       'title': 'My Trends',
-      'icon': FontAwesomeIcons.p,
+      'icon': FontAwesomeIcons.chartSimple,
       'route': '/$levelForUrl-trends-menu',
       'navKey': 'pastoral-work'
     },
     {
       'title': 'My Leaders Trends',
-      'icon': FontAwesomeIcons.arrowDown,
+      'icon': FontAwesomeIcons.chartPie,
       'route': '/$levelForUrl-subleaders-trends',
       'navKey': 'membership-attendance'
     },

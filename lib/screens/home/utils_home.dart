@@ -211,3 +211,26 @@ Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingT
     permitted: [Role.values.byName('leader${level.properCase}')],
   );
 }
+
+Widget myLeadersTrendsLevels(ChurchLevel churchLevel) {
+  const permittedLevels = [
+    ChurchLevel.constituency,
+    ChurchLevel.council,
+    ChurchLevel.stream,
+    ChurchLevel.campus,
+  ];
+
+  if (!permittedLevels.contains(churchLevel)) {
+    return Container();
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return HomePageButton(
+    text: 'My Leaders Trends',
+    icon: FontAwesomeIcons.chartPie,
+    route: '/${level.lowerCase}-subleaders-trends',
+    navKey: 'subleaders-trends',
+    permitted: const [Role.all],
+  );
+}
