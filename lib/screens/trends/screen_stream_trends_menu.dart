@@ -29,7 +29,7 @@ class StreamTrendsScreen extends StatelessWidget {
 
         body = WidgetTrendsMenu(
           church: stream,
-          permittedRoles: const [Role.leaderStream],
+          permittedRoles: permitRoleAndHigher(Role.leaderStream),
         );
 
         var returnValues = GQLQueryContainerReturnValue(

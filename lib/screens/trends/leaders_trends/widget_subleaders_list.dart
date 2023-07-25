@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/trends/leaders_trends/models_my_leaders_trends.dart';
 import 'package:poimen/state/enums.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/member_header_widget.dart';
+import 'package:provider/provider.dart';
 
 class SubLeadersListWidget extends StatelessWidget {
   const SubLeadersListWidget({Key? key, required this.church}) : super(key: key);
@@ -13,13 +15,14 @@ class SubLeadersListWidget extends StatelessWidget {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color kPrimaryColor =
         isDark ? const Color.fromARGB(255, 251, 192, 192) : const Color.fromARGB(255, 104, 28, 22);
+    var churchState = Provider.of<SharedState>(context);
 
     return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Text(
-            'My Leaders',
+            '${church.name} ${church.typename} Leaders',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -63,7 +66,22 @@ class SubLeadersListWidget extends StatelessWidget {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              print('Pastoral Cycle');
+                              if (church.typename == 'Fellowship') {
+                                churchState.fellowshipId = church.id;
+                              } else if (church.typename == 'Constituency') {
+                                churchState.constituencyId = church.id;
+                              } else if (church.typename == 'Council') {
+                                churchState.councilId = church.id;
+                              } else if (church.typename == 'Stream') {
+                                churchState.streamId = church.id;
+                              } else if (church.typename == 'Campus') {
+                                churchState.campusId = church.id;
+                              }
+
+                              Navigator.pushNamed(
+                                context,
+                                '/trends/${church.typename.toLowerCase()}/pastoral-work-cycles',
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: PoimenTheme.phoneColor,
@@ -83,7 +101,22 @@ class SubLeadersListWidget extends StatelessWidget {
                           const Padding(padding: EdgeInsets.all(5.0)),
                           ElevatedButton(
                             onPressed: () {
-                              print('Pastoral Cycle');
+                              if (church.typename == 'Fellowship') {
+                                churchState.fellowshipId = church.id;
+                              } else if (church.typename == 'Constituency') {
+                                churchState.constituencyId = church.id;
+                              } else if (church.typename == 'Council') {
+                                churchState.councilId = church.id;
+                              } else if (church.typename == 'Stream') {
+                                churchState.streamId = church.id;
+                              } else if (church.typename == 'Campus') {
+                                churchState.campusId = church.id;
+                              }
+
+                              Navigator.pushNamed(
+                                context,
+                                '/trends/${church.typename.toLowerCase()}/membership-attendance',
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: PoimenTheme.whatsappColor,

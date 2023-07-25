@@ -29,7 +29,7 @@ class CampusTrendsScreen extends StatelessWidget {
 
         body = WidgetTrendsMenu(
           church: campus,
-          permittedRoles: const [Role.leaderCampus, Role.adminCampus],
+          permittedRoles: permitRoleAndHigher(Role.leaderCampus),
         );
 
         var returnValues = GQLQueryContainerReturnValue(

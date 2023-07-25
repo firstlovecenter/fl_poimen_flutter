@@ -29,7 +29,7 @@ class FellowshipTrendsScreen extends StatelessWidget {
 
         body = WidgetTrendsMenu(
           church: fellowship,
-          permittedRoles: const [Role.leaderFellowship],
+          permittedRoles: permitRoleAndHigher(Role.leaderFellowship),
         );
 
         var returnValues = GQLQueryContainerReturnValue(

@@ -29,7 +29,7 @@ class CouncilTrendsScreen extends StatelessWidget {
 
         body = WidgetTrendsMenu(
           church: council,
-          permittedRoles: const [Role.leaderCouncil, Role.adminCouncil],
+          permittedRoles: permitRoleAndHigher(Role.leaderCouncil),
         );
 
         var returnValues = GQLQueryContainerReturnValue(

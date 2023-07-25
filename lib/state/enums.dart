@@ -149,3 +149,76 @@ enum Role {
   adminCampus,
   all
 }
+
+List<Role> permitRoleAndHigher(Role role) {
+  if (role == Role.leaderFellowship) {
+    return [
+      Role.leaderFellowship,
+      Role.leaderBacenta,
+      Role.leaderConstituency,
+      Role.adminConstituency,
+      Role.leaderCouncil,
+      Role.adminCouncil,
+      Role.leaderStream,
+      Role.adminStream,
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  if (role == Role.leaderBacenta) {
+    return [
+      Role.leaderBacenta,
+      Role.leaderConstituency,
+      Role.adminConstituency,
+      Role.leaderCouncil,
+      Role.adminCouncil,
+      Role.leaderStream,
+      Role.adminStream,
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  if (role == Role.leaderConstituency || role == Role.adminConstituency) {
+    return [
+      Role.leaderConstituency,
+      Role.adminConstituency,
+      Role.leaderCouncil,
+      Role.adminCouncil,
+      Role.leaderStream,
+      Role.adminStream,
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  if (role == Role.leaderCouncil || role == Role.adminCouncil) {
+    return [
+      Role.leaderCouncil,
+      Role.adminCouncil,
+      Role.leaderStream,
+      Role.adminStream,
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  if (role == Role.leaderStream || role == Role.adminStream) {
+    return [
+      Role.leaderStream,
+      Role.adminStream,
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  if (role == Role.leaderCampus || role == Role.adminCampus) {
+    return [
+      Role.leaderCampus,
+      Role.adminCampus,
+    ];
+  }
+
+  return [];
+}

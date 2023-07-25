@@ -29,7 +29,7 @@ class ConstituencyTrendsScreen extends StatelessWidget {
 
         body = WidgetTrendsMenu(
           church: constituency,
-          permittedRoles: const [Role.leaderConstituency],
+          permittedRoles: permitRoleAndHigher(Role.leaderConstituency),
         );
 
         var returnValues = GQLQueryContainerReturnValue(
