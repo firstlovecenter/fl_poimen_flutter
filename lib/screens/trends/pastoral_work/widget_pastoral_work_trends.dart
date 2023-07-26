@@ -41,6 +41,7 @@ class PastoralWorkTrendsWidget extends StatelessWidget {
                         color: kPrimaryColor,
                       ),
                     ),
+                    Text('Members ${cycle.membershipDataByChurch?.membersCount ?? '-'}'),
                     PastoralWorkCycleTile(
                       church: church,
                       cycle: cycle,

@@ -53,6 +53,31 @@ class TelepastoringActivityForTrends {
 }
 
 @JsonSerializable()
+class MembershipDataForTrends {
+  String id;
+  String typename;
+  DateTime updatedAt;
+  int membersCount;
+  int sheepCount;
+  int goatsCount;
+  int deerCount;
+
+  MembershipDataForTrends({
+    required this.id,
+    required this.typename,
+    required this.updatedAt,
+    required this.membersCount,
+    required this.sheepCount,
+    required this.goatsCount,
+    required this.deerCount,
+  });
+
+  factory MembershipDataForTrends.fromJson(Map<String, dynamic> json) =>
+      _$MembershipDataForTrendsFromJson(json);
+  Map<String, dynamic> toJson() => _$MembershipDataForTrendsToJson(this);
+}
+
+@JsonSerializable()
 class PastoralCycleForTrends extends PastoralCycle {
   @override
   final String id;
@@ -64,6 +89,7 @@ class PastoralCycleForTrends extends PastoralCycle {
   final String endDate;
   @override
   final int numberOfDays;
+  final MembershipDataForTrends? membershipDataByChurch;
   final List<VisitationActivityForTrends> visitationsByChurch;
   final List<PrayerActivityForTrends> prayersByChurch;
   final List<TelepastoringActivityForTrends> telepastoringsByChurch;
@@ -74,6 +100,7 @@ class PastoralCycleForTrends extends PastoralCycle {
     required this.startDate,
     required this.endDate,
     required this.numberOfDays,
+    required this.membershipDataByChurch,
     required this.visitationsByChurch,
     required this.prayersByChurch,
     required this.telepastoringsByChurch,
@@ -104,6 +131,7 @@ class PastoralCycleCountsForTrends extends PastoralCycle {
   final String endDate;
   @override
   final int numberOfDays;
+  final MembershipDataForTrends? membershipDataByChurch;
   final int visitationsByChurchCount;
   final int prayersByChurchCount;
   final int telepastoringsByChurchCount;
@@ -114,6 +142,7 @@ class PastoralCycleCountsForTrends extends PastoralCycle {
     required this.startDate,
     required this.endDate,
     required this.numberOfDays,
+    required this.membershipDataByChurch,
     required this.visitationsByChurchCount,
     required this.prayersByChurchCount,
     required this.telepastoringsByChurchCount,

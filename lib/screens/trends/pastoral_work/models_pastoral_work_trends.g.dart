@@ -50,6 +50,30 @@ Map<String, dynamic> _$TelepastoringActivityForTrendsToJson(
       'datetime': instance.datetime.toIso8601String(),
     };
 
+MembershipDataForTrends _$MembershipDataForTrendsFromJson(
+        Map<String, dynamic> json) =>
+    MembershipDataForTrends(
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      membersCount: json['membersCount'] as int,
+      sheepCount: json['sheepCount'] as int,
+      goatsCount: json['goatsCount'] as int,
+      deerCount: json['deerCount'] as int,
+    );
+
+Map<String, dynamic> _$MembershipDataForTrendsToJson(
+        MembershipDataForTrends instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      'membersCount': instance.membersCount,
+      'sheepCount': instance.sheepCount,
+      'goatsCount': instance.goatsCount,
+      'deerCount': instance.deerCount,
+    };
+
 PastoralCycleForTrends _$PastoralCycleForTrendsFromJson(
         Map<String, dynamic> json) =>
     PastoralCycleForTrends(
@@ -58,6 +82,10 @@ PastoralCycleForTrends _$PastoralCycleForTrendsFromJson(
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
       numberOfDays: json['numberOfDays'] as int,
+      membershipDataByChurch: json['membershipDataByChurch'] == null
+          ? null
+          : MembershipDataForTrends.fromJson(
+              json['membershipDataByChurch'] as Map<String, dynamic>),
       visitationsByChurch: (json['visitationsByChurch'] as List<dynamic>)
           .map((e) =>
               VisitationActivityForTrends.fromJson(e as Map<String, dynamic>))
@@ -80,6 +108,7 @@ Map<String, dynamic> _$PastoralCycleForTrendsToJson(
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'numberOfDays': instance.numberOfDays,
+      'membershipDataByChurch': instance.membershipDataByChurch,
       'visitationsByChurch': instance.visitationsByChurch,
       'prayersByChurch': instance.prayersByChurch,
       'telepastoringsByChurch': instance.telepastoringsByChurch,
@@ -93,6 +122,10 @@ PastoralCycleCountsForTrends _$PastoralCycleCountsForTrendsFromJson(
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
       numberOfDays: json['numberOfDays'] as int,
+      membershipDataByChurch: json['membershipDataByChurch'] == null
+          ? null
+          : MembershipDataForTrends.fromJson(
+              json['membershipDataByChurch'] as Map<String, dynamic>),
       visitationsByChurchCount: json['visitationsByChurchCount'] as int,
       prayersByChurchCount: json['prayersByChurchCount'] as int,
       telepastoringsByChurchCount: json['telepastoringsByChurchCount'] as int,
@@ -106,6 +139,7 @@ Map<String, dynamic> _$PastoralCycleCountsForTrendsToJson(
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'numberOfDays': instance.numberOfDays,
+      'membershipDataByChurch': instance.membershipDataByChurch,
       'visitationsByChurchCount': instance.visitationsByChurchCount,
       'prayersByChurchCount': instance.prayersByChurchCount,
       'telepastoringsByChurchCount': instance.telepastoringsByChurchCount,

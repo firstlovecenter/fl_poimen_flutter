@@ -24,6 +24,15 @@ final getFellowshipPastoralWorkCycles = gql('''
         startDate
         endDate
 
+        membershipDataByChurch(churchId: \$id) {
+          id
+          typename
+          updatedAt
+          membersCount
+          sheepCount
+          goatsCount
+          deerCount
+        }
         visitationsByChurchCount(churchId: \$id)
         prayersByChurchCount(churchId: \$id)
         telepastoringsByChurchCount(churchId: \$id)
@@ -56,6 +65,15 @@ final getConstituencyPastoralWorkCycles = gql('''
         startDate
         endDate
 
+        membershipDataByChurch(churchId: \$id) {
+          id
+          typename
+          updatedAt
+          membersCount
+          sheepCount
+          goatsCount
+          deerCount
+        }
         visitationsByChurchCount(churchId: \$id)
         prayersByChurchCount(churchId: \$id)
         telepastoringsByChurchCount(churchId: \$id)
@@ -67,7 +85,7 @@ final getConstituencyPastoralWorkCycles = gql('''
 getCouncilPastoralWorkCycles(String id) {
   return gql('''
     query getCouncilPastoralWorkCycles {
-      councils(where: {id: "$id"}) {
+      councils(where: {id: \$id}) {
         id
         typename
         name
@@ -89,9 +107,18 @@ getCouncilPastoralWorkCycles(String id) {
           startDate
           endDate
 
-          visitationsByChurchCount(churchId: "$id")
-          prayersByChurchCount(churchId: "$id")
-          telepastoringsByChurchCount(churchId: "$id")
+          membershipDataByChurch(churchId: \$id) {
+            id
+            typename
+            updatedAt
+            membersCount
+            sheepCount
+            goatsCount
+            deerCount
+          }
+          visitationsByChurchCount(churchId: \$id)
+          prayersByChurchCount(churchId: \$id)
+          telepastoringsByChurchCount(churchId: \$id)
         }
       }
     }
