@@ -6,7 +6,7 @@ final getFellowshipOutstandingPrayer = gql('''
       id
       typename
       name
-      completedPrayerCount
+      completedPrayersCount
       outstandingPrayer {
         id
         typename
@@ -27,7 +27,7 @@ final getBacentaOutstandingPrayer = gql('''
       id
       typename
       name
-      completedPrayerCount
+      completedPrayersCount
       outstandingPrayer {
         id
         typename
@@ -48,7 +48,7 @@ final getConstituencyOutstandingPrayer = gql('''
       id
       typename
       name
-      completedPrayerCount
+      completedPrayersCount
       outstandingPrayer {
         id
         typename
@@ -69,7 +69,7 @@ final getCouncilOutstandingPrayer = gql('''
       id
       typename
       name
-      completedPrayerCount
+      completedPrayersCount
       outstandingPrayer {
         id
         typename
@@ -91,7 +91,7 @@ final getFellowshipCompletedPrayer = gql('''
       typename
       name
       outstandingPrayerCount
-      completedPrayer {
+      completedPrayers {
         id
         typename
         status
@@ -112,7 +112,7 @@ final getBacentaCompletedPrayer = gql('''
       typename
       name
       outstandingPrayerCount
-      completedPrayer {
+      completedPrayers {
         id
         typename
         status
@@ -133,7 +133,7 @@ final getConstituencyCompletedPrayer = gql('''
       typename
       name
       outstandingPrayerCount
-      completedPrayer {
+      completedPrayers {
         id
         typename
         status
@@ -154,7 +154,7 @@ final getCouncilCompletedPrayer = gql('''
       typename
       name
       outstandingPrayerCount
-      completedPrayer {
+      completedPrayers {
         id
         typename
         status
@@ -182,7 +182,7 @@ mutation LogFellowshipPrayerActivity(
      id
      typename
      name
-     completedPrayerCount
+     completedPrayersCount
      outstandingPrayer {
         id
         typename
@@ -211,7 +211,7 @@ mutation LogBacentaPrayerActivity(
      id
      typename
      name
-     completedPrayerCount
+     completedPrayersCount
      outstandingPrayer {
         id
         typename
@@ -240,7 +240,7 @@ mutation LogConstituencyPrayerActivity(
      id
      typename
      name
-     completedPrayerCount
+     completedPrayersCount
      outstandingPrayer {
         id
         typename
@@ -269,7 +269,7 @@ mutation LogCouncilPrayerActivity(
      id
      typename
      name
-     completedPrayerCount
+     completedPrayersCount
      outstandingPrayer {
         id
         typename

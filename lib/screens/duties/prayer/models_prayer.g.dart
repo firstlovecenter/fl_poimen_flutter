@@ -67,7 +67,7 @@ ChurchForOutstandingPrayerList _$ChurchForOutstandingPrayerListFromJson(
           .map((e) =>
               OutstandingPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      completedPrayerCount: json['completedPrayerCount'] as int,
+      completedPrayersCount: json['completedPrayersCount'] as int,
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -87,14 +87,14 @@ Map<String, dynamic> _$ChurchForOutstandingPrayerListToJson(
       'name': instance.name,
       'leader': instance.leader,
       'admin': instance.admin,
-      'completedPrayerCount': instance.completedPrayerCount,
+      'completedPrayersCount': instance.completedPrayersCount,
       'outstandingPrayer': instance.outstandingPrayer,
     };
 
 ChurchForCompletedPrayerList _$ChurchForCompletedPrayerListFromJson(
         Map<String, dynamic> json) =>
     ChurchForCompletedPrayerList(
-      completedPrayer: (json['completedPrayer'] as List<dynamic>)
+      completedPrayers: (json['completedPrayers'] as List<dynamic>)
           .map(
               (e) => CompletedPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -119,5 +119,5 @@ Map<String, dynamic> _$ChurchForCompletedPrayerListToJson(
       'leader': instance.leader,
       'admin': instance.admin,
       'outstandingPrayerCount': instance.outstandingPrayerCount,
-      'completedPrayer': instance.completedPrayer,
+      'completedPrayers': instance.completedPrayers,
     };

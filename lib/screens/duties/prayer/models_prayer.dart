@@ -61,12 +61,12 @@ class CompletedPrayerForList extends MemberForList {
 
 @JsonSerializable()
 class ChurchForOutstandingPrayerList extends Church {
-  int completedPrayerCount = 0;
+  int completedPrayersCount = 0;
   List<OutstandingPrayerForList> outstandingPrayer = [];
 
   ChurchForOutstandingPrayerList({
     required this.outstandingPrayer,
-    required this.completedPrayerCount,
+    required this.completedPrayersCount,
   });
 
   factory ChurchForOutstandingPrayerList.fromJson(Map<String, dynamic> json) =>
@@ -78,10 +78,10 @@ class ChurchForOutstandingPrayerList extends Church {
 @JsonSerializable()
 class ChurchForCompletedPrayerList extends Church {
   int outstandingPrayerCount = 0;
-  List<CompletedPrayerForList> completedPrayer = [];
+  List<CompletedPrayerForList> completedPrayers = [];
 
   ChurchForCompletedPrayerList({
-    required this.completedPrayer,
+    required this.completedPrayers,
     required this.outstandingPrayerCount,
   });
 

@@ -10,6 +10,13 @@ query getConstituencySubLeaders(\$id: ID!) {
       id
       name
       typename
+
+      memberCount 
+
+      completedVisitationsCount
+      completedTelepastoringCount
+      completedPrayersCount
+
       leader {
         id
         typename

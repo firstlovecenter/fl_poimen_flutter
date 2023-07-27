@@ -60,7 +60,7 @@ class ChurchCompletedPrayerList extends StatelessWidget {
                     color: Colors.green,
                   ),
                   trailing: TrailingCardAlertNumber(
-                    number: church.completedPrayer.length,
+                    number: church.completedPrayers.length,
                     variant: TrailingCardAlertNumberVariant.green,
                   ),
                   title: const Text('Prayers Completed'),
@@ -70,7 +70,7 @@ class ChurchCompletedPrayerList extends StatelessWidget {
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        ...noDataChecker(church.completedPrayer.map((member) {
+        ...noDataChecker(church.completedPrayers.map((member) {
           return _memberTile(context, member);
         }).toList()),
       ]),

@@ -106,7 +106,7 @@ class ChurchOutstandingPrayerListState extends State<ChurchOutstandingPrayerList
                           color: Colors.green,
                         ),
                         trailing: TrailingCardAlertNumber(
-                          number: widget.church.completedPrayerCount,
+                          number: widget.church.completedPrayersCount,
                           variant: TrailingCardAlertNumberVariant.green,
                         ),
                         title: const Text('Prayers Completed'),
