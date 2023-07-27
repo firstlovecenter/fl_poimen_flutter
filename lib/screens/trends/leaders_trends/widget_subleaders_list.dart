@@ -104,7 +104,6 @@ class SubLeadersListWidget extends StatelessWidget {
                             'Pastoral Cycle',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -139,7 +138,6 @@ class SubLeadersListWidget extends StatelessWidget {
                             'Membership',
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
