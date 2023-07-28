@@ -57,3 +57,17 @@ class ChurchWithSubChurchList extends Church {
   @override
   Map<String, dynamic> toJson() => _$ChurchWithSubChurchListToJson(this);
 }
+
+@JsonSerializable()
+class CampusWithSubChurchList extends Church {
+  List<Church> subChurches = [];
+
+  CampusWithSubChurchList({
+    required this.subChurches,
+  });
+
+  factory CampusWithSubChurchList.fromJson(Map<String, dynamic> json) =>
+      _$CampusWithSubChurchListFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$CampusWithSubChurchListToJson(this);
+}

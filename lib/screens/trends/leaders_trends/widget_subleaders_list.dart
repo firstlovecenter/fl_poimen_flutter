@@ -72,7 +72,7 @@ class SubLeadersListWidget extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(5.0)),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
                           onPressed: () {
@@ -142,7 +142,42 @@ class SubLeadersListWidget extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    church.typename != 'Fellowship'
+                        ? ElevatedButton(
+                            onPressed: () {
+                              if (church.typename == 'Fellowship') {
+                                churchState.fellowshipId = church.id;
+                              } else if (church.typename == 'Constituency') {
+                                churchState.constituencyId = church.id;
+                              } else if (church.typename == 'Council') {
+                                churchState.councilId = church.id;
+                              } else if (church.typename == 'Stream') {
+                                churchState.streamId = church.id;
+                              } else if (church.typename == 'Campus') {
+                                churchState.campusId = church.id;
+                              }
+
+                              Navigator.pushNamed(
+                                context,
+                                '/${church.typename.toLowerCase()}-subleaders-trends',
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(255, 245, 133, 183),
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            child: const Text(
+                              'Sub Leaders',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          )
+                        : Container()
                   ],
                 ),
               ),

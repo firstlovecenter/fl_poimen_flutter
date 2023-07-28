@@ -89,7 +89,12 @@ class HomeScreenBody extends StatelessWidget {
             navKey: 'imcls',
             route: '/$levelForUrl-imcls',
             alertNumber: church.imclTotal,
-            permitted: const [Role.leaderFellowship, Role.leaderBacenta],
+            permitted: const [
+              Role.leaderFellowship,
+              Role.leaderBacenta,
+              Role.leaderConstituency,
+              Role.adminConstituency
+            ],
           ),
           imclLevels(churchLevel, church.imclTotal),
           outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount),

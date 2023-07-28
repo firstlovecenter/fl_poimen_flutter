@@ -76,6 +76,9 @@ import 'package:poimen/screens/trends/membership/screen_stream_membership_trends
 import 'package:poimen/screens/trends/membership/screen_campus_membership_trends.dart';
 import 'package:poimen/screens/trends/pastoral_work/screen_fellowship_pastoral_work_cycles.dart';
 import 'package:poimen/screens/trends/leaders_trends/screen_constituency_subleaders.dart';
+import 'package:poimen/screens/trends/leaders_trends/screen_council_subleaders.dart';
+import 'package:poimen/screens/trends/leaders_trends/screen_stream_subleaders.dart';
+import 'package:poimen/screens/trends/leaders_trends/screen_campus_subleaders.dart';
 
 var appRoutes = {
   '/home': (context) => const Home(),
@@ -206,4 +209,7 @@ var appRoutes = {
 
 // My Leaders Trends
   '/constituency-subleaders-trends': (context) => const ConstituencySubLeadersTrendsScreen(),
+  '/council-subleaders-trends': (context) => const CouncilSubLeadersTrendsScreen(),
+  '/stream-subleaders-trends': (context) => const StreamSubLeadersTrendsScreen(),
+  '/campus-subleaders-trends': (context) => const CampusSubLeadersTrendsScreen(),
 };
