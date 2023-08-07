@@ -61,15 +61,13 @@ class MemberDetailsScreen extends StatelessWidget {
                     color: member.status == 'Goat' ? Colors.black : Colors.white,
                   ),
                 ),
-                backgroundColor: member.status == 'Stable'
-                    ? Colors.purpleAccent
-                    : member.status == 'Sheep'
-                        ? PoimenTheme.good
-                        : member.status == 'Goat'
-                            ? PoimenTheme.warning
-                            : member.status == 'Deer'
-                                ? PoimenTheme.brand
-                                : PoimenTheme.bad,
+                backgroundColor: member.status == 'Sheep'
+                    ? PoimenTheme.good
+                    : member.status == 'Goat'
+                        ? PoimenTheme.warning
+                        : member.status == 'Deer'
+                            ? PoimenTheme.brand
+                            : PoimenTheme.bad,
               ),
               Center(
                   child: Text(

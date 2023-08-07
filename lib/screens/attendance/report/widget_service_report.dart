@@ -40,13 +40,14 @@ class ChurchServicesReport extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.all(10.0)),
         AttendanceImageCarousel(membersPicture: record.membersPicture),
-        const Padding(padding: EdgeInsets.all(8.0)),
+        const Padding(padding: EdgeInsets.all(10.0)),
         _ShowMembers(
+          status: AttendanceStatus.absent,
           members: record.membersAbsent,
           title: 'Members Who Were Absent: ${record.membersAbsent.length}/$totalMembership',
         ),
-        const Padding(padding: EdgeInsets.all(15.0)),
         _ShowMembers(
+          status: AttendanceStatus.present,
           title: 'Members Who Were Present: ${record.membersPresent.length}/$totalMembership',
           members: record.membersPresent,
         ),
@@ -65,24 +66,34 @@ class ChurchServicesReport extends StatelessWidget {
   }
 }
 
+enum AttendanceStatus { present, absent }
+
 class _ShowMembers extends StatelessWidget {
-  const _ShowMembers({Key? key, required this.members, required this.title}) : super(key: key);
+  const _ShowMembers({Key? key, required this.members, required this.title, required this.status})
+      : super(key: key);
 
   final List<MemberForListWithFellowship> members;
   final String title;
+  final AttendanceStatus status;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 18),
-        ),
-        ...members.map((member) {
-          return memberTile(context, member, member.fellowship);
-        }).toList()
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          ...members.map((member) {
+            return memberTile(context, member, member.fellowship);
+          }).toList()
+        ],
+      ),
     );
   }
 }
