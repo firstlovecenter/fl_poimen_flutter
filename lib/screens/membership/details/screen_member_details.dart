@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/details/gql_member_details.dart';
@@ -36,6 +37,11 @@ class MemberDetailsScreen extends StatelessWidget {
           fontWeight: FontWeight.w500,
         );
 
+        DateFormat formatter = DateFormat('yMMMEd');
+        String lastAttendedServiceDate =
+            formatter.format(DateTime.parse(member.lastAttendedServiceDate.toString()));
+        // END: ed8c6549bwf9;
+
         var returnValues = GQLQueryContainerReturnValue(
           pageTitle: const PageTitle(pageTitle: 'Member Details'),
           body: ListView(
@@ -70,15 +76,33 @@ class MemberDetailsScreen extends StatelessWidget {
                             : PoimenTheme.bad,
               ),
               Center(
-                  child: Text(
-                '${member.firstName} ${member.lastName}',
-                style: headerStyle,
-              )),
+                child: Text(
+                  '${member.firstName} ${member.lastName}',
+                  style: headerStyle,
+                ),
+              ),
               const Padding(padding: EdgeInsets.all(8.0)),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Column(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Last Attended On: '),
+                          Text(
+                            lastAttendedServiceDate,
+                            style: TextStyle(
+                              color: PoimenTheme.brand,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                       const WeekendCard(
                         text: 'WEEKDAY',

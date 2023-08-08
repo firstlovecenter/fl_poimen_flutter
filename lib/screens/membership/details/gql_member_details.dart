@@ -17,6 +17,7 @@ final getMemberDetails = gql('''
         latitude
         longitude
       }
+      lastAttendedServiceDate
       lastFourWeekdayServices {
         date
         service
