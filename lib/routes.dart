@@ -46,13 +46,8 @@ import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.da
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
-import 'package:poimen/screens/membership/upgrades/screen_audio_collections.dart';
-import 'package:poimen/screens/membership/upgrades/screen_bible_translations.dart';
-import 'package:poimen/screens/membership/upgrades/screen_camp_attendance.dart';
-import 'package:poimen/screens/membership/upgrades/screen_membership_upgrades.dart';
-import 'package:poimen/screens/membership/upgrades/screen_holy_ghost_baptism.dart';
+import 'package:poimen/screens/membership/upgrades/screen_member_spiritual_progresion.dart';
 import 'package:poimen/screens/membership/upgrades/screen_understanding_campaign.dart';
-import 'package:poimen/screens/membership/upgrades/screen_water_baptism_upgrade.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
 import 'package:poimen/screens/membership/screen_constituency_list.dart';
@@ -88,13 +83,8 @@ var appRoutes = {
   // Display Member Details
   '/member-details': (context) => const MemberDetailsScreen(),
   '/member-pastoral-comments': (context) => const MemberPastoralCommentsScreen(),
-  '/membership-upgrades': (context) => const MembershipUpgradesScreen(),
-  '/membership-upgrades/holy-ghost-baptism': (context) => const HolyGhostBaptismScreen(),
-  '/membership-upgrades/water-baptism': (context) => const WaterBaptismScreen(),
-  '/membership-upgrades/audio-collections': (context) => const AudioCollectionsScreen(),
-  '/membership-upgrades/bible-translations': (context) => const BibleTranslationsScreen(),
+  '/member-spiritual-progression': (context) => const MemberSpiritualProgressionsScreen(),
   '/membership-upgrades/understanding-campaign': (context) => const UnderstandingCampaignScreen(),
-  '/membership-upgrades/camp-attendance': (context) => const CampAttendanceScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),

@@ -10,7 +10,6 @@ import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';
-import 'package:poimen/widgets/color_block_tile.dart';
 import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
@@ -191,13 +190,29 @@ class MemberDetailsScreen extends StatelessWidget {
               const Padding(padding: EdgeInsets.all(8.0)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
-                child: ColorBlockTile(
-                  leadingColor: PoimenTheme.darkBrand,
-                  icon: FontAwesomeIcons.circleUp,
-                  color: PoimenTheme.brand,
-                  title: 'Membership Upgrades',
-                  to: '/membership-upgrades',
-                ),
+                child: ListTile(
+                    tileColor: PoimenTheme.brand,
+                    leading: const Icon(
+                      FontAwesomeIcons.book,
+                      color: Colors.white,
+                    ),
+                    title: const Text('Spiritual Progression'),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/member-spiritual-progression');
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+                child: ListTile(
+                    tileColor: PoimenTheme.brand,
+                    leading: const Icon(
+                      FontAwesomeIcons.baby,
+                      color: Colors.white,
+                    ),
+                    title: const Text('Life Progression'),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/membership-upgrades');
+                    }),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
               const Padding(padding: EdgeInsets.all(8.0)),

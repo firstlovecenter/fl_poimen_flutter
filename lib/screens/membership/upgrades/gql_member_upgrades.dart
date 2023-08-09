@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getMemberUpgradesDetails = gql('''
- query getMemberUpgradesDetails(\$id: ID!) {
+final getMemberSpiritualProgression = gql('''
+ query getMemberSpiritualProgression(\$id: ID!) {
     members(where: { id: \$id }) {
       id
       typename
@@ -11,192 +11,51 @@ final getMemberUpgradesDetails = gql('''
       pictureUrl
       phoneNumber
       whatsappNumber
-      hasHolyGhostBaptism
-      hasHolyGhostBaptismDate
-      hasWaterBaptism
-      hasWaterBaptismDate
-      graduatedUnderstandingSchools
-      hasAudioCollections
-      hasBibleTranslations
-      hasCampAttendance
+      spiritualProgression {
+        salvation
+        waterBaptism
+        holyGhostBaptism
+        newBelieversSchool
+        strongChristiansAcademy
+        understandingSchools1
+        understandingSchools2
+        understandingSchools3
+        attendedCamp1
+        attendedCamp2
+        attendedCamp3
+        foundersIntimateCounselling
+        leadPastorIntimateCounselling
+        bacentaLeader
+        basontaLeader
+        creativeArtsLeader
+        pastor
+        hasMakariosCollection
+        hasAudioCollection
+        onBacentaWhatsappGroup
+        }
+      }
+  }
+''');
+
+final getMemberLifeProgression = gql('''
+ query getMemberLifeProgression(\$id: ID!) {
+    members(where: { id: \$id }) {
+      id
+      typename
+      status
+      firstName
+      lastName
+      pictureUrl
+      phoneNumber
+      whatsappNumber
+      lifeProgression {
+        married
+        childbirth
+        universityEducation
+        ownsHouseOrBuildingProject
+      }
     }
-  }
-''');
-
-final recordMemberHolyGhostBaptismUpgrade = gql('''
-mutation (
-  \$memberId: ID!,
-  \$hasHolyGhostBaptism: Boolean!,
-  \$hasHolyGhostBaptismDate: String
-) {
-  SetMemberHolyGhostBaptism(
-  memberId: \$memberId,
-  hasHolyGhostBaptism: \$hasHolyGhostBaptism,
-  hasHolyGhostBaptismDate: \$hasHolyGhostBaptismDate
-  ) {
-    id
-    firstName
-    lastName
-    status
-    hasHolyGhostBaptism
-    hasHolyGhostBaptismDate
-    pastoralComments (limit: 5) {
-        id
-        typename
-        timestamp
-        comment
-        author {
-          id
-          typename
-          firstName
-          lastName
-          pictureUrl
-          phoneNumber
-          whatsappNumber
-        }
-        activity
-      }
-  }
-}
-''');
-
-final recordMemberWaterBaptismUpgrade = gql('''
-mutation (
-  \$memberId: ID!,
-  \$hasWaterBaptism: Boolean!,
-  \$hasWaterBaptismDate: String
-) {
-  SetMemberWaterBaptism(
-  memberId: \$memberId,
-  hasWaterBaptism: \$hasWaterBaptism,
-  hasWaterBaptismDate: \$hasWaterBaptismDate
-  ) {
-    id
-    firstName
-    lastName
-    status
-    hasWaterBaptism
-    hasWaterBaptismDate
-    pastoralComments (limit: 5) {
-        id
-        typename
-        timestamp
-        comment
-        author {
-          id
-          typename
-          firstName
-          lastName
-          pictureUrl
-          phoneNumber
-          whatsappNumber
-        }
-        activity
-      }
-  }
-}
-''');
-
-final recordMemberAudioCollectionsUpgrade = gql('''
-mutation (
-  \$memberId: ID!,
-  \$hasAudioCollections: Boolean!
-) {
-  SetMemberAudioCollections(
-  memberId: \$memberId,
-  hasAudioCollections: \$hasAudioCollections
-  ) {
-    id
-    firstName
-    lastName
-    status
-    hasAudioCollections
-    pastoralComments (limit: 5) {
-        id
-        typename
-        timestamp
-        comment
-        author {
-          id
-          typename
-          firstName
-          lastName
-          pictureUrl
-          phoneNumber
-          whatsappNumber
-        }
-        activity
-      }
-  }
-}
-''');
-
-final recordMemberBibleTranslationsUpgrade = gql('''
-mutation (
-  \$memberId: ID!,
-  \$hasBibleTranslations: Boolean!
-) {
-  SetMemberBibleTranslations(
-  memberId: \$memberId,
-  hasBibleTranslations: \$hasBibleTranslations
-  ) {
-    id
-    firstName
-    lastName
-    status
-    hasBibleTranslations
-    pastoralComments (limit: 5) {
-        id
-        typename
-        timestamp
-        comment
-        author {
-          id
-          typename
-          firstName
-          lastName
-          pictureUrl
-          phoneNumber
-          whatsappNumber
-        }
-        activity
-      }
-  }
-}
-''');
-
-final recordMemberCampAttendanceUpgrade = gql('''
-mutation (
-  \$memberId: ID!,
-  \$hasCampAttendance: Boolean!
-) {
-  SetMemberCampAttendance(
-  memberId: \$memberId,
-  hasCampAttendance: \$hasCampAttendance
-  ) {
-    id
-    firstName
-    lastName
-    status
-    hasCampAttendance
-    pastoralComments (limit: 5) {
-        id
-        typename
-        timestamp
-        comment
-        author {
-          id
-          typename
-          firstName
-          lastName
-          pictureUrl
-          phoneNumber
-          whatsappNumber
-        }
-        activity
-      }
-  }
-}
+  } 
 ''');
 
 final recordMemberUnderstandingCampaignUpgrade = gql('''
