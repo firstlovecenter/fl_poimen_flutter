@@ -211,7 +211,7 @@ class MemberDetailsScreen extends StatelessWidget {
                     ),
                     title: const Text('Life Progression'),
                     onTap: () {
-                      Navigator.pushNamed(context, '/membership-upgrades');
+                      Navigator.pushNamed(context, '/member-life-progression');
                     }),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),

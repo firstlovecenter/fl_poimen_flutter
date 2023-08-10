@@ -50,7 +50,6 @@ class SpiritualProgression {
 
   factory SpiritualProgression.fromJson(Map<String, dynamic> json) =>
       _$SpiritualProgressionFromJson(json);
-  @override
   Map<String, dynamic> toJson() => _$SpiritualProgressionToJson(this);
 }
 
@@ -77,18 +76,29 @@ class MemberWithSpiritualProgression extends MemberForList {
 }
 
 @JsonSerializable()
-class MemberWithLifeProgression extends MemberForList {
+class LifeProgression {
   bool married;
   bool childbirth;
   bool universityEducation;
   bool ownsHouseOrBuildingProject;
 
-  MemberWithLifeProgression({
+  LifeProgression({
     required this.married,
     required this.childbirth,
     required this.universityEducation,
     required this.ownsHouseOrBuildingProject,
-  }) : super(
+  });
+
+  factory LifeProgression.fromJson(Map<String, dynamic> json) => _$LifeProgressionFromJson(json);
+  Map<String, dynamic> toJson() => _$LifeProgressionToJson(this);
+}
+
+@JsonSerializable()
+class MemberWithLifeProgression extends MemberForList {
+  LifeProgression? lifeProgression;
+
+  MemberWithLifeProgression({this.lifeProgression})
+      : super(
           id: '',
           typename: '',
           status: '',

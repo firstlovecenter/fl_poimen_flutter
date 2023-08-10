@@ -11,25 +11,25 @@ import 'package:poimen/widgets/color_block_tile.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class MemberSpiritualProgressionsScreen extends StatelessWidget {
-  const MemberSpiritualProgressionsScreen({Key? key}) : super(key: key);
+class MemberLifeProgressionsScreen extends StatelessWidget {
+  const MemberLifeProgressionsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var state = Provider.of<SharedState>(context);
 
     return GQLQueryContainer(
-      query: getMemberSpiritualProgression,
+      query: getMemberLifeProgression,
       variables: {'id': state.memberId},
       defaultPageTitle: 'Membership Upgrades Details',
       bodyFunction: (data) {
-        final member = MemberWithSpiritualProgression.fromJson(data?['members'][0]);
+        final member = MemberWithLifeProgression.fromJson(data?['members'][0]);
         final memberPicture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
         double progressionPercentage =
-            calculateProgressionPercentage(member.spiritualProgression?.toJson());
+            calculateProgressionPercentage(member.lifeProgression?.toJson());
 
         return GQLQueryContainerReturnValue(
-            pageTitle: const PageTitle(pageTitle: 'Member Spiritual Progression'),
+            pageTitle: const PageTitle(pageTitle: 'Member Life Progression'),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: ListView(
@@ -38,7 +38,7 @@ class MemberSpiritualProgressionsScreen extends StatelessWidget {
                   MemberAvatarScreenHeader(member: member, memberPicture: memberPicture),
                   const Padding(padding: EdgeInsets.all(15.0)),
                   Center(
-                    child: Text('Spiritual Progression - $progressionPercentage%',
+                    child: Text('Life Progression - $progressionPercentage%',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -53,11 +53,11 @@ class MemberSpiritualProgressionsScreen extends StatelessWidget {
                     semanticsLabel: 'Progress: $progressionPercentage%',
                   ),
                   const Padding(padding: EdgeInsets.all(16.0)),
-                  ...spiritualProgressionList.map(
+                  ...lifeProgressionList.map(
                     (item) => Column(
                       children: [
                         ColorBlockTile(
-                          leadingColor: member.spiritualProgression?.toJson()[item.property] == true
+                          leadingColor: member.lifeProgression?.toJson()[item.property] == true
                               ? const Color(0xFF00450F)
                               : Colors.grey,
                           icon: item.icon,

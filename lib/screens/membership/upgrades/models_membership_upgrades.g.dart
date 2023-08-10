@@ -90,13 +90,29 @@ Map<String, dynamic> _$MemberWithSpiritualProgressionToJson(
       'spiritualProgression': instance.spiritualProgression,
     };
 
-MemberWithLifeProgression _$MemberWithLifeProgressionFromJson(
-        Map<String, dynamic> json) =>
-    MemberWithLifeProgression(
+LifeProgression _$LifeProgressionFromJson(Map<String, dynamic> json) =>
+    LifeProgression(
       married: json['married'] as bool,
       childbirth: json['childbirth'] as bool,
       universityEducation: json['universityEducation'] as bool,
       ownsHouseOrBuildingProject: json['ownsHouseOrBuildingProject'] as bool,
+    );
+
+Map<String, dynamic> _$LifeProgressionToJson(LifeProgression instance) =>
+    <String, dynamic>{
+      'married': instance.married,
+      'childbirth': instance.childbirth,
+      'universityEducation': instance.universityEducation,
+      'ownsHouseOrBuildingProject': instance.ownsHouseOrBuildingProject,
+    };
+
+MemberWithLifeProgression _$MemberWithLifeProgressionFromJson(
+        Map<String, dynamic> json) =>
+    MemberWithLifeProgression(
+      lifeProgression: json['lifeProgression'] == null
+          ? null
+          : LifeProgression.fromJson(
+              json['lifeProgression'] as Map<String, dynamic>),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -120,8 +136,5 @@ Map<String, dynamic> _$MemberWithLifeProgressionToJson(
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'married': instance.married,
-      'childbirth': instance.childbirth,
-      'universityEducation': instance.universityEducation,
-      'ownsHouseOrBuildingProject': instance.ownsHouseOrBuildingProject,
+      'lifeProgression': instance.lifeProgression,
     };
