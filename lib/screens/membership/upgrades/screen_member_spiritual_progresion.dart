@@ -53,6 +53,22 @@ class MemberSpiritualProgressionsScreen extends StatelessWidget {
                     semanticsLabel: 'Progress: $progressionPercentage%',
                   ),
                   const Padding(padding: EdgeInsets.all(16.0)),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/membership-upgrades/spiritual-progression');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text('Update Spiritual Progression'),
+                  ),
+                  const Padding(padding: EdgeInsets.all(16.0)),
                   ...spiritualProgressionList.map(
                     (item) => Column(
                       children: [

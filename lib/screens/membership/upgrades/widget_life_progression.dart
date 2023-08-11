@@ -51,7 +51,7 @@ class _LifeProgressionWidgetState extends State<LifeProgressionWidget> {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  'Please update the list of schools that this member has graduated',
+                  'Please update the life progeression milestones of the member',
                 ),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
@@ -77,16 +77,6 @@ class _LifeProgressionWidgetState extends State<LifeProgressionWidget> {
                 onPressed: widget.lifeProgressionMutation.result.isLoading
                     ? null
                     : () {
-                        print({
-                          'memberId': appState.memberId,
-                          'married': selectedProgressions.any((item) => item.property == 'married'),
-                          'childbirth':
-                              selectedProgressions.any((item) => item.property == 'childbirth'),
-                          'universityEducation': selectedProgressions
-                              .any((item) => item.property == 'universityEducation'),
-                          'ownsHouseOrBuildingProject': selectedProgressions
-                              .any((item) => item.property == 'ownsHouseOrBuildingProject'),
-                        });
                         widget.lifeProgressionMutation.runMutation({
                           'memberId': appState.memberId,
                           'married': selectedProgressions.any((item) => item.property == 'married'),

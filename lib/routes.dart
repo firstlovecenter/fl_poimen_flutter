@@ -57,6 +57,7 @@ import 'package:poimen/screens/membership/screen_fellowship_list.dart';
 import 'package:poimen/screens/membership/screen_campus_list.dart';
 import 'package:poimen/screens/membership/details/screen_member_details.dart';
 import 'package:poimen/screens/membership/screen_stream_list.dart';
+import 'package:poimen/screens/membership/upgrades/screen_update_spiritual_progression.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 import 'package:poimen/screens/search/search_screen.dart';
 import 'package:poimen/screens/trends/membership/screen_council_membership_trends.dart';
@@ -87,6 +88,8 @@ var appRoutes = {
   '/member-spiritual-progression': (context) => const MemberSpiritualProgressionsScreen(),
   '/member-life-progression': (context) => const MemberLifeProgressionsScreen(),
   '/membership-upgrades/life-progression': (context) => const UpdateLifeProgressionScreen(),
+  '/membership-upgrades/spiritual-progression': (context) =>
+      const UpdateSpiritualProgressionScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),
