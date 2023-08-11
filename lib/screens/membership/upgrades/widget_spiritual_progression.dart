@@ -108,7 +108,7 @@ class _SpiritualProgressionWidgetState extends State<SpiritualProgressionWidget>
                                 'foundersIntimateCounselling': selectedProgressions
                                     .any((item) => item.property == 'foundersIntimateCounselling'),
                                 'leadPastorIntimateCounselling': selectedProgressions.any(
-                                    (item) => item.property == 'leadPastorsIntimateCounselling'),
+                                    (item) => item.property == 'leadPastorIntimateCounselling'),
                                 'bacentaLeader': selectedProgressions
                                     .any((item) => item.property == 'bacentaLeader'),
                                 'basontaLeader': selectedProgressions
