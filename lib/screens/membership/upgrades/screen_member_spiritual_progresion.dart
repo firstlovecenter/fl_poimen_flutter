@@ -5,6 +5,7 @@ import 'package:poimen/screens/membership/details/widget_member_avatar_screen_he
 import 'package:poimen/screens/membership/upgrades/utils_member_upgrades.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/services/gql_query_container.dart';
+import 'package:poimen/state/enums.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/color_block_tile.dart';
@@ -53,21 +54,24 @@ class MemberSpiritualProgressionsScreen extends StatelessWidget {
                     semanticsLabel: 'Progress: $progressionPercentage%',
                   ),
                   const Padding(padding: EdgeInsets.all(16.0)),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/membership-upgrades/spiritual-progression');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    child: const Text('Update Spiritual Progression'),
-                  ),
+                  permitRoleAndHigher(Role.adminCampus).contains(state.role)
+                      ? ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, '/membership-upgrades/spiritual-progression');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          child: const Text('Update Spiritual Progression'),
+                        )
+                      : Container(),
                   const Padding(padding: EdgeInsets.all(16.0)),
                   ...spiritualProgressionList.map(
                     (item) => Column(
