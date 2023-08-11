@@ -191,6 +191,9 @@ class MemberDetailsScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
                 child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     tileColor: PoimenTheme.brand,
                     leading: const Icon(
                       FontAwesomeIcons.book,
@@ -204,6 +207,9 @@ class MemberDetailsScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
                 child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     tileColor: PoimenTheme.brand,
                     leading: const Icon(
                       FontAwesomeIcons.baby,

@@ -48,7 +48,7 @@ import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_spiritual_progresion.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_life_progression.dart';
-import 'package:poimen/screens/membership/upgrades/screen_understanding_campaign.dart';
+import 'package:poimen/screens/membership/upgrades/screen_update_life_progression.dart';
 import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
 import 'package:poimen/screens/membership/screen_constituency_list.dart';
@@ -86,7 +86,7 @@ var appRoutes = {
   '/member-pastoral-comments': (context) => const MemberPastoralCommentsScreen(),
   '/member-spiritual-progression': (context) => const MemberSpiritualProgressionsScreen(),
   '/member-life-progression': (context) => const MemberLifeProgressionsScreen(),
-  '/membership-upgrades/understanding-campaign': (context) => const UnderstandingCampaignScreen(),
+  '/membership-upgrades/life-progression': (context) => const UpdateLifeProgressionScreen(),
 
   // Display Members of Churches
   '/fellowship-members': (context) => const FellowshipMembershipScreen(),
@@ -99,7 +99,6 @@ var appRoutes = {
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
 
-  //// PASTORAL DUTIES ///////
   // Display IMCL for Fellowship and Bacenta Levels
   '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),

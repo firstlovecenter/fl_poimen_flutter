@@ -2,27 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/membership/upgrades/gql_member_upgrades.dart';
-import 'package:poimen/screens/membership/upgrades/widget_understanding_campaign.dart';
+import 'package:poimen/screens/membership/upgrades/models_membership_upgrades.dart';
+import 'package:poimen/screens/membership/upgrades/widget_life_progression.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:provider/provider.dart';
 
-class UnderstandingCampaignScreen extends StatefulHookWidget {
-  const UnderstandingCampaignScreen({Key? key}) : super(key: key);
+class UpdateLifeProgressionScreen extends StatefulHookWidget {
+  const UpdateLifeProgressionScreen({Key? key}) : super(key: key);
 
   @override
-  State<UnderstandingCampaignScreen> createState() => _UnderstandingCampaignScreenState();
+  State<UpdateLifeProgressionScreen> createState() => _UpdateLifeProgressionScreenState();
 }
 
-class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScreen> {
+class _UpdateLifeProgressionScreenState extends State<UpdateLifeProgressionScreen> {
   @override
   Widget build(BuildContext context) {
     var appState = Provider.of<SharedState>(context);
 
-    final understandingCampaignUpgradeMutation = useMutation(
+    final lifeProgressionUpgradeMutation = useMutation(
       MutationOptions(
-        document: recordMemberUnderstandingCampaignUpgrade,
+        document: updateMemberLifeProgression,
         // ignore: void_checks
         update: (cache, result) {
           return cache;
@@ -43,12 +44,12 @@ class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScree
                     constraints: const BoxConstraints(maxHeight: 350),
                     child: AlertBox(
                       type: AlertType.success,
-                      title: 'Understanding Campaign Upgrade',
+                      title: 'Life Progression Upgrade',
                       message: 'Member upgraded successfully!',
                       buttonText: 'OK',
                       onRetry: () => // pop two screens from navigator
                           Navigator.of(context)
-                              .popUntil(ModalRoute.withName('/membership-upgrades')),
+                              .popUntil(ModalRoute.withName('/member-life-progression')),
                     ),
                   ),
                 );
@@ -66,7 +67,7 @@ class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScree
                 constraints: const BoxConstraints(maxHeight: 350),
                 child: AlertBox(
                   type: AlertType.error,
-                  title: 'Error Submitting Understanding Campaign Report',
+                  title: 'Error Submitting Life Progression Report',
                   message: getGQLException(error),
                   buttonText: 'OK',
                   onRetry: () => Navigator.of(context).pop(),
@@ -78,28 +79,28 @@ class _UnderstandingCampaignScreenState extends State<UnderstandingCampaignScree
       ),
     );
 
-    final understandingCampaignQuery =
-        useQuery(QueryOptions(document: memberUnderstandingCampaigns, variables: {
-      'memberId': appState.memberId,
-    }));
+    final lifeProgressionQuery = useQuery(QueryOptions(
+      document: getMemberLifeProgression,
+      variables: {
+        'id': appState.memberId,
+      },
+    ));
 
-    if (understandingCampaignQuery.result.hasException) {
-      return Text(understandingCampaignQuery.result.exception.toString());
+    if (lifeProgressionQuery.result.hasException) {
+      return Text(lifeProgressionQuery.result.exception.toString());
     }
 
-    if (understandingCampaignQuery.result.isLoading) {
+    if (lifeProgressionQuery.result.isLoading) {
       return const LoadingScreen();
     }
 
-    var understandingSchoolObject =
-        understandingCampaignQuery.result.data?['members'][0]['graduatedUnderstandingSchools'];
+    final member =
+        MemberWithLifeProgression.fromJson(lifeProgressionQuery.result.data?['members'][0]);
 
-    List<String> graduatedSchools = [...understandingSchoolObject.map((sch) => sch.toString())];
-
-    return UnderstandingCampaignWidget(
-      title: 'Understanding Campaign Upgrades',
-      graduatedSchools: graduatedSchools,
-      understandingCampaignMutation: understandingCampaignUpgradeMutation,
+    return LifeProgressionWidget(
+      title: 'Life Progression Upgrades',
+      member: member,
+      lifeProgressionMutation: lifeProgressionUpgradeMutation,
     );
   }
 }

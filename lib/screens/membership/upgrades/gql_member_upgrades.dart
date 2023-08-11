@@ -58,20 +58,33 @@ final getMemberLifeProgression = gql('''
   } 
 ''');
 
-final recordMemberUnderstandingCampaignUpgrade = gql('''
+final updateMemberLifeProgression = gql('''
 mutation (
   \$memberId: ID!,
-  \$graduatedUnderstandingSchools: [UnderstandingSchools!]!
+  \$married: Boolean!,
+  \$childbirth: Boolean!,
+  \$ownsHouseOrBuildingProject: Boolean!,
+  \$universityEducation: Boolean!
 ) {
-  SetMemberUnderstandingCampaignGraduated(
+  UpdateMemberLifeProgression(
   memberId: \$memberId,
-  graduatedUnderstandingSchools: \$graduatedUnderstandingSchools
+  married: \$married,
+  childbirth: \$childbirth,
+  ownsHouseOrBuildingProject: \$ownsHouseOrBuildingProject,
+  universityEducation: \$universityEducation
+
   ) {
     id
+    typename
     firstName
     lastName
     status
-    graduatedUnderstandingSchools
+    lifeProgression {
+        married
+        childbirth
+        universityEducation
+        ownsHouseOrBuildingProject
+    }
     pastoralComments (limit: 5) {
         id
         typename
@@ -88,16 +101,6 @@ mutation (
         }
         activity
       }
-  }
-}
-''');
-
-final memberUnderstandingCampaigns = gql('''
-query (\$memberId: ID!) {
-  members (where: {id: \$memberId}){
-    id
-    status
-    graduatedUnderstandingSchools
   }
 }
 ''');
