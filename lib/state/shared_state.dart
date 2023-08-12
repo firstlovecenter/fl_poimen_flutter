@@ -6,6 +6,7 @@ import 'package:poimen/state/enums.dart';
 
 class SharedState with ChangeNotifier {
   String _searchKey = '';
+  String _version = '0.0.0';
   Role _role = Role.leaderFellowship;
   ChurchLevel _roleLevel = ChurchLevel.fellowship;
   ChurchRole _roleType = ChurchRole.leader;
@@ -45,6 +46,7 @@ class SharedState with ChangeNotifier {
   String _bottomNavSelected = '';
 
   String get searchKey => _searchKey;
+  String get version => _version;
   Role get role => _role;
   ChurchLevel get roleLevel => _roleLevel;
   ChurchRole get roleType => _roleType;
@@ -66,6 +68,11 @@ class SharedState with ChangeNotifier {
 
   set searchKey(String searchKey) {
     _searchKey = searchKey;
+    notifyListeners();
+  }
+
+  set version(String version) {
+    _version = version;
     notifyListeners();
   }
 

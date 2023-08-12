@@ -2,6 +2,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 final getUserRoles = gql('''
   query getUserRoles(\$id: String!) {
+    minimumRequiredVersion
     members(where: { auth_id: \$id }) {
       id
       typename

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/services/auth_service.dart';
+import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/auth_button.dart';
 import 'package:poimen/widgets/loading_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
     Key? key,
+    required this.currentVersion,
   }) : super(key: key);
+
+  final String currentVersion;
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -38,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color textColor = isDark ? Colors.white : Colors.black;
+    var state = Provider.of<SharedState>(context);
 
     return Scaffold(
       body: Center(
@@ -81,7 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: AuthButton(
-                        onPressed: loginAction,
+                        onPressed: () {
+                          state.version = widget.currentVersion;
+                          loginAction();
+                        },
                         text: 'Login',
                       ),
                     )
@@ -129,7 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   initAction() async {
     setLoadingState();
+    var state = Provider.of<SharedState>(context, listen: false);
     final bool isAuth = await AuthService.instance.init();
+
+    state.version = widget.currentVersion;
     if (isAuth) {
       setSuccessAuthState();
     } else {

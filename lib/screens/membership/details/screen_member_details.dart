@@ -37,8 +37,9 @@ class MemberDetailsScreen extends StatelessWidget {
         );
 
         DateFormat formatter = DateFormat('yMMMEd');
-        String lastAttendedServiceDate =
-            formatter.format(DateTime.parse(member.lastAttendedServiceDate.toString()));
+        String lastAttendedServiceDate = member.lastAttendedServiceDate != null
+            ? formatter.format(DateTime.parse(member.lastAttendedServiceDate.toString()))
+            : '';
         // END: ed8c6549bwf9;
 
         var returnValues = GQLQueryContainerReturnValue(
@@ -85,23 +86,25 @@ class MemberDetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Last Attended On: '),
-                          Text(
-                            lastAttendedServiceDate,
-                            style: TextStyle(
-                              color: PoimenTheme.brand,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                    member.lastAttendedServiceDate != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('Last Attended On: '),
+                                Text(
+                                  lastAttendedServiceDate,
+                                  style: TextStyle(
+                                    color: PoimenTheme.brand,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                )
+                              ],
                             ),
                           )
-                        ],
-                      ),
-                    ),
+                        : Container(),
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                       const WeekendCard(
                         text: 'WEEKDAY',
