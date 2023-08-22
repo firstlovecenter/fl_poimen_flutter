@@ -78,8 +78,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     onRetry: () => refetch!(),
                   );
                 } else if (result.isLoading || result.data == null) {
-                  return Column(
-                    children: const [
+                  return const Column(
+                    children: [
                       Padding(padding: EdgeInsets.all(50)),
                       CircularProgressIndicator(),
                     ],

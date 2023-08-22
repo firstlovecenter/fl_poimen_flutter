@@ -127,8 +127,8 @@ class MemberDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : Row(
-                                    children: const [
+                                : const Row(
+                                    children: [
                                       Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: CircleAvatar(
@@ -168,8 +168,8 @@ class MemberDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : Row(
-                                    children: const [
+                                : const Row(
+                                    children: [
                                       Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: CircleAvatar(

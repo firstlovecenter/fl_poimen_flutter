@@ -181,9 +181,9 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                             backgroundColor: Colors.blueGrey,
                           ),
                           child: locationSet
-                              ? Row(
+                              ? const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text('Location Set'),
                                     Padding(padding: EdgeInsets.all(8.0)),
                                     CircleAvatar(

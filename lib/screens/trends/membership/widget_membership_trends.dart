@@ -177,10 +177,10 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                       ),
                       titlesData: FlTitlesData(
                         show: true,
-                        rightTitles: AxisTitles(
+                        rightTitles: const AxisTitles(
                           sideTitles: SideTitles(showTitles: false),
                         ),
-                        topTitles: AxisTitles(
+                        topTitles: const AxisTitles(
                           sideTitles: SideTitles(
                             showTitles: false,
                           ),
@@ -192,7 +192,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                             reservedSize: 42,
                           ),
                         ),
-                        leftTitles: AxisTitles(
+                        leftTitles: const AxisTitles(
                           sideTitles: SideTitles(
                             showTitles: false,
                             reservedSize: 28,
@@ -204,7 +204,7 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                         show: false,
                       ),
                       barGroups: showingBarGroups,
-                      gridData: FlGridData(show: false),
+                      gridData: const FlGridData(show: false),
                     ),
                   ),
                 ),
