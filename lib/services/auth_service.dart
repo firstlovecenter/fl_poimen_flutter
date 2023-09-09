@@ -13,7 +13,7 @@ class AuthService {
   factory AuthService() => instance;
   AuthService._internal();
 
-  final FlutterAppAuth appAuth = FlutterAppAuth();
+  final FlutterAppAuth appAuth = const FlutterAppAuth();
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   Auth0User? profile;

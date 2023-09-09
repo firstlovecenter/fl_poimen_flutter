@@ -193,35 +193,47 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                   ),
                 ]),
               ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  final Uri launchUri = Uri.parse(
-                      'https://www.google.com/maps/search/?api=1&query=${member.location?.latitude}%2C${member.location?.longitude}');
+              member.location != null
+                  ? ElevatedButton.icon(
+                      onPressed: () async {
+                        final Uri launchUri = Uri.parse(
+                            'https://www.google.com/maps/search/?api=1&query=${member.location?.latitude}%2C${member.location?.longitude}');
 
-                  if (await canLaunchUrl(launchUri)) {
-                    await launchUrl(launchUri);
-                  } else {
-                    throw 'Could not launch $launchUri';
-                  }
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-                icon: const Icon(
-                  FontAwesomeIcons.locationPin,
-                  size: 15,
-                ),
-                label: const Text('Go to Location'),
-              ),
+                        if (await canLaunchUrl(launchUri)) {
+                          final bool nativeAppLaunchSucceeded = await launchUrl(
+                            launchUri,
+                            mode: LaunchMode.externalNonBrowserApplication,
+                          );
+
+                          if (!nativeAppLaunchSucceeded) {
+                            await launchUrl(
+                              launchUri,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          }
+                        } else {
+                          throw 'Could not launch $launchUri';
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
+                        foregroundColor: MaterialStateProperty.all(Colors.black),
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        ),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                      icon: const Icon(
+                        FontAwesomeIcons.locationPin,
+                        size: 15,
+                      ),
+                      label: const Text('Go to Location'),
+                    )
+                  : Container(),
               ElevatedButton.icon(
                 onPressed: () {
                   _bottomSheet(context, member);
