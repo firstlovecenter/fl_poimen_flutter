@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:poimen/models/neo4j.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 
 part 'models_visitation.g.dart';
@@ -6,6 +7,7 @@ part 'models_visitation.g.dart';
 @JsonSerializable()
 class OutstandingVisitationForList extends MemberForList {
   String visitationArea = '';
+  Neo4jPoint? location;
 
   OutstandingVisitationForList({
     required String id,
@@ -16,6 +18,7 @@ class OutstandingVisitationForList extends MemberForList {
     required String phoneNumber,
     required String whatsappNumber,
     required this.visitationArea,
+    this.location,
     String? status,
   }) : super(
           id: id,

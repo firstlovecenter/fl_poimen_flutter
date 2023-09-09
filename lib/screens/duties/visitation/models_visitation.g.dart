@@ -17,6 +17,9 @@ OutstandingVisitationForList _$OutstandingVisitationForListFromJson(
       phoneNumber: json['phoneNumber'] as String,
       whatsappNumber: json['whatsappNumber'] as String,
       visitationArea: json['visitationArea'] as String,
+      location: json['location'] == null
+          ? null
+          : Neo4jPoint.fromJson(json['location'] as Map<String, dynamic>),
       status: json['status'] as String?,
     )..lost = json['lost'] as bool?;
 
@@ -33,6 +36,7 @@ Map<String, dynamic> _$OutstandingVisitationForListToJson(
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
       'visitationArea': instance.visitationArea,
+      'location': instance.location,
     };
 
 CompletedVisitationForList _$CompletedVisitationForListFromJson(

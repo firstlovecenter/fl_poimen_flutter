@@ -11,6 +11,7 @@ import 'package:poimen/widgets/icon_contact.dart';
 import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChurchOutstandingVisitationList extends StatefulWidget {
   const ChurchOutstandingVisitationList({Key? key, required this.church}) : super(key: key);
@@ -191,6 +192,35 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                         WhatsAppInfo(number: member.whatsappNumber, firstName: member.firstName),
                   ),
                 ]),
+              ),
+              ElevatedButton.icon(
+                onPressed: () async {
+                  final Uri launchUri = Uri.parse(
+                      'https://www.google.com/maps/search/?api=1&query=${member.location?.latitude}%2C${member.location?.longitude}');
+
+                  if (await canLaunchUrl(launchUri)) {
+                    await launchUrl(launchUri);
+                  } else {
+                    throw 'Could not launch $launchUri';
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
+                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                icon: const Icon(
+                  FontAwesomeIcons.locationPin,
+                  size: 15,
+                ),
+                label: const Text('Go to Location'),
               ),
               ElevatedButton.icon(
                 onPressed: () {

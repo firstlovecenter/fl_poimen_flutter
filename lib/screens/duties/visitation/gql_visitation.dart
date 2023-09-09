@@ -16,6 +16,10 @@ final getFellowshipOutstandingVisitations = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
+        location {
+          latitude
+          longitude
+        }
         visitationArea
       }
     }
@@ -38,6 +42,10 @@ final getBacentaOutstandingVisitations = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
+        location {
+          latitude
+          longitude
+        }
         visitationArea
       }
     }
@@ -60,6 +68,10 @@ final getConstituencyOutstandingVisitations = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
+        location {
+          latitude
+          longitude
+        }
         visitationArea
       }
     }
@@ -82,6 +94,10 @@ final getCouncilOutstandingVisitations = gql('''
         pictureUrl
         phoneNumber
         whatsappNumber
+        location {
+          latitude
+          longitude
+        }
         visitationArea
       }
     }
