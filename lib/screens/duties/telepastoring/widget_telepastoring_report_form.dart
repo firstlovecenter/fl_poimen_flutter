@@ -127,6 +127,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                       child: Hero(
                         tag: 'member-${widget.member.id}',
                         child: AvatarWithInitials(
+                          show: true,
                           foregroundImage: picture.image,
                           member: widget.member,
                           radius: 80,

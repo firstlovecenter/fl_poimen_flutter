@@ -52,6 +52,7 @@ class MemberDetailsScreen extends StatelessWidget {
                 child: Hero(
                   tag: 'member-${member.id}',
                   child: AvatarWithInitials(
+                    show: true,
                     foregroundImage: picture.image,
                     member: member,
                     radius: 80,
