@@ -81,7 +81,7 @@ class ChurchImclListState extends State<ChurchImclList> {
 
 Column _memberTile(BuildContext context, ImclForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = Provider.of<SharedState>(context);
+  var memberState = context.watch<SharedState>();
 
   return Column(
     children: [

@@ -15,7 +15,7 @@ class SubLeadersListWidget extends StatelessWidget {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color kPrimaryColor =
         isDark ? const Color.fromARGB(255, 251, 192, 192) : const Color.fromARGB(255, 104, 28, 22);
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return ListView(
       children: [

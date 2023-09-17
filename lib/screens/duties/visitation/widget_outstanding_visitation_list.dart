@@ -145,7 +145,7 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
 
 Column visitationMemberTile(BuildContext context, OutstandingVisitationForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = Provider.of<SharedState>(context);
+  var memberState = context.watch<SharedState>();
 
   return Column(
     children: [

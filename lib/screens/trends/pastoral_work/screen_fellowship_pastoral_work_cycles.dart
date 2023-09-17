@@ -14,7 +14,7 @@ class FellowshipPastoralWorkCyclesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
         query: getFellowshipPastoralWorkCycles,
@@ -24,7 +24,8 @@ class FellowshipPastoralWorkCyclesScreen extends StatelessWidget {
         bodyFunction: (data) {
           Widget body;
 
-          final fellowship = ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['fellowships'][0]);
+          final fellowship =
+              ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['fellowships'][0]);
 
           body = PastoralWorkTrendsWidget(
             church: fellowship,

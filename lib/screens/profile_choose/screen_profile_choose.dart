@@ -32,7 +32,7 @@ class ProfileChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authId = AuthService.instance.idToken?.userId;
-    var state = Provider.of<SharedState>(context);
+    var state = context.watch<SharedState>();
 
     return GQLQueryContainer(
       query: getUserRoles,

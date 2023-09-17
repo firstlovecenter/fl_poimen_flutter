@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color textColor = isDark ? Colors.white : Colors.black;
-    var state = Provider.of<SharedState>(context);
+    var state = context.watch<SharedState>();
 
     return Scaffold(
       body: Center(

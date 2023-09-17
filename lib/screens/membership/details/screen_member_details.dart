@@ -20,7 +20,7 @@ class MemberDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<SharedState>(context);
+    var state = context.watch<SharedState>();
 
     return GQLQueryContainer(
       query: getMemberDetails,
@@ -202,7 +202,10 @@ class MemberDetailsScreen extends StatelessWidget {
                       FontAwesomeIcons.book,
                       color: Colors.white,
                     ),
-                    title: const Text('Spiritual Progression'),
+                    title: const Text(
+                      'Spiritual Progression',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onTap: () {
                       Navigator.pushNamed(context, '/member-spiritual-progression');
                     }),
@@ -218,7 +221,10 @@ class MemberDetailsScreen extends StatelessWidget {
                       FontAwesomeIcons.baby,
                       color: Colors.white,
                     ),
-                    title: const Text('Life Progression'),
+                    title: const Text(
+                      'Life Progression',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onTap: () {
                       Navigator.pushNamed(context, '/member-life-progression');
                     }),

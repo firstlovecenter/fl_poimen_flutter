@@ -14,7 +14,7 @@ class ConstituencyOutstandingTelepastoringScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
       query: getConstituencyOutstandingTelepastoring,

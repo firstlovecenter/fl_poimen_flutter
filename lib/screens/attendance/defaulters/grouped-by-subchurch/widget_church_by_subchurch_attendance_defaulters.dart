@@ -67,7 +67,7 @@ class DefaulterSubChurchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedState churchState = Provider.of<SharedState>(context);
+    SharedState churchState = context.watch<SharedState>();
     ChurchLevel subChurchLevel = getSubChurch(level);
 
     return InkWell(

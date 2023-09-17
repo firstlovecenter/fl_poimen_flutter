@@ -35,7 +35,7 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     final List<String> membership = [
       ...widget.church.sheep.map((sheep) => sheep.id),
       ...widget.church.goats.map((goat) => goat.id),

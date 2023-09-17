@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CloudinaryImage {
   String _url = '';
@@ -14,7 +14,7 @@ class CloudinaryImage {
 
   String get url => _transformImage(_url, _size);
 
-  NetworkImage get image => NetworkImage(_transformImage(_url, _size));
+  CachedNetworkImageProvider get image => CachedNetworkImageProvider(_transformImage(_url, _size));
 
   set url(String url) {
     _url = url;
@@ -30,10 +30,18 @@ String _transformImage(String url, ImageSize size) {
     return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_500/');
   }
   if (size == ImageSize.lg) {
-    return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_300,w_300/');
+    return url.replaceFirst('upload/', 'upload/c_fill,g_face,h_300,w_300,z_0.7/');
+  }
+
+  if (size == ImageSize.sm) {
+    return url.replaceFirst('upload/', 'upload/c_thumb,g_face,h_70,w_70,z_0.7/');
+  }
+
+  if (size == ImageSize.xs) {
+    return url.replaceFirst('upload/', 'upload/c_thumb,g_face,h_70,w_70,z_0.7/');
   }
 
   return url.replaceFirst('upload/', 'upload/c_thumb,g_face,h_150,w_150,z_0.7/');
 }
 
-enum ImageSize { normal, lg, fixedHeight }
+enum ImageSize { normal, lg, sm, xs, fixedHeight }

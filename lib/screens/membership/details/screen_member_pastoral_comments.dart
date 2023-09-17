@@ -17,7 +17,7 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<SharedState>(context);
+    var state = context.watch<SharedState>();
 
     return GQLQueryContainer(
       query: getMemberPastoralComments,

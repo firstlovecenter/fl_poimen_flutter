@@ -14,7 +14,7 @@ class ConstituencyPastoralWorkCyclesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
         query: getConstituencyPastoralWorkCycles,
@@ -24,7 +24,8 @@ class ConstituencyPastoralWorkCyclesScreen extends StatelessWidget {
         bodyFunction: (data) {
           Widget body;
 
-          final constituency = ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['constituencies'][0]);
+          final constituency =
+              ChurchForPastoralWorkTrendsWithCounts.fromJson(data?['constituencies'][0]);
 
           body = PastoralWorkTrendsWidget(
             church: constituency,

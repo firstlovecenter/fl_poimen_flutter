@@ -14,7 +14,7 @@ class CouncilOutstandingTelepastoringScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
       query: getCouncilOutstandingTelepastoring,
@@ -24,8 +24,7 @@ class CouncilOutstandingTelepastoringScreen extends StatelessWidget {
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final council =
-            ChurchForOutstandingTelepastoringList.fromJson(data?['councils'][0]);
+        final council = ChurchForOutstandingTelepastoringList.fromJson(data?['councils'][0]);
 
         body = ChurchOutstandingTelepastoringList(church: council);
 

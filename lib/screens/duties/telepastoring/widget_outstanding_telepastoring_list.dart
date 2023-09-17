@@ -144,7 +144,7 @@ class ChurchOutstandingTelepastoringListState extends State<ChurchOutstandingTel
 
 Column telepastoringMemberTile(BuildContext context, OutstandingTelepastoringForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = Provider.of<SharedState>(context);
+  var memberState = context.watch<SharedState>();
 
   return Column(
     children: [

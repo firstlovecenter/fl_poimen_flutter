@@ -12,15 +12,15 @@ class GQLQueryContainer extends StatefulWidget {
   final Widget? bottomNavBar;
   final bool? infiniteScroll;
 
-  const GQLQueryContainer(
-      {Key? key,
-      required this.query,
-      required this.variables,
-      required this.defaultPageTitle,
-      required this.bodyFunction,
-      this.infiniteScroll,
-      this.bottomNavBar})
-      : super(key: key);
+  const GQLQueryContainer({
+    Key? key,
+    required this.query,
+    required this.variables,
+    required this.defaultPageTitle,
+    required this.bodyFunction,
+    this.infiniteScroll,
+    this.bottomNavBar,
+  }) : super(key: key);
 
   @override
   State<GQLQueryContainer> createState() => _GQLQueryContainerState();

@@ -12,7 +12,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userState = Provider.of<SharedState>(context);
+    var userState = context.watch<SharedState>();
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

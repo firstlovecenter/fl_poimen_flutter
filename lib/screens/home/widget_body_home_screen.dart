@@ -19,7 +19,7 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    final churchState = context.watch<SharedState>();
     String level = church.typename.toLowerCase();
     final churchLevel = convertToChurchEnum(level);
     final levelForUrl = churchLevel.name.toLowerCase();

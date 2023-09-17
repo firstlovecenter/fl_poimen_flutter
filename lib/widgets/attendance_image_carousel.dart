@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:poimen/services/cloudinary_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class AttendanceImageCarousel extends StatelessWidget {
   const AttendanceImageCarousel({
@@ -35,23 +36,14 @@ class AttendanceImageCarousel extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(112, 69, 49, 72),
               ),
-              child: Image.network(
-                CloudinaryImage(url: picture, size: ImageSize.fixedHeight).url,
+              child: CachedNetworkImage(
+                imageUrl: CloudinaryImage(url: picture, size: ImageSize.fixedHeight).url,
                 fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    value: progress.progress,
+                  ),
+                ),
               ),
             );
           },

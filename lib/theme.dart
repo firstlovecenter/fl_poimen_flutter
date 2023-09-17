@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 Color _colorFromHex(String hexColor) {
@@ -44,6 +46,10 @@ class PoimenTheme {
   static Color bad = _colorFromHex('#F44A4A');
   static Color good = _colorFromHex('#39FF14');
   static Color warning = Colors.yellow;
+}
+
+getRandomColor() {
+  return Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }
 
 var lightTheme = ThemeData(

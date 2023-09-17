@@ -11,7 +11,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     var church = churchState.church;
 
     final churchLevel = convertToChurchEnum(church.typename.toLowerCase());
