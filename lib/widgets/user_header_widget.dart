@@ -52,7 +52,6 @@ class UserHeaderWidget extends StatelessWidget {
             AvatarWithInitials(
               foregroundImage: picture.image,
               member: user,
-              show: true,
               radius: 45,
             ),
           ],

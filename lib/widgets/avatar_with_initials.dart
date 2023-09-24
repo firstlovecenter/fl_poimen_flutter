@@ -8,14 +8,12 @@ class AvatarWithInitials extends StatelessWidget {
     Key? key,
     required this.foregroundImage,
     required this.member,
-    this.show = false,
     this.radius,
   }) : super(key: key);
 
   final ImageProvider<Object> foregroundImage;
   final MemberForList member;
   final double? radius;
-  final bool show;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class AvatarWithInitials extends StatelessWidget {
       showBadge: member.lost ?? false,
       // position: const BadgePosition(end: 0),
       child: CircleAvatar(
-        foregroundImage: show ? computedImage(member.pictureUrl) : null,
+        foregroundImage: computedImage(member.pictureUrl),
         backgroundColor: PoimenTheme().getRandomColor(),
         radius: radius ?? 20,
         child: Text(

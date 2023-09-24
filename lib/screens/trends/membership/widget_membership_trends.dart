@@ -176,7 +176,6 @@ class _MembershipTrendsWidgetState extends State<MembershipTrendsWidget> {
                         ),
                       ),
                       titlesData: FlTitlesData(
-                        show: true,
                         rightTitles: const AxisTitles(
                           sideTitles: SideTitles(showTitles: false),
                         ),

@@ -36,7 +36,6 @@ class MemberAvatarScreenHeader extends StatelessWidget {
         Column(
           children: [
             AvatarWithInitials(
-              show: true,
               foregroundImage: memberPicture.image,
               member: member,
               radius: 45,

@@ -153,7 +153,6 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                         Hero(
                           tag: 'member-${widget.member.id}',
                           child: AvatarWithInitials(
-                            show: true,
                             foregroundImage: picture.image,
                             member: widget.member,
                             radius: 35,

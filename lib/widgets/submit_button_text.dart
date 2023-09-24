@@ -7,10 +7,10 @@ class SubmittingButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: const [
         Text('Submitting'),
         Padding(padding: EdgeInsets.all(5)),
         SizedBox(
