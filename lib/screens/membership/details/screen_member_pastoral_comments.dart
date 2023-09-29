@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/helpers/menus.dart';
+import 'package:poimen/screens/duties/imcl/models_imcl.dart';
 import 'package:poimen/screens/membership/details/gql_member_details.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
@@ -8,6 +9,7 @@ import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';
+import 'package:poimen/widgets/member_status_chip.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -49,17 +51,7 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Chip(
-                label: Text(member.status ?? 'No Status',
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                backgroundColor: member.status == 'Sheep'
-                    ? PoimenTheme.good
-                    : member.status == 'Goat'
-                        ? PoimenTheme.warning
-                        : member.status == 'Deer'
-                            ? PoimenTheme.darkBrand
-                            : PoimenTheme.bad,
-              ),
+              MemberStatusChip(member: member),
               Center(
                   child: Text(
                 '${member.firstName} ${member.lastName}',
@@ -84,43 +76,7 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
                             Column(
                               children: [
                                 ...member.pastoralComments!.map((comment) {
-                                  return Column(
-                                    children: [
-                                      if (member.pastoralComments!.indexOf(comment) != 0)
-                                        const Divider(),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          comment.comment,
-                                          style: const TextStyle(color: PoimenTheme.whatsappColor),
-                                          overflow: TextOverflow.clip,
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  '${comment.author.firstName} ${comment.author.lastName}, ',
-                                                ),
-                                                Text(comment.activity),
-                                              ],
-                                            ),
-                                            Text(
-                                              timeago.format(comment.timestamp),
-                                              style: const TextStyle(
-                                                color: PoimenTheme.textSecondary,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
+                                  return PastoralCommentCard(comment: comment);
                                 }).toList()
                               ],
                             ),
@@ -134,6 +90,58 @@ class MemberPastoralCommentsScreen extends StatelessWidget {
 
         return returnValues;
       },
+    );
+  }
+}
+
+class PastoralCommentCard extends StatelessWidget {
+  const PastoralCommentCard({
+    super.key,
+    required this.comment,
+  });
+
+  final PastoralComments comment;
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    Color textColor = isDark ? PoimenTheme.whatsappColor : const Color.fromARGB(255, 0, 129, 28);
+
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            comment.comment,
+            style:  TextStyle(color: textColor),
+            overflow: TextOverflow.clip,
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    '${comment.author.firstName} ${comment.author.lastName}, ',
+                  ),
+                  Text(comment.activity),
+                ],
+              ),
+              Text(
+                timeago.format(comment.timestamp),
+                style: const TextStyle(
+                  color: PoimenTheme.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Divider()
+      ],
     );
   }
 }

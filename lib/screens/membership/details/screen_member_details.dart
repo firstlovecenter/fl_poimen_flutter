@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/details/gql_member_details.dart';
+import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -11,9 +12,9 @@ import 'package:poimen/widgets/avatar_with_initials.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/icon_contact.dart';
+import 'package:poimen/widgets/member_status_chip.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class MemberDetailsScreen extends StatelessWidget {
   const MemberDetailsScreen({Key? key}) : super(key: key);
@@ -58,23 +59,7 @@ class MemberDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Chip(
-                label: Text(
-                  member.status ?? 'No Status',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: member.status == 'Goat' ? Colors.black : Colors.white,
-                  ),
-                ),
-                backgroundColor: member.status == 'Sheep'
-                    ? PoimenTheme.good
-                    : member.status == 'Goat'
-                        ? PoimenTheme.warning
-                        : member.status == 'Deer'
-                            ? PoimenTheme.brand
-                            : PoimenTheme.bad,
-              ),
+              MemberStatusChip(member: member),
               Center(
                 child: Text(
                   '${member.firstName} ${member.lastName}',
@@ -302,43 +287,7 @@ class MemberDetailsScreen extends StatelessWidget {
                             Column(
                               children: [
                                 ...member.pastoralComments!.map((comment) {
-                                  return Column(
-                                    children: [
-                                      if (member.pastoralComments!.indexOf(comment) != 0)
-                                        const Divider(),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          comment.comment,
-                                          style: const TextStyle(color: PoimenTheme.whatsappColor),
-                                          overflow: TextOverflow.clip,
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  '${comment.author.firstName} ${comment.author.lastName}, ',
-                                                ),
-                                                Text(comment.activity),
-                                              ],
-                                            ),
-                                            Text(
-                                              timeago.format(comment.timestamp),
-                                              style: const TextStyle(
-                                                color: PoimenTheme.textSecondary,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
+                                  return PastoralCommentCard(comment: comment);
                                 }).toList()
                               ],
                             ),
