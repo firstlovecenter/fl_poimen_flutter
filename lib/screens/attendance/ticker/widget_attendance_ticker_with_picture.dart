@@ -47,7 +47,7 @@ class _AttendanceTickerWithPictureScreenState extends State<AttendanceTickerWith
       recordId = churchState.bussingRecordId;
     }
 
-    return Column(
+    return Stack(
       children: [
         Expanded(
           child: ListView(

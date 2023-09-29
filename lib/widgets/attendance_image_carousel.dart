@@ -18,7 +18,7 @@ class AttendanceImageCarousel extends StatelessWidget {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: MediaQuery.of(context).size.width > 500 ? 500.0 : 200.0,
+        height: MediaQuery.of(context).size.width > 500 ? 500.0 : 250.0,
         autoPlay: isSingle ? false : true,
         enableInfiniteScroll: isSingle ? false : true,
         autoPlayInterval: const Duration(seconds: 3),
@@ -34,11 +34,11 @@ class AttendanceImageCarousel extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 2.5),
               decoration: const BoxDecoration(
-                color: Color.fromARGB(112, 69, 49, 72),
+                color: Color.fromARGB(0, 161, 7, 185),
               ),
               child: CachedNetworkImage(
                 imageUrl: CloudinaryImage(url: picture, size: ImageSize.fixedHeight).url,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 progressIndicatorBuilder: (context, url, progress) => Center(
                   child: CircularProgressIndicator(
                     value: progress.progress,
