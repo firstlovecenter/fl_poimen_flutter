@@ -29,7 +29,7 @@ List<ProgressionItem> lifeProgressionList = [
     description: '',
   ),
   ProgressionItem(
-    title: 'University Eduction',
+    title: 'University Education',
     property: 'universityEducation',
     icon: FontAwesomeIcons.graduationCap,
     description: '',
