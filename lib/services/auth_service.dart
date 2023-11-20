@@ -57,14 +57,16 @@ class AuthService {
         promptValues: ['login'],
       );
 
-      final AuthorizationTokenResponse? result =
-          await appAuth.authorizeAndExchangeCode(
+      final AuthorizationTokenResponse? result = await appAuth.authorizeAndExchangeCode(
         authorizationTokenRequest,
       );
 
       return await _setLocalVariables(result);
-    } on PlatformException {
-      return 'User has cancelled or no internet!';
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print('PlatformException code: ${e.code}, message: ${e.message}, details: ${e.details}');
+      }
+      return 'User has cancelled or no internet! PlatformException code: ${e.code}, message: ${e.message}, details: ${e.details}';
     } catch (e, s) {
       if (kDebugMode) {
         print('Login Uknown error $e, $s');
