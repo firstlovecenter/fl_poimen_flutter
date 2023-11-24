@@ -6,7 +6,7 @@ final getFellowshipServices = gql('''
       id
       typename
       name
-      services(limit: 10) {
+      services(limit: 20) {
         id
         typename
         attendance
@@ -25,7 +25,7 @@ final getSundayBussing = gql('''
         id
         typename
         name
-        bussing(limit: 10) {
+        bussing(limit: 20) {
           id
           typename
           attendance
