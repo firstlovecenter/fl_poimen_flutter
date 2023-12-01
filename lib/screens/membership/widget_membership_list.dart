@@ -85,7 +85,7 @@ class ChurchMembershipList extends StatelessWidget {
 
 Column memberListTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = Provider.of<SharedState>(context);
+  var memberState = context.watch<SharedState>();
 
   return Column(
     children: [
@@ -119,7 +119,7 @@ class MemberListQuery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
 
     const pageSize = 7;
@@ -194,7 +194,7 @@ class _MemberInfiniteScrollListState extends State<MemberInfiniteScrollList> {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     ChurchString churchString = ChurchString(churchState.church.typename.toLowerCase());
     String churchLevel = churchString.pluralLowerCase;
     bool everyThingLoaded = widget.children.length < widget.position;

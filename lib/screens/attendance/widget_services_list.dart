@@ -14,7 +14,7 @@ class ChurchServicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     String serviceType = services.isNotEmpty ? services[0].typename : '';
 

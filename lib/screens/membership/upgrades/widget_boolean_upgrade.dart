@@ -36,7 +36,7 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
 
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<SharedState>(context);
+    var appState = context.watch<SharedState>();
     // replace spaces in title
     String hasUpgradeVariable = widget.title.replaceAll(' ', '');
     String label = 'Doesn\'t Have';

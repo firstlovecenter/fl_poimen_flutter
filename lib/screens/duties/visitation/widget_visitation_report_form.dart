@@ -52,7 +52,7 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     String visitationArea = '';
 
     bool locationSet = (location.latitude + location.longitude != 0.0);
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 

@@ -19,7 +19,7 @@ class UpdateSpiritualProgressionScreen extends StatefulHookWidget {
 class _UpdateSpiritualProgressionScreenState extends State<UpdateSpiritualProgressionScreen> {
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<SharedState>(context);
+    var appState = context.watch<SharedState>();
 
     final spiritualProgressionUpgradeMutation = useMutation(
       MutationOptions(
@@ -94,8 +94,8 @@ class _UpdateSpiritualProgressionScreenState extends State<UpdateSpiritualProgre
       return const LoadingScreen();
     }
 
-    final member =
-        MemberWithSpiritualProgression.fromJson(spiritualProgressionQuery.result.data?['members'][0]);
+    final member = MemberWithSpiritualProgression.fromJson(
+        spiritualProgressionQuery.result.data?['members'][0]);
 
     return SpiritualProgressionWidget(
       title: 'Spiritual Progression Upgrades',

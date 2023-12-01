@@ -38,7 +38,7 @@ class _LifeProgressionWidgetState extends State<LifeProgressionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<SharedState>(context);
+    var appState = context.watch<SharedState>();
 
     return ScaffoldWithMemberAvatar(
       title: widget.title,

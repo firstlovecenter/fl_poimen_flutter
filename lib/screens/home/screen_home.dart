@@ -11,9 +11,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.read<SharedState>();
     var church = churchState.church;
-
     var query = getFellowshipHomeScreen;
     String pluralName = 'fellowships';
 

@@ -5,7 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:poimen/screens/login_screen.dart';
 import 'package:poimen/services/gql.dart';
 import 'package:poimen/state/shared_state.dart';
-import 'package:poimen/theme.dart';
+import 'package:poimen/color_scheme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

@@ -16,7 +16,7 @@ class ScaffoldWithMemberAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<SharedState>(context);
+    var state = context.watch<SharedState>();
     final member = state.member;
     final memberPicture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
 

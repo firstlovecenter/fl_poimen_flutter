@@ -15,26 +15,26 @@ class AvatarWithInitials extends StatelessWidget {
   final MemberForList member;
   final double? radius;
 
-  computedImage(String url) {
-    if (url != '') {
-      return foregroundImage;
-    } else {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    computedImage(String url) {
+      if (url != '') {
+        return foregroundImage;
+      } else {
+        return null;
+      }
+    }
+
     return notification.Badge(
       showBadge: member.lost ?? false,
       // position: const BadgePosition(end: 0),
       child: CircleAvatar(
         foregroundImage: computedImage(member.pictureUrl),
-        backgroundColor: PoimenTheme.phoneColor,
+        backgroundColor: PoimenTheme().getRandomColor(),
         radius: radius ?? 20,
         child: Text(
           member.firstName.substring(0, 1) + member.lastName.substring(0, 1),
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     );

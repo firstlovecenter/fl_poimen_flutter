@@ -19,7 +19,7 @@ class UpdateLifeProgressionScreen extends StatefulHookWidget {
 class _UpdateLifeProgressionScreenState extends State<UpdateLifeProgressionScreen> {
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<SharedState>(context);
+    var appState = context.watch<SharedState>();
 
     final lifeProgressionUpgradeMutation = useMutation(
       MutationOptions(

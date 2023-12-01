@@ -19,7 +19,7 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),

@@ -10,7 +10,10 @@ import 'package:provider/provider.dart';
 
 Column memberTile(BuildContext context, MemberForList member, [Church? church]) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = Provider.of<SharedState>(context);
+  var memberState = context.watch<SharedState>();
+  var brightness = MediaQuery.of(context).platformBrightness;
+  bool isDarkMode = brightness == Brightness.dark;
+  Color fellowshipColor = isDarkMode ? Colors.yellow : Colors.yellow.shade900;
 
   return Column(
     children: [
@@ -37,7 +40,7 @@ Column memberTile(BuildContext context, MemberForList member, [Church? church]) 
               ? Text(
                   '${church.name} ${church.typename}',
                   style:
-                      TextStyle(color: church.id == memberState.church.id ? Colors.yellow : null),
+                      TextStyle(color: church.id == memberState.church.id ? fellowshipColor : null),
                 )
               : Text(member.status ?? member.typename),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [

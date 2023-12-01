@@ -28,7 +28,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
   @override
   Widget build(BuildContext context) {
     String telepastoringReport = '';
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     String level = churchState.church.typename;
     PastoralCycle cycle = churchState.pastoralCycle;
 

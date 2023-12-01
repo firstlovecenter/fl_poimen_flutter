@@ -60,7 +60,6 @@ class BussingWeeksForTrends {
 
   factory BussingWeeksForTrends.fromJson(Map<String, dynamic> json) =>
       _$BussingWeeksForTrendsFromJson(json);
-  @override
   Map<String, dynamic> toJson() => _$BussingWeeksForTrendsToJson(this);
 }
 

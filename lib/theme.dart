@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-Color _colorFromHex(String hexColor) {
+Color colorFromHex(String hexColor) {
   final hexCode = hexColor.replaceAll('#', '');
   return Color(int.parse('FF$hexCode', radix: 16));
 }
@@ -14,8 +16,8 @@ class PoimenTheme {
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color textSecondary = Colors.grey;
-  static Color brand = _colorFromHex('#850035');
-  static Color brandTextPrimary = _colorFromHex('#8a3a59');
+  static Color brand = colorFromHex('#850035');
+  static Color brandTextPrimary = colorFromHex('#8a3a59');
 
   static TextStyle heading1 = const TextStyle(
     fontSize: 20,
@@ -28,104 +30,55 @@ class PoimenTheme {
   );
 
   static Map<int, Color> brands = {
-    50: _colorFromHex('#FEEAFD'),
-    100: _colorFromHex('#FDCDFB'),
-    200: _colorFromHex('#FBAFF8'),
-    300: _colorFromHex('#F98FF6'),
-    400: _colorFromHex('#F770F3'),
-    500: _colorFromHex('#F550F1'),
-    600: _colorFromHex('#F331EE'),
-    700: _colorFromHex('#F111EC'),
-    800: _colorFromHex('#EE00E9'),
-    900: _colorFromHex('#E900E7'),
+    50: colorFromHex('#FEEAFD'),
+    100: colorFromHex('#FDCDFB'),
+    200: colorFromHex('#FBAFF8'),
+    300: colorFromHex('#F98FF6'),
+    400: colorFromHex('#F770F3'),
+    500: colorFromHex('#F550F1'),
+    600: colorFromHex('#F331EE'),
+    700: colorFromHex('#F111EC'),
+    800: colorFromHex('#EE00E9'),
+    900: colorFromHex('#E900E7'),
   };
 
-  static Color darkBrand = _colorFromHex('#45001C');
-  static Color bad = _colorFromHex('#F44A4A');
-  static Color good = _colorFromHex('#39FF14');
+  static Map<int, Color> facebook = {
+    50: colorFromHex('#E8F4F9'),
+    100: colorFromHex('#D9DEE9'),
+    200: colorFromHex('#B7C2DA'),
+    300: colorFromHex('#6482C0'),
+    400: colorFromHex('#4267B2'),
+    500: colorFromHex('#385898'),
+    600: colorFromHex('#314E89'),
+    700: colorFromHex('#29487D'),
+    800: colorFromHex('#223B67'),
+    900: colorFromHex('#1E355B'),
+  };
+
+  List<Color> randomColorArray = [
+    colorFromHex('#FEB2B2'),
+    colorFromHex('#FBD38D'),
+    colorFromHex('#FAF089'),
+    colorFromHex('#9AE6B4'),
+    colorFromHex('#81E6D9'),
+    colorFromHex('#90cdf4'),
+    colorFromHex('#9DECF9'),
+    colorFromHex('#D6BCFA'),
+    colorFromHex('#FBB6CE'),
+    colorFromHex('#9BDAF3'),
+    colorFromHex('#B7C2DA'),
+    colorFromHex('#A2CDFF'),
+    colorFromHex('#90edb3'),
+    colorFromHex('#A8DCFA'),
+    colorFromHex('#A2D4EC'),
+  ];
+
+  static Color darkBrand = colorFromHex('#45001C');
+  static Color bad = colorFromHex('#F44A4A');
+  static Color good = colorFromHex('#39FF14');
   static Color warning = Colors.yellow;
+
+  Color getRandomColor() {
+    return randomColorArray[Random().nextInt(randomColorArray.length)];
+  }
 }
-
-var lightTheme = ThemeData(
-  // MAIN COLORS
-  scaffoldBackgroundColor: _colorFromHex('#F0F0F0'),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-
-  // TYPOGRAPHY & TEXT
-  textTheme: TextTheme(
-    headlineSmall: TextStyle(color: PoimenTheme.brand),
-  ),
-  cardColor: _colorFromHex("#FDFDFD"),
-
-  buttonTheme: ButtonThemeData(
-    buttonColor: PoimenTheme.brand,
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.only(top: 13, bottom: 13),
-      backgroundColor: PoimenTheme.brand,
-      textStyle: const TextStyle(fontSize: 18),
-    ),
-  ),
-  iconTheme: IconThemeData(
-    color: PoimenTheme.brand,
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: _colorFromHex("#FDFDFD"),
-    selectedItemColor: PoimenTheme.brand,
-    unselectedItemColor: Colors.grey,
-  ),
-  // appBarTheme: AppBarTheme(
-  //   color: _colorFromHex("#FDFDFD"),
-  //   elevation: 0,
-  //   iconTheme: IconThemeData(
-  //     color: PoimenTheme.brand,
-  //   ),
-  // ),
-  colorScheme: ColorScheme.fromSwatch(
-    brightness: Brightness.light,
-    primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
-  ).copyWith(background: const Color(0x00242424)),
-);
-
-var darkTheme = ThemeData(
-  // MAIN COLORS
-  scaffoldBackgroundColor: _colorFromHex('#1E1E1E'),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-
-  // TYPOGRAPHY & TEXT
-  textTheme: TextTheme(
-    headlineSmall: TextStyle(color: PoimenTheme.brand),
-  ),
-  cardColor: _colorFromHex("#2A2A2A"),
-  buttonTheme: ButtonThemeData(
-    buttonColor: PoimenTheme.brand,
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      padding: const EdgeInsets.only(top: 13, bottom: 13),
-      backgroundColor: PoimenTheme.brand,
-      textStyle: const TextStyle(fontSize: 18),
-    ),
-  ),
-  iconTheme: IconThemeData(
-    color: PoimenTheme.brand,
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: _colorFromHex("#1A1A1A"),
-    selectedItemColor: PoimenTheme.brand,
-    unselectedItemColor: Colors.grey,
-  ),
-  appBarTheme: AppBarTheme(
-    color: _colorFromHex("#1A1A1A"),
-    iconTheme: IconThemeData(
-      color: PoimenTheme.brand,
-    ),
-  ),
-  colorScheme: ColorScheme.fromSwatch(
-    brightness: Brightness.dark,
-    primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
-  ).copyWith(
-    background: const Color(0x00242424),
-  ),
-);

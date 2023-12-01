@@ -36,7 +36,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var churchState = Provider.of<SharedState>(context);
+    var churchState = context.watch<SharedState>();
     final List<String> membership = [
       ...widget.church.sheep.map((sheep) => sheep.id),
       ...widget.church.goats.map((goat) => goat.id),
@@ -50,47 +50,54 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
       recordId = churchState.serviceRecordId;
     }
 
+    // You can create a list of widgets and return the widget at the corresponding index
+    List<Widget> listWidgets = [
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Summary for ${widget.service.serviceDate.humanReadable}',
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+            ),
+            Text(
+              format(widget.service.serviceDate.date),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: PoimenTheme.brand, fontSize: 16.0),
+            ),
+          ],
+        ),
+      ),
+      const Padding(padding: EdgeInsets.all(10.0)),
+      AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
+      const Padding(padding: EdgeInsets.all(8.0)),
+      _ShowMembersIfAny(
+        members: widget.church.sheep,
+        category: MemberCategory.Sheep,
+        presentMembers: _presentMembers,
+      ),
+      _ShowMembersIfAny(
+        members: widget.church.goats,
+        category: MemberCategory.Goat,
+        presentMembers: _presentMembers,
+      ),
+      _ShowMembersIfAny(
+        category: MemberCategory.Deer,
+        members: widget.church.deer,
+        presentMembers: _presentMembers,
+      ),
+    ];
+
     return Column(
       children: [
         Expanded(
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Summary for ${widget.service.serviceDate.humanReadable}',
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                    ),
-                    Text(
-                      format(widget.service.serviceDate.date),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: PoimenTheme.brand, fontSize: 16.0),
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(padding: EdgeInsets.all(10.0)),
-              AttendanceImageCarousel(membersPicture: widget.service.membersPicture),
-              const Padding(padding: EdgeInsets.all(8.0)),
-              _ShowMembersIfAny(
-                members: widget.church.sheep,
-                category: MemberCategory.Sheep,
-                presentMembers: _presentMembers,
-              ),
-              _ShowMembersIfAny(
-                members: widget.church.goats,
-                category: MemberCategory.Goat,
-                presentMembers: _presentMembers,
-              ),
-              _ShowMembersIfAny(
-                category: MemberCategory.Deer,
-                members: widget.church.deer,
-                presentMembers: _presentMembers,
-              ),
-            ],
+          child: ListView.builder(
+            itemCount: listWidgets.length,
+            itemBuilder: (BuildContext context, int index) {
+              // Return the widget at the current index
+              return listWidgets[index];
+            },
           ),
         ),
         ElevatedButton(
@@ -177,8 +184,10 @@ class _ShowMembersIfAnyState extends State<_ShowMembersIfAny> {
                             },
                             secondary: AvatarWithInitials(
                               member: member,
-                              foregroundImage:
-                                  cloudinary_custom.CloudinaryImage(url: member.pictureUrl).image,
+                              foregroundImage: cloudinary_custom.CloudinaryImage(
+                                url: member.pictureUrl,
+                                size: cloudinary_custom.ImageSize.xs,
+                              ).image,
                             ),
                             title: Text('${member.firstName} ${member.lastName}'),
                           ),

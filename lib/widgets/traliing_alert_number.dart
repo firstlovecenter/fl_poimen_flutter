@@ -10,7 +10,8 @@ class TrailingCardAlertNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color cardBackground = const Color(0xff000000);
-    Color textColor = Colors.red;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    Color textColor = isDark ? Colors.red : const Color.fromARGB(255, 106, 30, 30);
 
     if (variant == TrailingCardAlertNumberVariant.red) {
       cardBackground = const Color(0x22C02F2F);
@@ -18,7 +19,7 @@ class TrailingCardAlertNumber extends StatelessWidget {
 
     if (variant == TrailingCardAlertNumberVariant.green) {
       cardBackground = const Color(0x2139C02F);
-      textColor = const Color(0xFF4CD551);
+      textColor = isDark ? const Color(0xFF4CD551) : const Color.fromARGB(255, 33, 78, 35);
     }
 
     return Card(
