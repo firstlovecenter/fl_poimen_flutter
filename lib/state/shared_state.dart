@@ -40,6 +40,10 @@ class SharedState with ChangeNotifier {
   String _councilId = '';
   String _streamId = '';
   String _campusId = '';
+  String _hubId = '';
+  String _hubCouncilId = '';
+  String _ministryId = '';
+  String _creativeArtsId = '';
 
   String _bussingRecordId = '';
   String _serviceRecordId = '';
@@ -62,6 +66,10 @@ class SharedState with ChangeNotifier {
   String get councilId => _councilId;
   String get streamId => _streamId;
   String get campusId => _campusId;
+  String get hubId => _hubId;
+  String get hubCouncilId => _hubCouncilId;
+  String get ministryId => _ministryId;
+  String get creativeArtsId => _creativeArtsId;
 
   String get bussingRecordId => _bussingRecordId;
   String get serviceRecordId => _serviceRecordId;
@@ -143,6 +151,26 @@ class SharedState with ChangeNotifier {
 
   set campusId(String campusId) {
     _campusId = campusId;
+    notifyListeners();
+  }
+
+  set hubId(String hubId) {
+    _hubId = hubId;
+    notifyListeners();
+  }
+
+  set hubCouncilId(String hubCouncilId) {
+    _hubCouncilId = hubCouncilId;
+    notifyListeners();
+  }
+
+  set ministryId(String ministryId) {
+    _ministryId = ministryId;
+    notifyListeners();
+  }
+
+  set creativeArtsId(String creativeArtsId) {
+    _creativeArtsId = creativeArtsId;
     notifyListeners();
   }
 

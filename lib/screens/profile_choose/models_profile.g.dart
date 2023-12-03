@@ -52,6 +52,24 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       isAdminForCampus: (json['isAdminForCampus'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
+      leadsHub: (json['leadsHub'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      leadsHubCouncil: (json['leadsHubCouncil'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      leadsMinistry: (json['leadsMinistry'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      isAdminForMinistry: (json['isAdminForMinistry'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      leadsCreativeArts: (json['leadsCreativeArts'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      isAdminForCreativeArts: (json['isAdminForCreativeArts'] as List<dynamic>)
+          .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
@@ -68,4 +86,10 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'isAdminForStream': instance.isAdminForStream,
       'leadsCampus': instance.leadsCampus,
       'isAdminForCampus': instance.isAdminForCampus,
+      'leadsHub': instance.leadsHub,
+      'leadsHubCouncil': instance.leadsHubCouncil,
+      'leadsMinistry': instance.leadsMinistry,
+      'isAdminForMinistry': instance.isAdminForMinistry,
+      'leadsCreativeArts': instance.leadsCreativeArts,
+      'isAdminForCreativeArts': instance.isAdminForCreativeArts,
     };

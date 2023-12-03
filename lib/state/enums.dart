@@ -7,6 +7,10 @@ enum ChurchLevel {
   council,
   stream,
   campus,
+  hub,
+  hubCouncil,
+  ministry,
+  creativeArts
 }
 
 enum ChurchRole {
