@@ -41,7 +41,7 @@ class HomeScreenBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView.builder(
-        itemCount: 18,
+        itemCount: 22,
         itemBuilder: (BuildContext context, int index) {
           switch (index) {
             case 0:
