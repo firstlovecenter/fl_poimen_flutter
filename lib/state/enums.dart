@@ -82,6 +82,14 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
       return ChurchLevel.stream;
     case 'campus':
       return ChurchLevel.campus;
+    case 'hub':
+      return ChurchLevel.hub;
+    case 'hubCouncil':
+      return ChurchLevel.hubCouncil;
+    case 'ministry':
+      return ChurchLevel.ministry;
+    case 'creativeArts':
+      return ChurchLevel.creativeArts;
     default:
       return ChurchLevel.fellowship;
   }

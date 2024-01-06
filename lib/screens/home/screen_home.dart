@@ -41,6 +41,26 @@ class HomeScreen extends StatelessWidget {
       query = getCampusHomeScreen;
     }
 
+    if (church.typename == 'Hub') {
+      pluralName = 'hubs';
+      query = getHubHomeScreen;
+    }
+
+    if (church.typename == 'HubCouncil') {
+      pluralName = 'hubCouncils';
+      query = getHubCouncilHomeScreen;
+    }
+
+    if (church.typename == 'Ministry') {
+      pluralName = 'ministries';
+      query = getMinistryHomeScreen;
+    }
+
+    if (church.typename == 'CreativeArts') {
+      pluralName = 'creativeArts';
+      query = getCreativeArtsHomeScreen;
+    }
+
     return GQLQueryContainer(
       query: query,
       variables: {'id': church.id},
