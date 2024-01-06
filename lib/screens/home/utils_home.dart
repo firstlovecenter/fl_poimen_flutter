@@ -28,6 +28,20 @@ String parseRole(Role role) {
       return 'Campus Leader';
     case Role.adminCampus:
       return 'Campus Admin';
+
+    //* Creative Arts Roles
+    case Role.leaderHub:
+      return 'Hub Leader';
+    case Role.leaderHubCouncil:
+      return 'Hub Council Leader';
+    case Role.leaderMinistry:
+      return 'Ministry Leader';
+    case Role.adminMinistry:
+      return 'Ministry Admin';
+    case Role.leaderCreativeArts:
+      return 'Creative Arts Leader';
+    case Role.adminCreativeArts:
+      return 'Creative Arts Admin';
     default:
       return '';
   }
