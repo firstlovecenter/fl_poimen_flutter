@@ -623,3 +623,107 @@ final getFellowshipDeerForList = gql('''
     }
   }
 ''');
+
+final getHubMembershipNumbers = gql('''
+query getHubMembershipNumbers(\$id: ID!) {
+  hubs(where: { id: \$id }) {
+    id
+    typename
+    name
+
+    sheepPaginated {
+      totalCount
+    }
+    goatsPaginated {
+      totalCount
+    }
+    deerPaginated {
+      totalCount
+    }
+  }
+}
+''');
+
+final getHubSheepForList = gql('''
+   query getHubSheep(\$id: ID!, \$first: Int! \$after: Int!) {
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+
+      sheepPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            lost 
+            firstName
+            lastName
+            fullName
+            pictureUrl
+            phoneNumber
+            whatsappNumber
+          }  
+        }
+        totalCount
+        position
+      }
+    }
+  }
+''');
+
+final getHubGoatsForList = gql('''
+   query getHubGoats(\$id: ID!, \$first: Int! \$after: Int!) {
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+
+      goatsPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            lost 
+            firstName
+            lastName
+            fullName
+            pictureUrl
+            phoneNumber
+            whatsappNumber
+          }  
+        }
+        totalCount
+        position
+      }
+    }
+  }
+''');
+
+final getHubDeerForList = gql('''
+   query getHubDeer(\$id: ID!, \$first: Int! \$after: Int!) {
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+
+      deerPaginated(first: \$first, after: \$after) {
+        edges {
+          node {
+            id
+            typename
+            lost 
+            firstName
+            lastName
+            fullName
+            pictureUrl
+            phoneNumber
+            whatsappNumber
+          }  
+        }
+        totalCount
+        position
+      }
+    }
+  }
+''');

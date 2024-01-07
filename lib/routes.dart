@@ -46,6 +46,7 @@ import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.da
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
+import 'package:poimen/screens/membership/screen_hub_list.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_spiritual_progresion.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_life_progression.dart';
 import 'package:poimen/screens/membership/upgrades/screen_update_life_progression.dart';
@@ -98,6 +99,7 @@ var appRoutes = {
   '/council-members': (context) => const CouncilMembershipScreen(),
   '/stream-members': (context) => const StreamMembershipScreen(),
   '/campus-members': (context) => const CampusMembershipScreen(),
+  '/hub-members': (context) => const HubMembershipScreen(),
 
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),

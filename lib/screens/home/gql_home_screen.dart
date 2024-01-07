@@ -121,6 +121,13 @@ final getHubHomeScreen = gql('''
       typename
       name
       imclTotal
+      currentPastoralCycle {
+        id
+        typename
+        startDate
+        endDate
+        numberOfDays
+      }
     }
   }
 ''');
@@ -132,6 +139,13 @@ final getHubCouncilHomeScreen = gql('''
       typename
       name
       imclTotal
+      currentPastoralCycle {
+        id
+        typename
+        startDate
+        endDate
+        numberOfDays
+      }
     }
   }
 ''');

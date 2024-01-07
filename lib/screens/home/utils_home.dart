@@ -56,6 +56,8 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
     ChurchLevel.bacenta,
     ChurchLevel.constituency,
     ChurchLevel.council,
+    ChurchLevel.hub,
+    ChurchLevel.hubCouncil,
   ];
 
   if (!permittedLevels.contains(churchLevel)) {
