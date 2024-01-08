@@ -29,7 +29,7 @@ class HubRehearsalsScreen extends StatelessWidget {
           body = ChurchServicesList(services: hub.services);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Services', church: hub),
+            pageTitle: PageTitle(pageTitle: 'Recent Rehearsals', church: hub),
             body: body,
           );
         });
