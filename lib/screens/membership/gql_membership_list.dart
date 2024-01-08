@@ -341,3 +341,55 @@ final getCampusMembers = gql('''
     }
   }
 ''');
+
+final getHubMembers = gql('''
+   query getHubMembers(\$id: ID!, \$rehearsalRecordId: ID) {
+    rehearsalRecords(where: { id: \$rehearsalRecordId }, options: { limit: 1 }) {
+      id
+      typename
+      membersPicture
+      serviceDate {
+        date
+      }
+    }
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+
+      sheep {
+        id
+        typename
+        lost 
+        firstName
+        lastName
+        fullName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+      goats {
+        id
+        typename
+        lost 
+        firstName
+        lastName
+        fullName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+      deer {
+        id
+        typename
+        lost 
+        firstName
+        lastName
+        fullName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+    }
+  }
+''');

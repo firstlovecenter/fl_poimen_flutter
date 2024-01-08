@@ -1,6 +1,7 @@
 import 'package:poimen/screens/attendance/defaulters/service-attendance/council_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/campus_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/screen_hub_services.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
@@ -149,6 +150,9 @@ var appRoutes = {
   '/bussingrecord-services': (context) => const SundayBussingScreen(),
   '/bussingrecord/attendance-ticker': (context) => const BussingRecordAttendanceTickerScreen(),
   '/bussingrecord/attendance-report': (context) => const BussingAttendanceReportScreen(),
+
+  // Hub Attendance Screens
+  '/rehearsal-meetings': (context) => const HubRehearsalsScreen(),
 
 // Attendance Defaulters
   '/constituency/service-attendance-defaulters': (context) =>

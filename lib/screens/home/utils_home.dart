@@ -103,6 +103,24 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
   ];
 }
 
+List<Widget> hubAttendanceLevels(ChurchLevel churchLevel) {
+  if (churchLevel != ChurchLevel.hub) {
+    return [Container()];
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return [
+    HomePageButton(
+      text: 'Rehearsal Attendance',
+      icon: FontAwesomeIcons.music,
+      navKey: 'rehearsal-attendance',
+      route: '/rehearsal-meetings',
+      permitted: [Role.values.byName('leader${level.properCase}')],
+    ),
+  ];
+}
+
 Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
   const permittedLevels = [
     ChurchLevel.constituency,
