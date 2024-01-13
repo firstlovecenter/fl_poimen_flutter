@@ -52,3 +52,30 @@ class ServicesForReport {
       _$ServicesForReportFromJson(json);
   Map<String, dynamic> toJson() => _$ServicesForReportToJson(this);
 }
+
+@JsonSerializable()
+class RehearsalsForReport {
+  String id = '';
+  String typename = '';
+  TimeGraph serviceDate = TimeGraph();
+  List<String> membersPicture = [];
+  List<MemberForListWithFellowship> membersAbsent = [];
+  List<MemberForListWithFellowship> membersPresent = [];
+  List<MemberForList> membersAbsentFromHub = [];
+  List<MemberForList> membersPresentFromHub = [];
+
+  RehearsalsForReport({
+    required this.id,
+    required this.typename,
+    required this.serviceDate,
+    required this.membersPicture,
+    required this.membersAbsent,
+    required this.membersPresent,
+    required this.membersAbsentFromHub,
+    required this.membersPresentFromHub,
+  });
+
+  factory RehearsalsForReport.fromJson(Map<String, dynamic> json) =>
+      _$RehearsalsForReportFromJson(json);
+  Map<String, dynamic> toJson() => _$RehearsalsForReportToJson(this);
+}

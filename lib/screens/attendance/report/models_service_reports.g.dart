@@ -74,3 +74,41 @@ Map<String, dynamic> _$ServicesForReportToJson(ServicesForReport instance) =>
       'membersPresent': instance.membersPresent,
       'membersAbsent': instance.membersAbsent,
     };
+
+RehearsalsForReport _$RehearsalsForReportFromJson(Map<String, dynamic> json) =>
+    RehearsalsForReport(
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      serviceDate:
+          TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+      membersPicture: (json['membersPicture'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      membersAbsent: (json['membersAbsent'] as List<dynamic>)
+          .map((e) =>
+              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      membersPresent: (json['membersPresent'] as List<dynamic>)
+          .map((e) =>
+              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      membersAbsentFromHub: (json['membersAbsentFromHub'] as List<dynamic>)
+          .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      membersPresentFromHub: (json['membersPresentFromHub'] as List<dynamic>)
+          .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$RehearsalsForReportToJson(
+        RehearsalsForReport instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'serviceDate': instance.serviceDate,
+      'membersPicture': instance.membersPicture,
+      'membersAbsent': instance.membersAbsent,
+      'membersPresent': instance.membersPresent,
+      'membersAbsentFromHub': instance.membersAbsentFromHub,
+      'membersPresentFromHub': instance.membersPresentFromHub,
+    };

@@ -34,7 +34,7 @@ class HubAttendanceTickerScreen extends StatelessWidget {
 
           final attendanceMutation = useMutation(
             MutationOptions(
-              document: recordMembershipAttendance,
+              document: recordMembershipRehearsalAttendance,
               // ignore: void_checks
               update: (cache, result) {
                 return cache;
@@ -60,7 +60,7 @@ class HubAttendanceTickerScreen extends StatelessWidget {
                               onRetry: () {
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                                 Navigator.of(context)
-                                    .pushReplacementNamed('/servicerecord/attendance-report');
+                                    .pushReplacementNamed('/rehearsalrecord/attendance-report');
                               }),
                         ),
                       );

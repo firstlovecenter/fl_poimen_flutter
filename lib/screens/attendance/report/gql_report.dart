@@ -143,3 +143,75 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
     }
   }
   ''');
+
+final getHubRehearsalReport = gql('''
+query getHubRehearsalReport(\$rehearsalRecordId: ID!, \$hubId: ID!) {
+    hubs(where: { id: \$hubId }) {
+      id
+      typename
+      name
+    }
+    rehearsalRecords(where: { id: \$rehearsalRecordId }) {
+      id
+      typename
+      serviceDate {
+        date
+      }
+      membersPicture
+      membersPresent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
+      }
+      membersAbsent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        fellowship {
+          id
+          typename
+          name
+        }
+      }
+      membersPresentFromHub(id: \$hubId) {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+      }
+      membersAbsentFromHub(id: \$hubId) {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+      }
+    }
+  }
+  ''');

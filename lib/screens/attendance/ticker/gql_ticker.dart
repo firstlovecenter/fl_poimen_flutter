@@ -30,3 +30,34 @@ final recordMembershipAttendance = gql('''
   }
 }
   ''');
+
+final recordMembershipRehearsalAttendance = gql('''
+ mutation RecordMembershipRehearsalAttendance(
+  \$hubId: ID!
+  \$presentMembers: [ID!]!
+  \$absentMembers: [ID!]!
+  \$recordId: ID!
+) {
+  RecordMembershipRehearsalAttendance(
+    hubId: \$hubId
+    presentMembers: \$presentMembers
+    absentMembers: \$absentMembers
+    recordId: \$recordId
+  ) {
+    id
+    markedAttendance(churchId: \$hubId)
+    membersPresent {
+      id
+      firstName
+      lastName
+      pictureUrl
+    }
+    membersAbsent {
+      id
+      firstName
+      lastName
+      pictureUrl
+    }
+  }
+}
+  ''');

@@ -19,7 +19,7 @@ class HubRehearsalsScreen extends StatelessWidget {
     return GQLQueryContainer(
         query: getHubServices,
         variables: {'id': churchState.hubId},
-        defaultPageTitle: 'Hub Services',
+        defaultPageTitle: 'Hub Rehearsals',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
         bodyFunction: (data, [fetchMore]) {
           Widget body;

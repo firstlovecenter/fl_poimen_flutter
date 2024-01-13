@@ -1,6 +1,7 @@
 import 'package:poimen/screens/attendance/defaulters/service-attendance/council_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/campus_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/report/screen_rehearsal_report.dart';
 import 'package:poimen/screens/attendance/screen_hub_services.dart';
 import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
@@ -155,6 +156,7 @@ var appRoutes = {
   // Hub Attendance Screens
   '/rehearsal-meetings': (context) => const HubRehearsalsScreen(),
   '/rehearsalrecord/attendance-ticker': (context) => const HubAttendanceTickerScreen(),
+  '/rehearsalrecord/attendance-report': (context) => const HubAttendanceReportScreen(),
 
 // Attendance Defaulters
   '/constituency/service-attendance-defaulters': (context) =>
