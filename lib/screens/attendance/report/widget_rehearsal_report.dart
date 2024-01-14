@@ -55,8 +55,8 @@ class ChurchRehearsalsReport extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/${record.typename.toLowerCase()}-rehearsals', (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/rehearsal-meetings', (route) => false);
             },
             child: const Text('Go to Rehearsals List'),
           ),

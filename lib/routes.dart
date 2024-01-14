@@ -7,6 +7,7 @@ import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
+import 'package:poimen/screens/duties/imcl/screen_hub_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/prayer/council_completed_prayer.dart';
@@ -111,6 +112,7 @@ var appRoutes = {
   '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
   '/constituency-imcls': (context) => const ConstituencyIMCLScreen(),
+  '/hub-imcls': (context) => const HubIMCLScreen(),
 
   '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
   '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),

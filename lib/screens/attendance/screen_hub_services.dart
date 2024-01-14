@@ -20,7 +20,7 @@ class HubRehearsalsScreen extends StatelessWidget {
         query: getHubServices,
         variables: {'id': churchState.hubId},
         defaultPageTitle: 'Hub Rehearsals',
-        bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
+        bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 

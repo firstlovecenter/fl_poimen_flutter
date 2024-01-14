@@ -139,3 +139,40 @@ final recordReasonForMemberAbsence = gql('''
   }
 }
 ''');
+
+final getHubImcls = gql('''
+ query getHubIdls(\$id: ID!) {
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+      imcls {
+        id
+        typename
+        status
+        imclChecked
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+        missedChurchComments(options: { sort: [{ timestamp: DESC }], limit: 1 }) {
+          id
+          typename
+          timestamp
+          activity
+          comment
+          author {
+            id
+            typename
+            firstName
+            lastName
+            pictureUrl
+            phoneNumber
+            whatsappNumber
+          }
+        }
+      }
+    }
+  }
+''');

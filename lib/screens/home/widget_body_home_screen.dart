@@ -107,7 +107,8 @@ class HomeScreenBody extends StatelessWidget {
                   Role.leaderFellowship,
                   Role.leaderBacenta,
                   Role.leaderConstituency,
-                  Role.adminConstituency
+                  Role.adminConstituency,
+                  Role.leaderHub
                 ],
               );
             case 14:
