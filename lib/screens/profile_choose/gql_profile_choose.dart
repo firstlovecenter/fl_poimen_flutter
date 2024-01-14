@@ -55,6 +55,37 @@ final getUserRoles = gql('''
         typename
         name
       }
+
+      leadsHub {
+        id
+        typename
+        name
+      }
+      leadsHubCouncil {
+        id
+        typename
+        name
+      }
+      leadsMinistry {
+        id
+        typename
+        name
+      }
+      isAdminForMinistry {
+        id
+        typename
+        name
+      }
+      leadsCreativeArts {
+        id
+        typename
+        name
+      }
+      isAdminForCreativeArts {
+        id
+        typename
+        name
+      }
     }
   }
 ''');

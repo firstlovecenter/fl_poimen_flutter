@@ -1,9 +1,13 @@
 import 'package:poimen/screens/attendance/defaulters/service-attendance/council_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/campus_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
+import 'package:poimen/screens/attendance/report/screen_rehearsal_report.dart';
+import 'package:poimen/screens/attendance/screen_hub_services.dart';
+import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
+import 'package:poimen/screens/duties/imcl/screen_hub_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/prayer/council_completed_prayer.dart';
@@ -46,6 +50,7 @@ import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.da
 import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
+import 'package:poimen/screens/membership/screen_hub_list.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_spiritual_progresion.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_life_progression.dart';
 import 'package:poimen/screens/membership/upgrades/screen_update_life_progression.dart';
@@ -98,6 +103,7 @@ var appRoutes = {
   '/council-members': (context) => const CouncilMembershipScreen(),
   '/stream-members': (context) => const StreamMembershipScreen(),
   '/campus-members': (context) => const CampusMembershipScreen(),
+  '/hub-members': (context) => const HubMembershipScreen(),
 
   // Display IDL list for Fellowship Church Levels
   '/fellowship-idls': (context) => const FellowshipIDLScreen(),
@@ -106,6 +112,7 @@ var appRoutes = {
   '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
   '/constituency-imcls': (context) => const ConstituencyIMCLScreen(),
+  '/hub-imcls': (context) => const HubIMCLScreen(),
 
   '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
   '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),
@@ -147,6 +154,11 @@ var appRoutes = {
   '/bussingrecord-services': (context) => const SundayBussingScreen(),
   '/bussingrecord/attendance-ticker': (context) => const BussingRecordAttendanceTickerScreen(),
   '/bussingrecord/attendance-report': (context) => const BussingAttendanceReportScreen(),
+
+  // Hub Attendance Screens
+  '/rehearsal-meetings': (context) => const HubRehearsalsScreen(),
+  '/rehearsalrecord/attendance-ticker': (context) => const HubAttendanceTickerScreen(),
+  '/rehearsalrecord/attendance-report': (context) => const HubAttendanceReportScreen(),
 
 // Attendance Defaulters
   '/constituency/service-attendance-defaulters': (context) =>

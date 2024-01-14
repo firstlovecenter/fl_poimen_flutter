@@ -7,6 +7,10 @@ enum ChurchLevel {
   council,
   stream,
   campus,
+  hub,
+  hubCouncil,
+  ministry,
+  creativeArts
 }
 
 enum ChurchRole {
@@ -61,6 +65,21 @@ Role getRoleEnum(ChurchLevel churchLevel, ChurchRole role) {
     return Role.adminCampus;
   }
 
+  //* Creative Arts Roles
+  else if (churchLevel == ChurchLevel.hub && role == ChurchRole.leader) {
+    return Role.leaderHub;
+  } else if (churchLevel == ChurchLevel.hubCouncil && role == ChurchRole.leader) {
+    return Role.leaderHubCouncil;
+  } else if (churchLevel == ChurchLevel.ministry && role == ChurchRole.leader) {
+    return Role.leaderMinistry;
+  } else if (churchLevel == ChurchLevel.ministry && role == ChurchRole.admin) {
+    return Role.adminMinistry;
+  } else if (churchLevel == ChurchLevel.creativeArts && role == ChurchRole.leader) {
+    return Role.leaderCreativeArts;
+  } else if (churchLevel == ChurchLevel.creativeArts && role == ChurchRole.admin) {
+    return Role.adminCreativeArts;
+  }
+
   return Role.leaderFellowship;
 }
 
@@ -78,6 +97,14 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
       return ChurchLevel.stream;
     case 'campus':
       return ChurchLevel.campus;
+    case 'hub':
+      return ChurchLevel.hub;
+    case 'hubCouncil':
+      return ChurchLevel.hubCouncil;
+    case 'ministry':
+      return ChurchLevel.ministry;
+    case 'creativeArts':
+      return ChurchLevel.creativeArts;
     default:
       return ChurchLevel.fellowship;
   }
@@ -143,10 +170,16 @@ enum Role {
   leaderCouncil,
   leaderStream,
   leaderCampus,
+  leaderHub,
+  leaderHubCouncil,
+  leaderMinistry,
+  leaderCreativeArts,
   adminConstituency,
   adminCouncil,
   adminStream,
   adminCampus,
+  adminMinistry,
+  adminCreativeArts,
   all
 }
 

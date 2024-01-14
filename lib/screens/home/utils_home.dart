@@ -28,6 +28,20 @@ String parseRole(Role role) {
       return 'Campus Leader';
     case Role.adminCampus:
       return 'Campus Admin';
+
+    //* Creative Arts Roles
+    case Role.leaderHub:
+      return 'Hub Leader';
+    case Role.leaderHubCouncil:
+      return 'Hub Council Leader';
+    case Role.leaderMinistry:
+      return 'Ministry Leader';
+    case Role.adminMinistry:
+      return 'Ministry Admin';
+    case Role.leaderCreativeArts:
+      return 'Creative Arts Leader';
+    case Role.adminCreativeArts:
+      return 'Creative Arts Admin';
     default:
       return '';
   }
@@ -42,6 +56,8 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
     ChurchLevel.bacenta,
     ChurchLevel.constituency,
     ChurchLevel.council,
+    ChurchLevel.hub,
+    ChurchLevel.hubCouncil,
   ];
 
   if (!permittedLevels.contains(churchLevel)) {
@@ -82,6 +98,24 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
       icon: FontAwesomeIcons.userCheck,
       navKey: 'attendance',
       route: '/servicerecord-services',
+      permitted: [Role.values.byName('leader${level.properCase}')],
+    ),
+  ];
+}
+
+List<Widget> hubAttendanceLevels(ChurchLevel churchLevel) {
+  if (churchLevel != ChurchLevel.hub) {
+    return [Container()];
+  }
+
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return [
+    HomePageButton(
+      text: 'Rehearsal Attendance',
+      icon: FontAwesomeIcons.music,
+      navKey: 'rehearsal-attendance',
+      route: '/rehearsal-meetings',
       permitted: [Role.values.byName('leader${level.properCase}')],
     ),
   ];

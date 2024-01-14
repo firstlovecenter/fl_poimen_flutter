@@ -31,6 +31,12 @@ class Profile {
   List<ProfileChurch> isAdminForStream;
   List<ProfileChurch> leadsCampus;
   List<ProfileChurch> isAdminForCampus;
+  List<ProfileChurch> leadsHub;
+  List<ProfileChurch> leadsHubCouncil;
+  List<ProfileChurch> leadsMinistry;
+  List<ProfileChurch> isAdminForMinistry;
+  List<ProfileChurch> leadsCreativeArts;
+  List<ProfileChurch> isAdminForCreativeArts;
 
   Profile({
     required this.id,
@@ -46,6 +52,12 @@ class Profile {
     required this.isAdminForStream,
     required this.leadsCampus,
     required this.isAdminForCampus,
+    required this.leadsHub,
+    required this.leadsHubCouncil,
+    required this.leadsMinistry,
+    required this.isAdminForMinistry,
+    required this.leadsCreativeArts,
+    required this.isAdminForCreativeArts,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);

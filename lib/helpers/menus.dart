@@ -30,6 +30,14 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
             'navKey': 'attendance'
           }
         : null,
+    churchLevel == ChurchLevel.hub
+        ? {
+            'title': 'Rehearsals',
+            'icon': FontAwesomeIcons.userCheck,
+            'route': '/rehearsal-meetings',
+            'navKey': 'rehearsal-attendance'
+          }
+        : null,
     churchLevel == ChurchLevel.fellowship
         ? {
             'title': 'IDLs',
@@ -63,6 +71,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
     [
       ChurchLevel.fellowship,
       ChurchLevel.bacenta,
+      ChurchLevel.hub,
     ].contains(churchLevel)
         ? {
             'title': 'IMCLs',

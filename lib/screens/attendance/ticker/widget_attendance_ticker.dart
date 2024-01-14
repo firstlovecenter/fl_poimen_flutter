@@ -116,6 +116,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
 
                   widget.tickerMutation.runMutation({
                     'fellowshipId': churchState.fellowshipId,
+                    'hubId': churchState.hubId,
                     'presentMembers': _presentMembers,
                     'absentMembers': absentMembers,
                     'recordId': recordId,

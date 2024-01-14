@@ -40,6 +40,18 @@ class ProfileCard extends StatelessWidget {
           } else if (church.typename == 'Campus') {
             userState.role = getRoleEnum(ChurchLevel.campus, convertToRoleEnum(role));
             userState.campusId = church.id;
+          } else if (church.typename == 'Hub') {
+            userState.role = getRoleEnum(ChurchLevel.hub, convertToRoleEnum(role));
+            userState.hubId = church.id;
+          } else if (church.typename == 'HubCouncil') {
+            userState.role = getRoleEnum(ChurchLevel.hubCouncil, convertToRoleEnum(role));
+            userState.hubCouncilId = church.id;
+          } else if (church.typename == 'Ministry') {
+            userState.role = getRoleEnum(ChurchLevel.ministry, convertToRoleEnum(role));
+            userState.ministryId = church.id;
+          } else if (church.typename == 'CreativeArts') {
+            userState.role = getRoleEnum(ChurchLevel.creativeArts, convertToRoleEnum(role));
+            userState.creativeArtsId = church.id;
           }
 
           Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
@@ -89,5 +101,6 @@ _getRoleImage(String level) {
       return 'assets/images/profile-choose/campus-admin.jpg';
 
     default:
+      return 'assets/images/profile-choose/campus-admin.jpg';
   }
 }

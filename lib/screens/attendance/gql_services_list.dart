@@ -10,7 +10,7 @@ final getFellowshipServices = gql('''
         id
         typename
         attendance
-        markedAttendance(fellowshipId: \$id)
+        markedAttendance(churchId: \$id)
         serviceDate {
             date
          } 
@@ -29,7 +29,7 @@ final getSundayBussing = gql('''
           id
           typename
           attendance
-          markedAttendance(fellowshipId: \$id)
+          markedAttendance(churchId: \$id)
           serviceDate {
             date
          } 
@@ -37,3 +37,22 @@ final getSundayBussing = gql('''
       }
     }
     ''');
+
+final getHubServices = gql('''
+ query getHubServices(\$id: ID!) {
+    hubs(where: { id: \$id }) {
+      id
+      typename
+      name
+      services(limit: 10) {
+        id
+        typename
+        attendance
+        markedAttendance(churchId: \$id)
+        serviceDate {
+            date
+         } 
+      }
+    }
+  }
+  ''');

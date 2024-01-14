@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/gql_profile_choose.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
@@ -6,6 +8,7 @@ import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 bool currentVersionValid(minimumVersion, currentVersion) {
   int majorMinimumVersion = int.parse(minimumVersion.split('.')[0]);
@@ -54,7 +57,32 @@ class ProfileChooseScreen extends StatelessWidget {
               children: [
                 const Text('Please update your app to the latest version'),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    String url = '';
+                    if (Platform.isAndroid) {
+                      url =
+                          'https://play.google.com/store/apps/details?id=io.firstlovecenter.poimen';
+                    } else if (Platform.isIOS) {
+                      url = 'https://apps.apple.com/gh/app/flc-poimen/id6443637787';
+                    }
+                    final Uri launchUri = Uri.parse(url);
+
+                    if (await canLaunchUrl(launchUri)) {
+                      final bool nativeAppLaunchSucceeded = await launchUrl(
+                        launchUri,
+                        mode: LaunchMode.externalNonBrowserApplication,
+                      );
+
+                      if (!nativeAppLaunchSucceeded) {
+                        await launchUrl(
+                          launchUri,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      }
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
                   child: const Text('Update'),
                 ),
               ],

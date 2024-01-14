@@ -73,13 +73,7 @@ class HomeScreenBody extends StatelessWidget {
                 children: attendanceLevels(churchLevel),
               );
             case 7:
-              return HomePageButton(
-                text: 'First Timers and New Converts',
-                icon: FontAwesomeIcons.userPlus,
-                navKey: 'idls',
-                route: '/$levelForUrl-idls',
-                permitted: const [Role.leaderFellowship],
-              );
+              return Column(children: hubAttendanceLevels(churchLevel));
             case 8:
               return HomePageButton(
                 text: 'Membership List',
@@ -113,7 +107,8 @@ class HomeScreenBody extends StatelessWidget {
                   Role.leaderFellowship,
                   Role.leaderBacenta,
                   Role.leaderConstituency,
-                  Role.adminConstituency
+                  Role.adminConstituency,
+                  Role.leaderHub
                 ],
               );
             case 14:

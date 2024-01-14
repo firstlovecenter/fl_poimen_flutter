@@ -114,6 +114,64 @@ final getCampusHomeScreen = gql('''
   }
 ''');
 
+final getHubHomeScreen = gql('''
+  query getHubHomeScreen(\$id: ID!){
+    hubs(where: {id: \$id}){
+      id
+      typename
+      name
+      imclTotal
+      currentPastoralCycle {
+        id
+        typename
+        startDate
+        endDate
+        numberOfDays
+      }
+    }
+  }
+''');
+
+final getHubCouncilHomeScreen = gql('''
+  query getHubCouncilHomeScreen(\$id: ID!){
+    hubCouncils(where: {id: \$id}){
+      id
+      typename
+      name
+      imclTotal
+      currentPastoralCycle {
+        id
+        typename
+        startDate
+        endDate
+        numberOfDays
+      }
+    }
+  }
+''');
+
+final getMinistryHomeScreen = gql('''
+  query getMinistryHomeScreen(\$id: ID!){
+    ministries(where: {id: \$id}){
+      id
+      typename
+      name
+      imclTotal
+    }
+  }
+''');
+
+final getCreativeArtsHomeScreen = gql('''
+  query getCreativeArtsHomeScreen(\$id: ID!){
+    creativeArts(where: {id: \$id}){
+      id
+      typename
+      name
+      imclTotal
+    }
+  }
+''');
+
 final getBacentaPastoralCycle = gql('''
  mutation getBacentaPastoralCycle {
   currentBacentaPastoralCycle {

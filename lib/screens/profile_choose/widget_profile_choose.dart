@@ -66,6 +66,9 @@ class ProfileChooseWidget extends StatelessWidget {
                 ...user.isAdminForCampus.map((church) {
                   return ProfileCard(church: church, role: 'Admin');
                 }).toList(),
+                ...user.leadsHub.map((church) {
+                  return ProfileCard(church: church, role: 'Leader');
+                }).toList(),
               ],
             ),
           ),
