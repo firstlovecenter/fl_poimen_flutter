@@ -14,7 +14,7 @@ final recordMembershipAttendance = gql('''
     recordId: \$recordId
   ) {
     id
-    markedAttendance(fellowshipId: \$fellowshipId)
+    markedAttendance(churchId: \$fellowshipId)
     membersPresent {
       id
       firstName
