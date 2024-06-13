@@ -18,7 +18,7 @@ var lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.only(top: 13, bottom: 13),
-      backgroundColor: PoimenTheme.brand,
+      // backgroundColor: PoimenTheme.brand,
       textStyle: const TextStyle(fontSize: 18),
     ),
   ),
@@ -40,7 +40,7 @@ var lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
     primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
-  ).copyWith(background: const Color(0x00242424)),
+  ).copyWith(surface: const Color(0x00242424)),
 );
 
 var darkTheme = ThemeData(
@@ -59,8 +59,8 @@ var darkTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       padding: const EdgeInsets.only(top: 13, bottom: 13),
-      backgroundColor: PoimenTheme.brand,
-      textStyle: const TextStyle(fontSize: 18),
+      // backgroundColor: PoimenTheme.brand,
+      textStyle: const TextStyle(fontSize: 18, color: Colors.white),
     ),
   ),
   iconTheme: IconThemeData(
@@ -81,6 +81,6 @@ var darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),
   ).copyWith(
-    background: const Color(0x00242424),
+    surface: const Color(0x00242424),
   ),
 );
