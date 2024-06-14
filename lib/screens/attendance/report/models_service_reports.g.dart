@@ -6,10 +6,10 @@ part of 'models_service_reports.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MemberForListWithFellowship _$MemberForListWithFellowshipFromJson(
+MemberForListWithBacenta _$MemberForListWithBacentaFromJson(
         Map<String, dynamic> json) =>
-    MemberForListWithFellowship(
-      fellowship: Church.fromJson(json['fellowship'] as Map<String, dynamic>),
+    MemberForListWithBacenta(
+      bacenta: Church.fromJson(json['bacenta'] as Map<String, dynamic>),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -21,8 +21,8 @@ MemberForListWithFellowship _$MemberForListWithFellowshipFromJson(
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String;
 
-Map<String, dynamic> _$MemberForListWithFellowshipToJson(
-        MemberForListWithFellowship instance) =>
+Map<String, dynamic> _$MemberForListWithBacentaToJson(
+        MemberForListWithBacenta instance) =>
     <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
@@ -33,7 +33,7 @@ Map<String, dynamic> _$MemberForListWithFellowshipToJson(
       'pictureUrl': instance.pictureUrl,
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
-      'fellowship': instance.fellowship,
+      'bacenta': instance.bacenta,
     };
 
 ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) =>
@@ -45,21 +45,21 @@ ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) =>
       membersPicture: (json['membersPicture'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      membersPresentFromFellowship:
-          (json['membersPresentFromFellowship'] as List<dynamic>)
+      membersPresentFromBacenta:
+          (json['membersPresentFromBacenta'] as List<dynamic>)
               .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
               .toList(),
-      membersAbsentFromFellowship:
-          (json['membersAbsentFromFellowship'] as List<dynamic>)
+      membersAbsentFromBacenta:
+          (json['membersAbsentFromBacenta'] as List<dynamic>)
               .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))
               .toList(),
       membersAbsent: (json['membersAbsent'] as List<dynamic>)
           .map((e) =>
-              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
           .toList(),
       membersPresent: (json['membersPresent'] as List<dynamic>)
           .map((e) =>
-              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -69,8 +69,8 @@ Map<String, dynamic> _$ServicesForReportToJson(ServicesForReport instance) =>
       'typename': instance.typename,
       'serviceDate': instance.serviceDate,
       'membersPicture': instance.membersPicture,
-      'membersPresentFromFellowship': instance.membersPresentFromFellowship,
-      'membersAbsentFromFellowship': instance.membersAbsentFromFellowship,
+      'membersPresentFromBacenta': instance.membersPresentFromBacenta,
+      'membersAbsentFromBacenta': instance.membersAbsentFromBacenta,
       'membersPresent': instance.membersPresent,
       'membersAbsent': instance.membersAbsent,
     };
@@ -86,11 +86,11 @@ RehearsalsForReport _$RehearsalsForReportFromJson(Map<String, dynamic> json) =>
           .toList(),
       membersAbsent: (json['membersAbsent'] as List<dynamic>)
           .map((e) =>
-              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
           .toList(),
       membersPresent: (json['membersPresent'] as List<dynamic>)
           .map((e) =>
-              MemberForListWithFellowship.fromJson(e as Map<String, dynamic>))
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
           .toList(),
       membersAbsentFromHub: (json['membersAbsentFromHub'] as List<dynamic>)
           .map((e) => MemberForList.fromJson(e as Map<String, dynamic>))

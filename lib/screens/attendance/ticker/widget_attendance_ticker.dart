@@ -115,7 +115,7 @@ class _AttendanceTickerScreenState extends State<AttendanceTickerScreen> {
                       membership.where((member) => !_presentMembers.contains(member)).toList();
 
                   widget.tickerMutation.runMutation({
-                    'fellowshipId': churchState.fellowshipId,
+                    'bacentaId': churchState.bacentaId,
                     'hubId': churchState.hubId,
                     'presentMembers': _presentMembers,
                     'absentMembers': absentMembers,

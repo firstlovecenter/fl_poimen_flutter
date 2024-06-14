@@ -42,12 +42,12 @@ import 'package:poimen/screens/attendance/defaulters/screen_constituency_default
 import 'package:poimen/screens/attendance/defaulters/screen_council_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.dart';
 import 'package:poimen/screens/attendance/defaulters/screen_campus_defaulters.dart';
-import 'package:poimen/screens/attendance/report/screen_fellowship_report.dart';
+import 'package:poimen/screens/attendance/report/screen_bacenta_report.dart';
 import 'package:poimen/screens/attendance/report/screen_sunday_bussing_report.dart';
 import 'package:poimen/screens/attendance/screen_sunday_bussing.dart';
-import 'package:poimen/screens/attendance/screen_fellowship_services.dart';
+import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.dart';
-import 'package:poimen/screens/attendance/ticker/screen_fellowship_ticker.dart';
+import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
 import 'package:poimen/screens/membership/screen_hub_list.dart';
@@ -147,8 +147,8 @@ var appRoutes = {
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens
   '/servicerecord-services': (context) => const FellowshipServicesScreen(),
-  '/servicerecord/attendance-ticker': (context) => const FellowshipAttendanceTickerScreen(),
-  '/servicerecord/attendance-report': (context) => const FellowshipAttendanceReportScreen(),
+  '/servicerecord/attendance-ticker': (context) => const BacentaAttendanceTickerScreen(),
+  '/servicerecord/attendance-report': (context) => const BacentaAttendanceReportScreen(),
 
   // Bacenta Attendance Screens
   '/bussingrecord-services': (context) => const SundayBussingScreen(),

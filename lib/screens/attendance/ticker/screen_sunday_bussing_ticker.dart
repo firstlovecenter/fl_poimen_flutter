@@ -20,16 +20,16 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getFellowshipMembersForBussing,
+        query: getBacentaMembersForBussing,
         variables: {
-          'id': churchState.fellowshipId,
+          'id': churchState.bacentaId,
           'bussingRecordId': churchState.bussingRecordId,
         },
-        defaultPageTitle: 'Tick Fellowship Membership Attendance',
+        defaultPageTitle: 'Tick Bacenta Membership Attendance',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
+          final bacenta = ChurchForMemberListByCategory.fromJson(data?['bacentas'][0]);
           final service = ServiceWithPicture.fromJson(data?['bussingRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -92,7 +92,7 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
 
           body = AttendanceTickerScreen(
             category: ServiceCategory.bussing,
-            church: fellowship,
+            church: bacenta,
             service: service,
             tickerMutation: attendanceMutation,
           );
@@ -100,7 +100,7 @@ class BussingRecordAttendanceTickerScreen extends StatelessWidget {
           var returnValues = GQLQueryContainerReturnValue(
               pageTitle: PageTitle(
                 pageTitle: 'Tick Membership Attendance',
-                church: fellowship,
+                church: bacenta,
               ),
               body: body);
 

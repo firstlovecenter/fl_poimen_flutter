@@ -51,7 +51,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
           );
         } else if (widget.infiniteScroll != true && (result.isLoading || result.data == null)) {
           body = const LoadingScreen();
-        } else {
+      } else {
           GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);
 
           pageTitle = res.pageTitle;

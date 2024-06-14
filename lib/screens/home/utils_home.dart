@@ -79,7 +79,7 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
 }
 
 List<Widget> attendanceLevels(ChurchLevel churchLevel) {
-  if (churchLevel != ChurchLevel.fellowship) {
+  if (churchLevel != ChurchLevel.bacenta) {
     return [Container()];
   }
 

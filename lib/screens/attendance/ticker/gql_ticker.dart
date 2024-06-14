@@ -2,19 +2,19 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 final recordMembershipAttendance = gql('''
  mutation RecordMembershipAttendance(
-  \$fellowshipId: ID!
+  \$bacentaId: ID!
   \$presentMembers: [ID!]!
   \$absentMembers: [ID!]!
   \$recordId: ID!
 ) {
   RecordMembershipAttendance(
-    fellowshipId: \$fellowshipId
+    bacentaId: \$bacentaId
     presentMembers: \$presentMembers
     absentMembers: \$absentMembers
     recordId: \$recordId
   ) {
     id
-    markedAttendance(churchId: \$fellowshipId)
+    markedAttendance(churchId: \$bacentaId)
     membersPresent {
       id
       firstName

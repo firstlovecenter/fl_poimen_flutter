@@ -1,59 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getFellowshipMembers = gql('''
-   query getFellowshipMembers(\$id: ID!, \$serviceRecordId: ID) {
-    serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
-      id
-      typename
-      membersPicture
-      serviceDate {
-        date
-      }
-    }
-    fellowships(where: { id: \$id }) {
-      id
-      typename
-      name
-
-      sheep {
-        id
-        typename
-        lost 
-        firstName
-        lastName
-        fullName
-        pictureUrl
-        phoneNumber
-        whatsappNumber
-      }
-      goats {
-        id
-        typename
-        lost 
-        firstName
-        lastName
-        fullName
-        pictureUrl
-        phoneNumber
-        whatsappNumber
-      }
-      deer {
-        id
-        typename
-        lost 
-        firstName
-        lastName
-        fullName
-        pictureUrl
-        phoneNumber
-        whatsappNumber
-      }
-    }
-  }
-''');
-
-final getFellowshipMembersForBussing = gql('''
-   query getFellowshipMembersForBussing(\$id: ID!, \$bussingRecordId: ID) {
+final getBacentaMembersForBussing = gql('''
+   query getBacentaMembersForBussing(\$id: ID!, \$bussingRecordId: ID) {
     bussingRecords(where: { id: \$bussingRecordId }, options: { limit: 1 }) {
       id
       typename
@@ -62,7 +10,7 @@ final getFellowshipMembersForBussing = gql('''
         date
       }
     }
-    fellowships (where: { id: \$id }) {
+    bacentas (where: { id: \$id }) {
       id
       typename
       name

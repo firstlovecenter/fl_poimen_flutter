@@ -16,25 +16,25 @@ class BussingAttendanceReportScreen extends StatelessWidget {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getFellowshipBussingReport,
+        query: getBacentaBussingReport,
         variables: {
-          'fellowshipId': churchState.fellowshipId,
+          'bacentaId': churchState.bacentaId,
           'bussingRecordId': churchState.bussingRecordId,
         },
-        defaultPageTitle: 'Fellowship Attendance Report',
+        defaultPageTitle: 'Bacenta Attendance Report',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = Church.fromJson(data?['fellowships'][0]);
+          final bacenta = Church.fromJson(data?['bacentas'][0]);
           final bussingRecord = ServicesForReport.fromJson(data?['bussingRecords'][0]);
 
           body = ChurchServicesReport(
-            church: fellowship,
+            church: bacenta,
             record: bussingRecord,
           );
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: fellowship),
+            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: bacenta),
             body: body,
           );
         });

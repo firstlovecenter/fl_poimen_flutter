@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getFellowshipServices = gql('''
- query getFellowshipServices(\$id: ID!) {
-    fellowships(where: { id: \$id }) {
+final getBacentaServices = gql('''
+ query getBacentaServices(\$id: ID!) {
+    bacentas(where: { id: \$id }) {
       id
       typename
       name
@@ -21,7 +21,7 @@ final getFellowshipServices = gql('''
 
 final getSundayBussing = gql('''
   query getSundayBussing(\$id: ID!) {
-      fellowships(where: { id: \$id }) {
+      bacentas(where: { id: \$id }) {
         id
         typename
         name

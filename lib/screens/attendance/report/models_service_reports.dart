@@ -4,11 +4,11 @@ import 'package:poimen/screens/membership/models_membership.dart';
 part 'models_service_reports.g.dart';
 
 @JsonSerializable()
-class MemberForListWithFellowship extends MemberForList {
-  Church fellowship;
+class MemberForListWithBacenta extends MemberForList {
+  Church bacenta;
 
-  MemberForListWithFellowship({
-    required this.fellowship,
+  MemberForListWithBacenta({
+    required this.bacenta,
   }) : super(
           id: '',
           typename: '',
@@ -20,10 +20,10 @@ class MemberForListWithFellowship extends MemberForList {
           whatsappNumber: '',
         );
 
-  factory MemberForListWithFellowship.fromJson(Map<String, dynamic> json) =>
-      _$MemberForListWithFellowshipFromJson(json);
+  factory MemberForListWithBacenta.fromJson(Map<String, dynamic> json) =>
+      _$MemberForListWithBacentaFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$MemberForListWithFellowshipToJson(this);
+  Map<String, dynamic> toJson() => _$MemberForListWithBacentaToJson(this);
 }
 
 @JsonSerializable()
@@ -32,18 +32,18 @@ class ServicesForReport {
   String typename = '';
   TimeGraph serviceDate = TimeGraph();
   List<String> membersPicture = [];
-  List<MemberForList> membersPresentFromFellowship = [];
-  List<MemberForList> membersAbsentFromFellowship = [];
-  List<MemberForListWithFellowship> membersPresent = [];
-  List<MemberForListWithFellowship> membersAbsent = [];
+  List<MemberForList> membersPresentFromBacenta = [];
+  List<MemberForList> membersAbsentFromBacenta = [];
+  List<MemberForListWithBacenta> membersPresent = [];
+  List<MemberForListWithBacenta> membersAbsent = [];
 
   ServicesForReport({
     required this.id,
     required this.typename,
     required this.serviceDate,
     required this.membersPicture,
-    required this.membersPresentFromFellowship,
-    required this.membersAbsentFromFellowship,
+    required this.membersPresentFromBacenta,
+    required this.membersAbsentFromBacenta,
     required this.membersAbsent,
     required this.membersPresent,
   });
@@ -59,8 +59,8 @@ class RehearsalsForReport {
   String typename = '';
   TimeGraph serviceDate = TimeGraph();
   List<String> membersPicture = [];
-  List<MemberForListWithFellowship> membersAbsent = [];
-  List<MemberForListWithFellowship> membersPresent = [];
+  List<MemberForListWithBacenta> membersAbsent = [];
+  List<MemberForListWithBacenta> membersPresent = [];
   List<MemberForList> membersAbsentFromHub = [];
   List<MemberForList> membersPresentFromHub = [];
 

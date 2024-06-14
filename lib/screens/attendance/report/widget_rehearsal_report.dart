@@ -72,7 +72,7 @@ class _ShowMembers extends StatelessWidget {
   const _ShowMembers({Key? key, required this.members, required this.title, required this.status})
       : super(key: key);
 
-  final List<MemberForListWithFellowship> members;
+  final List<MemberForListWithBacenta> members;
   final String title;
   final AttendanceStatus status;
 
@@ -90,7 +90,7 @@ class _ShowMembers extends StatelessWidget {
             ),
           ),
           ...members.map((member) {
-            return memberTile(context, member, member.fellowship);
+            return memberTile(context, member, member.bacenta);
           }).toList()
         ],
       ),

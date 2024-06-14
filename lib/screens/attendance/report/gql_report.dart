@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getFellowshipServiceReport = gql('''
-query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
-    fellowships(where: { id: \$fellowshipId }) {
+final getBacentaServiceReport = gql('''
+query getBacentaServiceReport(\$serviceRecordId: ID!, \$bacentaId: ID!) {
+    bacentas(where: { id: \$bacentaId }) {
       id
       typename
       name
@@ -24,7 +24,7 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name
@@ -40,13 +40,13 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name
         }
       }
-      membersPresentFromFellowship(id: \$fellowshipId) {
+      membersPresentFromBacenta(id: \$bacentaId) {
         id
         status
         typename
@@ -57,7 +57,7 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
         whatsappNumber
         pictureUrl
       }
-      membersAbsentFromFellowship(id: \$fellowshipId) {
+      membersAbsentFromBacenta(id: \$bacentaId) {
         id
         status
         typename
@@ -72,9 +72,9 @@ query getFellowshipServiceReport(\$serviceRecordId: ID!, \$fellowshipId: ID!) {
   }
   ''');
 
-final getFellowshipBussingReport = gql('''
-query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
-    fellowships(where: { id: \$fellowshipId }) {
+final getBacentaBussingReport = gql('''
+query getBacentaBussingReport(\$bussingRecordId: ID!, \$bacentaId: ID!) {
+    bacentas(where: { id: \$bacentaId }) {
       id
       typename
       name
@@ -96,7 +96,7 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name
@@ -112,13 +112,13 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name
         }
       }
-      membersPresentFromFellowship(id: \$fellowshipId) {
+      membersPresentFromBacenta(id: \$bacentaId) {
         id
         status
         typename
@@ -129,7 +129,7 @@ query getFellowshipBussingReport(\$bussingRecordId: ID!, \$fellowshipId: ID!) {
         whatsappNumber
         pictureUrl
       }
-      membersAbsentFromFellowship(id: \$fellowshipId) {
+      membersAbsentFromBacenta(id: \$bacentaId) {
         id
         status
         typename
@@ -168,7 +168,7 @@ query getHubRehearsalReport(\$rehearsalRecordId: ID!, \$hubId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name
@@ -184,7 +184,7 @@ query getHubRehearsalReport(\$rehearsalRecordId: ID!, \$hubId: ID!) {
         phoneNumber
         whatsappNumber
         pictureUrl
-        fellowship {
+        bacenta {
           id
           typename
           name

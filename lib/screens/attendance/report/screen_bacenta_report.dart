@@ -8,30 +8,30 @@ import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class FellowshipAttendanceReportScreen extends StatelessWidget {
-  const FellowshipAttendanceReportScreen({Key? key}) : super(key: key);
+class BacentaAttendanceReportScreen extends StatelessWidget {
+  const BacentaAttendanceReportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getFellowshipServiceReport,
+        query: getBacentaServiceReport,
         variables: {
-          'fellowshipId': churchState.fellowshipId,
+          'bacentaId': churchState.bacentaId,
           'serviceRecordId': churchState.serviceRecordId,
         },
-        defaultPageTitle: 'Fellowship Attendance Report',
+        defaultPageTitle: 'Bacenta Attendance Report',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = Church.fromJson(data?['fellowships'][0]);
+          final bacenta = Church.fromJson(data?['bacentas'][0]);
 
           if (data?['serviceRecords'].isEmpty) {
             body = const Center(child: Text('No Service Records'));
 
             return GQLQueryContainerReturnValue(
-              pageTitle: PageTitle(pageTitle: 'Attendance Report', church: fellowship),
+              pageTitle: PageTitle(pageTitle: 'Attendance Report', church: bacenta),
               body: body,
             );
           }
@@ -39,12 +39,12 @@ class FellowshipAttendanceReportScreen extends StatelessWidget {
           final serviceRecord = ServicesForReport.fromJson(data?['serviceRecords'][0]);
 
           body = ChurchServicesReport(
-            church: fellowship,
+            church: bacenta,
             record: serviceRecord,
           );
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: fellowship),
+            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: bacenta),
             body: body,
           );
         });

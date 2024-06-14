@@ -17,19 +17,19 @@ class FellowshipServicesScreen extends StatelessWidget {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getFellowshipServices,
-        variables: {'id': churchState.fellowshipId},
-        defaultPageTitle: 'Fellowship Services',
+        query: getBacentaServices,
+        variables: {'id': churchState.bacentaId},
+        defaultPageTitle: 'Bacenta Services',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForServicesList.fromJson(data?['fellowships'][0]);
+          final bacenta = ChurchForServicesList.fromJson(data?['bacentas'][0]);
 
-          body = ChurchServicesList(services: fellowship.services);
+          body = ChurchServicesList(services: bacenta.services);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Services', church: fellowship),
+            pageTitle: PageTitle(pageTitle: 'Recent Services', church: bacenta),
             body: body,
           );
         });

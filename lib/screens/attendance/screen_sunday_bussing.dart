@@ -18,13 +18,13 @@ class SundayBussingScreen extends StatelessWidget {
 
     return GQLQueryContainer(
         query: getSundayBussing,
-        variables: {'id': churchState.fellowshipId},
+        variables: {'id': churchState.bacentaId},
         defaultPageTitle: 'Recent Bussing',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForBussingList.fromJson(data?['fellowships'][0]);
+          final fellowship = ChurchForBussingList.fromJson(data?['bacentas'][0]);
 
           body = ChurchServicesList(services: fellowship.bussing);
 

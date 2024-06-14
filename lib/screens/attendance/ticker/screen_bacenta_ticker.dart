@@ -12,24 +12,24 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class FellowshipAttendanceTickerScreen extends StatelessWidget {
-  const FellowshipAttendanceTickerScreen({Key? key}) : super(key: key);
+class BacentaAttendanceTickerScreen extends StatelessWidget {
+  const BacentaAttendanceTickerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getFellowshipMembers,
+        query: getBacentaMembers,
         variables: {
-          'id': churchState.fellowshipId,
+          'id': churchState.bacentaId,
           'serviceRecordId': churchState.serviceRecordId,
         },
-        defaultPageTitle: 'Tick Fellowship Membership Attendance',
+        defaultPageTitle: 'Tick Bacenta Membership Attendance',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForMemberListByCategory.fromJson(data?['fellowships'][0]);
+          final bacenta = ChurchForMemberListByCategory.fromJson(data?['bacentas'][0]);
           final service = ServiceWithPicture.fromJson(data?['serviceRecords'][0]);
 
           final attendanceMutation = useMutation(
@@ -92,7 +92,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
 
           body = AttendanceTickerScreen(
             category: ServiceCategory.service,
-            church: fellowship,
+            church: bacenta,
             service: service,
             tickerMutation: attendanceMutation,
           );
@@ -100,7 +100,7 @@ class FellowshipAttendanceTickerScreen extends StatelessWidget {
           var returnValues = GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
               pageTitle: 'Tick Membership Attendance',
-              church: fellowship,
+              church: bacenta,
             ),
             body: body,
           );
