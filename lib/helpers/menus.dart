@@ -14,7 +14,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
 
   return [
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
-    churchLevel == ChurchLevel.fellowship
+    churchLevel == ChurchLevel.bacenta
         ? {
             'title': 'Sunday',
             'icon': FontAwesomeIcons.busSimple,
@@ -22,7 +22,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
             'navKey': 'attendance'
           }
         : null,
-    churchLevel == ChurchLevel.fellowship
+    churchLevel == ChurchLevel.bacenta
         ? {
             'title': 'Weekday',
             'icon': FontAwesomeIcons.userCheck,
@@ -38,7 +38,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
             'navKey': 'rehearsal-attendance'
           }
         : null,
-    churchLevel == ChurchLevel.fellowship
+    churchLevel == ChurchLevel.bacenta
         ? {
             'title': 'IDLs',
             'icon': FontAwesomeIcons.userPlus,
@@ -69,7 +69,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
   return [
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
     [
-      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
       ChurchLevel.bacenta,
       ChurchLevel.hub,
     ].contains(churchLevel)
@@ -81,7 +81,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
           }
         : null,
     [
-      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)
@@ -93,7 +93,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
           }
         : null,
     [
-      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)
@@ -105,7 +105,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
           }
         : null,
     [
-      ChurchLevel.fellowship,
+      ChurchLevel.bacenta,
       ChurchLevel.constituency,
       ChurchLevel.council,
     ].contains(churchLevel)

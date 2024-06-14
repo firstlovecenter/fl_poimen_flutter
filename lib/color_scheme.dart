@@ -30,13 +30,13 @@ var lightTheme = ThemeData(
     selectedItemColor: PoimenTheme.brand,
     unselectedItemColor: Colors.grey,
   ),
-  // appBarTheme: AppBarTheme(
-  //   color: colorFromHex("#FDFDFD"),
-  //   elevation: 0,
-  //   iconTheme: IconThemeData(
-  //     color: PoimenTheme.brand,
-  //   ),
-  // ),
+  appBarTheme: AppBarTheme(
+    color: colorFromHex("#FDFDFD"),
+    elevation: 0,
+    iconTheme: IconThemeData(
+      color: PoimenTheme.brand,
+    ),
+  ),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
     primarySwatch: MaterialColor(PoimenTheme.brand.value, PoimenTheme.brands),

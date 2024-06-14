@@ -50,7 +50,15 @@ final getBacentaMembersForBussing = gql('''
 ''');
 
 final getBacentaMembers = gql('''
-   query getBacentaMembers(\$id: ID!) {
+   query getBacentaMembers(\$id: ID!, \$serviceRecordId: ID) {
+    serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
+      id
+      typename
+      membersPicture
+      serviceDate {
+        date
+      }
+    }
     bacentas (where: { id: \$id }) {
       id
       typename

@@ -92,7 +92,7 @@ class Member extends MemberForList {
   Gender gender = Gender();
   TimeGraph dob = TimeGraph();
   Church council;
-  Church fellowship;
+  Church bacenta;
   Church? ministry;
   List<PastoralComments>? pastoralComments = [];
 
@@ -101,7 +101,7 @@ class Member extends MemberForList {
       required this.dob,
       required this.council,
       required this.ministry,
-      required this.fellowship,
+      required this.bacenta,
       this.pastoralComments})
       : super(
           id: '',

@@ -245,25 +245,25 @@ class MemberDetailsScreen extends StatelessWidget {
                 style: PoimenTheme.heading2,
               ),
               BioDetailsCard(title: 'Council', detail: member.council.name),
-              BioDetailsCard(title: 'Fellowship', detail: member.fellowship.name),
-              if (member.fellowship.leader != null && member.fellowship.leader!.id != member.id)
+              BioDetailsCard(title: 'Bacenta', detail: member.bacenta.name),
+              if (member.bacenta.leader != null && member.bacenta.leader!.id != member.id)
                 InkWell(
                   onTap: () {
-                    state.memberId = member.fellowship.leader!.id;
+                    state.memberId = member.bacenta.leader!.id;
                     Navigator.pushNamed(
                       context,
                       '/member-details',
-                      arguments: member.fellowship.leader,
+                      arguments: member.bacenta.leader,
                     );
                   },
                   child: BioDetailsCard(
-                      title: 'Fellowship Leader',
+                      title: 'Bacenta Leader',
                       detail:
-                          '${member.fellowship.leader!.firstName} ${member.fellowship.leader!.lastName}',
-                      phoneNumber: member.fellowship.leader!.phoneNumber,
+                          '${member.bacenta.leader!.firstName} ${member.bacenta.leader!.lastName}',
+                      phoneNumber: member.bacenta.leader!.phoneNumber,
                       whatsAppInfo: WhatsAppInfo(
-                          firstName: member.fellowship.leader!.firstName,
-                          number: member.fellowship.leader!.whatsappNumber)),
+                          firstName: member.bacenta.leader!.firstName,
+                          number: member.bacenta.leader!.whatsappNumber)),
                 )
               else
                 Container(),

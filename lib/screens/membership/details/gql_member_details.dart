@@ -61,7 +61,7 @@ final getMemberDetails = gql('''
         }
         activity
       }
-      fellowship {
+      bacenta{
         id
         typename
         name

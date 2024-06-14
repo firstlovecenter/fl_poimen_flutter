@@ -6,7 +6,6 @@ import 'package:poimen/screens/attendance/screen_hub_services.dart';
 import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
-import 'package:poimen/screens/duties/imcl/screen_fellowship_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_hub_imcls.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
@@ -54,7 +53,7 @@ import 'package:poimen/screens/membership/screen_hub_list.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_spiritual_progresion.dart';
 import 'package:poimen/screens/membership/upgrades/screen_member_life_progression.dart';
 import 'package:poimen/screens/membership/upgrades/screen_update_life_progression.dart';
-import 'package:poimen/screens/membership/idl/screen_fellowship_idls.dart';
+import 'package:poimen/screens/membership/idl/screen_bacenta_idls.dart';
 import 'package:poimen/screens/membership/screen_bacenta_list.dart';
 import 'package:poimen/screens/membership/screen_constituency_list.dart';
 import 'package:poimen/screens/membership/screen_council_list.dart';
@@ -106,10 +105,9 @@ var appRoutes = {
   '/hub-members': (context) => const HubMembershipScreen(),
 
   // Display IDL list for Fellowship Church Levels
-  '/fellowship-idls': (context) => const FellowshipIDLScreen(),
+  '/bacenta-idls': (context) => const BacentaIDLScreen(),
 
   // Display IMCL for Fellowship and Bacenta Levels
-  '/fellowship-imcls': (context) => const FellowshipIMCLScreen(),
   '/bacenta-imcls': (context) => const BacentaIMCLScreen(),
   '/constituency-imcls': (context) => const ConstituencyIMCLScreen(),
   '/hub-imcls': (context) => const HubIMCLScreen(),

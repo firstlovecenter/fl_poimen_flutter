@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getFellowshipIdls = gql('''
- query getFellowshipIdls(\$id: ID!) {
-    fellowships(where: { id: \$id }) {
+final getBacentaIdls = gql('''
+ query getBacentaIdls(\$id: ID!) {
+    bacentas(where: { id: \$id }) {
       id
       typename
       name
