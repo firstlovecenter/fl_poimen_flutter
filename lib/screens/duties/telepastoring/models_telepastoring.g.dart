@@ -70,7 +70,7 @@ ChurchForOutstandingTelepastoringList
                       e as Map<String, dynamic>))
                   .toList(),
           completedTelepastoringCount:
-              json['completedTelepastoringCount'] as int,
+              (json['completedTelepastoringCount'] as num).toInt(),
         )
           ..id = json['id'] as String
           ..typename = json['typename'] as String
@@ -103,7 +103,7 @@ ChurchForCompletedTelepastoringList
                       e as Map<String, dynamic>))
                   .toList(),
           outstandingTelepastoringCount:
-              json['outstandingTelepastoringCount'] as int,
+              (json['outstandingTelepastoringCount'] as num).toInt(),
         )
           ..id = json['id'] as String
           ..typename = json['typename'] as String

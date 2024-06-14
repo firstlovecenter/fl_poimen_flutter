@@ -11,15 +11,16 @@ HomeScreenChurch _$HomeScreenChurchFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       typename: json['typename'] as String,
       name: json['name'] as String,
-      imclTotal: json['imclTotal'] as int,
+      imclTotal: (json['imclTotal'] as num).toInt(),
       fellowshipServiceAttendanceDefaultersCount:
-          json['fellowshipServiceAttendanceDefaultersCount'] as int?,
+          (json['fellowshipServiceAttendanceDefaultersCount'] as num?)?.toInt(),
       fellowshipBussingAttendanceDefaultersCount:
-          json['fellowshipBussingAttendanceDefaultersCount'] as int?,
-      outstandingVisitationsCount: json['outstandingVisitationsCount'] as int?,
-      outstandingPrayerCount: json['outstandingPrayerCount'] as int?,
+          (json['fellowshipBussingAttendanceDefaultersCount'] as num?)?.toInt(),
+      outstandingVisitationsCount:
+          (json['outstandingVisitationsCount'] as num?)?.toInt(),
+      outstandingPrayerCount: (json['outstandingPrayerCount'] as num?)?.toInt(),
       outstandingTelepastoringCount:
-          json['outstandingTelepastoringCount'] as int?,
+          (json['outstandingTelepastoringCount'] as num?)?.toInt(),
       currentPastoralCycle: json['currentPastoralCycle'] == null
           ? null
           : PastoralCycle.fromJson(
@@ -48,7 +49,7 @@ PastoralCycle _$PastoralCycleFromJson(Map<String, dynamic> json) =>
       typename: json['typename'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
-      numberOfDays: json['numberOfDays'] as int,
+      numberOfDays: (json['numberOfDays'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PastoralCycleToJson(PastoralCycle instance) =>

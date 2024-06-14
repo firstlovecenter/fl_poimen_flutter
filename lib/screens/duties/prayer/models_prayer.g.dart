@@ -67,7 +67,7 @@ ChurchForOutstandingPrayerList _$ChurchForOutstandingPrayerListFromJson(
           .map((e) =>
               OutstandingPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      completedPrayersCount: json['completedPrayersCount'] as int,
+      completedPrayersCount: (json['completedPrayersCount'] as num).toInt(),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -98,7 +98,7 @@ ChurchForCompletedPrayerList _$ChurchForCompletedPrayerListFromJson(
           .map(
               (e) => CompletedPrayerForList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      outstandingPrayerCount: json['outstandingPrayerCount'] as int,
+      outstandingPrayerCount: (json['outstandingPrayerCount'] as num).toInt(),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String

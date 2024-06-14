@@ -39,7 +39,7 @@ class ProfileChooseWidget extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 10.0,
               children: [
-                ...user.leadsFellowship.map((church) {
+                ...user.leadsBacenta.map((church) {
                   return ProfileCard(church: church, role: 'Leader');
                 }).toList(),
                 ...user.leadsConstituency.map((church) {

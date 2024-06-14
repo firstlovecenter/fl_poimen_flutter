@@ -50,17 +50,17 @@ ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
         Map<String, dynamic> json) =>
     ChurchForAttendanceDefaulters(
       fellowshipServiceAttendanceDefaultersCount:
-          json['fellowshipServiceAttendanceDefaultersCount'] as int,
+          (json['fellowshipServiceAttendanceDefaultersCount'] as num).toInt(),
       fellowshipBussingAttendanceDefaultersCount:
-          json['fellowshipBussingAttendanceDefaultersCount'] as int,
-      bacentaCount: json['bacentaCount'] as int?,
-      constituencyCount: json['constituencyCount'] as int?,
-      councilCount: json['councilCount'] as int?,
-      streamCount: json['streamCount'] as int?,
+          (json['fellowshipBussingAttendanceDefaultersCount'] as num).toInt(),
+      bacentaCount: (json['bacentaCount'] as num?)?.toInt(),
+      constituencyCount: (json['constituencyCount'] as num?)?.toInt(),
+      councilCount: (json['councilCount'] as num?)?.toInt(),
+      streamCount: (json['streamCount'] as num?)?.toInt(),
       fellowshipServicesThisWeekCount:
-          json['fellowshipServicesThisWeekCount'] as int?,
+          (json['fellowshipServicesThisWeekCount'] as num?)?.toInt(),
       fellowshipBussingLastWeekCount:
-          json['fellowshipBussingLastWeekCount'] as int?,
+          (json['fellowshipBussingLastWeekCount'] as num?)?.toInt(),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -71,7 +71,7 @@ ChurchForAttendanceDefaulters _$ChurchForAttendanceDefaultersFromJson(
       ..admin = json['admin'] == null
           ? null
           : MemberForList.fromJson(json['admin'] as Map<String, dynamic>)
-      ..fellowshipCount = json['fellowshipCount'] as int?;
+      ..fellowshipCount = (json['fellowshipCount'] as num?)?.toInt();
 
 Map<String, dynamic> _$ChurchForAttendanceDefaultersToJson(
         ChurchForAttendanceDefaulters instance) =>

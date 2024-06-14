@@ -9,7 +9,7 @@ final getUserRoles = gql('''
       firstName
       lastName
       pictureUrl
-      leadsFellowship {
+      leadsBacenta {
         id
         typename
         name

@@ -10,10 +10,10 @@ MembershipData _$MembershipDataFromJson(Map<String, dynamic> json) =>
     MembershipData(
       id: json['id'] as String,
       typename: json['typename'] as String,
-      sheepCount: json['sheepCount'] as int,
-      deerCount: json['deerCount'] as int,
-      goatsCount: json['goatsCount'] as int,
-      membersCount: json['membersCount'] as int,
+      sheepCount: (json['sheepCount'] as num).toInt(),
+      deerCount: (json['deerCount'] as num).toInt(),
+      goatsCount: (json['goatsCount'] as num).toInt(),
+      membersCount: (json['membersCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$MembershipDataToJson(MembershipData instance) =>
@@ -29,10 +29,12 @@ Map<String, dynamic> _$MembershipDataToJson(MembershipData instance) =>
 ChurchForOverallCycleAssessment _$ChurchForOverallCycleAssessmentFromJson(
         Map<String, dynamic> json) =>
     ChurchForOverallCycleAssessment(
-      memberCount: json['memberCount'] as int,
-      completedVisitationsCount: json['completedVisitationsCount'] as int,
-      completedPrayersCount: json['completedPrayersCount'] as int,
-      completedTelepastoringCount: json['completedTelepastoringCount'] as int,
+      memberCount: (json['memberCount'] as num).toInt(),
+      completedVisitationsCount:
+          (json['completedVisitationsCount'] as num).toInt(),
+      completedPrayersCount: (json['completedPrayersCount'] as num).toInt(),
+      completedTelepastoringCount:
+          (json['completedTelepastoringCount'] as num).toInt(),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String

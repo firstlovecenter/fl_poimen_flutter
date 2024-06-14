@@ -171,8 +171,8 @@ PaginatedMemberList _$PaginatedMemberListFromJson(Map<String, dynamic> json) =>
       edges: (json['edges'] as List<dynamic>)
           .map((e) => Node.fromJson(e as Map<String, dynamic>))
           .toList(),
-      totalCount: json['totalCount'] as int,
-      position: json['position'] as int,
+      totalCount: (json['totalCount'] as num).toInt(),
+      position: (json['position'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PaginatedMemberListToJson(
@@ -225,7 +225,7 @@ Map<String, dynamic> _$ChurchForPaginatedMemberListToJson(
 PaginatedMemberCounts _$PaginatedMemberCountsFromJson(
         Map<String, dynamic> json) =>
     PaginatedMemberCounts(
-      totalCount: json['totalCount'] as int,
+      totalCount: (json['totalCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PaginatedMemberCountsToJson(

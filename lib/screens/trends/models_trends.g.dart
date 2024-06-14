@@ -35,11 +35,13 @@ Map<String, dynamic> _$ChurchForTrendsMenuToJson(
 ServiceWeeksForTrends _$ServiceWeeksForTrendsFromJson(
         Map<String, dynamic> json) =>
     ServiceWeeksForTrends(
-      week: json['week'] as int,
+      week: (json['week'] as num).toInt(),
       typename: json['typename'] as String,
-      attendance: json['attendance'] as int,
-      membersPresentAtWeekdayCount: json['membersPresentAtWeekdayCount'] as int,
-      membersAbsentAtWeekdayCount: json['membersAbsentAtWeekdayCount'] as int,
+      attendance: (json['attendance'] as num).toInt(),
+      membersPresentAtWeekdayCount:
+          (json['membersPresentAtWeekdayCount'] as num).toInt(),
+      membersAbsentAtWeekdayCount:
+          (json['membersAbsentAtWeekdayCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ServiceWeeksForTrendsToJson(
@@ -55,11 +57,13 @@ Map<String, dynamic> _$ServiceWeeksForTrendsToJson(
 BussingWeeksForTrends _$BussingWeeksForTrendsFromJson(
         Map<String, dynamic> json) =>
     BussingWeeksForTrends(
-      week: json['week'] as int,
+      week: (json['week'] as num).toInt(),
       typename: json['typename'] as String,
-      attendance: json['attendance'] as int,
-      membersPresentAtWeekendCount: json['membersPresentAtWeekendCount'] as int,
-      membersAbsentAtWeekendCount: json['membersAbsentAtWeekendCount'] as int,
+      attendance: (json['attendance'] as num).toInt(),
+      membersPresentAtWeekendCount:
+          (json['membersPresentAtWeekendCount'] as num).toInt(),
+      membersAbsentAtWeekendCount:
+          (json['membersAbsentAtWeekendCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$BussingWeeksForTrendsToJson(
@@ -75,10 +79,10 @@ Map<String, dynamic> _$BussingWeeksForTrendsToJson(
 ChurchForMembershipAttendanceTrends
     _$ChurchForMembershipAttendanceTrendsFromJson(Map<String, dynamic> json) =>
         ChurchForMembershipAttendanceTrends(
-          sheepCount: json['sheepCount'] as int,
-          goatsCount: json['goatsCount'] as int,
-          deerCount: json['deerCount'] as int,
-          lostCount: json['lostCount'] as int,
+          sheepCount: (json['sheepCount'] as num).toInt(),
+          goatsCount: (json['goatsCount'] as num).toInt(),
+          deerCount: (json['deerCount'] as num).toInt(),
+          lostCount: (json['lostCount'] as num).toInt(),
           serviceWeeks: (json['serviceWeeks'] as List<dynamic>)
               .map((e) =>
                   ServiceWeeksForTrends.fromJson(e as Map<String, dynamic>))

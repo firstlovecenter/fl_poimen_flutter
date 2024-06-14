@@ -56,10 +56,10 @@ MembershipDataForTrends _$MembershipDataForTrendsFromJson(
       id: json['id'] as String,
       typename: json['typename'] as String,
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-      membersCount: json['membersCount'] as int,
-      sheepCount: json['sheepCount'] as int,
-      goatsCount: json['goatsCount'] as int,
-      deerCount: json['deerCount'] as int,
+      membersCount: (json['membersCount'] as num).toInt(),
+      sheepCount: (json['sheepCount'] as num).toInt(),
+      goatsCount: (json['goatsCount'] as num).toInt(),
+      deerCount: (json['deerCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$MembershipDataForTrendsToJson(
@@ -81,7 +81,7 @@ PastoralCycleForTrends _$PastoralCycleForTrendsFromJson(
       typename: json['typename'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
-      numberOfDays: json['numberOfDays'] as int,
+      numberOfDays: (json['numberOfDays'] as num).toInt(),
       membershipDataByChurch: json['membershipDataByChurch'] == null
           ? null
           : MembershipDataForTrends.fromJson(
@@ -121,14 +121,16 @@ PastoralCycleCountsForTrends _$PastoralCycleCountsForTrendsFromJson(
       typename: json['typename'] as String,
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
-      numberOfDays: json['numberOfDays'] as int,
+      numberOfDays: (json['numberOfDays'] as num).toInt(),
       membershipDataByChurch: json['membershipDataByChurch'] == null
           ? null
           : MembershipDataForTrends.fromJson(
               json['membershipDataByChurch'] as Map<String, dynamic>),
-      visitationsByChurchCount: json['visitationsByChurchCount'] as int,
-      prayersByChurchCount: json['prayersByChurchCount'] as int,
-      telepastoringsByChurchCount: json['telepastoringsByChurchCount'] as int,
+      visitationsByChurchCount:
+          (json['visitationsByChurchCount'] as num).toInt(),
+      prayersByChurchCount: (json['prayersByChurchCount'] as num).toInt(),
+      telepastoringsByChurchCount:
+          (json['telepastoringsByChurchCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PastoralCycleCountsForTrendsToJson(
