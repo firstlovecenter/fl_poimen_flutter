@@ -106,6 +106,11 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       pastoralComments: (json['pastoralComments'] as List<dynamic>?)
           ?.map((e) => PastoralComments.fromJson(e as Map<String, dynamic>))
           .toList(),
+      occupation: json['occupation'] == null
+          ? null
+          : Occupation.fromJson(json['occupation'] as Map<String, dynamic>),
+      maritalStatus:
+          MaritalStatus.fromJson(json['maritalStatus'] as Map<String, dynamic>),
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -117,6 +122,9 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
       ..middleName = json['middleName'] as String
+      ..email = json['email'] as String?
+      ..currentTitle = json['currentTitle'] as String?
+      ..nameWithTitle = json['nameWithTitle'] as String
       ..visitationArea = json['visitationArea'] as String
       ..location = json['location'] == null
           ? null
@@ -144,6 +152,9 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'whatsappNumber': instance.whatsappNumber,
       'middleName': instance.middleName,
+      'email': instance.email,
+      'currentTitle': instance.currentTitle,
+      'nameWithTitle': instance.nameWithTitle,
       'visitationArea': instance.visitationArea,
       'location': instance.location,
       'lastAttendedServiceDate':
@@ -151,6 +162,8 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'lastFourWeekdayServices': instance.lastFourWeekdayServices,
       'lastFourWeekendServices': instance.lastFourWeekendServices,
       'gender': instance.gender,
+      'occupation': instance.occupation,
+      'maritalStatus': instance.maritalStatus,
       'dob': instance.dob,
       'council': instance.council,
       'bacenta': instance.bacenta,

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/details/gql_member_details.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
+import 'package:poimen/screens/membership/details/widget_save_contact.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -64,6 +65,7 @@ class MemberDetailsScreen extends StatelessWidget {
                 child: Text(
                   '${member.firstName} ${member.lastName}',
                   style: headerStyle,
+                  textAlign: TextAlign.center,
                 ),
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
@@ -226,9 +228,15 @@ class MemberDetailsScreen extends StatelessWidget {
               BioDetailsCard(title: 'Sex', detail: member.gender.gender.name),
               BioDetailsCard(title: 'Date of Birth', detail: member.dob.humanReadable),
               const Padding(padding: EdgeInsets.all(8.0)),
-              Text(
-                'Contact Information',
-                style: PoimenTheme.heading2,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Contact Information',
+                    style: PoimenTheme.heading2,
+                  ),
+                  WidgetSaveContact(member: member, roles: ''),
+                ],
               ),
               BioDetailsCard(
                   title: 'Phone Number',

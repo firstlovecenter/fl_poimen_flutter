@@ -161,6 +161,12 @@ enum GenderOptions {
   Female,
 }
 
+enum MaritalStatusOptions {
+  Single,
+  Married,
+  Widowed,
+}
+
 enum MemberCategory { Sheep, Deer, Goat }
 
 enum Role {

@@ -39,5 +39,22 @@ class Gender {
   Map<String, dynamic> toJson() => _$GenderToJson(this);
 }
 
+@JsonSerializable()
+class MaritalStatus {
+  MaritalStatusOptions status;
 
+  MaritalStatus({this.status = MaritalStatusOptions.Single});
 
+  factory MaritalStatus.fromJson(Map<String, dynamic> json) => _$MaritalStatusFromJson(json);
+  Map<String, dynamic> toJson() => _$MaritalStatusToJson(this);
+}
+
+@JsonSerializable()
+class Occupation {
+  String occupation;
+
+  Occupation({this.occupation = ''});
+
+  factory Occupation.fromJson(Map<String, dynamic> json) => _$OccupationFromJson(json);
+  Map<String, dynamic> toJson() => _$OccupationToJson(this);
+}

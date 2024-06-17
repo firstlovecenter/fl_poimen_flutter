@@ -84,26 +84,33 @@ class Last4Services {
 @JsonSerializable()
 class Member extends MemberForList {
   String middleName = '';
+  String? email = '';
+  String? currentTitle = '';
+  String nameWithTitle = '';
   String visitationArea = '';
   Neo4jPoint? location = Neo4jPoint();
   DateTime? lastAttendedServiceDate = DateTime.now();
   List<Last4Services> lastFourWeekdayServices = [];
   List<Last4Services> lastFourWeekendServices = [];
   Gender gender = Gender();
+  Occupation? occupation = Occupation();
+  MaritalStatus maritalStatus = MaritalStatus();
   TimeGraph dob = TimeGraph();
   Church council;
   Church bacenta;
   Church? ministry;
   List<PastoralComments>? pastoralComments = [];
 
-  Member(
-      {required this.gender,
-      required this.dob,
-      required this.council,
-      required this.ministry,
-      required this.bacenta,
-      this.pastoralComments})
-      : super(
+  Member({
+    required this.gender,
+    required this.dob,
+    required this.council,
+    required this.ministry,
+    required this.bacenta,
+    this.pastoralComments,
+    this.occupation,
+    required this.maritalStatus,
+  }) : super(
           id: '',
           typename: '',
           status: '',

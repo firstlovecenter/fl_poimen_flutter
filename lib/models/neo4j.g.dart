@@ -37,3 +37,30 @@ const _$GenderOptionsEnumMap = {
   GenderOptions.Male: 'Male',
   GenderOptions.Female: 'Female',
 };
+
+MaritalStatus _$MaritalStatusFromJson(Map<String, dynamic> json) =>
+    MaritalStatus(
+      status:
+          $enumDecodeNullable(_$MaritalStatusOptionsEnumMap, json['status']) ??
+              MaritalStatusOptions.Single,
+    );
+
+Map<String, dynamic> _$MaritalStatusToJson(MaritalStatus instance) =>
+    <String, dynamic>{
+      'status': _$MaritalStatusOptionsEnumMap[instance.status]!,
+    };
+
+const _$MaritalStatusOptionsEnumMap = {
+  MaritalStatusOptions.Single: 'Single',
+  MaritalStatusOptions.Married: 'Married',
+  MaritalStatusOptions.Widowed: 'Widowed',
+};
+
+Occupation _$OccupationFromJson(Map<String, dynamic> json) => Occupation(
+      occupation: json['occupation'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$OccupationToJson(Occupation instance) =>
+    <String, dynamic>{
+      'occupation': instance.occupation,
+    };
