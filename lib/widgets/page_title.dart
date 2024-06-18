@@ -7,18 +7,23 @@ class PageTitle extends StatelessWidget {
   const PageTitle({
     Key? key,
     this.church,
+    this.trailing,
     required this.pageTitle,
   }) : super(key: key);
 
   final ProfileChurch? church;
   final String pageTitle;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
 
-    Widget title = ListTile(title: Text(pageTitle));
+    Widget title = ListTile(
+      title: Text(pageTitle),
+      trailing: trailing,
+    );
 
     if (church != null) {
       title = ListTile(
@@ -32,15 +37,16 @@ class PageTitle extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: ModalRoute.of(context)!.settings.name != '/search' &&
-                ModalRoute.of(context)!.settings.name != '/home'
-            ? InkWell(
-                child: const Icon(FontAwesomeIcons.magnifyingGlass),
-                onTap: () {
-                  Navigator.pushNamed(context, '/search');
-                },
-              )
-            : null,
+        trailing: trailing ??
+            (ModalRoute.of(context)!.settings.name != '/search' &&
+                    ModalRoute.of(context)!.settings.name != '/home'
+                ? InkWell(
+                    child: const Icon(FontAwesomeIcons.magnifyingGlass),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/search');
+                    },
+                  )
+                : null),
       );
     }
 

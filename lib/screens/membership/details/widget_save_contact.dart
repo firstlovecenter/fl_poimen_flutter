@@ -5,29 +5,50 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:http/http.dart' as http;
 
-class WidgetSaveContact extends StatelessWidget {
+class WidgetSaveContact extends StatefulWidget {
   const WidgetSaveContact({super.key, required this.member, required this.roles});
 
   final Member member;
   final String roles;
 
   @override
+  State<WidgetSaveContact> createState() => _WidgetSaveContactState();
+}
+
+class _WidgetSaveContactState extends State<WidgetSaveContact> {
+  bool loading = false;
+
+  @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ButtonStyle(
-        padding: WidgetStateProperty.all<EdgeInsets>(
-            const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0)),
-      ),
-      onPressed: () async {
-        print(await generateVCard(member, ''));
-      },
-      icon: const Icon(
-        FontAwesomeIcons.solidFloppyDisk,
-        size: 16,
-      ),
-      label: const Text(
-        'Save Contact',
-        style: TextStyle(fontSize: 12),
+    const iconSize = 16.0;
+
+    return SizedBox(
+      height: 30,
+      child: ElevatedButton.icon(
+        style: ButtonStyle(
+          fixedSize: WidgetStateProperty.all<Size>(const Size(80, 30)),
+          padding: WidgetStateProperty.all<EdgeInsets>(
+              const EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)),
+        ),
+        onPressed: () async {
+          setState(() {
+            loading = true;
+          });
+          print(await generateVCard(widget.member, ''));
+          setState(() {
+            loading = false;
+          });
+        },
+        icon: loading == true
+            ? const SizedBox(width: iconSize, height: iconSize, child: CircularProgressIndicator())
+            : const Icon(
+                FontAwesomeIcons.solidFloppyDisk,
+                size: iconSize,
+              ),
+        label: const Text(
+          'Save',
+          style: TextStyle(fontSize: 12),
+        ),
       ),
     );
   }
