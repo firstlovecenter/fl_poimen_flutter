@@ -8,8 +8,10 @@ final getMemberDetails = gql('''
       firstName
       middleName
       lastName
+      email
       currentTitle
       nameWithTitle
+      roles
       status
       pictureUrl
       phoneNumber
@@ -32,6 +34,9 @@ final getMemberDetails = gql('''
       }
       maritalStatus{
         status
+      }
+      occupation {
+        occupation
       }
       gender {
         gender

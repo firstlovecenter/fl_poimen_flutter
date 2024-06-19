@@ -42,11 +42,12 @@ class MemberDetailsScreen extends StatelessWidget {
         String lastAttendedServiceDate = member.lastAttendedServiceDate != null
             ? formatter.format(DateTime.parse(member.lastAttendedServiceDate.toString()))
             : '';
-        // END: ed8c6549bwf9;
 
         var returnValues = GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
-              pageTitle: 'Member Details', trailing: WidgetSaveContact(member: member, roles: '')),
+            pageTitle: 'Member Details',
+            trailing: WidgetSaveContact(member: member, roles: ''),
+          ),
           body: ListView(
             padding: const EdgeInsets.all(8.0),
             children: [

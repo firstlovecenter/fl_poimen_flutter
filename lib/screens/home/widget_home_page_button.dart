@@ -29,13 +29,14 @@ class HomePageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var userState = context.watch<SharedState>();
     if (!permitted.contains(userState.role) && !permitted.contains(Role.all)) {
-      return Container();
+      return const SizedBox.shrink();
     }
 
     return Column(
       children: [
         Card(
           child: ListTile(
+            dense: true,
             onTap: () {
               userState.bottomNavSelected = navKey;
               if (navigateBack != null && navigateBack == true) {

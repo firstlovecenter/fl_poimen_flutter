@@ -83,27 +83,24 @@ class ChurchMembershipList extends StatelessWidget {
   }
 }
 
-Column memberListTile(BuildContext context, MemberForList member) {
+Widget memberListTile(BuildContext context, MemberForList member) {
   CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
   var memberState = context.watch<SharedState>();
 
-  return Column(
-    children: [
-      ListTile(
-        onTap: () {
-          memberState.member = member;
-          memberState.memberId = member.id;
-          Navigator.pushNamed(context, '/member-details');
-        },
-        title: Text('${member.firstName} ${member.lastName}'),
-        subtitle: Text(member.typename),
-        leading: Hero(
-          tag: 'member-${member.id}',
-          child: AvatarWithInitials(foregroundImage: picture.image, member: member),
-        ),
-      ),
-      const Divider(thickness: 1)
-    ],
+  return ListTile(
+    dense: true,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    onTap: () {
+      memberState.member = member;
+      memberState.memberId = member.id;
+      Navigator.pushNamed(context, '/member-details');
+    },
+    title: Text('${member.firstName} ${member.lastName}'),
+    subtitle: Text(member.typename),
+    leading: Hero(
+      tag: 'member-${member.id}',
+      child: AvatarWithInitials(foregroundImage: picture.image, member: member),
+    ),
   );
 }
 
