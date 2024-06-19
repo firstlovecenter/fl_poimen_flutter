@@ -111,6 +111,24 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
           : Occupation.fromJson(json['occupation'] as Map<String, dynamic>),
       maritalStatus:
           MaritalStatus.fromJson(json['maritalStatus'] as Map<String, dynamic>),
+      lastFourWeekdayServices:
+          (json['lastFourWeekdayServices'] as List<dynamic>)
+              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      lastFourWeekendServices:
+          (json['lastFourWeekendServices'] as List<dynamic>)
+              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      lastAttendedServiceDate: json['lastAttendedServiceDate'] == null
+          ? null
+          : DateTime.parse(json['lastAttendedServiceDate'] as String),
+      location: json['location'] == null
+          ? null
+          : Neo4jPoint.fromJson(json['location'] as Map<String, dynamic>),
+      visitationArea: json['visitationArea'] as String,
+      roles: json['roles'] as String,
+      nameWithTitle: json['nameWithTitle'] as String,
+      currentTitle: json['currentTitle'] as String?,
     )
       ..id = json['id'] as String
       ..typename = json['typename'] as String
@@ -122,24 +140,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
       ..phoneNumber = json['phoneNumber'] as String
       ..whatsappNumber = json['whatsappNumber'] as String
       ..middleName = json['middleName'] as String
-      ..email = json['email'] as String?
-      ..currentTitle = json['currentTitle'] as String?
-      ..nameWithTitle = json['nameWithTitle'] as String
-      ..visitationArea = json['visitationArea'] as String
-      ..location = json['location'] == null
-          ? null
-          : Neo4jPoint.fromJson(json['location'] as Map<String, dynamic>)
-      ..lastAttendedServiceDate = json['lastAttendedServiceDate'] == null
-          ? null
-          : DateTime.parse(json['lastAttendedServiceDate'] as String)
-      ..lastFourWeekdayServices =
-          (json['lastFourWeekdayServices'] as List<dynamic>)
-              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
-              .toList()
-      ..lastFourWeekendServices =
-          (json['lastFourWeekendServices'] as List<dynamic>)
-              .map((e) => Last4Services.fromJson(e as Map<String, dynamic>))
-              .toList();
+      ..email = json['email'] as String?;
 
 Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'id': instance.id,
@@ -155,6 +156,7 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'email': instance.email,
       'currentTitle': instance.currentTitle,
       'nameWithTitle': instance.nameWithTitle,
+      'roles': instance.roles,
       'visitationArea': instance.visitationArea,
       'location': instance.location,
       'lastAttendedServiceDate':

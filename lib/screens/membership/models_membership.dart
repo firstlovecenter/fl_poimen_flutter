@@ -87,6 +87,7 @@ class Member extends MemberForList {
   String? email = '';
   String? currentTitle = '';
   String nameWithTitle = '';
+  String roles = '';
   String visitationArea = '';
   Neo4jPoint? location = Neo4jPoint();
   DateTime? lastAttendedServiceDate = DateTime.now();
@@ -110,6 +111,14 @@ class Member extends MemberForList {
     this.pastoralComments,
     this.occupation,
     required this.maritalStatus,
+    required this.lastFourWeekdayServices,
+    required this.lastFourWeekendServices,
+    required this.lastAttendedServiceDate,
+    required this.location,
+    required this.visitationArea,
+    required this.roles,
+    required this.nameWithTitle,
+    this.currentTitle,
   }) : super(
           id: '',
           typename: '',

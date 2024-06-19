@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +37,7 @@ class _WidgetSaveContactState extends State<WidgetSaveContact> {
             setState(() {
               loading = true;
             });
-            await downloadAndOpenVCard(widget.member, '');
+            await downloadAndOpenVCard(widget.member);
           } catch (e) {
             if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +67,7 @@ class _WidgetSaveContactState extends State<WidgetSaveContact> {
   }
 }
 
-Future<String> generateVCard(Member member, String roles) async {
+Future<String> generateVCard(Member member) async {
   String base64Image = '';
   final response = await http.get(Uri.parse(member.pictureUrl));
   final bytes = response.bodyBytes;
@@ -78,57 +80,20 @@ FN:${member.nameWithTitle}
 ORG:FLC ${member.council.name} Council;${member.email != null ? '\nEMAIL;type=INTERNET;type=HOME;type=pref:${member.email}' : ''}
 TEL;type=CELL;type=VOICE;type=pref:${member.phoneNumber}
 ${member.whatsappNumber != member.phoneNumber ? ';TYPE=HOME:${member.whatsappNumber}' : ''}
-NOTE:Visitation Landmark: ${member.visitationArea}\\nOccupation: ${member.occupation?.occupation ?? 'None'}\\nMarital Status: ${member.maritalStatus.status.name}\\nRoles in Church:\\n$roles\n${base64Image != '' ? 'PHOTO;ENCODING=b;TYPE=JPEG:$base64Image\n' : ''}BDAY:${member.dob.date}
+NOTE:Visitation Landmark: ${member.visitationArea}\\nOccupation: ${member.occupation?.occupation.trim() == '' ? 'None' : member.occupation?.occupation}\\nMarital Status: ${member.maritalStatus.status.name}\\n${member.roles != '' ? '\\nRoles in Church\\n${member.roles}\\n' : ''}\n${base64Image != '' ? 'PHOTO;ENCODING=b;TYPE=JPEG:$base64Image\n' : ''}BDAY:${member.dob.date.toIso8601String().substring(0, 10)}
 ADR;TYPE=HOME:;;;;${member.visitationArea};;\nEND:VCARD''';
 
   return vCard;
 }
 
-Future<void> downloadAndOpenVCard(Member member, String roles) async {
+Future<void> downloadAndOpenVCard(Member member) async {
   try {
-    FlutterContacts.config.includeNotesOnIos13AndAbove = true;
-    final response = await http.get(Uri.parse(member.pictureUrl));
-    final bytes = response.bodyBytes;
-
-    final contact = Contact()
-      ..name.first = member.firstName
-      ..name.last = member.lastName
-      ..name.prefix = member.currentTitle ?? ''
-      ..photo = bytes
-      ..addresses = [
-        Address(
-          member.visitationArea,
-          street: member.visitationArea,
-          city: member.visitationArea,
-          label: AddressLabel.home,
-        )
-      ]
-      ..events = [
-        Event(
-          month: member.dob.date.month,
-          day: member.dob.date.day,
-          label: EventLabel.birthday,
-        )
-      ]
-      ..organizations = [
-        Organization(company: 'FLC ${member.council.name} Council'),
-      ]
-      ..emails = [
-        Email(member.email ?? '', label: EmailLabel.work),
-      ]
-      ..phones = [
-        Phone(member.phoneNumber, label: PhoneLabel.mobile),
-        if (member.phoneNumber != member.whatsappNumber)
-          Phone(member.whatsappNumber, label: PhoneLabel.custom, customLabel: 'WhatsApp')
-      ]
-      ..notes = [
-        Note('Visit me')
-        // Note(
-        //   'Visitation Landmark: ${member.visitationArea}\nOccupation: ${member.occupation?.occupation ?? 'None'}\nMarital Status: ${member.maritalStatus.status.name}\nRoles in Church:\n$roles',
-        // ),
-      ];
-    final newContact = await FlutterContacts.openExternalInsert(contact);
-    print(newContact?.toJson());
+    String vCard = await generateVCard(member);
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/vCard.vcf');
+    await file.writeAsString(vCard);
+    // await FlutterContacts.openExternalInsert(Contact.fromVCard(vCard));
+    await OpenFile.open(file.path);
   } catch (e) {
     rethrow;
   }
