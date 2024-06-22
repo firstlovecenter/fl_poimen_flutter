@@ -1,6 +1,8 @@
 import 'package:poimen/theme.dart';
 import 'package:flutter/material.dart';
 
+var newLightTheme = ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: PoimenTheme.brand));
+
 var lightTheme = ThemeData(
   // MAIN COLORS
   scaffoldBackgroundColor: colorFromHex('#F0F0F0'),

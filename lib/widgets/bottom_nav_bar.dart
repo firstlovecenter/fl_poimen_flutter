@@ -29,6 +29,7 @@ class BottomNavBar extends StatelessWidget {
     return Hero(
       tag: 'bottomNavBar',
       child: BottomNavigationBar(
+        useLegacyColorScheme: false,
         items: getIcons(menuArray),
         currentIndex: computedIndex,
         onTap: (int index) {

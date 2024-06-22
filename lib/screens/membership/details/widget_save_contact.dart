@@ -8,10 +8,9 @@ import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:http/http.dart' as http;
 
 class WidgetSaveContact extends StatefulWidget {
-  const WidgetSaveContact({super.key, required this.member, required this.roles});
+  const WidgetSaveContact({super.key, required this.member});
 
   final Member member;
-  final String roles;
 
   @override
   State<WidgetSaveContact> createState() => _WidgetSaveContactState();

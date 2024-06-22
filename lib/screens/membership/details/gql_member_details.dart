@@ -5,6 +5,7 @@ final getMemberDetails = gql('''
     members(where: { id: \$id }) {
       id
       typename
+      stickyNote
       firstName
       middleName
       lastName
@@ -117,6 +118,27 @@ final getMemberPastoralComments = gql('''
         }
         activity
       }
+    }
+  }
+''');
+
+final recordPastoralComment = gql('''
+  mutation LogPastoralComment(\$memberId: ID!, \$comment: String!, \$roleLevel: String!, \$cycleId: ID!) {
+    LogPastoralComment(memberId: \$memberId, comment: \$comment, roleLevel: \$roleLevel, cycleId: \$cycleId) {
+      id
+      typename
+      timestamp
+      comment
+      author {
+        id
+        typename
+        firstName
+        lastName
+        pictureUrl
+        phoneNumber
+        whatsappNumber
+      }
+      activity
     }
   }
 ''');

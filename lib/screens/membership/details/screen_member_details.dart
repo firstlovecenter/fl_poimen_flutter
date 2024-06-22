@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/membership/details/gql_member_details.dart';
 import 'package:poimen/screens/membership/details/screen_member_pastoral_comments.dart';
+import 'package:poimen/screens/membership/details/widget_add_pastoral_comment.dart';
 import 'package:poimen/screens/membership/details/widget_save_contact.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/cloudinary_service.dart';
@@ -47,7 +48,9 @@ class MemberDetailsScreen extends StatelessWidget {
         var returnValues = GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             pageTitle: 'Member Details',
-            trailing: WidgetSaveContact(member: member, roles: ''),
+            trailing: WidgetSaveContact(
+              member: member,
+            ),
           ),
           body: ListView(
             padding: const EdgeInsets.all(8.0),
@@ -238,7 +241,7 @@ class MemberDetailsScreen extends StatelessWidget {
                     'Contact Information',
                     style: PoimenTheme.heading2,
                   ),
-                  WidgetSaveContact(member: member, roles: ''),
+                  WidgetSaveContact(member: member),
                 ],
               ),
               BioDetailsCard(
@@ -284,16 +287,24 @@ class MemberDetailsScreen extends StatelessWidget {
               const BioDetailsCard(title: 'Notes', detail: ''),
               const Padding(padding: EdgeInsets.all(8.0)),
               member.pastoralComments == null || member.pastoralComments!.isEmpty
+                  ? const SizedBox.shrink()
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Pastoral Comments',
+                          style: PoimenTheme.heading2,
+                        ),
+                        WidgetAddPastoralComment(member: member)
+                      ],
+                    ),
+              member.pastoralComments == null || member.pastoralComments!.isEmpty
                   ? Container()
                   : Card(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
                         child: Column(
                           children: [
-                            Text(
-                              'Pastoral Comments',
-                              style: PoimenTheme.heading2,
-                            ),
                             const Padding(padding: EdgeInsets.all(8.0)),
                             Column(
                               children: [

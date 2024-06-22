@@ -38,7 +38,7 @@ class PoimenApp extends StatelessWidget {
         child: MaterialApp(
           // debugShowCheckedModeBanner: false,
           title: 'Poimen Flutter Client',
-          theme: lightTheme,
+          theme: newLightTheme,
           darkTheme: darkTheme,
           routes: appRoutes,
           home: LoginScreen(currentVersion: currentVersion),
