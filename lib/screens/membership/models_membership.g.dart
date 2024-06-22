@@ -103,6 +103,7 @@ Member _$MemberFromJson(Map<String, dynamic> json) => Member(
           ? null
           : Church.fromJson(json['ministry'] as Map<String, dynamic>),
       bacenta: Church.fromJson(json['bacenta'] as Map<String, dynamic>),
+      stickyNote: json['stickyNote'] as String?,
       pastoralComments: (json['pastoralComments'] as List<dynamic>?)
           ?.map((e) => PastoralComments.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -157,6 +158,7 @@ Map<String, dynamic> _$MemberToJson(Member instance) => <String, dynamic>{
       'currentTitle': instance.currentTitle,
       'nameWithTitle': instance.nameWithTitle,
       'roles': instance.roles,
+      'stickyNote': instance.stickyNote,
       'visitationArea': instance.visitationArea,
       'location': instance.location,
       'lastAttendedServiceDate':

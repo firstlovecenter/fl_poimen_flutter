@@ -88,6 +88,7 @@ class Member extends MemberForList {
   String? currentTitle = '';
   String nameWithTitle = '';
   String roles = '';
+  String? stickyNote = '';
   String visitationArea = '';
   Neo4jPoint? location = Neo4jPoint();
   DateTime? lastAttendedServiceDate = DateTime.now();
@@ -108,6 +109,7 @@ class Member extends MemberForList {
     required this.council,
     required this.ministry,
     required this.bacenta,
+    this.stickyNote,
     this.pastoralComments,
     this.occupation,
     required this.maritalStatus,

@@ -74,6 +74,43 @@ class MemberDetailsScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+              member.stickyNote != null || member.stickyNote != ''
+                  ? Container(
+                      padding: const EdgeInsets.all(16.0), // Add some padding around the text
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[200], // Sticky note color
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(2, 4), // changes position of shadow
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(8), // Rounded corners
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Sticky Note',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            member.stickyNote ?? '',
+                            style: const TextStyle(
+                              color: Colors.black, // Text color
+                              fontSize: 16, // Text size
+                              fontWeight: FontWeight.bold, // Text weight
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox.shrink(),
               const Padding(padding: EdgeInsets.all(8.0)),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
