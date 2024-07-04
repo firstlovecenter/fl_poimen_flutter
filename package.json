@@ -8,6 +8,8 @@
   "scripts": {
     "start": "flutter run --dart-define=AUTH0_DOMAIN=flcadmin-test.us.auth0.com --dart-define=AUTH0_CLIENT_ID=qASlxzOgIGh5oTr3aEChJFs7lW7AZvxy --dart-define=API_ENDPOINT=http://localhost:4001 --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=developer-tests --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=developer-tests",
     "start-prd": "flutter run --dart-define=AUTH0_DOMAIN=flcadmin.us.auth0.com --dart-define=AUTH0_CLIENT_ID=KPaxujz8cW2KdhPHlRnHbBtueLd2JkWw --dart-define=API_ENDPOINT=https://poimen.firstlovecenter.com --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=poimen-membership-attendance --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=poimen-visitation-report",
+    "build:android": "flutter build appbundle --dart-define=AUTH0_DOMAIN=flcadmin.us.auth0.com --dart-define=AUTH0_CLIENT_ID=KPaxujz8cW2KdhPHlRnHbBtueLd2JkWw --dart-define=API_ENDPOINT=https://poimen.firstlovecenter.com --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=poimen-membership-attendance --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=poimen-visitation-report",
+    "build:ios": "flutter build ipa --dart-define=AUTH0_DOMAIN=flcadmin.us.auth0.com --dart-define=AUTH0_CLIENT_ID=KPaxujz8cW2KdhPHlRnHbBtueLd2JkWw --dart-define=API_ENDPOINT=https://poimen.firstlovecenter.com --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=poimen-membership-attendance --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=poimen-visitation-report",
     "api": "cd ../fl-pastoral-care/api &&  npm run start:dev",
     "release:major": "node scripts/release.js major",
     "release:minor": "node scripts/release.js minor",
