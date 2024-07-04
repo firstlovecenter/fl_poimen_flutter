@@ -7,12 +7,12 @@ import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
 import 'package:poimen/screens/duties/imcl/screen_bacenta_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_constituency_imcls.dart';
 import 'package:poimen/screens/duties/imcl/screen_hub_imcls.dart';
+import 'package:poimen/screens/duties/prayer/bacenta_completed_prayer.dart';
+import 'package:poimen/screens/duties/prayer/bacenta_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/constituency_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/prayer/council_completed_prayer.dart';
 import 'package:poimen/screens/duties/prayer/council_outstanding_prayer.dart';
-import 'package:poimen/screens/duties/prayer/fellowship_completed_prayer.dart';
-import 'package:poimen/screens/duties/prayer/fellowship_outstanding_prayer.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_completed_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/constituency_outstanding_telepastoring.dart';
 import 'package:poimen/screens/duties/telepastoring/bacenta_outstanding_telepastoring.dart';
@@ -135,8 +135,8 @@ var appRoutes = {
   '/council/outstanding-telepastoring': (context) => const CouncilOutstandingTelepastoringScreen(),
   '/council/completed-telepastoring': (context) => const CouncilCompletedTelepastoringScreen(),
 
-  '/fellowship/outstanding-prayer': (context) => const FellowshipOutstandingPrayerScreen(),
-  '/fellowship/completed-prayer': (context) => const FellowshipCompletedPrayerScreen(),
+  '/bacenta/outstanding-prayer': (context) => const BacentaOutstandingPrayerScreen(),
+  '/bacenta/completed-prayer': (context) => const BacentaCompletedPrayerScreen(),
   '/constituency/outstanding-prayer': (context) => const ConstituencyOutstandingPrayerScreen(),
   '/constituency/completed-prayer': (context) => const ConstituencyCompletedPrayerScreen(),
   '/council/outstanding-prayer': (context) => const CouncilOutstandingPrayerScreen(),

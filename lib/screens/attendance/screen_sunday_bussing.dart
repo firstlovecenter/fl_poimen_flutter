@@ -24,12 +24,12 @@ class SundayBussingScreen extends StatelessWidget {
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final fellowship = ChurchForBussingList.fromJson(data?['bacentas'][0]);
+          final bacenta = ChurchForBussingList.fromJson(data?['bacentas'][0]);
 
-          body = ChurchServicesList(services: fellowship.bussing);
+          body = ChurchServicesList(services: bacenta.bussing);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Bussing', church: fellowship),
+            pageTitle: PageTitle(pageTitle: 'Recent Bussing', church: bacenta),
             body: body,
           );
         });

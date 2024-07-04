@@ -69,8 +69,8 @@ class ProfileCard extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
               SizedBox(
-                height: 69,
-                width: 69,
+                height: 60,
+                width: 60,
                 child: CircleAvatar(
                   foregroundImage: AssetImage(_getRoleImage(church.typename)),
                 ),
