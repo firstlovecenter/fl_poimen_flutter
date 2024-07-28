@@ -74,7 +74,7 @@ class MemberDetailsScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              member.stickyNote != null || member.stickyNote != ''
+              member.stickyNote != null && member.stickyNote?.trim() != ''
                   ? Container(
                       padding: const EdgeInsets.all(16.0), // Add some padding around the text
                       decoration: BoxDecoration(

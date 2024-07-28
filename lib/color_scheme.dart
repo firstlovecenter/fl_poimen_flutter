@@ -2,6 +2,11 @@ import 'package:poimen/theme.dart';
 import 'package:flutter/material.dart';
 
 var newLightTheme = ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: PoimenTheme.brand));
+var newDarkTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+  seedColor: PoimenTheme.brand,
+  brightness: Brightness.dark,
+));
 
 var lightTheme = ThemeData(
   // MAIN COLORS

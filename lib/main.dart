@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:poimen/routes.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -27,7 +28,6 @@ class PoimenApp extends StatelessWidget {
   const PoimenApp({Key? key, required this.currentVersion}) : super(key: key);
 
   final String currentVersion;
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class PoimenApp extends StatelessWidget {
           // debugShowCheckedModeBanner: false,
           title: 'Poimen Flutter Client',
           theme: newLightTheme,
-          darkTheme: darkTheme,
+          darkTheme: newDarkTheme,
           routes: appRoutes,
           home: LoginScreen(currentVersion: currentVersion),
         ),
