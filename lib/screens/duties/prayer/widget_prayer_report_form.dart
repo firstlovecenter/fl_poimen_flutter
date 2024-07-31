@@ -108,8 +108,8 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SizedBox(
-        height: 550,
+      child: FractionallySizedBox(
+        heightFactor: 0.9,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ListView(

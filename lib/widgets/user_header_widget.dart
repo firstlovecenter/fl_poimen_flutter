@@ -47,14 +47,16 @@ class UserHeaderWidget extends StatelessWidget {
           ],
         ),
         const Padding(padding: EdgeInsets.all(10.0)),
-        Column(
-          children: [
-            AvatarWithInitials(
-              foregroundImage: picture.image,
-              member: user,
-              radius: 45,
-            ),
-          ],
+        Expanded(
+          child: Column(
+            children: [
+              AvatarWithInitials(
+                foregroundImage: picture.image,
+                member: user,
+                radius: 45,
+              ),
+            ],
+          ),
         )
       ],
     );

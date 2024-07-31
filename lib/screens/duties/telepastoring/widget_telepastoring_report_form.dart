@@ -110,86 +110,88 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SizedBox(
-        height: 550,
+      child: FractionallySizedBox(
+        heightFactor: 0.9,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    Text('Telepastoring Report', style: PoimenTheme.heading2),
-                    const Padding(padding: EdgeInsets.all(15.0)),
-                    Center(
-                      child: Hero(
-                        tag: 'member-${widget.member.id}',
-                        child: AvatarWithInitials(
-                          foregroundImage: picture.image,
-                          member: widget.member,
-                          radius: 80,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      Text('Telepastoring Report', style: PoimenTheme.heading2),
+                      const Padding(padding: EdgeInsets.all(15.0)),
+                      Center(
+                        child: Hero(
+                          tag: 'member-${widget.member.id}',
+                          child: AvatarWithInitials(
+                            foregroundImage: picture.image,
+                            member: widget.member,
+                            radius: 80,
+                          ),
                         ),
                       ),
-                    ),
-                    const Padding(padding: EdgeInsets.all(15.0)),
-                    Text('${widget.member.firstName} ${widget.member.lastName}',
-                        style: PoimenTheme.heading2),
-                    const Padding(padding: EdgeInsets.all(15.0)),
-                    TextFormField(
-                      maxLines: 4,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: const InputDecoration(
-                        labelText: 'Comment',
-                        hintText: 'What is your report on this telepastoring?',
+                      const Padding(padding: EdgeInsets.all(15.0)),
+                      Text('${widget.member.firstName} ${widget.member.lastName}',
+                          style: PoimenTheme.heading2),
+                      const Padding(padding: EdgeInsets.all(15.0)),
+                      TextFormField(
+                        maxLines: 4,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: const InputDecoration(
+                          labelText: 'Comment',
+                          hintText: 'What is your report on this telepastoring?',
+                        ),
+                        onSaved: (String? value) {
+                          telepastoringReport = value ?? '';
+                        },
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                       ),
-                      onSaved: (String? value) {
-                        telepastoringReport = value ?? '';
-                      },
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            padding: WidgetStateProperty.all(
+                              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            ),
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
                             ),
                           ),
-                        ),
-                        onPressed: reportMutation.result.isLoading
-                            ? null
-                            : () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState!.save();
+                          onPressed: reportMutation.result.isLoading
+                              ? null
+                              : () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
 
-                                  reportMutation.runMutation({
-                                    'comment': telepastoringReport,
-                                    'roleLevel': level,
-                                    'memberId': widget.member.id,
-                                    'cycleId': cycle.id
-                                  });
-                                }
-                              },
-                        child: reportMutation.result.isLoading
-                            ? const SubmittingButtonText()
-                            : const Text('Submit'),
+                                    reportMutation.runMutation({
+                                      'comment': telepastoringReport,
+                                      'roleLevel': level,
+                                      'memberId': widget.member.id,
+                                      'cycleId': cycle.id
+                                    });
+                                  }
+                                },
+                          child: reportMutation.result.isLoading
+                              ? const SubmittingButtonText()
+                              : const Text('Submit'),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

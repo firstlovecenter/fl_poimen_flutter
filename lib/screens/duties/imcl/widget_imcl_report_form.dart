@@ -80,8 +80,8 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SizedBox(
-        height: 200,
+      child: FractionallySizedBox(
+        heightFactor: 0.9,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -111,10 +111,10 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
+                          padding: WidgetStateProperty.all(
                             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
