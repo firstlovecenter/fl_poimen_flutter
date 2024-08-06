@@ -77,8 +77,8 @@ VERSION:3.0
 N:${member.lastName};${member.firstName};${member.middleName.trim() != '' ? '${member.middleName};' : ''}${member.currentTitle != null ? '${member.currentTitle};' : ''}
 FN:${member.nameWithTitle}
 ORG:FLC ${member.council.name} Council;${member.email != null ? '\nEMAIL;type=INTERNET;type=HOME;type=pref:${member.email}' : ''}
-TEL;type=CELL;type=VOICE;type=pref:${member.phoneNumber}
-${member.whatsappNumber != member.phoneNumber ? ';TYPE=HOME:${member.whatsappNumber}' : ''}
+TEL;type=CELL;type=VOICE;type=pref:+${member.phoneNumber}
+${member.whatsappNumber != member.phoneNumber ? ';TYPE=HOME:+${member.whatsappNumber}' : ''}
 NOTE:Visitation Landmark: ${member.visitationArea}\\nOccupation: ${member.occupation?.occupation.trim() == '' ? 'None' : member.occupation?.occupation}\\nMarital Status: ${member.maritalStatus.status.name}\\n${member.roles != '' ? '\\nRoles in Church\\n${member.roles}\\n' : ''}\n${base64Image != '' ? 'PHOTO;ENCODING=b;TYPE=JPEG:$base64Image\n' : ''}BDAY:${member.dob.date.toIso8601String().substring(0, 10)}
 ADR;TYPE=HOME:;;;;${member.visitationArea};;\nEND:VCARD''';
 

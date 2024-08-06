@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart' as notification;
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/theme.dart';
 
 class AvatarWithInitials extends StatelessWidget {
   const AvatarWithInitials({
@@ -30,7 +29,7 @@ class AvatarWithInitials extends StatelessWidget {
       // position: const BadgePosition(end: 0),
       child: CircleAvatar(
         foregroundImage: computedImage(member.pictureUrl),
-        backgroundColor: PoimenTheme().getRandomColor(),
+        backgroundColor: Colors.amberAccent,
         radius: radius ?? 20,
         child: Text(
           member.firstName.substring(0, 1) + member.lastName.substring(0, 1),
