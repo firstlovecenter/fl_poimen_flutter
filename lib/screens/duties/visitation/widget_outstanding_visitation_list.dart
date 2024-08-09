@@ -217,12 +217,12 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
-                        foregroundColor: MaterialStateProperty.all(Colors.black),
-                        padding: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(PoimenTheme.whatsappColor),
+                        foregroundColor: WidgetStateProperty.all(Colors.black),
+                        padding: WidgetStateProperty.all(
                           const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         ),
-                        shape: MaterialStateProperty.all(
+                        shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -256,10 +256,10 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
 
 ButtonStyle _outstandingVisitationButtonStyle() {
   return ButtonStyle(
-    padding: MaterialStateProperty.all(
+    padding: WidgetStateProperty.all(
       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     ),
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),

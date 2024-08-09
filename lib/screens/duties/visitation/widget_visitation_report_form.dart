@@ -178,7 +178,6 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            backgroundColor: Colors.blueGrey,
                           ),
                           child: locationSet
                               ? const Row(

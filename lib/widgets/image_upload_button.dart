@@ -66,9 +66,7 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
             : progress == 1.0
                 ? const ElevatedButton(onPressed: null, child: Text('Upload Complete'))
                 : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                    ),
+                    style: ElevatedButton.styleFrom(),
                     onPressed: () async {
                       final memberId =
                           AuthService.instance.idToken?.userId.replaceFirst('auth0|', '');

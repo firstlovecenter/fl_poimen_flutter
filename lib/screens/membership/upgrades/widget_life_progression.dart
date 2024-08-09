@@ -101,12 +101,12 @@ class _LifeProgressionWidgetState extends State<LifeProgressionWidget> {
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: widget.lifeProgressionMutation.result.isLoading
-            ? const MaterialStatePropertyAll<Color>(PoimenTheme.darkCardColor)
-            : MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
-        padding: MaterialStateProperty.all(
+            ? const WidgetStatePropertyAll<Color>(PoimenTheme.darkCardColor)
+            : WidgetStatePropertyAll<Color>(color ?? PoimenTheme.brand),
+        padding: WidgetStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         ),
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
