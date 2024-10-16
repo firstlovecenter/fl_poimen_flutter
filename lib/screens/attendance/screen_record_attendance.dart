@@ -18,18 +18,18 @@ class RecordAttendanceScreen extends StatelessWidget {
 
     return GQLQueryContainer(
         query: getGovernorshipMeetings,
-        variables: {'id': churchState.constituencyId},
+        variables: {'id': churchState.governorshipId},
         defaultPageTitle: 'Services',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final constituency = ChurchForMeetingsList.fromJson(data?['constituencies'][0]);
+          final governorship = ChurchForMeetingsList.fromJson(data?['governorships'][0]);
 
-          body = RecordedMeetingsList(meetings: constituency.poimenMeetings);
+          body = RecordedMeetingsList(meetings: governorship.poimenMeetings);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Meetings', church: constituency),
+            pageTitle: PageTitle(pageTitle: 'Recent Meetings', church: governorship),
             body: body,
           );
         });

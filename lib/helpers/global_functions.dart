@@ -4,10 +4,10 @@ ChurchLevel getSubChurch(ChurchLevel level) {
   switch (level) {
     case ChurchLevel.bacenta:
       return ChurchLevel.fellowship;
-    case ChurchLevel.constituency:
+    case ChurchLevel.governorship:
       return ChurchLevel.bacenta;
     case ChurchLevel.council:
-      return ChurchLevel.constituency;
+      return ChurchLevel.governorship;
     case ChurchLevel.stream:
       return ChurchLevel.council;
     case ChurchLevel.campus:

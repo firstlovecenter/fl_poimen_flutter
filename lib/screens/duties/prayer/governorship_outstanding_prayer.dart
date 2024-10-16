@@ -9,28 +9,28 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyOutstandingPrayerScreen extends StatelessWidget {
-  const ConstituencyOutstandingPrayerScreen({Key? key}) : super(key: key);
+class GovernorshipOutstandingPrayerScreen extends StatelessWidget {
+  const GovernorshipOutstandingPrayerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-      query: getConstituencyOutstandingPrayer,
-      variables: {'id': churchState.constituencyId},
-      defaultPageTitle: 'Constituency Outstanding Prayers',
+      query: getGovernorshipOutstandingPrayer,
+      variables: {'id': churchState.governorshipId},
+      defaultPageTitle: 'Governorship Outstanding Prayers',
       bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 2),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency = ChurchForOutstandingPrayerList.fromJson(data?['constituencies'][0]);
+        final governorship = ChurchForOutstandingPrayerList.fromJson(data?['governorships'][0]);
 
-        body = ChurchOutstandingPrayerList(church: constituency);
+        body = ChurchOutstandingPrayerList(church: governorship);
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
-            church: constituency,
+            church: governorship,
             pageTitle: 'Outstanding Prayers',
           ),
           body: body,

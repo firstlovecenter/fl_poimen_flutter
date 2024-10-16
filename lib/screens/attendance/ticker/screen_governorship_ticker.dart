@@ -11,23 +11,23 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyAttendanceTickerScreen extends StatelessWidget {
-  const ConstituencyAttendanceTickerScreen({Key? key}) : super(key: key);
+class GovernorshipAttendanceTickerScreen extends StatelessWidget {
+  const GovernorshipAttendanceTickerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getConstituencyMembers,
+        query: getGovernorshipMembers,
         variables: {
-          'id': churchState.constituencyId,
+          'id': churchState.governorshipId,
         },
-        defaultPageTitle: 'Tick Constituency Membership Attendance',
+        defaultPageTitle: 'Tick Governorship Membership Attendance',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final constituency = ChurchForMemberListByCategory.fromJson(data?['constituencies'][0]);
+          final governorship = ChurchForMemberListByCategory.fromJson(data?['governorships'][0]);
 
           final attendanceMutation = useMutation(
             MutationOptions(
@@ -89,14 +89,14 @@ class ConstituencyAttendanceTickerScreen extends StatelessWidget {
 
           body = WidgetAttendanceTickerOnDate(
             category: ServiceCategory.service,
-            church: constituency,
+            church: governorship,
             tickerMutation: attendanceMutation,
           );
 
           var returnValues = GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
               pageTitle: 'Tick Membership Attendance',
-              church: constituency,
+              church: governorship,
             ),
             body: body,
           );

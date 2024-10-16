@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:poimen/state/enums.dart';
 
 const _higherChurches = [
-  ChurchLevel.constituency,
+  ChurchLevel.governorship,
   ChurchLevel.council,
   ChurchLevel.stream,
   ChurchLevel.campus
@@ -82,7 +82,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.bacenta,
-      ChurchLevel.constituency,
+      ChurchLevel.governorship,
       ChurchLevel.council,
     ].contains(churchLevel)
         ? {
@@ -94,7 +94,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.bacenta,
-      ChurchLevel.constituency,
+      ChurchLevel.governorship,
       ChurchLevel.council,
     ].contains(churchLevel)
         ? {
@@ -106,7 +106,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
         : null,
     [
       ChurchLevel.bacenta,
-      ChurchLevel.constituency,
+      ChurchLevel.governorship,
       ChurchLevel.council,
     ].contains(churchLevel)
         ? {

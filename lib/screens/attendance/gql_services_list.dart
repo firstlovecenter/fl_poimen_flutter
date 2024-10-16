@@ -2,7 +2,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 final getGovernorshipMeetings = gql('''
 query getGovernorshipMeetings(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name

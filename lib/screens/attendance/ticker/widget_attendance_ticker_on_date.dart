@@ -124,7 +124,7 @@ class _WidgetAttendanceTickerOnDateState extends State<WidgetAttendanceTickerOnD
                       membership.where((member) => !_presentMembers.contains(member)).toList();
 
                   widget.tickerMutation.runMutation({
-                    'constituencyId': churchState.constituencyId,
+                    'governorshipId': churchState.governorshipId,
                     'hubId': churchState.hubId,
                     'date': _selectedDate.toString().split(' ')[0],
                     'presentMembers': _presentMembers,

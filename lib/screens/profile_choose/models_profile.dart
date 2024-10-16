@@ -23,8 +23,8 @@ class Profile {
   String lastName;
   String pictureUrl;
   List<ProfileChurch> leadsBacenta;
-  List<ProfileChurch> leadsConstituency;
-  List<ProfileChurch> isAdminForConstituency;
+  List<ProfileChurch> leadsGovernorship;
+  List<ProfileChurch> isAdminForGovernorship;
   List<ProfileChurch> leadsCouncil;
   List<ProfileChurch> isAdminForCouncil;
   List<ProfileChurch> leadsStream;
@@ -44,8 +44,8 @@ class Profile {
     required this.lastName,
     required this.pictureUrl,
     required this.leadsBacenta,
-    required this.leadsConstituency,
-    required this.isAdminForConstituency,
+    required this.leadsGovernorship,
+    required this.isAdminForGovernorship,
     required this.leadsCouncil,
     required this.isAdminForCouncil,
     required this.leadsStream,

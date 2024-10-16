@@ -12,10 +12,10 @@ String parseRole(Role role) {
       return 'Fellowship Leader';
     case Role.leaderBacenta:
       return 'Bacenta Leader';
-    case Role.leaderConstituency:
-      return 'Constituency Leader';
-    case Role.adminConstituency:
-      return 'Constituency Admin';
+    case Role.leaderGovernorship:
+      return 'Governorship Leader';
+    case Role.adminGovernorship:
+      return 'Governorship Admin';
     case Role.leaderCouncil:
       return 'Council Leader';
     case Role.adminCouncil:
@@ -54,7 +54,7 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
   const permittedLevels = [
     ChurchLevel.fellowship,
     ChurchLevel.bacenta,
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
     ChurchLevel.hub,
     ChurchLevel.hubCouncil,
@@ -99,7 +99,7 @@ List<Widget> attendanceLevels(ChurchLevel churchLevel) {
     ];
   }
 
-  if (churchLevel == ChurchLevel.constituency) {
+  if (churchLevel == ChurchLevel.governorship) {
     return [
       HomePageButton(
         text: 'Record Attendance',
@@ -134,7 +134,7 @@ List<Widget> hubAttendanceLevels(ChurchLevel churchLevel) {
 
 Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
   const permittedLevels = [
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
     ChurchLevel.stream,
     ChurchLevel.campus
@@ -158,7 +158,7 @@ Widget imclLevels(ChurchLevel churchLevel, int? imclTotal) {
 
 Widget defaultersLevels(ChurchLevel churchLevel, int? defaulterCount) {
   const permittedLevels = [
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
     ChurchLevel.stream,
     ChurchLevel.campus
@@ -189,7 +189,7 @@ Widget outstandingVisitationLevels(ChurchLevel churchLevel, int? outstandingVisi
   const permittedLevels = [
     ChurchLevel.fellowship,
     ChurchLevel.bacenta,
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
   ];
 
@@ -213,7 +213,7 @@ Widget outstandingPrayerLevels(ChurchLevel churchLevel, int? outstandingPrayerTo
   const permittedLevels = [
     ChurchLevel.fellowship,
     ChurchLevel.bacenta,
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
   ];
 
@@ -237,7 +237,7 @@ Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingT
   const permittedLevels = [
     ChurchLevel.fellowship,
     ChurchLevel.bacenta,
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
   ];
 
@@ -259,7 +259,7 @@ Widget outstandingTelepastoringLevels(ChurchLevel churchLevel, int? outstandingT
 
 Widget myLeadersTrendsLevels(ChurchLevel churchLevel) {
   const permittedLevels = [
-    ChurchLevel.constituency,
+    ChurchLevel.governorship,
     ChurchLevel.council,
     ChurchLevel.stream,
     ChurchLevel.campus,

@@ -3,7 +3,7 @@
 enum ChurchLevel {
   fellowship,
   bacenta,
-  constituency,
+  governorship,
   council,
   stream,
   campus,
@@ -30,9 +30,9 @@ ChurchLevel getChurchLevelFromAuth(List<String> role) {
       .isNotEmpty) {
     return ChurchLevel.council;
   } else if (role
-      .where((element) => ['leaderConstituency', 'adminConstituency'].contains(element))
+      .where((element) => ['leaderGovernorship', 'adminGovernorship'].contains(element))
       .isNotEmpty) {
-    return ChurchLevel.constituency;
+    return ChurchLevel.governorship;
   } else if (role.where((element) => ['leaderBacenta'].contains(element)).isNotEmpty) {
     return ChurchLevel.bacenta;
   } else if (role.contains('leaderFellowship')) {
@@ -47,10 +47,10 @@ Role getRoleEnum(ChurchLevel churchLevel, ChurchRole role) {
     return Role.leaderFellowship;
   } else if (churchLevel == ChurchLevel.bacenta && role == ChurchRole.leader) {
     return Role.leaderBacenta;
-  } else if (churchLevel == ChurchLevel.constituency && role == ChurchRole.leader) {
-    return Role.leaderConstituency;
-  } else if (churchLevel == ChurchLevel.constituency && role == ChurchRole.admin) {
-    return Role.adminConstituency;
+  } else if (churchLevel == ChurchLevel.governorship && role == ChurchRole.leader) {
+    return Role.leaderGovernorship;
+  } else if (churchLevel == ChurchLevel.governorship && role == ChurchRole.admin) {
+    return Role.adminGovernorship;
   } else if (churchLevel == ChurchLevel.council && role == ChurchRole.leader) {
     return Role.leaderCouncil;
   } else if (churchLevel == ChurchLevel.council && role == ChurchRole.admin) {
@@ -89,8 +89,8 @@ ChurchLevel convertToChurchEnum(String churchLevel) {
       return ChurchLevel.fellowship;
     case 'bacenta':
       return ChurchLevel.bacenta;
-    case 'constituency':
-      return ChurchLevel.constituency;
+    case 'governorship':
+      return ChurchLevel.governorship;
     case 'council':
       return ChurchLevel.council;
     case 'stream':
@@ -134,7 +134,7 @@ class ChurchString {
     _lowerCase = _lowerCase == 'campus' ? 'campus' : levelLowerCase;
     _properCase = levelLowerCase[0].toUpperCase() + levelLowerCase.substring(1);
     _pluralLowerCase = _convertToPluralLowerCase(_lowerCase);
-    _pluralProperCase = _properCase == 'Constituency' ? 'Constituencies' : '${_properCase}s';
+    _pluralProperCase = _properCase == 'Governorship' ? 'Governorships' : '${_properCase}s';
   }
 
   String get lowerCase => _lowerCase;
@@ -144,8 +144,8 @@ class ChurchString {
 }
 
 String _convertToPluralLowerCase(String churchString) {
-  if (churchString == 'constituency') {
-    return 'constituencies';
+  if (churchString == 'governorship') {
+    return 'governorships';
   }
   if (churchString == 'campus') {
     return 'campuses';
@@ -172,7 +172,7 @@ enum MemberCategory { Sheep, Deer, Goat }
 enum Role {
   leaderFellowship,
   leaderBacenta,
-  leaderConstituency,
+  leaderGovernorship,
   leaderCouncil,
   leaderStream,
   leaderCampus,
@@ -180,7 +180,7 @@ enum Role {
   leaderHubCouncil,
   leaderMinistry,
   leaderCreativeArts,
-  adminConstituency,
+  adminGovernorship,
   adminCouncil,
   adminStream,
   adminCampus,
@@ -194,8 +194,8 @@ List<Role> permitRoleAndHigher(Role role) {
     return [
       Role.leaderFellowship,
       Role.leaderBacenta,
-      Role.leaderConstituency,
-      Role.adminConstituency,
+      Role.leaderGovernorship,
+      Role.adminGovernorship,
       Role.leaderCouncil,
       Role.adminCouncil,
       Role.leaderStream,
@@ -208,8 +208,8 @@ List<Role> permitRoleAndHigher(Role role) {
   if (role == Role.leaderBacenta) {
     return [
       Role.leaderBacenta,
-      Role.leaderConstituency,
-      Role.adminConstituency,
+      Role.leaderGovernorship,
+      Role.adminGovernorship,
       Role.leaderCouncil,
       Role.adminCouncil,
       Role.leaderStream,
@@ -219,10 +219,10 @@ List<Role> permitRoleAndHigher(Role role) {
     ];
   }
 
-  if (role == Role.leaderConstituency || role == Role.adminConstituency) {
+  if (role == Role.leaderGovernorship || role == Role.adminGovernorship) {
     return [
-      Role.leaderConstituency,
-      Role.adminConstituency,
+      Role.leaderGovernorship,
+      Role.adminGovernorship,
       Role.leaderCouncil,
       Role.adminCouncil,
       Role.leaderStream,

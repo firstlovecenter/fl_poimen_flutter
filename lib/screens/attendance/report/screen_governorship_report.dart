@@ -8,30 +8,30 @@ import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyAttendanceReportScreen extends StatelessWidget {
-  const ConstituencyAttendanceReportScreen({Key? key}) : super(key: key);
+class GovernorshipAttendanceReportScreen extends StatelessWidget {
+  const GovernorshipAttendanceReportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getConstituencyServiceReport,
+        query: getGovernorshipServiceReport,
         variables: {
-          'constituencyId': churchState.constituencyId,
+          'governorshipId': churchState.governorshipId,
           'poimenRecordId': churchState.serviceRecordId,
         },
-        defaultPageTitle: 'Constituency Attendance Report',
+        defaultPageTitle: 'Governorship Attendance Report',
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final constituency = Church.fromJson(data?['constituencies'][0]);
+          final governorship = Church.fromJson(data?['governorships'][0]);
 
           if (data?['poimenRecords'].isEmpty) {
             body = const Center(child: Text('No Records'));
 
             return GQLQueryContainerReturnValue(
-              pageTitle: PageTitle(pageTitle: 'Attendance Report', church: constituency),
+              pageTitle: PageTitle(pageTitle: 'Attendance Report', church: governorship),
               body: body,
             );
           }
@@ -39,12 +39,12 @@ class ConstituencyAttendanceReportScreen extends StatelessWidget {
           final serviceRecord = MeetingsForReport.fromJson(data?['poimenRecords'][0]);
 
           body = ChurchMeetingsReport(
-            church: constituency,
+            church: governorship,
             record: serviceRecord,
           );
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: constituency),
+            pageTitle: PageTitle(pageTitle: 'Attendance Report', church: governorship),
             body: body,
           );
         });

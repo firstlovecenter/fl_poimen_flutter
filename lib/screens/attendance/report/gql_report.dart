@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getConstituencyServiceReport = gql('''
-query getConstituencyServiceReport(\$poimenRecordId: ID!, \$constituencyId: ID!) {
-    constituencies(where: { id: \$constituencyId }) {
+final getGovernorshipServiceReport = gql('''
+query getGovernorshipServiceReport(\$poimenRecordId: ID!, \$governorshipId: ID!) {
+    governorships(where: { id: \$governorshipId }) {
       id
       typename
       name

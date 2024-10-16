@@ -52,9 +52,9 @@ final getBacentaOutstandingVisitations = gql('''
   }
 ''');
 
-final getConstituencyOutstandingVisitations = gql('''
- query getConstituencyOutstandingVisitations(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipOutstandingVisitations = gql('''
+ query getGovernorshipOutstandingVisitations(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -146,9 +146,9 @@ final getBacentaCompletedVisitations = gql('''
   }
 ''');
 
-final getConstituencyCompletedVisitations = gql('''
- query getConstituencyCompletedVisitations(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipCompletedVisitations = gql('''
+ query getGovernorshipCompletedVisitations(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -274,8 +274,8 @@ mutation LogBacentaVisitationActivity(
   }
 ''');
 
-final logConstituencyVisitationActivity = gql('''
-mutation LogConstituencyVisitationActivity(
+final logGovernorshipVisitationActivity = gql('''
+mutation LogGovernorshipVisitationActivity(
     \$latitude: Float!
     \$longitude: Float!
     \$visitationArea: String!
@@ -284,7 +284,7 @@ mutation LogConstituencyVisitationActivity(
     \$roleLevel: String!
     \$memberId: ID!
     \$cycleId: ID!){
-  LogConstituencyVisitationActivity(
+  LogGovernorshipVisitationActivity(
     latitude: \$latitude,
     longitude: \$longitude,
     visitationArea: \$visitationArea,

@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getConstituencyAttendanceDefaulters = gql('''
-   query getConstituencyAttendanceDefaulters(\$id: ID!) {
-     constituencies(where: { id: \$id }) {
+final getGovernorshipAttendanceDefaulters = gql('''
+   query getGovernorshipAttendanceDefaulters(\$id: ID!) {
+     governorships(where: { id: \$id }) {
        id
        name
        typename
@@ -13,9 +13,9 @@ final getConstituencyAttendanceDefaulters = gql('''
    }
   ''');
 
-final getConstituencyFellowshipServiceAttendanceDefaultersList = gql('''
- query getConstituencyFellowshipServiceAttendanceDefaultersList(\$id: ID!) {
-  constituencies(where: { id: \$id }) {
+final getGovernorshipFellowshipServiceAttendanceDefaultersList = gql('''
+ query getGovernorshipFellowshipServiceAttendanceDefaultersList(\$id: ID!) {
+  governorships(where: { id: \$id }) {
     id
     name
     typename
@@ -37,9 +37,9 @@ final getConstituencyFellowshipServiceAttendanceDefaultersList = gql('''
 }
 ''');
 
-final getConstituencyBussingAttendanceDefaultersList = gql('''
- query getConstituencyBussingAttendanceDefaultersList(\$id: ID!) {
-  constituencies(where: { id: \$id }) {
+final getGovernorshipBussingAttendanceDefaultersList = gql('''
+ query getGovernorshipBussingAttendanceDefaultersList(\$id: ID!) {
+  governorships(where: { id: \$id }) {
     id
     name
     typename
@@ -67,7 +67,7 @@ final getCouncilAttendanceDefaulters = gql('''
        id
        name
        typename
-       constituencyCount
+       governorshipCount
        fellowshipServiceAttendanceDefaultersCount
        fellowshipBussingAttendanceDefaultersCount
      }

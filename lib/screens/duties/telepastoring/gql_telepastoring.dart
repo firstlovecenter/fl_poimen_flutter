@@ -42,9 +42,9 @@ final getBacentaOutstandingTelepastoring = gql('''
   }
 ''');
 
-final getConstituencyOutstandingTelepastoring = gql('''
- query getConstituencyOutstandingTelepastoring(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipOutstandingTelepastoring = gql('''
+ query getGovernorshipOutstandingTelepastoring(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -126,9 +126,9 @@ final getBacentaCompletedTelepastoring = gql('''
   }
 ''');
 
-final getConstituencyCompletedTelepastoring = gql('''
- query getConstituencyCompletedTelepastoring(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipCompletedTelepastoring = gql('''
+ query getGovernorshipCompletedTelepastoring(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -226,13 +226,13 @@ mutation LogBacentaTelepastoringActivity(
   }
 ''');
 
-final logConstituencyTelepastoringActivity = gql('''
-mutation LogConstituencyTelepastoringActivity(
+final logGovernorshipTelepastoringActivity = gql('''
+mutation LogGovernorshipTelepastoringActivity(
     \$comment: String!
     \$roleLevel: String!
     \$memberId: ID!
     \$cycleId: ID!){
-  LogConstituencyTelepastoringActivity(
+  LogGovernorshipTelepastoringActivity(
     comment: \$comment, 
     roleLevel: \$roleLevel, 
     memberId: \$memberId, 

@@ -1,12 +1,12 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-final getCouncilAttendanceDefaultersByConstituency = gql('''
-   query getCouncilAttendanceDefaultersByConstituency(\$id: ID!) {
+final getCouncilAttendanceDefaultersByGovernorship = gql('''
+   query getCouncilAttendanceDefaultersByGovernorship(\$id: ID!) {
      councils(where: { id: \$id }) {
        id
        name
        typename
-       constituencies (options: {sort: [{name: ASC}]}) {
+       governorships (options: {sort: [{name: ASC}]}) {
           id
           name
           typename

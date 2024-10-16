@@ -42,9 +42,9 @@ final getBacentaOutstandingPrayer = gql('''
   }
 ''');
 
-final getConstituencyOutstandingPrayer = gql('''
- query getConstituencyOutstandingPrayer(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipOutstandingPrayer = gql('''
+ query getGovernorshipOutstandingPrayer(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -126,9 +126,9 @@ final getBacentaCompletedPrayer = gql('''
   }
 ''');
 
-final getConstituencyCompletedPrayer = gql('''
- query getConstituencyCompletedPrayer(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipCompletedPrayer = gql('''
+ query getGovernorshipCompletedPrayer(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -226,13 +226,13 @@ mutation LogBacentaPrayerActivity(
   }
 ''');
 
-final logConstituencyPrayerActivity = gql('''
-mutation LogConstituencyPrayerActivity(
+final logGovernorshipPrayerActivity = gql('''
+mutation LogGovernorshipPrayerActivity(
     \$comment: String!
     \$roleLevel: String!
     \$memberId: ID!
     \$cycleId: ID!){
-  LogConstituencyPrayerActivity(
+  LogGovernorshipPrayerActivity(
     comment: \$comment, 
     roleLevel: \$roleLevel, 
     memberId: \$memberId, 

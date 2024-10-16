@@ -24,9 +24,9 @@ class HomeScreen extends StatelessWidget {
       pluralName = 'bacentas';
       query = getBacentaHomeScreen;
     }
-    if (church.typename == 'Constituency') {
-      pluralName = 'constituencies';
-      query = getConstituencyHomeScreen;
+    if (church.typename == 'Governorship') {
+      pluralName = 'governorships';
+      query = getGovernorshipHomeScreen;
     }
     if (church.typename == 'Council') {
       pluralName = 'councils';

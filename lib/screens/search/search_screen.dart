@@ -34,9 +34,9 @@ class _SearchScreenState extends State<SearchScreen> {
       pluralName = 'bacentas';
       query = searchBacenta;
     }
-    if (church.typename == 'Constituency') {
-      pluralName = 'constituencies';
-      query = searchConstituency;
+    if (church.typename == 'Governorship') {
+      pluralName = 'governorships';
+      query = searchGovernorship;
     }
     if (church.typename == 'Council') {
       pluralName = 'councils';

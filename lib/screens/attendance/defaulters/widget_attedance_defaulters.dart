@@ -24,8 +24,8 @@ class ChurchAttendanceDefaulters extends StatelessWidget {
       subChurchCount = church.bacentaCount;
     }
 
-    if (church.constituencyCount != null) {
-      subChurchCount = church.constituencyCount;
+    if (church.governorshipCount != null) {
+      subChurchCount = church.governorshipCount;
     }
 
     if (church.councilCount != null) {

@@ -9,8 +9,8 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ScreenConstituencyMeetings extends StatelessWidget {
-  const ScreenConstituencyMeetings({Key? key}) : super(key: key);
+class ScreenGovernorshipMeetings extends StatelessWidget {
+  const ScreenGovernorshipMeetings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +18,18 @@ class ScreenConstituencyMeetings extends StatelessWidget {
 
     return GQLQueryContainer(
         query: getGovernorshipMeetings,
-        variables: {'id': churchState.constituencyId},
-        defaultPageTitle: 'Constituency Services',
+        variables: {'id': churchState.governorshipId},
+        defaultPageTitle: 'Governorship Services',
         bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final constituency = ChurchForServicesList.fromJson(data?['constituencys'][0]);
+          final governorship = ChurchForServicesList.fromJson(data?['governorships'][0]);
 
-          body = ChurchServicesList(services: constituency.services);
+          body = ChurchServicesList(services: governorship.services);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Services', church: constituency),
+            pageTitle: PageTitle(pageTitle: 'Recent Services', church: governorship),
             body: body,
           );
         });

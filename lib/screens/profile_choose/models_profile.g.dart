@@ -6,15 +6,13 @@ part of 'models_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) =>
-    ProfileChurch(
+ProfileChurch _$ProfileChurchFromJson(Map<String, dynamic> json) => ProfileChurch(
       id: json['id'] as String,
       typename: json['typename'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProfileChurchToJson(ProfileChurch instance) => <String, dynamic>{
       'id': instance.id,
       'typename': instance.typename,
       'name': instance.name,
@@ -28,10 +26,10 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       leadsBacenta: (json['leadsBacenta'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
-      leadsConstituency: (json['leadsConstituency'] as List<dynamic>)
+      leadsGovernorship: (json['leadsGovernorship'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isAdminForConstituency: (json['isAdminForConstituency'] as List<dynamic>)
+      isAdminForGovernorship: (json['isAdminForGovernorship'] as List<dynamic>)
           .map((e) => ProfileChurch.fromJson(e as Map<String, dynamic>))
           .toList(),
       leadsCouncil: (json['leadsCouncil'] as List<dynamic>)
@@ -78,8 +76,8 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'pictureUrl': instance.pictureUrl,
       'leadsBacenta': instance.leadsBacenta,
-      'leadsConstituency': instance.leadsConstituency,
-      'isAdminForConstituency': instance.isAdminForConstituency,
+      'leadsGovernorship': instance.leadsGovernorship,
+      'isAdminForGovernorship': instance.isAdminForGovernorship,
       'leadsCouncil': instance.leadsCouncil,
       'isAdminForCouncil': instance.isAdminForCouncil,
       'leadsStream': instance.leadsStream,

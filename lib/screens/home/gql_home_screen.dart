@@ -42,9 +42,9 @@ final getBacentaHomeScreen = gql('''
   }
 ''');
 
-final getConstituencyHomeScreen = gql('''
-  query getConstituencyHomeScreen(\$id: ID!){
-    constituencies(where: {id: \$id}){
+final getGovernorshipHomeScreen = gql('''
+  query getGovernorshipHomeScreen(\$id: ID!){
+    governorships(where: {id: \$id}){
       id
       typename
       name
@@ -183,9 +183,9 @@ final getBacentaPastoralCycle = gql('''
 }
 ''');
 
-final getConstituencyPastoralCycle = gql('''
- mutation getConstituencyPastoralCycle {
-  currentConstituencyPastoralCycle {
+final getGovernorshipPastoralCycle = gql('''
+ mutation getGovernorshipPastoralCycle {
+  currentGovernorshipPastoralCycle {
     typename
     startDate
     endDate

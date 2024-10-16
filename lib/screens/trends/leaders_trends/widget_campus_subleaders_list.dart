@@ -58,8 +58,8 @@ class CampusSubLeadersListWidget extends StatelessWidget {
                           onPressed: () {
                             if (church.typename == 'Fellowship') {
                               churchState.fellowshipId = church.id;
-                            } else if (church.typename == 'Constituency') {
-                              churchState.constituencyId = church.id;
+                            } else if (church.typename == 'Governorship') {
+                              churchState.governorshipId = church.id;
                             } else if (church.typename == 'Council') {
                               churchState.councilId = church.id;
                             } else if (church.typename == 'Stream') {
@@ -92,8 +92,8 @@ class CampusSubLeadersListWidget extends StatelessWidget {
                                 onPressed: () {
                                   if (church.typename == 'Fellowship') {
                                     churchState.fellowshipId = church.id;
-                                  } else if (church.typename == 'Constituency') {
-                                    churchState.constituencyId = church.id;
+                                  } else if (church.typename == 'Governorship') {
+                                    churchState.governorshipId = church.id;
                                   } else if (church.typename == 'Council') {
                                     churchState.councilId = church.id;
                                   } else if (church.typename == 'Stream') {

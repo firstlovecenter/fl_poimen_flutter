@@ -9,28 +9,28 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyIMCLScreen extends StatelessWidget {
-  const ConstituencyIMCLScreen({Key? key}) : super(key: key);
+class GovernorshipIMCLScreen extends StatelessWidget {
+  const GovernorshipIMCLScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-      query: getConstituencyImcls,
-      variables: {'id': churchState.constituencyId},
-      defaultPageTitle: 'Constituency IMCL List',
+      query: getGovernorshipImcls,
+      variables: {'id': churchState.governorshipId},
+      defaultPageTitle: 'Governorship IMCL List',
       bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 1),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency = ChurchForImclList.fromJson(data?['constituencies'][0]);
+        final governorship = ChurchForImclList.fromJson(data?['governorships'][0]);
 
-        body = ChurchImclList(church: constituency);
+        body = ChurchImclList(church: governorship);
 
         return GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
-              church: constituency,
+              church: governorship,
               pageTitle: 'IMCL List',
             ),
             body: body);

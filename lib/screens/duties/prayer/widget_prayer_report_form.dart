@@ -40,8 +40,8 @@ class _OutstandingPrayerReportFormState extends State<OutstandingPrayerReportFor
     if (church.typename == 'Bacenta') {
       query = logBacentaPrayerActivity;
     }
-    if (church.typename == 'Constituency') {
-      query = logConstituencyPrayerActivity;
+    if (church.typename == 'Governorship') {
+      query = logGovernorshipPrayerActivity;
     }
     if (church.typename == 'Council') {
       query = logCouncilPrayerActivity;

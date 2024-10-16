@@ -100,7 +100,7 @@ Future<void> downloadAndOpenVCard(Member member) async {
 
 const _roleTypes = [
   'Bacenta',
-  'Constituency',
+  'Governorship',
   'Council',
   'Stream',
   'Campus',
@@ -111,7 +111,7 @@ const _roleTypes = [
 ];
 
 const _adminTypes = [
-  'Constituency',
+  'Governorship',
   'Council',
   'Stream',
   'Campus',

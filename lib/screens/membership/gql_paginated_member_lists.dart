@@ -312,9 +312,9 @@ final getCouncilDeerForList = gql('''
   }
 ''');
 
-final getConstituencyMembershipNumbers = gql('''
-query getConstituencyMembershipNumbers(\$id: ID!) {
-  constituencies(where: { id: \$id }) {
+final getGovernorshipMembershipNumbers = gql('''
+query getGovernorshipMembershipNumbers(\$id: ID!) {
+  governorships(where: { id: \$id }) {
     id
     typename
     name
@@ -332,9 +332,9 @@ query getConstituencyMembershipNumbers(\$id: ID!) {
 }
 ''');
 
-final getConstituencySheepForList = gql('''
-   query getConstituenciesheep(\$id: ID!, \$first: Int! \$after: Int!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipSheepForList = gql('''
+   query getGovernorshipsheep(\$id: ID!, \$first: Int! \$after: Int!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -360,9 +360,9 @@ final getConstituencySheepForList = gql('''
   }
 ''');
 
-final getConstituencyGoatsForList = gql('''
-   query getConstituencyGoats(\$id: ID!, \$first: Int! \$after: Int!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipGoatsForList = gql('''
+   query getGovernorshipGoats(\$id: ID!, \$first: Int! \$after: Int!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name
@@ -388,9 +388,9 @@ final getConstituencyGoatsForList = gql('''
   }
 ''');
 
-final getConstituencyDeerForList = gql('''
-   query getConstituencyDeer(\$id: ID!, \$first: Int! \$after: Int!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipDeerForList = gql('''
+   query getGovernorshipDeer(\$id: ID!, \$first: Int! \$after: Int!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name

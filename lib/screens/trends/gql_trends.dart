@@ -26,9 +26,9 @@ final getFellowshipTrendsMenu = gql('''
   }
 ''');
 
-final getConstituencyTrendsMenu = gql('''
-  query getConstituencyTrendsMenu(\$id: ID!) {
-    constituencies(where: {id: \$id}) {
+final getGovernorshipTrendsMenu = gql('''
+  query getGovernorshipTrendsMenu(\$id: ID!) {
+    governorships(where: {id: \$id}) {
       id
       typename
       name

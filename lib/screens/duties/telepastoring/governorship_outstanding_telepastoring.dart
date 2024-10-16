@@ -9,29 +9,29 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyOutstandingTelepastoringScreen extends StatelessWidget {
-  const ConstituencyOutstandingTelepastoringScreen({Key? key}) : super(key: key);
+class GovernorshipOutstandingTelepastoringScreen extends StatelessWidget {
+  const GovernorshipOutstandingTelepastoringScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-      query: getConstituencyOutstandingTelepastoring,
-      variables: {'id': churchState.constituencyId},
-      defaultPageTitle: 'Constituency Outstanding Telepastorings',
+      query: getGovernorshipOutstandingTelepastoring,
+      variables: {'id': churchState.governorshipId},
+      defaultPageTitle: 'Governorship Outstanding Telepastorings',
       bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 4),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
-        final constituency =
-            ChurchForOutstandingTelepastoringList.fromJson(data?['constituencies'][0]);
+        final governorship =
+            ChurchForOutstandingTelepastoringList.fromJson(data?['governorships'][0]);
 
-        body = ChurchOutstandingTelepastoringList(church: constituency);
+        body = ChurchOutstandingTelepastoringList(church: governorship);
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
-            church: constituency,
+            church: governorship,
             pageTitle: 'Outstanding Telepastorings',
           ),
           body: body,

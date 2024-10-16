@@ -14,12 +14,12 @@ final getUserRoles = gql('''
         typename
         name
       }
-      leadsConstituency {
+      leadsGovernorship {
         id
         typename
         name
       }
-      isAdminForConstituency {
+      isAdminForGovernorship {
         id
         typename
         name

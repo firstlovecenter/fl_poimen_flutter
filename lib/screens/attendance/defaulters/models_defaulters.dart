@@ -4,12 +4,12 @@ part 'models_defaulters.g.dart';
 
 @JsonSerializable()
 class ChurchBySubChurchForAttendanceDefaulters extends Church {
-  List<ChurchForAttendanceDefaulters>? constituencies;
+  List<ChurchForAttendanceDefaulters>? governorships;
   List<ChurchForAttendanceDefaulters>? councils;
   List<ChurchForAttendanceDefaulters>? streams;
 
   ChurchBySubChurchForAttendanceDefaulters({
-    this.constituencies,
+    this.governorships,
     this.councils,
     this.streams,
   });
@@ -27,7 +27,7 @@ class ChurchForAttendanceDefaulters extends Church {
   int fellowshipBussingAttendanceDefaultersCount = 0;
   int? fellowshipCount = 0;
   int? bacentaCount = 0;
-  int? constituencyCount = 0;
+  int? governorshipCount = 0;
   int? councilCount = 0;
   int? streamCount = 0;
   int? fellowshipServicesThisWeekCount = 0;
@@ -37,7 +37,7 @@ class ChurchForAttendanceDefaulters extends Church {
     required this.fellowshipServiceAttendanceDefaultersCount,
     required this.fellowshipBussingAttendanceDefaultersCount,
     required this.bacentaCount,
-    required this.constituencyCount,
+    required this.governorshipCount,
     required this.councilCount,
     required this.streamCount,
     required this.fellowshipServicesThisWeekCount,

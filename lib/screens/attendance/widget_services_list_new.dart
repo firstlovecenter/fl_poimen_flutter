@@ -25,7 +25,7 @@ class RecordedMeetingsList extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                '/constituency/attendance-ticker',
+                '/governorship/attendance-ticker',
               );
             },
             child: const Padding(

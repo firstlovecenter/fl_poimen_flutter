@@ -40,9 +40,9 @@ final getFellowshipMembershipAttendanceTrends = gql('''
   }
 ''');
 
-final getConstituencyMembershipAttendanceTrends = gql('''
-  query getConstituencyMembershipAttendanceTrends(\$id: ID!) {
-    constituencies(where: {id: \$id}) {
+final getGovernorshipMembershipAttendanceTrends = gql('''
+  query getGovernorshipMembershipAttendanceTrends(\$id: ID!) {
+    governorships(where: {id: \$id}) {
       id
       typename
       name

@@ -28,9 +28,9 @@ class ProfileCard extends StatelessWidget {
           } else if (church.typename == 'Bacenta') {
             userState.role = getRoleEnum(ChurchLevel.bacenta, convertToRoleEnum(role));
             userState.bacentaId = church.id;
-          } else if (church.typename == 'Constituency') {
-            userState.role = getRoleEnum(ChurchLevel.constituency, convertToRoleEnum(role));
-            userState.constituencyId = church.id;
+          } else if (church.typename == 'Governorship') {
+            userState.role = getRoleEnum(ChurchLevel.governorship, convertToRoleEnum(role));
+            userState.governorshipId = church.id;
           } else if (church.typename == 'Council') {
             userState.role = getRoleEnum(ChurchLevel.council, convertToRoleEnum(role));
             userState.councilId = church.id;
@@ -91,8 +91,8 @@ _getRoleImage(String level) {
       return 'assets/images/profile-choose/fellowship-leader.jpg';
     case 'Bacenta':
       return 'assets/images/profile-choose/bacenta-leader.jpg';
-    case 'Constituency':
-      return 'assets/images/profile-choose/constituency-leader.jpg';
+    case 'Governorship':
+      return 'assets/images/profile-choose/governorship-leader.jpg';
     case 'Council':
       return 'assets/images/profile-choose/council-leader.jpeg';
     case 'Stream':

@@ -30,7 +30,7 @@ class CouncilSubLeadersTrendsScreen extends StatelessWidget {
         var returnValues = GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
             church: churchState.church,
-            pageTitle: 'My Constituencies',
+            pageTitle: 'My Governorships',
           ),
           body: body,
         );

@@ -106,8 +106,8 @@ class HomeScreenBody extends StatelessWidget {
                 permitted: const [
                   Role.leaderFellowship,
                   Role.leaderBacenta,
-                  Role.leaderConstituency,
-                  Role.adminConstituency,
+                  Role.leaderGovernorship,
+                  Role.adminGovernorship,
                   Role.leaderHub
                 ],
               );

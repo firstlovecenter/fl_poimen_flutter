@@ -41,9 +41,9 @@ final getFellowshipPastoralWorkCycles = gql('''
   }
 ''');
 
-final getConstituencyPastoralWorkCycles = gql('''
-  query getConstituencyPastoralWorkCycles(\$id: ID!) {
-    constituencies(where: {id: \$id}) {
+final getGovernorshipPastoralWorkCycles = gql('''
+  query getGovernorshipPastoralWorkCycles(\$id: ID!) {
+    governorships(where: {id: \$id}) {
       id
       typename
       name

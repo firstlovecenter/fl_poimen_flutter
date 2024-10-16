@@ -98,9 +98,9 @@ final getBacentaMembers = gql('''
   }
 ''');
 
-final getConstituencyMembers = gql('''
-   query getConstituencyMembers(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipMembers = gql('''
+   query getGovernorshipMembers(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name

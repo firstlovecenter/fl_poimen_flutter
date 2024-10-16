@@ -42,9 +42,9 @@ final searchBacenta = gql('''
   }
 ''');
 
-final searchConstituency = gql('''
-  query searchConstituency(\$id: ID!, \$searchKey: String!){
-    constituencies(where: {id: \$id}){
+final searchGovernorship = gql('''
+  query searchGovernorship(\$id: ID!, \$searchKey: String!){
+    governorships(where: {id: \$id}){
       id
       typename
       name

@@ -75,9 +75,9 @@ final getBacentaImcls = gql('''
   }
 ''');
 
-final getConstituencyImcls = gql('''
- query getConstituencyImcls(\$id: ID!) {
-    constituencies(where: { id: \$id }) {
+final getGovernorshipImcls = gql('''
+ query getGovernorshipImcls(\$id: ID!) {
+    governorships(where: { id: \$id }) {
       id
       typename
       name

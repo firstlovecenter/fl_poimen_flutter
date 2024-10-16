@@ -9,30 +9,30 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyMembershipAttendanceScreen extends StatelessWidget {
-  const ConstituencyMembershipAttendanceScreen({super.key});
+class GovernorshipMembershipAttendanceScreen extends StatelessWidget {
+  const GovernorshipMembershipAttendanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-        query: getConstituencyMembershipAttendanceTrends,
-        variables: {'id': churchState.constituencyId},
+        query: getGovernorshipMembershipAttendanceTrends,
+        variables: {'id': churchState.governorshipId},
         bottomNavBar: const BottomNavBar(menu: getMyTrendsMenus, index: 2),
         defaultPageTitle: 'Membership Attendance Trends',
         bodyFunction: (data) {
           Widget body;
 
-          final constituency =
-              ChurchForMembershipAttendanceTrends.fromJson(data?['constituencies'][0]);
+          final governorship =
+              ChurchForMembershipAttendanceTrends.fromJson(data?['governorships'][0]);
 
           body = MembershipTrendsWidget(
-            church: constituency,
+            church: governorship,
           );
 
           var returnValues = GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(church: constituency, pageTitle: 'Membership Attendance Trends'),
+            pageTitle: PageTitle(church: governorship, pageTitle: 'Membership Attendance Trends'),
             body: body,
           );
 

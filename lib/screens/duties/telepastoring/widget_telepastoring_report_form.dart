@@ -41,8 +41,8 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
     if (church.typename == 'Bacenta') {
       query = logBacentaTelepastoringActivity;
     }
-    if (church.typename == 'Constituency') {
-      query = logConstituencyTelepastoringActivity;
+    if (church.typename == 'Governorship') {
+      query = logGovernorshipTelepastoringActivity;
     }
     if (church.typename == 'Council') {
       query = logCouncilTelepastoringActivity;

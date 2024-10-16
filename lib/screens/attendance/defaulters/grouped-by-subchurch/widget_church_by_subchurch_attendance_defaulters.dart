@@ -20,8 +20,8 @@ class ChurchBySubChurchAttendanceDefaulters extends StatelessWidget {
     ChurchLevel subChurchLevel = getSubChurch(churchLevel);
     List<ChurchForAttendanceDefaulters> subChurch = [];
 
-    if (subChurchLevel == ChurchLevel.constituency) {
-      subChurch = church.constituencies ?? [];
+    if (subChurchLevel == ChurchLevel.governorship) {
+      subChurch = church.governorships ?? [];
     }
 
     if (subChurchLevel == ChurchLevel.council) {
@@ -72,9 +72,9 @@ class DefaulterSubChurchCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        if (level == ChurchLevel.constituency) {
-          churchState.constituencyId = church.id;
-          Navigator.pushNamed(context, '/constituency/attendance-defaulters');
+        if (level == ChurchLevel.governorship) {
+          churchState.governorshipId = church.id;
+          Navigator.pushNamed(context, '/governorship/attendance-defaulters');
         }
         if (level == ChurchLevel.stream) {
           churchState.streamId = church.id;

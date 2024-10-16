@@ -10,30 +10,30 @@ import 'package:poimen/widgets/bottom_nav_bar.dart';
 import 'package:poimen/widgets/page_title.dart';
 import 'package:provider/provider.dart';
 
-class ConstituencyTrendsScreen extends StatelessWidget {
-  const ConstituencyTrendsScreen({super.key});
+class GovernorshipTrendsScreen extends StatelessWidget {
+  const GovernorshipTrendsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-      query: getConstituencyTrendsMenu,
-      variables: {'id': churchState.constituencyId},
+      query: getGovernorshipTrendsMenu,
+      variables: {'id': churchState.governorshipId},
       bottomNavBar: const BottomNavBar(menu: getTrendsMenus, index: 1),
       defaultPageTitle: 'Trends Menu',
       bodyFunction: (data) {
         Widget body;
 
-        final constituency = ChurchForTrendsMenu.fromJson(data?['constituencies'][0]);
+        final governorship = ChurchForTrendsMenu.fromJson(data?['governorships'][0]);
 
         body = WidgetTrendsMenu(
-          church: constituency,
-          permittedRoles: permitRoleAndHigher(Role.leaderConstituency),
+          church: governorship,
+          permittedRoles: permitRoleAndHigher(Role.leaderGovernorship),
         );
 
         var returnValues = GQLQueryContainerReturnValue(
-          pageTitle: PageTitle(church: constituency, pageTitle: 'Trends Menu'),
+          pageTitle: PageTitle(church: governorship, pageTitle: 'Trends Menu'),
           body: body,
         );
 

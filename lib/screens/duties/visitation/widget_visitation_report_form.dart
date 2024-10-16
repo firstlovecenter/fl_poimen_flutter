@@ -65,8 +65,8 @@ class _OutstandingVisitationReportFormState extends State<OutstandingVisitationR
     if (church.typename == 'Bacenta') {
       query = logBacentaVisitationActivity;
     }
-    if (church.typename == 'Constituency') {
-      query = logConstituencyVisitationActivity;
+    if (church.typename == 'Governorship') {
+      query = logGovernorshipVisitationActivity;
     }
     if (church.typename == 'Council') {
       query = logCouncilVisitationActivity;
