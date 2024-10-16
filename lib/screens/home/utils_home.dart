@@ -79,28 +79,39 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
 }
 
 List<Widget> attendanceLevels(ChurchLevel churchLevel) {
-  if (churchLevel != ChurchLevel.bacenta) {
-    return [Container()];
+  ChurchString level = ChurchString(churchLevel.name);
+  if (churchLevel == ChurchLevel.bacenta) {
+    return [
+      HomePageButton(
+        text: 'Sunday Attendance',
+        icon: FontAwesomeIcons.busSimple,
+        navKey: 'attendance',
+        route: '/bussingrecord-services',
+        permitted: [Role.values.byName('leader${level.properCase}')],
+      ),
+      HomePageButton(
+        text: 'Weekday Attendance',
+        icon: FontAwesomeIcons.userCheck,
+        navKey: 'attendance',
+        route: '/servicerecord-services',
+        permitted: [Role.values.byName('leader${level.properCase}')],
+      ),
+    ];
   }
 
-  ChurchString level = ChurchString(churchLevel.name);
+  if (churchLevel == ChurchLevel.constituency) {
+    return [
+      HomePageButton(
+        text: 'Record Attendance',
+        icon: FontAwesomeIcons.userCheck,
+        navKey: 'attendance',
+        route: '/record-attendance',
+        permitted: [Role.values.byName('leader${level.properCase}')],
+      ),
+    ];
+  }
 
-  return [
-    HomePageButton(
-      text: 'Sunday Attendance',
-      icon: FontAwesomeIcons.busSimple,
-      navKey: 'attendance',
-      route: '/bussingrecord-services',
-      permitted: [Role.values.byName('leader${level.properCase}')],
-    ),
-    HomePageButton(
-      text: 'Weekday Attendance',
-      icon: FontAwesomeIcons.userCheck,
-      navKey: 'attendance',
-      route: '/servicerecord-services',
-      permitted: [Role.values.byName('leader${level.properCase}')],
-    ),
-  ];
+  return [Container()];
 }
 
 List<Widget> hubAttendanceLevels(ChurchLevel churchLevel) {

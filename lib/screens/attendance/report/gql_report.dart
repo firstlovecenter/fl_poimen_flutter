@@ -1,5 +1,55 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+final getConstituencyServiceReport = gql('''
+query getConstituencyServiceReport(\$poimenMeetingId: ID!, \$constituencyId: ID!) {
+    constituencies(where: { id: \$constituencyId }) {
+      id
+      typename
+      name
+    }
+    poimenMeetings(where: { id: \$poimenMeetingId }) {
+      id
+      typename
+      serviceDate {
+        date
+      }
+      membersPicture
+      membersPresent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        bacenta {
+          id
+          typename
+          name
+        }
+      }
+      membersAbsent {
+        id
+        status
+        typename
+        firstName
+        lastName
+        fullName
+        phoneNumber
+        whatsappNumber
+        pictureUrl
+        bacenta {
+          id
+          typename
+          name
+        }
+      }
+    }
+  }
+  ''');
+
 final getBacentaServiceReport = gql('''
 query getBacentaServiceReport(\$serviceRecordId: ID!, \$bacentaId: ID!) {
     bacentas(where: { id: \$bacentaId }) {

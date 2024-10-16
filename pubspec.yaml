@@ -57,7 +57,7 @@ dependencies:
   accordion: ^2.5.1
   image_picker: ^1.0.2  
   cloudinary_public: ^0.21.0 
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   infinite_scroll: ^1.1.1
   badges: ^3.1.1 
   fl_chart: ^0.63.0

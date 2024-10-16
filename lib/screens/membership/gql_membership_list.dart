@@ -99,13 +99,7 @@ final getBacentaMembers = gql('''
 ''');
 
 final getConstituencyMembers = gql('''
-   query getConstituencyMembers(\$id: ID!, \$serviceRecordId: ID) {
-    serviceRecords(where: { id: \$serviceRecordId }, options: { limit: 1 }) {
-      id
-      serviceDate {
-        date
-      }
-    }
+   query getConstituencyMembers(\$id: ID!) {
     constituencies(where: { id: \$id }) {
       id
       typename

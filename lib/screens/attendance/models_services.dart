@@ -6,6 +6,7 @@ part 'models_services.g.dart';
 @JsonSerializable()
 class ChurchForServicesList extends Church {
   List<ServicesForList> services = [];
+  List<ServicesForList>? meetings = [];
 
   ChurchForServicesList({
     required this.services,
