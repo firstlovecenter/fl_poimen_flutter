@@ -37,7 +37,6 @@ class ConstituencyAttendanceTickerScreen extends StatelessWidget {
                 return cache;
               },
               onCompleted: (resultData) {
-                print(resultData.toString());
                 if (resultData == null) {
                   return;
                 }

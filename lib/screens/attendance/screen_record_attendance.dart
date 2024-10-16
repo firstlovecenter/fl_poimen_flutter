@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poimen/helpers/menus.dart';
 import 'package:poimen/screens/attendance/gql_services_list.dart';
 import 'package:poimen/screens/attendance/models_services.dart';
-import 'package:poimen/screens/attendance/widget_services_list%20copy.dart';
-import 'package:poimen/screens/membership/models_membership.dart';
+import 'package:poimen/screens/attendance/widget_services_list_new.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/services/gql_query_container.dart';
 import 'package:poimen/widgets/bottom_nav_bar.dart';
@@ -25,9 +24,9 @@ class RecordAttendanceScreen extends StatelessWidget {
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 
-          final constituency = ChurchForServicesList.fromJson(data?['constituencies'][0]);
+          final constituency = ChurchForMeetingsList.fromJson(data?['constituencies'][0]);
 
-          body = RecordedMeetingsList(meetings: constituency.meetings!);
+          body = RecordedMeetingsList(meetings: constituency.poimenMeetings);
 
           return GQLQueryContainerReturnValue(
             pageTitle: PageTitle(pageTitle: 'Recent Meetings', church: constituency),

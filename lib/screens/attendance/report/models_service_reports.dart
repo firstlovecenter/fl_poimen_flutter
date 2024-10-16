@@ -27,6 +27,29 @@ class MemberForListWithBacenta extends MemberForList {
 }
 
 @JsonSerializable()
+class MeetingsForReport {
+  String id = '';
+  String typename = '';
+  TimeGraph serviceDate = TimeGraph();
+  List<String> membersPicture = [];
+  List<MemberForListWithBacenta> membersPresent = [];
+  List<MemberForListWithBacenta> membersAbsent = [];
+
+  MeetingsForReport({
+    required this.id,
+    required this.typename,
+    required this.serviceDate,
+    required this.membersPicture,
+    required this.membersAbsent,
+    required this.membersPresent,
+  });
+
+  factory MeetingsForReport.fromJson(Map<String, dynamic> json) =>
+      _$MeetingsForReportFromJson(json);
+  Map<String, dynamic> toJson() => _$MeetingsForReportToJson(this);
+}
+
+@JsonSerializable()
 class ServicesForReport {
   String id = '';
   String typename = '';

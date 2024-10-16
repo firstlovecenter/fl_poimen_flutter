@@ -2,11 +2,13 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 final recordMembershipAttendanceOnDate = gql('''
  mutation RecordMembershipAttendanceOnDate(
+  \$constituencyId: ID!
   \$presentMembers: [ID!]!
   \$absentMembers: [ID!]!
   \$date: String!
 ) {
   RecordMembershipAttendanceOnDate(
+    constituencyId: \$constituencyId
     presentMembers: \$presentMembers
     absentMembers: \$absentMembers
     date: \$date

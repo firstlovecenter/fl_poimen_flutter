@@ -6,6 +6,34 @@ part of 'models_services.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ChurchForMeetingsList _$ChurchForMeetingsListFromJson(
+        Map<String, dynamic> json) =>
+    ChurchForMeetingsList(
+      poimenMeetings: (json['poimenMeetings'] as List<dynamic>)
+          .map((e) => ServicesForList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    )
+      ..id = json['id'] as String
+      ..typename = json['typename'] as String
+      ..name = json['name'] as String
+      ..leader = json['leader'] == null
+          ? null
+          : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
+      ..admin = json['admin'] == null
+          ? null
+          : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ChurchForMeetingsListToJson(
+        ChurchForMeetingsList instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'name': instance.name,
+      'leader': instance.leader,
+      'admin': instance.admin,
+      'poimenMeetings': instance.poimenMeetings,
+    };
+
 ChurchForServicesList _$ChurchForServicesListFromJson(
         Map<String, dynamic> json) =>
     ChurchForServicesList(
@@ -21,7 +49,10 @@ ChurchForServicesList _$ChurchForServicesListFromJson(
           : MemberForList.fromJson(json['leader'] as Map<String, dynamic>)
       ..admin = json['admin'] == null
           ? null
-          : MemberForList.fromJson(json['admin'] as Map<String, dynamic>);
+          : MemberForList.fromJson(json['admin'] as Map<String, dynamic>)
+      ..meetings = (json['meetings'] as List<dynamic>?)
+          ?.map((e) => ServicesForList.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$ChurchForServicesListToJson(
         ChurchForServicesList instance) =>
@@ -32,6 +63,7 @@ Map<String, dynamic> _$ChurchForServicesListToJson(
       'leader': instance.leader,
       'admin': instance.admin,
       'services': instance.services,
+      'meetings': instance.meetings,
     };
 
 ChurchForBussingList _$ChurchForBussingListFromJson(

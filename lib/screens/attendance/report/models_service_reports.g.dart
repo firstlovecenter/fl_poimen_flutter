@@ -36,6 +36,35 @@ Map<String, dynamic> _$MemberForListWithBacentaToJson(
       'bacenta': instance.bacenta,
     };
 
+MeetingsForReport _$MeetingsForReportFromJson(Map<String, dynamic> json) =>
+    MeetingsForReport(
+      id: json['id'] as String,
+      typename: json['typename'] as String,
+      serviceDate:
+          TimeGraph.fromJson(json['serviceDate'] as Map<String, dynamic>),
+      membersPicture: (json['membersPicture'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      membersAbsent: (json['membersAbsent'] as List<dynamic>)
+          .map((e) =>
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      membersPresent: (json['membersPresent'] as List<dynamic>)
+          .map((e) =>
+              MemberForListWithBacenta.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MeetingsForReportToJson(MeetingsForReport instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'typename': instance.typename,
+      'serviceDate': instance.serviceDate,
+      'membersPicture': instance.membersPicture,
+      'membersPresent': instance.membersPresent,
+      'membersAbsent': instance.membersAbsent,
+    };
+
 ServicesForReport _$ServicesForReportFromJson(Map<String, dynamic> json) =>
     ServicesForReport(
       id: json['id'] as String,

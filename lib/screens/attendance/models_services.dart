@@ -4,6 +4,20 @@ import 'package:poimen/screens/membership/models_membership.dart';
 part 'models_services.g.dart';
 
 @JsonSerializable()
+class ChurchForMeetingsList extends Church {
+  List<ServicesForList> poimenMeetings = [];
+
+  ChurchForMeetingsList({
+    required this.poimenMeetings,
+  });
+
+  factory ChurchForMeetingsList.fromJson(Map<String, dynamic> json) =>
+      _$ChurchForMeetingsListFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChurchForMeetingsListToJson(this);
+}
+
+@JsonSerializable()
 class ChurchForServicesList extends Church {
   List<ServicesForList> services = [];
   List<ServicesForList>? meetings = [];
