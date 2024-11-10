@@ -1,0 +1,135 @@
+type Member implements Person @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  auth_id: String
+  status: String!
+  lost: Boolean
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  currentTitle: String @customResolver
+  nameWithTitle: String @customResolver
+  roles: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  visitationArea: String
+  location: Point
+  stickyNote: String
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  title: [Title!]!
+    @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  council: Council!
+    @cypher(
+      statement: """
+      MATCH (this)-[:BELONGS_TO]->(:Bacenta)<-[:HAS*2]-(council:Council)
+      RETURN DISTINCT council
+      """
+    )
+  # Church Details
+  members: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)-[:BELONGS_TO]-(members:Member)
+      RETURN DISTINCT members
+      """
+    )
+  memberCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)-[:BELONGS_TO]-(members:Member)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  ministryMembers: [Member]
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)-[:BELONGS_TO]-(members:Member)
+      MATCH (members)-[:BELONGS_TO]->(:Ministry)
+      RETURN DISTINCT members
+      """
+    )
+  ministryMembershipCount: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)-[:BELONGS_TO]-(members:Member)
+      MATCH (members)-[:BELONGS_TO]->(:Ministry)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  loggedHistory: [HistoryLog!]! @relationship(type: "LOGGED_BY", direction: IN)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Gender @auth(rules: [{ isAuthenticated: true }]) {
+  gender: String
+  members: [Member!]! @relationship(type: "HAS_GENDER", direction: IN)
+}
+
+type MaritalStatus @auth(rules: [{ isAuthenticated: true }]) {
+  status: String
+  members: [Member!]! @relationship(type: "HAS_MARITAL_STATUS", direction: IN)
+}
+
+type Occupation @auth(rules: [{ isAuthenticated: true }]) {
+  occupation: String
+  members: [Member!]! @relationship(type: "HAS_OCCUPATION", direction: IN)
+}
+
+type Title @auth(rules: [{ isAuthenticated: true }]) {
+  title: String! #Pastor, Reverend, Apostle, Bishop (Mother)
+  members: [Member!]!
+    @relationship(type: "HAS_TITLE", properties: "HasTitle", direction: IN)
+}
+
+interface HasTitle @relationshipProperties {
+  date: Date
+}
+
+type TimeGraph @auth(rules: [{ isAuthenticated: true }]) {
+  date: Date
+  memberDob: Member @relationship(type: "WAS_BORN_ON", direction: IN)
+  # titleAppointmentDate: Member @relationship(type: "APPOINTED_ON", direction: IN)
+  leaderHistoryStartDate: Member
+    @relationship(type: "LEADER_STARTED_ON", direction: OUT)
+  leaderHistoryEndDate: TimeGraph
+    @relationship(type: "LEADER_ENDED_ON", direction: OUT)
+  historyDate: Member @relationship(type: "RECORDED_ON", direction: OUT)
+  serviceRecords: [ServiceRecord!]!
+    @relationship(type: "SERVICE_HELD_ON", direction: IN)
+}
+
+type HistoryLog @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID! @id
+  timeStamp: DateTime
+  historyRecord: String #leader was transferred to
+  createdAt: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
+  loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
+  leaders: [Member!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  governorship: [Governorship!]!
+    @relationship(type: "HAS_HISTORY", direction: IN)
+}
+
+#Query Definitions
+type Query {
+  currentUser(id: ID): Member
+    @cypher(
+      statement: "MATCH (member:Member {auth_id: $auth.jwt.sub}) RETURN member"
+    )
+    @auth(rules: [{ isAuthenticated: true }])
+  understandingSchools(school: UnderstandingSchools!): [UnderstandingSchools!]!
+  minimumRequiredVersion: String! @cypher(statement: "RETURN '1.3.0'")
+  memberByEmail(email: String!): Member
+    @cypher(
+      statement: "MATCH (member:Member {email:$email}) RETURN member LIMIT 1"
+    )
+}

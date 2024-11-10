@@ -1,0 +1,656 @@
+type ServiceLog @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID
+  historyRecord: String #leader was transferred to
+  createdAt: TimeGraph @relationship(type: "RECORDED_ON", direction: OUT)
+  loggedBy: Member @relationship(type: "LOGGED_BY", direction: OUT)
+  serviceRecords: [ServiceRecord!]!
+    @relationship(type: "HAS_SERVICE", direction: OUT)
+  leaders: [Member!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  fellowship: [Fellowship!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  bacenta: [Bacenta!]! @relationship(type: "HAS_HISTORY", direction: IN)
+  # bacentaFellowshipRecords(bacentaId: ID!): [BacentaFellowshipServiceRecords!]!
+  governorship: [Governorship!]!
+    @relationship(type: "HAS_HISTORY", direction: IN)
+  council: [Council!]! @relationship(type: "HAS_HISTORY", direction: IN)
+}
+
+type ServiceDay @auth(rules: [{ isAuthenticated: true }]) {
+  day: String!
+  dayNumber: Int
+  fellowship: Fellowship @relationship(type: "MEETS_ON", direction: IN)
+}
+
+interface Record {
+  id: ID!
+  createdAt: DateTime!
+  createdBy: Member! @relationship(type: "LOGGED_BY", direction: OUT)
+  attendance: Int
+  markedAttendance(churchId: ID!): Boolean!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:PRESENT_AT_SERVICE|ABSENT_FROM_SERVICE]-(member:Member)-[:BELONGS_TO]->(bacenta:Bacenta {id: $churchId})
+      RETURN COUNT(member) > 0 AS markedAttendance
+      """
+    )
+  membersPresent: [Member!]!
+    @relationship(type: "PRESENT_AT_SERVICE", direction: IN)
+  membersAbsent: [Member!]!
+    @relationship(type: "ABSENT_FROM_SERVICE", direction: IN)
+}
+
+type PoimenRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  typename: String! @customResolver
+  createdAt: DateTime!
+  createdBy: Member!
+  serviceDate: TimeGraph @relationship(type: "SERVICE_HELD_ON", direction: OUT)
+  week: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      RETURN date(date.date).week
+      """
+    )
+  attendance: Int
+
+  serviceLog: ServiceLog! @relationship(type: "HAS_SERVICE", direction: IN)
+}
+
+type ServiceRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  typename: String! @customResolver
+  createdAt: DateTime!
+  createdBy: Member!
+  serviceDate: TimeGraph @relationship(type: "SERVICE_HELD_ON", direction: OUT)
+  week: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      RETURN date(date.date).week
+      """
+    )
+  attendance: Int
+
+  serviceLog: ServiceLog! @relationship(type: "HAS_SERVICE", direction: IN)
+}
+
+type RehearsalRecord implements Record
+  @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  typename: String! @customResolver
+  createdAt: DateTime!
+  createdBy: Member!
+  serviceDate: TimeGraph @relationship(type: "SERVICE_HELD_ON", direction: OUT)
+  week: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      RETURN date(date.date).week
+      """
+    )
+  attendance: Int
+
+  serviceLog: ServiceLog! @relationship(type: "HAS_SERVICE", direction: IN)
+}
+
+type BussingRecord implements Record @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  typename: String! @customResolver
+  week: Int
+    @cypher(
+      statement: """
+      MATCH (this)-[:BUSSED_ON]->(date:TimeGraph)
+      RETURN date(date.date).week
+      """
+    )
+  # Mobilisation
+  createdAt: DateTime! #mobilisation time is the time the record was created
+  serviceDate: TimeGraph! @relationship(type: "BUSSED_ON", direction: OUT)
+  createdBy: Member! @relationship(type: "LOGGED_BY", direction: OUT)
+
+  #On The Way
+  attendance: Int
+  serviceLog: ServiceLog @relationship(type: "HAS_BUSSING", direction: IN)
+}
+
+extend type Member {
+  attendedServices: [ServiceRecord!]!
+    @relationship(type: "ATTENDED_SERVICE", direction: OUT)
+}
+
+type ServiceWeek {
+  typename: String!
+  week: Int!
+  numberOfServicesHeld: Int!
+  attendance: Int!
+  income: Int!
+  membersPresentAtWeekdayCount: Int!
+  membersAbsentAtWeekdayCount: Int!
+  membersPresentAtWeekday: [Member!]!
+  membersAbsentAtWeekday: [Member!]!
+}
+
+type BussingWeek {
+  typename: String!
+  week: Int!
+  numberOfBacentasBussed: Int!
+  attendance: Int!
+  membersPresentAtWeekendCount: Int!
+  membersAbsentAtWeekendCount: Int!
+  membersPresentAtWeekend: [Member!]!
+  membersAbsentAtWeekend: [Member!]!
+}
+
+# TODO: use aggregateServiceRecord and AggregateBussingRecord instead of the long way
+
+extend type Fellowship {
+  serviceWeeks(limit: Int! = 6): [ServiceWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT this, records, date WHERE NOT (records:NoService)
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)-[:BELONGS_TO]->(this)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)-[:BELONGS_TO]->(this)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfServicesHeld,
+      SUM(records.attendance) AS attendance,
+      SUM(records.income) AS income,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfServicesHeld: numberOfServicesHeld,
+          attendance: attendance,
+          income: income,
+          membersPresentAtWeekdayCount: presentMembersCount,
+          membersAbsentAtWeekdayCount: absentMembersCount,
+          membersPresentAtWeekday: presentMembers,
+          membersAbsentAtWeekday: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+  bussingWeeks(limit: Int! = 6): [BussingWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT this, records, date WHERE NOT (records:NoService)
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)-[:BELONGS_TO]->(this)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)-[:BELONGS_TO]->(this)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfBacentasBussed,
+      SUM(records.attendance) AS attendance,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfBacentasBussed: numberOfBacentasBussed,
+          attendance: attendance,
+          membersPresentAtWeekendCount: presentMembersCount,
+          membersAbsentAtWeekendCount: absentMembersCount,
+          membersPresentAtWeekend: presentMembers,
+          membersAbsentAtWeekend: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+}
+
+extend type Governorship {
+  serviceWeeks(limit: Int! = 6): [ServiceWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)-[:HAS]->(fellowships:Fellowship)
+      MATCH (fellowships)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfServicesHeld,
+      SUM(records.attendance) AS attendance,
+      SUM(records.income) AS income,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfServicesHeld: numberOfServicesHeld,
+          attendance: attendance,
+          income: income,
+          membersPresentAtWeekdayCount: presentMembersCount,
+          membersAbsentAtWeekdayCount: absentMembersCount,
+          membersPresentAtWeekday: presentMembers,
+          membersAbsentAtWeekday: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+  bussingWeeks(limit: Int! = 6): [BussingWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfBacentasBussed,
+      SUM(records.attendance) AS attendance,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfBacentasBussed: numberOfBacentasBussed,
+          attendance: attendance,
+          membersPresentAtWeekendCount: presentMembersCount,
+          membersAbsentAtWeekendCount: absentMembersCount,
+          membersPresentAtWeekend: presentMembers,
+          membersAbsentAtWeekend: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+}
+
+extend type Council {
+  serviceWeeks(limit: Int! = 6): [ServiceWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)-[:HAS]->(fellowships:Fellowship)
+      MATCH (fellowships)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfServicesHeld,
+      SUM(records.attendance) AS attendance,
+      SUM(records.income) AS income,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfServicesHeld: numberOfServicesHeld,
+          attendance: attendance,
+          income: income,
+          membersPresentAtWeekdayCount: presentMembersCount,
+          membersAbsentAtWeekdayCount: absentMembersCount,
+          membersPresentAtWeekday: presentMembers,
+          membersAbsentAtWeekday: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+  bussingWeeks(limit: Int! = 6): [BussingWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfBacentasBussed,
+      SUM(records.attendance) AS attendance,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfBacentasBussed: numberOfBacentasBussed,
+          attendance: attendance,
+          membersPresentAtWeekendCount: presentMembersCount,
+          membersAbsentAtWeekendCount: absentMembersCount,
+          membersPresentAtWeekend: presentMembers,
+          membersAbsentAtWeekend: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+}
+
+extend type Stream {
+  serviceWeeks(limit: Int! = 6): [ServiceWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)-[:HAS]->(fellowships:Fellowship)
+      MATCH (fellowships)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfServicesHeld,
+      SUM(records.attendance) AS attendance,
+      SUM(records.income) AS income,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfServicesHeld: numberOfServicesHeld,
+          attendance: attendance,
+          income: income,
+          membersPresentAtWeekdayCount: presentMembersCount,
+          membersAbsentAtWeekdayCount: absentMembersCount,
+          membersPresentAtWeekday: presentMembers,
+          membersAbsentAtWeekday: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+  bussingWeeks(limit: Int! = 6): [BussingWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfBacentasBussed,
+      SUM(records.attendance) AS attendance,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfBacentasBussed: numberOfBacentasBussed,
+          attendance: attendance,
+          membersPresentAtWeekendCount: presentMembersCount,
+          membersAbsentAtWeekendCount: absentMembersCount,
+          membersPresentAtWeekend: presentMembers,
+          membersAbsentAtWeekend: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+}
+
+extend type Campus {
+  serviceWeeks(limit: Int! = 6): [ServiceWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)-[:HAS]->(fellowships:Fellowship)
+      MATCH (fellowships)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(records:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfServicesHeld,
+      SUM(records.attendance) AS attendance,
+      SUM(records.income) AS income,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfServicesHeld: numberOfServicesHeld,
+          attendance: attendance,
+          income: income,
+          membersPresentAtWeekdayCount: presentMembersCount,
+          membersAbsentAtWeekdayCount: absentMembersCount,
+          membersPresentAtWeekday: presentMembers,
+          membersAbsentAtWeekday: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+  bussingWeeks(limit: Int! = 6): [BussingWeek!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(records:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WITH DISTINCT records, date WHERE NOT (records:NoService)
+      WITH records, date ORDER BY date.date DESC LIMIT $limit
+      OPTIONAL MATCH (records)<-[:PRESENT_AT_SERVICE]-(presentMembers:Member)
+      OPTIONAL MATCH (records)<-[:ABSENT_FROM_SERVICE]-(absentMembers:Member)
+
+      WITH
+      date.date.week AS week,
+      date.date.year AS year,
+      COUNT(DISTINCT records) AS numberOfBacentasBussed,
+      SUM(records.attendance) AS attendance,
+      COUNT(DISTINCT presentMembers) AS presentMembersCount,
+      COUNT(DISTINCT absentMembers) AS absentMembersCount,
+      COLLECT(DISTINCT presentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS presentMembers,
+      COLLECT(DISTINCT absentMembers {
+        .id,
+        .firstName,
+        .lastName,
+        .pictureUrl,
+        .phoneNumber,
+        .whatsappNumber
+        }) AS absentMembers
+
+      WITH collect({
+          week: week,
+          year: year,
+          numberOfBacentasBussed: numberOfBacentasBussed,
+          attendance: attendance,
+          membersPresentAtWeekendCount: presentMembersCount,
+          membersAbsentAtWeekendCount: absentMembersCount,
+          membersPresentAtWeekend: presentMembers,
+          membersAbsentAtWeekend: absentMembers
+        }) AS data
+
+      UNWIND data AS weekData
+      RETURN weekData ORDER BY weekData.year, weekData.week DESC LIMIT $limit
+      """
+    )
+}

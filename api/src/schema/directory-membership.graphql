@@ -1,0 +1,714 @@
+##Church Types##
+interface Person @auth(rules: [{ isAuthenticated: true }]) {
+  id: ID!
+  typename: String!
+  lost: Boolean
+    @cypher(
+      statement: """
+      MATCH (this)
+      UNWIND labels(this) AS labels
+
+      WITH labels
+      WHERE labels IN ['Lost']
+      WITH collect(labels) AS labels
+
+      RETURN 'Lost' IN labels AS Lost
+      """
+    )
+  status: String!
+    @cypher(
+      statement: """
+      MATCH (this)
+      UNWIND labels(this) AS labels
+
+      WITH labels
+      WHERE labels IN ['Lost','Sheep','Goat','Deer','IDL']
+      WITH collect(labels) AS labels
+      WITH 'Lost' IN labels AS Lost, 'IDL' IN labels AS IDL, labels
+
+      RETURN
+      CASE true
+          WHEN Lost THEN 'Lost'
+          WHEN IDL THEN 'IDL'
+          WHEN 'Sheep' IN labels THEN 'Sheep'
+          WHEN 'Goat' IN labels THEN 'Goat'
+          WHEN 'Deer' IN labels THEN 'Deer'
+          ELSE 'Sheep'
+      END AS labels
+      """
+    )
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Sheep implements Person {
+  id: ID!
+  typename: String! @customResolver
+  lost: Boolean
+  status: String!
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Goat implements Person {
+  id: ID!
+  typename: String! @customResolver
+  lost: Boolean
+  status: String!
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type Deer implements Person {
+  id: ID!
+  typename: String! @customResolver
+  lost: Boolean
+  status: String!
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type IDL implements Person {
+  id: ID!
+  typename: String! @customResolver
+  lost: Boolean
+  status: String!
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  visitationArea: String
+  location: Point
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+type IMCL implements Person {
+  id: ID!
+  typename: String! @customResolver
+  lost: Boolean
+  status: String!
+  auth_id: String
+  firstName: String! #@search
+  middleName: String
+  lastName: String!
+  fullName: String @customResolver
+  email: String
+  phoneNumber: String!
+  whatsappNumber: String
+  pictureUrl: String!
+  gender: Gender! @relationship(type: "HAS_GENDER", direction: OUT)
+  maritalStatus: MaritalStatus!
+    @relationship(type: "HAS_MARITAL_STATUS", direction: OUT)
+  dob: TimeGraph! @relationship(type: "WAS_BORN_ON", direction: OUT)
+  ministry: Ministry @relationship(type: "BELONGS_TO", direction: OUT)
+  occupation: Occupation @relationship(type: "HAS_OCCUPATION", direction: OUT)
+  history: [HistoryLog!]! @relationship(type: "HAS_HISTORY", direction: OUT)
+  bacenta: Bacenta! @relationship(type: "BELONGS_TO", direction: OUT)
+}
+
+extend type Member {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:LEADS|HAS|IS_ADMIN_FOR*1..5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IDL)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+}
+
+extend type Campus {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*5]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IDL)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+extend type Stream {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  imcls: [IMCL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IMCL) WHERE NOT members:Lost
+      //WHERE members.lastMissedServiceDate.week >= date().week - 1
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+extend type Council {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IDL)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  imcls: [IMCL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IMCL) WHERE NOT members:Lost
+      //WHERE members.lastMissedServiceDate.week >= date().week - 1
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+extend type Governorship {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IDL)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  imcls: [IMCL!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:IMCL) WHERE NOT members:Lost
+      //WHERE members.lastMissedServiceDate.week >= date().week - 1
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+extend type Bacenta {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Sheep)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Goat)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Deer)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:IDL)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Lost)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  imcls: [IMCL!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:IMCL) WHERE NOT members:Lost
+      //WHERE members.lastMissedServiceDate.week >= date().week - 1
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+extend type Hub {
+  sheep: [Sheep!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Sheep)-[:BELONGS_TO]->(fellowship)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Sheep)-[:BELONGS_TO]->(fellowship)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  goats: [Goat!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Goat)-[:BELONGS_TO]->(fellowship)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  goatsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Goat)-[:BELONGS_TO]->(fellowship)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  deer: [Deer!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Deer)-[:BELONGS_TO]->(fellowship)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  deerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Deer)-[:BELONGS_TO]->(fellowship)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  lostCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Lost)-[:BELONGS_TO]->(fellowship)
+      RETURN COUNT(DISTINCT members)
+      """
+    )
+  idls: [IDL!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:IDL)-[:BELONGS_TO]->(fellowship)
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  imcls: [IMCL!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS]-(:HubCouncil)<-[:HAS]-(:Ministry)<-[:HAS]-(creativearts:CreativeArts)
+      MATCH (this)<-[:HAS_MINISTRY]-(governorship:Governorship)-[:HAS*2]->(fellowship:Fellowship)
+      MATCH (creativearts)<-[:BELONGS_TO]-(members:Active:Member)-[:BELONGS_TO]->(fellowship)
+      WHERE NOT members:Lost AND members.rehearsalIMCLChecked = false
+      //WHERE members.lastMissedServiceDate.week >= date().week - 1
+      RETURN DISTINCT members ORDER BY toLower(members.lastName), toLower(members.firstName)
+      """
+    )
+  sheepPaginated(first: Int! = 10, after: Int! = 0): SheepConnectionCustom!
+  goatsPaginated(first: Int! = 10, after: Int! = 0): GoatConnectionCustom!
+  deerPaginated(first: Int! = 10, after: Int! = 0): DeerConnectionCustom!
+  idlsPaginated(first: Int! = 10, after: Int! = 0): IDLConnectionCustom!
+}
+
+type SheepNode {
+  node: Sheep!
+}
+
+type GoatNode {
+  node: Goat!
+}
+
+type DeerNode {
+  node: Deer!
+}
+
+type IDLNode {
+  node: IDL!
+}
+
+interface ConnectionCustom {
+  totalCount: Int!
+  position: Int!
+}
+
+type SheepConnectionCustom implements ConnectionCustom {
+  edges: [SheepNode!]!
+  totalCount: Int!
+  position: Int!
+}
+
+type GoatConnectionCustom implements ConnectionCustom {
+  edges: [GoatNode!]!
+  totalCount: Int!
+  position: Int!
+}
+
+type DeerConnectionCustom implements ConnectionCustom {
+  edges: [DeerNode!]!
+  totalCount: Int!
+  position: Int!
+}
+
+type IDLConnectionCustom implements ConnectionCustom {
+  edges: [IDLNode!]!
+  totalCount: Int!
+  position: Int!
+}

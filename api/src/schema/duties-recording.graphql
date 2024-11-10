@@ -1,0 +1,105 @@
+extend type Mutation {
+  LogBacentaPrayerActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Bacenta!
+
+  LogGovernorshipPrayerActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Governorship!
+
+  LogCouncilPrayerActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Council!
+
+  LogBacentaVisitationActivity(
+    latitude: Float!
+    longitude: Float!
+    visitationArea: String!
+    picture: String!
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Bacenta!
+
+  LogGovernorshipVisitationActivity(
+    latitude: Float!
+    longitude: Float!
+    visitationArea: String!
+    picture: String!
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Governorship!
+
+  LogCouncilVisitationActivity(
+    latitude: Float!
+    longitude: Float!
+    visitationArea: String!
+    picture: String!
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Council!
+
+  LogBacentaTelepastoringActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Bacenta!
+
+  LogGovernorshipTelepastoringActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Governorship!
+
+  LogCouncilTelepastoringActivity(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): Council!
+
+  LogPastoralComment(
+    comment: String!
+    roleLevel: String!
+    memberId: ID!
+    cycleId: ID!
+  ): PastoralComment!
+    @cypher(
+      statement: """
+      CREATE (pastoralComment:PastoralComment)
+        SET pastoralComment.id = randomUUID(),
+        pastoralComment.comment = $comment,
+        pastoralComment.activity = 'Pastoral Comment',
+        pastoralComment.roleLevel = $roleLevel,
+        pastoralComment.timestamp = datetime()
+
+      WITH pastoralComment
+      MATCH (author:Member {auth_id: $auth.jwt.sub})
+
+      MATCH (member:Member {id: $memberId})
+      MATCH (cycle:PastoralCycle {id: $cycleId})
+      MERGE (date:TimeGraph {date: date()})
+      MERGE (pastoralComment)-[:WRITTEN_ON]->(date)
+      MERGE (pastoralComment)-[:COMMENTS_ON]->(member)
+      MERGE (author)-[:WROTE]->(pastoralComment)
+
+      RETURN pastoralComment
+      """
+    )
+}

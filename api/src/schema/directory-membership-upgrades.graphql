@@ -1,0 +1,178 @@
+scalar UnderstandingSchools
+
+interface MemberUpgrade {
+  id: ID!
+  typename: String!
+  member: Member!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS_PROGRESSION]-(member:Member)
+      RETURN member
+      """
+    )
+}
+
+type SpiritualProgression implements MemberUpgrade {
+  id: ID!
+  typename: String!
+  member: Member!
+  salvation: Boolean!
+  waterBaptism: Boolean!
+  holyGhostBaptism: Boolean!
+  newBelieversSchool: Boolean!
+  strongChristiansAcademy: Boolean!
+  understandingSchools1: Boolean!
+  understandingSchools2: Boolean!
+  understandingSchools3: Boolean!
+  attendedCamp1: Boolean!
+  attendedCamp2: Boolean!
+  attendedCamp3: Boolean!
+  foundersIntimateCounselling: Boolean!
+  leadPastorIntimateCounselling: Boolean!
+  bacentaLeader: Boolean!
+  basontaLeader: Boolean!
+  creativeArtsLeader: Boolean!
+  pastor: Boolean!
+    @cypher(
+      statement: """
+      OPTIONAL MATCH (this)<-[:HAS_PROGRESSION]-(member:Member)-[:HAS_TITLE]->(title:Title)
+      RETURN title IS NOT NULL
+      """
+    )
+  hasMakariosCollection: Boolean!
+  hasAudioCollection: Boolean!
+  onBacentaWhatsappGroup: Boolean!
+}
+
+type LifeProgression implements MemberUpgrade {
+  id: ID!
+  typename: String!
+  member: Member!
+  married: Boolean!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:HAS_PROGRESSION]-(member:Member)-[:HAS_MARITAL_STATUS]->(status:MaritalStatus)
+      RETURN status.status = 'Married'
+      """
+    )
+  childbirth: Boolean!
+  universityEducation: Boolean!
+  ownsHouseOrBuildingProject: Boolean!
+}
+
+extend interface Person {
+  lifeProgression: LifeProgression
+    @relationship(type: "HAS_PROGRESSION", direction: OUT)
+  spiritualProgression: SpiritualProgression
+    @relationship(type: "HAS_PROGRESSION", direction: OUT)
+}
+
+extend type Member {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+
+extend type Sheep {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+
+extend type Goat {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+
+extend type Deer {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+
+extend type IDL {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+extend type IMCL {
+  lifeProgression: LifeProgression
+  spiritualProgression: SpiritualProgression
+}
+
+extend type Mutation {
+  UpdateMemberSpiritualProgression(
+    memberId: ID!
+    salvation: Boolean!
+    waterBaptism: Boolean!
+    holyGhostBaptism: Boolean!
+    newBelieversSchool: Boolean!
+    strongChristiansAcademy: Boolean!
+    understandingSchools1: Boolean!
+    understandingSchools2: Boolean!
+    understandingSchools3: Boolean!
+    attendedCamp1: Boolean!
+    attendedCamp2: Boolean!
+    attendedCamp3: Boolean!
+    foundersIntimateCounselling: Boolean!
+    leadPastorIntimateCounselling: Boolean!
+    bacentaLeader: Boolean!
+    basontaLeader: Boolean!
+    creativeArtsLeader: Boolean!
+    hasMakariosCollection: Boolean!
+    hasAudioCollection: Boolean!
+    onBacentaWhatsappGroup: Boolean!
+  ): Member!
+    @auth(rules: [{ roles: ["adminCampus"] }])
+    @cypher(
+      statement: """
+      MATCH (member:Member {id: $memberId})
+      MERGE (progression:SpiritualProgression {id: member.id})
+        SET progression.salvation = $salvation,
+            progression.waterBaptism = $waterBaptism,
+            progression.holyGhostBaptism = $holyGhostBaptism,
+            progression.newBelieversSchool = $newBelieversSchool,
+            progression.strongChristiansAcademy = $strongChristiansAcademy,
+            progression.understandingSchools1 = $understandingSchools1,
+            progression.understandingSchools2 = $understandingSchools2,
+            progression.understandingSchools3 = $understandingSchools3,
+            progression.attendedCamp1 = $attendedCamp1,
+            progression.attendedCamp2 = $attendedCamp2,
+            progression.attendedCamp3 = $attendedCamp3,
+            progression.foundersIntimateCounselling = $foundersIntimateCounselling,
+            progression.leadPastorIntimateCounselling = $leadPastorIntimateCounselling,
+            progression.bacentaLeader = $bacentaLeader,
+            progression.basontaLeader = $basontaLeader,
+            progression.creativeArtsLeader = $creativeArtsLeader,
+            progression.hasMakariosCollection = $hasMakariosCollection,
+            progression.hasAudioCollection = $hasAudioCollection,
+            progression.onBacentaWhatsappGroup = $onBacentaWhatsappGroup
+
+      MERGE (member)-[:HAS_PROGRESSION]->(progression)
+      RETURN member
+      """
+    )
+  UpdateMemberLifeProgression(
+    memberId: ID!
+    married: Boolean!
+    childbirth: Boolean!
+    universityEducation: Boolean!
+    ownsHouseOrBuildingProject: Boolean!
+  ): Member!
+    @auth(rules: [{ roles: ["adminCampus"] }])
+    @cypher(
+      statement: """
+      WITH $married AS isMarried
+      WITH CASE isMarried WHEN true THEN 'Married' ELSE 'Single' END AS maritalStatus
+
+      MATCH (member:Member {id: $memberId})-[r:HAS_MARITAL_STATUS]->(:MaritalStatus)
+      MATCH (status:MaritalStatus {status: maritalStatus})
+      MERGE (progression:LifeProgression {id: member.id})
+        SET progression.childbirth = $childbirth,
+            progression.universityEducation = $universityEducation,
+            progression.ownsHouseOrBuildingProject = $ownsHouseOrBuildingProject
+        DELETE r
+
+      MERGE (member)-[:HAS_PROGRESSION]->(progression)
+      MERGE (member)-[:HAS_MARITAL_STATUS]->(status)
+
+      RETURN member
+      """
+    )
+}

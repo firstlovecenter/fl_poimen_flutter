@@ -1,0 +1,65 @@
+extend type Campus {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*4]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}
+
+extend type Stream {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*3]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}
+
+extend type Council {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS*2]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}
+
+extend type Governorship {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}
+
+extend type Bacenta {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}
+
+extend type Fellowship {
+  memberSearch(key: String!, limit: Int! = 6): [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(members:Active:Member)
+      WHERE toLower(members.firstName+ ' ' + members.lastName) CONTAINS toLower($key)
+      RETURN DISTINCT members ORDER BY members.lastName, members.firstName LIMIT $limit
+      """
+    )
+}

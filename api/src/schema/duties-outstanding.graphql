@@ -1,0 +1,598 @@
+type VisitationActivity {
+  id: ID!
+  typename: String!
+  datetime: DateTime!
+  location: String!
+  picture: String!
+  comment: PastoralComment!
+    @relationship(type: "LEAVES_COMMENT", direction: OUT)
+  serviceLog: ServiceLog! @relationship(type: "PERFORMED_DUTY", direction: IN)
+  memberVisited: Member! @relationship(type: "TOWARDS", direction: OUT)
+  pastoralCycle: PastoralCycle!
+    @relationship(type: "DURING_CYCLE", direction: OUT)
+}
+
+type PrayerActivity {
+  id: ID!
+  typename: String!
+  datetime: DateTime!
+  comment: PastoralComment!
+    @relationship(type: "LEAVES_COMMENT", direction: OUT)
+  serviceLog: ServiceLog! @relationship(type: "PERFORMED_DUTY", direction: IN)
+  memberPrayedFor: Member! @relationship(type: "TOWARDS", direction: OUT)
+  pastoralCycle: PastoralCycle!
+    @relationship(type: "DURING_CYCLE", direction: OUT)
+}
+
+type TelepastoringActivity {
+  id: ID!
+  typename: String!
+  datetime: DateTime!
+  picture: String!
+  comment: PastoralComment!
+    @relationship(type: "LEAVES_COMMENT", direction: OUT)
+  serviceLog: ServiceLog! @relationship(type: "PERFORMED_DUTY", direction: IN)
+  memberTelepastored: Member! @relationship(type: "TOWARDS", direction: OUT)
+  pastoralCycle: PastoralCycle!
+    @relationship(type: "DURING_CYCLE", direction: OUT)
+}
+
+extend type Bacenta {
+  outstandingVisitations: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+          WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingVisitationsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+          WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedVisitations: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedVisitationsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingPrayer: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingPrayerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedPrayers: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedPrayersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:BacentaCycle {month: date().month, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+}
+
+extend type Governorship {
+  outstandingVisitations: [Member!]!
+    @cypher(
+      statement: """
+       MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+       MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+       MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+       WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+          WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingVisitationsCount: Int!
+    @cypher(
+      statement: """
+       MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+       MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+       MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+       WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+          WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedVisitations: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedVisitationsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingPrayer: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingPrayerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedPrayers: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedPrayersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..1]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:GovernorshipCycle {quarter: date().quarter, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+}
+
+extend type Council {
+  outstandingVisitations: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this:Council)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+         MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+         WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingVisitationsCount: Int!
+    @cypher(
+      statement: """
+       MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+       MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+       MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+       WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(visitation:VisitationActivity)
+          WHERE (visitation)-[:TOWARDS]->(member) AND (visitation)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship  OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+       RETURN COUNT(member)
+      """
+    )
+  completedVisitations: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedVisitationsCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(visitation:VisitationActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(visitation)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingPrayer: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship  OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingPrayerCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(prayer:PrayerActivity)
+          WHERE (prayer)-[:TOWARDS]->(member) AND (prayer)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship  OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedPrayers: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedPrayersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(prayer:PrayerActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(prayer)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  outstandingTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship  OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  outstandingTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)-[:LEADS|IS_ADMIN_FOR]->(church)
+        WHERE  NOT church:ClosedBacenta AND NOT church:ClosedGovernorship AND NOT church:ClosedCouncil AND NOT church:ClosedStream AND NOT church:ClosedCammpus
+        AND NOT church:ClosedHub AND NOT  church:ClosedHubCouncil AND NOT church:ClosedMinistry AND NOT church:ClosedCreativeArts
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)<-[:CURRENT_HISTORY]-(this)
+      WHERE NOT EXISTS {
+          MATCH (log)-[:PERFORMED_DUTY]->(telepastoring:TelepastoringActivity)
+          WHERE (telepastoring)-[:TOWARDS]->(member) AND (telepastoring)-[:DURING_CYCLE]->(cycle)
+      }
+
+      OPTIONAL MATCH (author)-[:LEADS]->(lowerChurch)-[:HAS*0..2]->(:Bacenta)<-[:BELONGS_TO]-(alreadyMember:Member)
+      WHERE lowerChurch:Governorship  OR lowerChurch:Bacenta
+      WITH member, author, collect(DISTINCT alreadyMember) AS alreadyMembers WHERE NOT member IN alreadyMembers
+      WITH member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+  completedTelepastoring: [Member!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN member
+      """
+    )
+  completedTelepastoringCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(:Bacenta)<-[:BELONGS_TO]-(member:Active:Member)
+      MATCH (cycle:CouncilCycle {half: toInteger(ceil(toFloat(date().month)/toFloat(6))) - 1, year: date().year})<-[:DURING_CYCLE]-(telepastoring:TelepastoringActivity)
+      MATCH (author:Member {auth_id: $auth.jwt.sub})-[:CURRENT_HISTORY]->(log:ServiceLog)-[:PERFORMED_DUTY]->(telepastoring)-[:TOWARDS]->(member)
+
+      WITH DISTINCT member, author WHERE member <> author
+
+      RETURN COUNT(member)
+      """
+    )
+}

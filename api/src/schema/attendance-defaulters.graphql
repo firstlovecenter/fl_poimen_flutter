@@ -1,0 +1,261 @@
+extend type Governorship {
+  fellowshipServicesThisWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:CURRENT_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      RETURN COUNT(DISTINCT record)
+      """
+    )
+  fellowshipServiceAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+
+      RETURN DISTINCT fellowship
+      """
+    )
+  fellowshipServiceAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+       WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+
+  fellowshipBussingLastWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+  fellowshipBussingAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+      RETURN DISTINCT fellowship
+      """
+    )
+  fellowshipBussingAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+}
+
+extend type Council {
+  fellowshipServicesThisWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:CURRENT_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      RETURN COUNT(DISTINCT record)
+      """
+    )
+  fellowshipServiceAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+
+      RETURN DISTINCT fellowship LIMIT 40
+      """
+    )
+  fellowshipServiceAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+
+  fellowshipBussingLastWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+  fellowshipBussingAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+
+      RETURN DISTINCT fellowship LIMIT 40
+      """
+    )
+  fellowshipBussingAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+}
+
+extend type Stream {
+  fellowshipServicesThisWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:CURRENT_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      RETURN COUNT(DISTINCT record)
+      """
+    )
+  fellowshipServiceAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+      RETURN DISTINCT fellowship LIMIT 20
+      """
+    )
+  fellowshipServiceAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+
+  fellowshipBussingLastWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+  fellowshipBussingAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+      RETURN DISTINCT fellowship LIMIT 20
+      """
+    )
+  fellowshipBussingAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+}
+
+extend type Campus {
+  fellowshipServicesThisWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:CURRENT_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      RETURN COUNT(DISTINCT record)
+      """
+    )
+  fellowshipServiceAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+      RETURN DISTINCT fellowship LIMIT 20
+      """
+    )
+  fellowshipServiceAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
+      AND record.markedAttendance IS NULL
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+
+  fellowshipBussingLastWeekCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      RETURN COUNT(record)
+      """
+    )
+  fellowshipBussingAttendanceDefaulters: [Fellowship!]!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+      RETURN DISTINCT fellowship LIMIT 20
+      """
+    )
+  fellowshipBussingAttendanceDefaultersCount: Int!
+    @cypher(
+      statement: """
+      MATCH (this)-[:HAS]->(:Stream)-[:HAS]->(:Council)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_BUSSING]->(record:BussingRecord)-[:BUSSED_ON]->(date:TimeGraph)
+      WHERE date.date.week = date().week - 1 AND date.date.year = date().year
+      AND record.markedAttendance IS NULL
+
+      RETURN COUNT(DISTINCT fellowship)
+      """
+    )
+}
