@@ -30,7 +30,9 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
   @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(document: widget.query, variables: widget.variables),
+      options: QueryOptions(
+        
+        document: widget.query, variables: widget.variables),
       builder: (
         QueryResult result, {
         VoidCallback? refetch,

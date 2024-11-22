@@ -16,15 +16,15 @@ class UserHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = context.watch<SharedState>();
-    final authUser = AuthService.instance.idToken;
+    final authUser = AuthService.instance.profile;
     final picture = CloudinaryImage(url: authUser!.picture, size: ImageSize.lg);
     var role = parseRole(state.role);
     final user = MemberForList(
       id: authUser.sub,
       typename: 'Member',
       status: 'Sheep',
-      firstName: authUser.given_name,
-      lastName: authUser.family_name,
+      firstName: authUser.name,
+      lastName: 'last name--',
       pictureUrl: authUser.picture,
       phoneNumber: '0000',
       whatsappNumber: '0000',

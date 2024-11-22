@@ -61,9 +61,7 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [
-            'appAuthRedirectScheme': 'io.firstlovecenter.poimen'
-        ]
+        manifestPlaceholders = [auth0Domain: "flcadmin.us.auth0.com", auth0Scheme: "https",]
     }
 
       signingConfigs {

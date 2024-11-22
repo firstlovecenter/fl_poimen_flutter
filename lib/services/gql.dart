@@ -12,7 +12,8 @@ final String host = apiEndpoint == 'http://localhost:4001' && Platform.isAndroid
 final String currentHost = kDebugMode ? host : apiEndpoint;
 
 final HttpLink httpLink = HttpLink(
-  '$currentHost/graphql',
+  // '$currentHost/graphql',
+  "https://poimen.firstlovecenter.com/graphql"
 );
 final authToken = AuthService.instance.auth0AccessToken.toString();
 

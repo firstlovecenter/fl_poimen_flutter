@@ -19,7 +19,7 @@ class ProfileCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           userState.church = church;
-          userState.roleLevel = getChurchLevelFromAuth((AuthService.instance.idToken?.roles ?? []));
+          userState.roleLevel = getChurchLevelFromAuth((AuthService.instance.profile?.roles ?? []));
           userState.roleType = convertToRoleEnum(role);
 
           if (church.typename == 'Fellowship') {

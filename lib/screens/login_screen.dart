@@ -14,15 +14,6 @@ class LoginScreen extends StatefulWidget {
 
   final String currentVersion;
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -35,8 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    initAction();
     super.initState();
+    initAction();
   }
 
   @override
@@ -64,24 +55,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Padding(padding: EdgeInsets.all(16.0)),
                     RichText(
                       text: TextSpan(
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                          children: [
-                            TextSpan(
-                                text: 'Welcome to the',
-                                style: TextStyle(
-                                  color: textColor,
-                                )),
-                            TextSpan(
-                              text: ' POIMEN',
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        children: [
+                          TextSpan(
+                              text: 'Welcome to the',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
                                 color: textColor,
-                              ),
+                              )),
+                          TextSpan(
+                            text: ' POIMEN',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
                             ),
-                            TextSpan(text: ' App', style: TextStyle(color: textColor)),
-                          ]),
+                          ),
+                          TextSpan(text: ' App', style: TextStyle(color: textColor)),
+                        ],
+                      ),
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
                     Padding(
@@ -93,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         text: 'Login',
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
@@ -110,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isProgressing = false;
       isLoggedIn = true;
-      name = AuthService.instance.idToken?.name;
+      name = AuthService.instance.profile?.name;
     });
 
     Navigator.of(context).pushNamedAndRemoveUntil('/profile-choose', (route) => false);

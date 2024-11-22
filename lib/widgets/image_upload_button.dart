@@ -68,44 +68,44 @@ class _ImageUploadButtonState extends State<ImageUploadButton> {
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(),
                     onPressed: () async {
-                      final memberId =
-                          AuthService.instance.idToken?.userId.replaceFirst('auth0|', '');
+                      // final memberId =
+                      //     AuthService.instance.idToken?.userId.replaceFirst('auth0|', '');
                       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-                      final authUser = AuthService.instance.idToken;
+                      // final authUser = AuthService.instance.idToken;
                       final date = DateTime.now().toIso8601String().split('T')[0];
 
-                      try {
-                        CloudinaryResponse response = await cloudinary.uploadFile(
-                          CloudinaryFile.fromFile(
-                            image?.path ?? '',
-                            publicId:
-                                'poimen/${authUser?.given_name}-${authUser?.family_name}-$memberId/${date}_${getRandomString(16)}',
-                            identifier: 'user/user-$memberId',
-                            tags: ['membership picture', 'face-detection'],
-                            context: {
-                              'caption': '_$memberId',
-                              'uploader-id': memberId,
-                              'uploader-name': '${authUser?.given_name} ${authUser?.family_name}',
-                            },
-                            resourceType: CloudinaryResourceType.Image,
-                          ),
-                          onProgress: (count, total) {
-                            setState(() {
-                              progress = count / total;
-                            });
-                          },
-                        );
+                      // try {
+                      //   CloudinaryResponse response = await cloudinary.uploadFile(
+                      //     CloudinaryFile.fromFile(
+                      //       image?.path ?? '',
+                      //       publicId:
+                      //           'poimen/${authUser?.given_name}-${authUser?.family_name}-$memberId/${date}_${getRandomString(16)}',
+                      //       identifier: 'user/user-$memberId',
+                      //       tags: ['membership picture', 'face-detection'],
+                      //       context: {
+                      //         'caption': '_$memberId',
+                      //         'uploader-id': memberId,
+                      //         'uploader-name': '${authUser?.given_name} ${authUser?.family_name}',
+                      //       },
+                      //       resourceType: CloudinaryResourceType.Image,
+                      //     ),
+                      //     onProgress: (count, total) {
+                      //       setState(() {
+                      //         progress = count / total;
+                      //       });
+                      //     },
+                      //   );
 
-                        setState(() {
-                          picture = response.secureUrl;
-                        });
-                        widget.setPictureUrl(response.secureUrl);
-                      } on CloudinaryException catch (error) {
-                        if (kDebugMode) {
-                          print(error.message);
-                          print(error.request);
-                        }
-                      }
+                      //   setState(() {
+                      //     picture = response.secureUrl;
+                      //   });
+                      //   widget.setPictureUrl(response.secureUrl);
+                      // } on CloudinaryException catch (error) {
+                      //   if (kDebugMode) {
+                      //     print(error.message);
+                      //     print(error.request);
+                      //   }
+                      // }
                     },
                     child: widget.child,
                   )
