@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/state/shared_state.dart';
@@ -26,8 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // await initAction();
+    });
     super.initState();
-    initAction();
   }
 
   @override
@@ -50,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const SizedBox(
                       height: 250,
-                      child: RiveAnimation.asset('assets/animations/spinning_logo.riv'),
+                      child: RiveAnimation.asset(
+                          'assets/animations/spinning_logo.riv'),
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
                     RichText(
@@ -71,7 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: textColor,
                             ),
                           ),
-                          TextSpan(text: ' App', style: TextStyle(color: textColor)),
+                          TextSpan(
+                              text: ' App', style: TextStyle(color: textColor)),
                         ],
                       ),
                     ),
@@ -105,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
       name = AuthService.instance.profile?.name;
     });
 
-    Navigator.of(context).pushNamedAndRemoveUntil('/profile-choose', (route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/profile-choose', (route) => false);
   }
 
   setLoadingState() {
@@ -132,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setLoadingState();
     var state = Provider.of<SharedState>(context, listen: false);
     final bool isAuth = await AuthService.instance.init();
-
+    log('Auth is Done $isAuth');
     state.version = widget.currentVersion;
     if (isAuth) {
       setSuccessAuthState();
