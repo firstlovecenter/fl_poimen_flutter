@@ -12,15 +12,13 @@ final String host = apiEndpoint == 'http://localhost:4001' && Platform.isAndroid
 
 final String currentHost = kDebugMode ? host : apiEndpoint;
 
-final HttpLink httpLink = HttpLink(
-    // '$currentHost/graphql',
-    "https://poimen.firstlovecenter.com/graphql");
+final HttpLink httpLink = HttpLink('$currentHost/graphql');
 final authToken = AuthService.instance.auth0AccessToken.toString();
 FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 final AuthLink authLink = AuthLink(
   getToken: () async {
     String? token = await secureStorage.read(key: 'accessToken');
-   
+
     return 'Bearer $token';
   },
 );

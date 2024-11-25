@@ -21,7 +21,7 @@ void main() async {
   // We're using HiveStore for persistence,
   // so we need to initialize Hive.
 
-  runApp(const PoimenApp(currentVersion: '1.3.0'));
+  runApp(PoimenApp(currentVersion: currentVersion));
 }
 
 class PoimenApp extends StatelessWidget {
@@ -41,7 +41,9 @@ class PoimenApp extends StatelessWidget {
           darkTheme: newDarkTheme,
           routes: appRoutes,
           initialRoute: "/",
-          home: const HandleLogin(),
+          home: HandleLogin(
+            currentVersion: currentVersion,
+          ),
         ),
       ),
     );

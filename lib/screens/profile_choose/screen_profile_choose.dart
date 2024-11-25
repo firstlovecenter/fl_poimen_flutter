@@ -111,9 +111,7 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
               final version = state.version;
 
               // Conditionally render body based on version validity and platform
-              if (!kIsWeb &&
-                  !currentVersionValid(
-                      data?['minimumRequiredVersion'], version)) {
+              if (!kIsWeb && !currentVersionValid(data?['minimumRequiredVersion'], version)) {
                 return _buildUpdatePrompt();
               }
 
@@ -124,37 +122,39 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
           );
   }
 
-  Widget _buildUpdatePrompt() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Please update your app to the latest version'),
-          TextButton(
-            onPressed: () async {
-              final url = Platform.isAndroid
-                  ? 'https://play.google.com/store/apps/details?id=io.firstlovecenter.poimen'
-                  : 'https://apps.apple.com/gh/app/flc-poimen/id6443637787';
-              final Uri launchUri = Uri.parse(url);
+  GQLQueryContainerReturnValue _buildUpdatePrompt() {
+    return GQLQueryContainerReturnValue(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Please update your app to the latest version'),
+            TextButton(
+              onPressed: () async {
+                final url = Platform.isAndroid
+                    ? 'https://play.google.com/store/apps/details?id=io.firstlovecenter.poimen'
+                    : 'https://apps.apple.com/gh/app/flc-poimen/id6443637787';
+                final Uri launchUri = Uri.parse(url);
 
-              if (await canLaunchUrl(launchUri)) {
-                final launched = await launchUrl(
-                  launchUri,
-                  mode: LaunchMode.externalNonBrowserApplication,
-                );
-                if (!launched) {
-                  await launchUrl(
+                if (await canLaunchUrl(launchUri)) {
+                  final launched = await launchUrl(
                     launchUri,
-                    mode: LaunchMode.externalApplication,
+                    mode: LaunchMode.externalNonBrowserApplication,
                   );
+                  if (!launched) {
+                    await launchUrl(
+                      launchUri,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                } else {
+                  debugPrint('Could not launch $url');
                 }
-              } else {
-                debugPrint('Could not launch $url');
-              }
-            },
-            child: const Text('Update'),
-          ),
-        ],
+              },
+              child: const Text('Update'),
+            ),
+          ],
+        ),
       ),
     );
   }

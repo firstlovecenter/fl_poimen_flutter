@@ -9,12 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({
-    Key? key,
-    required this.currentVersion,
-  }) : super(key: key);
-
-  final String currentVersion;
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -39,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color textColor = isDark ? Colors.white : Colors.black;
     var state = context.watch<SharedState>();
-
+    print('Check the state ${state.version}');
     return Scaffold(
       body: Center(
         child: Column(
@@ -54,8 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const SizedBox(
                       height: 250,
-                      child: RiveAnimation.asset(
-                          'assets/animations/spinning_logo.riv'),
+                      child: RiveAnimation.asset('assets/animations/spinning_logo.riv'),
                     ),
                     const Padding(padding: EdgeInsets.all(16.0)),
                     RichText(
@@ -76,8 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: textColor,
                             ),
                           ),
-                          TextSpan(
-                              text: ' App', style: TextStyle(color: textColor)),
+                          TextSpan(text: ' App', style: TextStyle(color: textColor)),
                         ],
                       ),
                     ),
@@ -86,7 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: AuthButton(
                         onPressed: () {
-                          state.version = widget.currentVersion;
                           loginAction();
                         },
                         text: 'Login',
@@ -111,8 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
       name = AuthService.instance.profile?.name;
     });
 
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/profile-choose', (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil('/profile-choose', (route) => false);
   }
 
   setLoadingState() {
@@ -137,10 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   initAction() async {
     setLoadingState();
-    var state = Provider.of<SharedState>(context, listen: false);
     final bool isAuth = await AuthService.instance.init();
     log('Auth is Done $isAuth');
-    state.version = widget.currentVersion;
     if (isAuth) {
       setSuccessAuthState();
     } else {

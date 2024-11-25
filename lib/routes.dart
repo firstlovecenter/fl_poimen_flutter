@@ -86,22 +86,17 @@ import 'package:poimen/screens/trends/leaders_trends/screen_stream_subleaders.da
 import 'package:poimen/screens/trends/leaders_trends/screen_campus_subleaders.dart';
 
 var appRoutes = {
-  '/login': (context) => const LoginScreen(
-        currentVersion: "1.3.0",
-      ),
+  '/login': (context) => const LoginScreen(),
   '/home': (context) => const Home(),
   '/search': (context) => const SearchScreen(),
   '/profile-choose': (context) => const ProfileChooseScreen(),
 
   // Display Member Details
   '/member-details': (context) => const MemberDetailsScreen(),
-  '/member-pastoral-comments': (context) =>
-      const MemberPastoralCommentsScreen(),
-  '/member-spiritual-progression': (context) =>
-      const MemberSpiritualProgressionsScreen(),
+  '/member-pastoral-comments': (context) => const MemberPastoralCommentsScreen(),
+  '/member-spiritual-progression': (context) => const MemberSpiritualProgressionsScreen(),
   '/member-life-progression': (context) => const MemberLifeProgressionsScreen(),
-  '/membership-upgrades/life-progression': (context) =>
-      const UpdateLifeProgressionScreen(),
+  '/membership-upgrades/life-progression': (context) => const UpdateLifeProgressionScreen(),
   '/membership-upgrades/spiritual-progression': (context) =>
       const UpdateSpiritualProgressionScreen(),
 
@@ -122,79 +117,54 @@ var appRoutes = {
   '/governorship-imcls': (context) => const GovernorshipIMCLScreen(),
   '/hub-imcls': (context) => const HubIMCLScreen(),
 
-  '/fellowship/outstanding-visitation': (context) =>
-      const FellowshipOutstandingVisitationScreen(),
-  '/fellowship/completed-visitation': (context) =>
-      const FellowshipCompletedVisitationScreen(),
-  '/bacenta/outstanding-visitation': (context) =>
-      const BacentaOutstandingVisitationScreen(),
-  '/bacenta/completed-visitation': (context) =>
-      const BacentaCompletedVisitationScreen(),
+  '/fellowship/outstanding-visitation': (context) => const FellowshipOutstandingVisitationScreen(),
+  '/fellowship/completed-visitation': (context) => const FellowshipCompletedVisitationScreen(),
+  '/bacenta/outstanding-visitation': (context) => const BacentaOutstandingVisitationScreen(),
+  '/bacenta/completed-visitation': (context) => const BacentaCompletedVisitationScreen(),
   '/governorship/outstanding-visitation': (context) =>
       const GovernorshipOutstandingVisitationScreen(),
-  '/governorship/completed-visitation': (context) =>
-      const GovernorshipCompletedVisitationScreen(),
-  '/council/outstanding-visitation': (context) =>
-      const CouncilOutstandingVisitationScreen(),
-  '/council/completed-visitation': (context) =>
-      const CouncilCompletedVisitationScreen(),
+  '/governorship/completed-visitation': (context) => const GovernorshipCompletedVisitationScreen(),
+  '/council/outstanding-visitation': (context) => const CouncilOutstandingVisitationScreen(),
+  '/council/completed-visitation': (context) => const CouncilCompletedVisitationScreen(),
 
   '/fellowship/outstanding-telepastoring': (context) =>
       const FellowshipOutstandingTelepastoringScreen(),
   '/fellowship/completed-telepastoring': (context) =>
       const FellowshipCompletedTelepastoringScreen(),
-  '/bacenta/outstanding-telepastoring': (context) =>
-      const BacentaOutstandingTelepastoringScreen(),
-  '/bacenta/completed-telepastoring': (context) =>
-      const BacentaCompletedTelepastoringScreen(),
+  '/bacenta/outstanding-telepastoring': (context) => const BacentaOutstandingTelepastoringScreen(),
+  '/bacenta/completed-telepastoring': (context) => const BacentaCompletedTelepastoringScreen(),
   '/governorship/outstanding-telepastoring': (context) =>
       const GovernorshipOutstandingTelepastoringScreen(),
   '/governorship/completed-telepastoring': (context) =>
       const GovernorshipCompletedTelepastoringScreen(),
-  '/council/outstanding-telepastoring': (context) =>
-      const CouncilOutstandingTelepastoringScreen(),
-  '/council/completed-telepastoring': (context) =>
-      const CouncilCompletedTelepastoringScreen(),
+  '/council/outstanding-telepastoring': (context) => const CouncilOutstandingTelepastoringScreen(),
+  '/council/completed-telepastoring': (context) => const CouncilCompletedTelepastoringScreen(),
 
-  '/bacenta/outstanding-prayer': (context) =>
-      const BacentaOutstandingPrayerScreen(),
-  '/bacenta/completed-prayer': (context) =>
-      const BacentaCompletedPrayerScreen(),
-  '/governorship/outstanding-prayer': (context) =>
-      const GovernorshipOutstandingPrayerScreen(),
-  '/governorship/completed-prayer': (context) =>
-      const GovernorshipCompletedPrayerScreen(),
-  '/council/outstanding-prayer': (context) =>
-      const CouncilOutstandingPrayerScreen(),
-  '/council/completed-prayer': (context) =>
-      const CouncilCompletedPrayerScreen(),
+  '/bacenta/outstanding-prayer': (context) => const BacentaOutstandingPrayerScreen(),
+  '/bacenta/completed-prayer': (context) => const BacentaCompletedPrayerScreen(),
+  '/governorship/outstanding-prayer': (context) => const GovernorshipOutstandingPrayerScreen(),
+  '/governorship/completed-prayer': (context) => const GovernorshipCompletedPrayerScreen(),
+  '/council/outstanding-prayer': (context) => const CouncilOutstandingPrayerScreen(),
+  '/council/completed-prayer': (context) => const CouncilCompletedPrayerScreen(),
 
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens
   '/record-attendance': (context) => const RecordAttendanceScreen(),
   '/servicerecord-services': (context) => const FellowshipServicesScreen(),
-  '/servicerecord/attendance-ticker': (context) =>
-      const BacentaAttendanceTickerScreen(),
-  '/governorship/attendance-ticker': (context) =>
-      const GovernorshipAttendanceTickerScreen(),
-  '/servicerecord/attendance-report': (context) =>
-      const BacentaAttendanceReportScreen(),
-  '/meetings/attendance-report': (context) =>
-      const GovernorshipAttendanceReportScreen(),
+  '/servicerecord/attendance-ticker': (context) => const BacentaAttendanceTickerScreen(),
+  '/governorship/attendance-ticker': (context) => const GovernorshipAttendanceTickerScreen(),
+  '/servicerecord/attendance-report': (context) => const BacentaAttendanceReportScreen(),
+  '/meetings/attendance-report': (context) => const GovernorshipAttendanceReportScreen(),
 
   // Bacenta Attendance Screens
   '/bussingrecord-services': (context) => const SundayBussingScreen(),
-  '/bussingrecord/attendance-ticker': (context) =>
-      const BussingRecordAttendanceTickerScreen(),
-  '/bussingrecord/attendance-report': (context) =>
-      const BussingAttendanceReportScreen(),
+  '/bussingrecord/attendance-ticker': (context) => const BussingRecordAttendanceTickerScreen(),
+  '/bussingrecord/attendance-report': (context) => const BussingAttendanceReportScreen(),
 
   // Hub Attendance Screens
   '/rehearsal-meetings': (context) => const HubRehearsalsScreen(),
-  '/rehearsalrecord/attendance-ticker': (context) =>
-      const HubAttendanceTickerScreen(),
-  '/rehearsalrecord/attendance-report': (context) =>
-      const HubAttendanceReportScreen(),
+  '/rehearsalrecord/attendance-ticker': (context) => const HubAttendanceTickerScreen(),
+  '/rehearsalrecord/attendance-report': (context) => const HubAttendanceReportScreen(),
 
 // Attendance Defaulters
   '/governorship/service-attendance-defaulters': (context) =>
@@ -216,12 +186,9 @@ var appRoutes = {
 
   '/governorship/attendance-defaulters': (context) =>
       const GovernorshipAttendanceDefaultersScreen(),
-  '/council/attendance-defaulters': (context) =>
-      const CouncilAttendanceDefaultersScreen(),
-  '/stream/attendance-defaulters': (context) =>
-      const StreamAttendanceDefaultersScreen(),
-  '/campus/attendance-defaulters': (context) =>
-      const CampusAttendanceDefaultersScreen(),
+  '/council/attendance-defaulters': (context) => const CouncilAttendanceDefaultersScreen(),
+  '/stream/attendance-defaulters': (context) => const StreamAttendanceDefaultersScreen(),
+  '/campus/attendance-defaulters': (context) => const CampusAttendanceDefaultersScreen(),
 
   // Attendance Defaulters Grouped By SubChurch
   '/council-by-governorship/attendance-defaulters': (context) =>
@@ -242,12 +209,9 @@ var appRoutes = {
       const FellowshipMembershipAttendanceScreen(),
   '/trends/governorship/membership-attendance': (context) =>
       const GovernorshipMembershipAttendanceScreen(),
-  '/trends/council/membership-attendance': (context) =>
-      const CouncilMembershipAttendanceScreen(),
-  '/trends/stream/membership-attendance': (context) =>
-      const StreamMembershipAttendanceScreen(),
-  '/trends/campus/membership-attendance': (context) =>
-      const CampusMembershipAttendanceScreen(),
+  '/trends/council/membership-attendance': (context) => const CouncilMembershipAttendanceScreen(),
+  '/trends/stream/membership-attendance': (context) => const StreamMembershipAttendanceScreen(),
+  '/trends/campus/membership-attendance': (context) => const CampusMembershipAttendanceScreen(),
 
   // Pastoral Care
   '/trends/fellowship/pastoral-work-cycles': (context) =>
@@ -256,12 +220,8 @@ var appRoutes = {
       const GovernorshipPastoralWorkCyclesScreen(),
 
 // My Leaders Trends
-  '/governorship-subleaders-trends': (context) =>
-      const GovernorshipSubLeadersTrendsScreen(),
-  '/council-subleaders-trends': (context) =>
-      const CouncilSubLeadersTrendsScreen(),
-  '/stream-subleaders-trends': (context) =>
-      const StreamSubLeadersTrendsScreen(),
-  '/campus-subleaders-trends': (context) =>
-      const CampusSubLeadersTrendsScreen(),
+  '/governorship-subleaders-trends': (context) => const GovernorshipSubLeadersTrendsScreen(),
+  '/council-subleaders-trends': (context) => const CouncilSubLeadersTrendsScreen(),
+  '/stream-subleaders-trends': (context) => const StreamSubLeadersTrendsScreen(),
+  '/campus-subleaders-trends': (context) => const CampusSubLeadersTrendsScreen(),
 };

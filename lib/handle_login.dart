@@ -8,7 +8,9 @@ import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 
 class HandleLogin extends StatefulWidget {
-  const HandleLogin({super.key});
+  const HandleLogin({super.key, required this.currentVersion});
+
+  final String currentVersion;
 
   @override
   State<HandleLogin> createState() => _HandleLoginState();
@@ -34,10 +36,8 @@ class _HandleLoginState extends State<HandleLogin> {
       print('Check the Initializing $isInitialized');
       if (isInitialized) {
         // Check if the stored values are valid
-        final String? accessToken =
-            await _authService.secureStorage.read(key: 'accessToken');
-        final String? authId =
-            await _authService.secureStorage.read(key: 'authId');
+        final String? accessToken = await _authService.secureStorage.read(key: 'accessToken');
+        final String? authId = await _authService.secureStorage.read(key: 'authId');
         // If credentials exist and are valid, consider user authenticated
         // js.context.callMethod('loadScript', ['redirect.js']);
         log('Handle Login $authId');
@@ -54,6 +54,9 @@ class _HandleLoginState extends State<HandleLogin> {
 
   @override
   Widget build(BuildContext context) {
+    var state = context.watch<SharedState>();
+    state.version = widget.currentVersion;
+
     return FutureBuilder<bool>(
       future: _authFuture,
       builder: (context, snapshot) {
@@ -78,7 +81,7 @@ class _HandleLoginState extends State<HandleLogin> {
           return const ProfileChooseScreen();
         } else {
           // Not authenticated - Navigate to LoginScreen
-          return const LoginScreen(currentVersion: '1.4.0');
+          return const LoginScreen();
         }
       },
     );

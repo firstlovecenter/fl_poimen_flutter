@@ -1,9 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:poimen/services/auth_service.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 
 class ImageUploadButton extends StatefulWidget {
