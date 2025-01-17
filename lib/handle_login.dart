@@ -1,5 +1,3 @@
-import 'dart:developer';
-// import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
 import 'package:poimen/services/auth_service.dart';
@@ -30,18 +28,15 @@ class _HandleLoginState extends State<HandleLogin> {
 
   Future<bool> _initializeAuth() async {
     try {
-      // Run init() to perform authentication setup
-      log('Initializing _authService.init()');
       final isInitialized = await _authService.init();
-      print('Check the Initializing $isInitialized');
+
       if (isInitialized) {
         // Check if the stored values are valid
         final String? accessToken = await _authService.secureStorage.read(key: 'accessToken');
         final String? authId = await _authService.secureStorage.read(key: 'authId');
         // If credentials exist and are valid, consider user authenticated
         // js.context.callMethod('loadScript', ['redirect.js']);
-        log('Handle Login $authId');
-        log('Handle Login $accessToken');
+
         return accessToken != null && authId != null;
       }
 

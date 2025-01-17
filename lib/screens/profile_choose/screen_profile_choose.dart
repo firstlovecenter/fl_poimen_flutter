@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:html/parser.dart' as html;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:poimen/screens/profile_choose/gql_profile_choose.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/screens/profile_choose/widget_profile_choose.dart';
-import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/gql_query_container.dart';
-import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';

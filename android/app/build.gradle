@@ -33,6 +33,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
    }
 
 android {
+    namespace 'io.firstlovecenter.poimen'
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 

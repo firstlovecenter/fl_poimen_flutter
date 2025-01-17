@@ -1,23 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-// import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:poimen/helpers/constants.dart';
-import 'package:poimen/models/auth0_id_token.dart';
-import 'package:http/http.dart' as http;
 import 'package:poimen/models/auth0_user.dart';
-
-import 'dart:convert';
-import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:auth0_flutter/auth0_flutter_web.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
 
 class AuthService {
   static final AuthService instance = AuthService._internal();
@@ -91,8 +77,7 @@ class AuthService {
         );
         return 'Success';
       } else {
-        final credentials =
-            await auth0.webAuthentication().login(useHTTPS: true);
+        final credentials = await auth0.webAuthentication().login(useHTTPS: true);
         auth0AccessToken = credentials.accessToken;
 
         profile = Auth0User(
@@ -105,8 +90,7 @@ class AuthService {
             roles: []);
         debugPrint('Login function profile ${profile?.id}');
         debugPrint('Login Function profile sub ${profile?.sub}');
-        await secureStorage.write(
-            key: 'accessToken', value: credentials.idToken);
+        await secureStorage.write(key: 'accessToken', value: credentials.idToken);
         await secureStorage.write(key: 'authId', value: profile!.sub);
 
         return 'Success';

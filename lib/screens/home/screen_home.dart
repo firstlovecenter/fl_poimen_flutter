@@ -14,12 +14,9 @@ class HomeScreen extends StatelessWidget {
     var churchState = context.read<SharedState>();
     var church = churchState.church;
     var query = getFellowshipHomeScreen;
-    String pluralName = 'fellowships';
 
-    if (church.typename == 'Fellowship') {
-      pluralName = 'fellowships';
-      query = getFellowshipHomeScreen;
-    }
+    String pluralName = 'bacentas';
+
     if (church.typename == 'Bacenta') {
       pluralName = 'bacentas';
       query = getBacentaHomeScreen;
