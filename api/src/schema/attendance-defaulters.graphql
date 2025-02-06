@@ -89,8 +89,8 @@ extend type Council {
   fellowshipServiceAttendanceDefaultersCount: Int!
     @cypher(
       statement: """
-      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)-[:HAS]->(fellowship:Fellowship)
-      MATCH (fellowship)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
+      MATCH (this)-[:HAS]->(:Governorship)-[:HAS]->(bacenta:Bacenta)
+      MATCH (bacenta)-[:HAS_HISTORY]->(:ServiceLog)-[:HAS_SERVICE]->(record:ServiceRecord)-[:SERVICE_HELD_ON]->(date:TimeGraph)
       WHERE date.date.week = date().week AND date.date.year = date().year AND NOT record:NoService
       AND record.markedAttendance IS NULL
 
