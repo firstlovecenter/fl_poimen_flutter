@@ -17,15 +17,16 @@ class UserHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = context.watch<SharedState>();
     final authUser = AuthService.instance.profile;
-    final picture = CloudinaryImage(url: authUser!.picture, size: ImageSize.lg);
+
+    final picture = CloudinaryImage(url: authUser?.picture ?? '', size: ImageSize.lg);
     var role = parseRole(state.role);
     final user = MemberForList(
-      id: authUser.sub,
+      id: authUser?.sub ?? '',
       typename: 'Member',
       status: 'Sheep',
-      firstName: authUser.name,
+      firstName: authUser?.name ?? '',
       lastName: 'last name--',
-      pictureUrl: authUser.picture,
+      pictureUrl: authUser?.picture ?? '',
       phoneNumber: '0000',
       whatsappNumber: '0000',
     );
@@ -37,7 +38,7 @@ class UserHeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              authUser.name,
+              authUser?.name ?? '',
               style: const TextStyle(fontSize: 20),
             ),
             Text(

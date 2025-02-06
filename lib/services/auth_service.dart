@@ -28,7 +28,7 @@ class AuthService {
         final credentials = await auth0Web.onLoad();
         if (credentials != null) {
           auth0AccessToken = credentials.idToken;
-          log('Credentials successfully loaded.');
+
           profile = Auth0User(
             nickname: '',
             name: credentials.user.name ?? '',
@@ -88,8 +88,7 @@ class AuthService {
             updatedAt: '',
             sub: credentials.user.sub,
             roles: []);
-        debugPrint('Login function profile ${profile?.id}');
-        debugPrint('Login Function profile sub ${profile?.sub}');
+
         await secureStorage.write(key: 'accessToken', value: credentials.idToken);
         await secureStorage.write(key: 'authId', value: profile!.sub);
 

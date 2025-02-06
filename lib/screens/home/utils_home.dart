@@ -52,7 +52,6 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
   final churchLevel = convertToChurchEnum(level);
 
   const permittedLevels = [
-    ChurchLevel.fellowship,
     ChurchLevel.bacenta,
     ChurchLevel.governorship,
     ChurchLevel.council,
@@ -67,6 +66,7 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
   final daysLeftInCycle =
       getNumberOfDaysTillDeadline(DateTime.parse(church.currentPastoralCycle?.endDate ?? ''));
 
+  print('daysInCycle: $daysInCycle');
   return [
     const Padding(padding: EdgeInsets.all(10.0)),
     Row(

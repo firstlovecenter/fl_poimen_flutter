@@ -21,22 +21,23 @@ class HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final churchState = context.watch<SharedState>();
     String level = church.typename.toLowerCase();
+    print('level: $level');
     final churchLevel = convertToChurchEnum(level);
     final levelForUrl = churchLevel.name.toLowerCase();
 
     Future.delayed(Duration.zero, () {
       if (church.currentPastoralCycle != null) {
-        churchState.pastoralCycle = church.currentPastoralCycle!;
+        // churchState.pastoralCycle = church.currentPastoralCycle!;
       }
     });
 
     int? totalFellowshipAttendanceDefaulters;
 
-    if (church.fellowshipBussingAttendanceDefaultersCount != null &&
-        church.fellowshipBussingAttendanceDefaultersCount != null) {
-      totalFellowshipAttendanceDefaulters = church.fellowshipBussingAttendanceDefaultersCount! +
-          church.fellowshipServiceAttendanceDefaultersCount!;
-    }
+    // if (church.fellowshipBussingAttendanceDefaultersCount != null &&
+    //     church.fellowshipServiceAttendanceDefaultersCount != null) {
+    //   totalFellowshipAttendanceDefaulters = church.fellowshipBussingAttendanceDefaultersCount! +
+    //       church.fellowshipServiceAttendanceDefaultersCount!;
+    // }
 
     return Padding(
       padding: const EdgeInsets.all(20.0),

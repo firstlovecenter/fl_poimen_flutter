@@ -10,6 +10,7 @@ class SharedState with ChangeNotifier {
   Role _role = Role.leaderFellowship;
   ChurchLevel _roleLevel = ChurchLevel.fellowship;
   ChurchRole _roleType = ChurchRole.leader;
+  
   ProfileChurch _church = ProfileChurch(
     id: '',
     typename: '',
