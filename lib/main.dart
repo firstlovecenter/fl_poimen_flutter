@@ -8,6 +8,7 @@ import 'package:poimen/services/gql.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/color_scheme.dart';
 import 'package:provider/provider.dart';
+import 'package:poimen/state/auth_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,10 +17,15 @@ void main() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   String currentVersion = packageInfo.version;
 
-  // We're using HiveStore for persistence,
-  // so we need to initialize Hive.
-
-  runApp(PoimenApp(currentVersion: currentVersion));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SharedState()),
+        ChangeNotifierProvider(create: (_) => AuthState()),
+      ],
+      child: PoimenApp(currentVersion: currentVersion),
+    ),
+  );
 }
 
 class PoimenApp extends StatelessWidget {
@@ -31,17 +37,14 @@ class PoimenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: client,
-      child: ChangeNotifierProvider(
-        create: (_) => SharedState(),
-        child: MaterialApp(
-          title: 'Poimen Flutter Client',
-          theme: newLightTheme,
-          darkTheme: newDarkTheme,
-          routes: appRoutes,
-          initialRoute: "/",
-          home: HandleLogin(
-            currentVersion: currentVersion,
-          ),
+      child: MaterialApp(
+        title: 'Poimen Flutter Client',
+        theme: newLightTheme,
+        darkTheme: newDarkTheme,
+        routes: appRoutes,
+        initialRoute: "/",
+        home: HandleLogin(
+          currentVersion: currentVersion,
         ),
       ),
     );

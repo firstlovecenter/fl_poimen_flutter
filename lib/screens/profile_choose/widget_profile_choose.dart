@@ -76,7 +76,7 @@ class ProfileChooseWidget extends StatelessWidget {
           AuthButton(
               text: 'Sign Out',
               onPressed: () {
-                AuthService.instance.logout();
+                AuthService.instance.logout(context);
                 Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
               }),
           const Padding(padding: EdgeInsets.all(6))

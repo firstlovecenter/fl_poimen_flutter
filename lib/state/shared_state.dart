@@ -51,6 +51,9 @@ class SharedState with ChangeNotifier {
   String _serviceRecordId = '';
   String _bottomNavSelected = '';
 
+  // Add user profile field
+  Profile? _userProfile;
+
   String get searchKey => _searchKey;
   String get version => _version;
   Role get role => _role;
@@ -59,6 +62,9 @@ class SharedState with ChangeNotifier {
   ProfileChurch get church => _church;
   MemberForList get member => _member;
   String get bottomNavSelected => _bottomNavSelected;
+
+  // Add getter for user profile
+  Profile? get userProfile => _userProfile;
 
   PastoralCycle get pastoralCycle => _pastoralCycle;
   String get memberId => _memberId;
@@ -210,6 +216,12 @@ class SharedState with ChangeNotifier {
 
   set serviceRecordId(String serviceRecordId) {
     _serviceRecordId = serviceRecordId;
+    notifyListeners();
+  }
+
+  // Add setter for user profile
+  set userProfile(Profile? profile) {
+    _userProfile = profile;
     notifyListeners();
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:poimen/screens/profile_choose/gql_profile_choose.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/screens/profile_choose/widget_profile_choose.dart';
 import 'package:poimen/services/gql_query_container.dart';
+import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -72,7 +74,7 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
         _isLoading = true;
         _errorMessage = null;
       });
-      
+
       // Using Future.wait to fetch both values in parallel
       final results = await Future.wait([
         _secureStorage.read(key: 'accessToken'),
@@ -112,6 +114,7 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SharedState>();
+    final authState = Provider.of<AuthState>(context, listen: false);
 
     if (_isLoading) {
       return const Scaffold(
@@ -164,8 +167,17 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
             ),
           );
         }
-        
+
         final user = Profile.fromJson(data['members'][0]);
+
+        // Store the user profile in AuthState instead of just SharedState
+        log('Storing user profile in AuthState: ${user.firstName} ${user.lastName}');
+        Future.microtask(() {
+          // Update both states to ensure backward compatibility during transition
+          authState.setUserProfile(user);
+          Provider.of<SharedState>(context, listen: false).userProfile = user;
+        });
+
         final version = state.version;
 
         // Conditionally render body based on version validity and platform

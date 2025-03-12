@@ -3,6 +3,7 @@ import 'package:poimen/screens/home/utils_home.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/cloudinary_service.dart';
+import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
 import 'package:poimen/widgets/avatar_with_initials.dart';
@@ -16,23 +17,27 @@ class UserHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = context.watch<SharedState>();
-    final authUser = AuthService.instance.profile;
+    var authState = context.watch<AuthState>();
 
-    // Extract first and last name safely
-    final fullName = authUser?.name ?? 'User Name';
+    // Get user information from AuthState which provides unified access
+    final fullName = authState.getFullName();
+    final pictureUrl = authState.getPictureUrl();
+
     final nameParts = fullName.split(' ');
     final firstName = nameParts.isNotEmpty ? nameParts[0] : 'User';
     final lastName = nameParts.length > 1 ? nameParts.skip(1).join(' ') : 'Name';
 
-    final picture = CloudinaryImage(url: authUser?.picture ?? '', size: ImageSize.lg);
+    final picture = CloudinaryImage(url: pictureUrl, size: ImageSize.lg);
     var role = parseRole(state.role);
+
+    // Create user member object for display
     final user = MemberForList(
-      id: authUser?.sub ?? '',
+      id: authState.userProfile?.id ?? authState.authProfile?.sub ?? '',
       typename: 'Member',
       status: 'Sheep',
       firstName: firstName,
       lastName: lastName,
-      pictureUrl: authUser?.picture ?? '',
+      pictureUrl: pictureUrl,
       phoneNumber: '0000',
       whatsappNumber: '0000',
     );
@@ -44,7 +49,7 @@ class UserHeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              authUser?.name ?? '',
+              fullName,
               style: const TextStyle(fontSize: 20),
             ),
             Text(
