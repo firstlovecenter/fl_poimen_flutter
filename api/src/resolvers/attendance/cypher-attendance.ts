@@ -29,9 +29,8 @@ WITH collect(DISTINCT combinedRecord.id) AS recordIds, record.id AS currentServi
 
 WITH apoc.coll.indexOf(recordIds,currentServiceId) + 1 AS lastServiceIndex, recordIds WHERE lastServiceIndex >= 0
 MATCH (lastService:ServiceRecord {id: recordIds[lastServiceIndex]})-[:SERVICE_HELD_ON]->(lastDate:TimeGraph)
-OPTIONAL MATCH (lastService)<-[:PRESENT_AT_SERVICE|ABSENT_FROM_SERVICE]-(member:Member)-[:BELONGS_TO]->(:Bacenta {id: $bacentaId})
 
-RETURN COUNT(lastService) > 0 AS lastService, COUNT(member) > 0 AS filled, lastDate.date AS lastDate 
+RETURN COUNT(lastService) > 0 AS lastService, lastService.markedAttendance AS filled, lastDate.date AS lastDate 
 `
 
 export const getLastButOneBussingRecord = `
@@ -53,8 +52,7 @@ WITH collect(DISTINCT combinedRecord.id) AS recordIds, record.id AS currentServi
 WITH apoc.coll.indexOf(recordIds,currentServiceId) + 1 AS lastServiceIndex, recordIds WHERE lastServiceIndex >= 0
 MATCH (lastService:BussingRecord {id: recordIds[lastServiceIndex]})-[:BUSSED_ON]->(lastDate:TimeGraph)
 
-OPTIONAL MATCH (lastService)<-[:PRESENT_AT_SERVICE|ABSENT_FROM_SERVICE]-(member:Member)-[:BELONGS_TO]->(:Bacenta {id: $bacentaId})
-RETURN COUNT(lastService) > 0 AS lastService, COUNT(member) > 0 AS filled, lastDate.date AS lastDate
+RETURN COUNT(lastService) > 0 AS lastService, lastService.markedAttendance AS filled, lastDate.date AS lastDate
 `
 
 export const checkIfFilledAbsent = `
