@@ -17,7 +17,7 @@ class AuthState extends ChangeNotifier {
     notifyListeners();
     
     final initialized = await _authService.init();
-    if (initialized) {
+    if (initialized && _authService.profile != null) {
       _authProfile = _authService.profile;
     }
    

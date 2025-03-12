@@ -57,6 +57,8 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   String? _accessToken;
   String? _authId;
+  bool _isLoading = true;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -66,6 +68,11 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
 
   Future<void> _initializeAuthData() async {
     try {
+      setState(() {
+        _isLoading = true;
+        _errorMessage = null;
+      });
+      
       // Using Future.wait to fetch both values in parallel
       final results = await Future.wait([
         _secureStorage.read(key: 'accessToken'),
@@ -75,19 +82,30 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
       final accessToken = results[0];
       final authId = results[1];
 
+      if (accessToken == null || authId == null) {
+        debugPrint('Missing auth data. Token: ${accessToken != null}, ID: ${authId != null}');
+        setState(() {
+          _errorMessage = 'Authentication data is missing. Please log in again.';
+        });
+      }
+
       setState(() {
         _accessToken = accessToken;
         _authId = authId;
+        _isLoading = false;
       });
 
       if (_accessToken != null && _authId != null) {
-        debugPrint('Access Token: $_accessToken');
-        debugPrint('Auth ID: $_authId');
+        debugPrint('Auth data loaded. ID: $_authId');
       } else {
         debugPrint('No valid authentication data found.');
       }
     } catch (e) {
       debugPrint('Error initializing auth data: $e');
+      setState(() {
+        _errorMessage = 'Failed to load authentication data: $e';
+        _isLoading = false;
+      });
     }
   }
 
@@ -95,28 +113,71 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
   Widget build(BuildContext context) {
     final state = context.watch<SharedState>();
 
-    return _authId == null
-        ? const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          )
-        : GQLQueryContainer(
-            query: getUserRoles,
-            variables: {'id': _authId},
-            defaultPageTitle: 'Profile Selection',
-            bodyFunction: (data, [fetchMore]) {
-              final user = Profile.fromJson(data?['members'][0]);
-              final version = state.version;
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
 
-              // Conditionally render body based on version validity and platform
-              if (!kIsWeb && !currentVersionValid(data?['minimumRequiredVersion'], version)) {
-                return _buildUpdatePrompt();
-              }
+    if (_errorMessage != null) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(_errorMessage!),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _initializeAuthData,
+                child: const Text('Retry'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
-              return GQLQueryContainerReturnValue(
-                body: ProfileChooseWidget(user: user),
-              );
-            },
+    if (_authId == null) {
+      return const Scaffold(
+        body: Center(child: Text('Authentication data not found. Please login again.')),
+      );
+    }
+
+    return GQLQueryContainer(
+      query: getUserRoles,
+      variables: {'id': _authId},
+      defaultPageTitle: 'Profile Selection',
+      bodyFunction: (data, [fetchMore]) {
+        if (data == null || data['members'] == null || data['members'].isEmpty) {
+          return GQLQueryContainerReturnValue(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('User profile not found. Please try again.'),
+                  ElevatedButton(
+                    onPressed: _initializeAuthData,
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
           );
+        }
+        
+        final user = Profile.fromJson(data['members'][0]);
+        final version = state.version;
+
+        // Conditionally render body based on version validity and platform
+        if (!kIsWeb && !currentVersionValid(data['minimumRequiredVersion'], version)) {
+          return _buildUpdatePrompt();
+        }
+
+        return GQLQueryContainerReturnValue(
+          body: ProfileChooseWidget(user: user),
+        );
+      },
+    );
   }
 
   GQLQueryContainerReturnValue _buildUpdatePrompt() {

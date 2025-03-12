@@ -30,9 +30,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
   @override
   Widget build(BuildContext context) {
     return Query(
-      options: QueryOptions(
-        
-        document: widget.query, variables: widget.variables),
+      options: QueryOptions(document: widget.query, variables: widget.variables),
       builder: (
         QueryResult result, {
         VoidCallback? refetch,
@@ -46,14 +44,10 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         Widget body;
 
         if (result.hasException) {
-          body = AlertBox(
-            type: AlertType.error,
-            message: getGQLException(result.exception),
-            onRetry: () => refetch!(),
-          );
+          body = _handleQueryError(result.exception);
         } else if (widget.infiniteScroll != true && (result.isLoading || result.data == null)) {
           body = const LoadingScreen();
-      } else {
+        } else {
           GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);
 
           pageTitle = res.pageTitle;
@@ -70,6 +64,39 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
           bottomNavigationBar: widget.bottomNavBar,
         );
       },
+    );
+  }
+
+  Widget _handleQueryError(dynamic error) {
+    String errorMessage = 'An unknown error occurred';
+
+    if (error is OperationException) {
+      if (error.linkException != null) {
+        errorMessage = 'Network error: ${error.linkException.toString()}';
+      } else if (error.graphqlErrors.isNotEmpty) {
+        errorMessage = 'GraphQL error: ${error.graphqlErrors.map((e) => e.message).join(", ")}';
+      }
+    } else {
+      errorMessage = 'Error: ${error.toString()}';
+    }
+
+    debugPrint('GQLQueryContainer error: $errorMessage');
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(errorMessage),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              // Refresh the query
+              // You'll need to implement a way to refresh the query here
+            },
+            child: const Text('Retry'),
+          ),
+        ],
+      ),
     );
   }
 }

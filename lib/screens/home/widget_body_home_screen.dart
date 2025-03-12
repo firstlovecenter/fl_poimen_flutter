@@ -21,130 +21,103 @@ class HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final churchState = context.watch<SharedState>();
     String level = church.typename.toLowerCase();
-    print('level: $level');
     final churchLevel = convertToChurchEnum(level);
     final levelForUrl = churchLevel.name.toLowerCase();
 
     Future.delayed(Duration.zero, () {
       if (church.currentPastoralCycle != null) {
-        // churchState.pastoralCycle = church.currentPastoralCycle!;
+        churchState.pastoralCycle = church.currentPastoralCycle!;
       }
     });
 
     int? totalFellowshipAttendanceDefaulters;
 
-    // if (church.fellowshipBussingAttendanceDefaultersCount != null &&
-    //     church.fellowshipServiceAttendanceDefaultersCount != null) {
-    //   totalFellowshipAttendanceDefaulters = church.fellowshipBussingAttendanceDefaultersCount! +
-    //       church.fellowshipServiceAttendanceDefaultersCount!;
-    // }
+    if (church.fellowshipBussingAttendanceDefaultersCount != null &&
+        church.fellowshipServiceAttendanceDefaultersCount != null) {
+      totalFellowshipAttendanceDefaulters = church.fellowshipBussingAttendanceDefaultersCount! +
+          church.fellowshipServiceAttendanceDefaultersCount!;
+    }
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: ListView.builder(
-        itemCount: 22,
-        itemBuilder: (BuildContext context, int index) {
-          switch (index) {
-            case 0:
-              return const UserHeaderWidget();
-            case 1:
-              return Column(
-                children: countdownLevels(church),
-              );
-            case 2:
-              return const Padding(padding: EdgeInsets.all(20.0));
-            case 3:
-              return Text(
-                '${church.name} ${church.typename}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 22),
-              );
-            case 4:
-              return const Padding(padding: EdgeInsets.all(5.0));
-            case 5:
-              return const Text(
-                'Reports',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: PoimenTheme.textSecondary,
-                ),
-              );
-            case 6:
-              return Column(
-                children: attendanceLevels(churchLevel),
-              );
-            case 7:
-              return Column(children: hubAttendanceLevels(churchLevel));
-            case 8:
-              return HomePageButton(
-                text: 'Membership List',
-                navKey: 'membership',
-                icon: FontAwesomeIcons.solidAddressBook,
-                route: '/$levelForUrl-members',
-                permitted: const [Role.all],
-              );
-            case 9:
-              return const Padding(padding: EdgeInsets.all(6.0));
-            case 10:
-              return const Text(
-                'Outstanding Work',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: PoimenTheme.textSecondary,
-                ),
-              );
-            case 11:
-              return const Padding(padding: EdgeInsets.all(6.0));
-            case 12:
-              return defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters);
-            case 13:
-              return HomePageButton(
-                text: 'Missing Persons Call List',
-                icon: FontAwesomeIcons.personCircleQuestion,
-                navKey: 'imcls',
-                route: '/$levelForUrl-imcls',
-                alertNumber: church.imclTotal,
-                permitted: const [
-                  Role.leaderFellowship,
-                  Role.leaderBacenta,
-                  Role.leaderGovernorship,
-                  Role.adminGovernorship,
-                  Role.leaderHub
-                ],
-              );
-            case 14:
-              return imclLevels(churchLevel, church.imclTotal);
-            case 15:
-              return outstandingTelepastoringLevels(
-                  churchLevel, church.outstandingTelepastoringCount);
-            case 16:
-              return outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount);
-            case 17:
-              return outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount);
-            case 18:
-              return const Padding(padding: EdgeInsets.all(8.0));
-            case 19:
-              return const Text(
-                'Trends',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: PoimenTheme.textSecondary,
-                ),
-              );
-            case 20:
-              return HomePageButton(
-                text: 'My Trends',
-                icon: FontAwesomeIcons.chartSimple,
-                route: '/$levelForUrl-trends-menu',
-                navKey: 'trends',
-                permitted: const [Role.all],
-              );
-            case 21:
-              return myLeadersTrendsLevels(churchLevel);
-            default:
-              return const SizedBox.shrink();
-          }
-        },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const UserHeaderWidget(),
+            Column(
+              children: countdownLevels(church),
+            ),
+            const Padding(padding: EdgeInsets.all(20.0)),
+            Text(
+              '${church.name} ${church.typename}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 22),
+            ),
+            const Padding(padding: EdgeInsets.all(5.0)),
+            const Text(
+              'Reports',
+              style: TextStyle(
+                fontSize: 18,
+                color: PoimenTheme.textSecondary,
+              ),
+            ),
+            Column(
+              children: attendanceLevels(churchLevel),
+            ),
+            Column(children: hubAttendanceLevels(churchLevel)),
+            HomePageButton(
+              text: 'Membership List',
+              navKey: 'membership',
+              icon: FontAwesomeIcons.solidAddressBook,
+              route: '/$levelForUrl-members',
+              permitted: const [Role.all],
+            ),
+            const Padding(padding: EdgeInsets.all(6.0)),
+            const Text(
+              'Outstanding Work',
+              style: TextStyle(
+                fontSize: 18,
+                color: PoimenTheme.textSecondary,
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(6.0)),
+            defaultersLevels(churchLevel, totalFellowshipAttendanceDefaulters),
+            HomePageButton(
+              text: 'Missing Persons Call List',
+              icon: FontAwesomeIcons.personCircleQuestion,
+              navKey: 'imcls',
+              route: '/$levelForUrl-imcls',
+              alertNumber: church.imclTotal,
+              permitted: const [
+                Role.leaderFellowship,
+                Role.leaderBacenta,
+                Role.leaderGovernorship,
+                Role.adminGovernorship,
+                Role.leaderHub
+              ],
+            ),
+            imclLevels(churchLevel, church.imclTotal),
+            outstandingTelepastoringLevels(churchLevel, church.outstandingTelepastoringCount),
+            outstandingVisitationLevels(churchLevel, church.outstandingVisitationsCount),
+            outstandingPrayerLevels(churchLevel, church.outstandingPrayerCount),
+            const Padding(padding: EdgeInsets.all(8.0)),
+            const Text(
+              'Trends',
+              style: TextStyle(
+                fontSize: 18,
+                color: PoimenTheme.textSecondary,
+              ),
+            ),
+            HomePageButton(
+              text: 'My Trends',
+              icon: FontAwesomeIcons.chartSimple,
+              route: '/$levelForUrl-trends-menu',
+              navKey: 'trends',
+              permitted: const [Role.all],
+            ),
+            myLeadersTrendsLevels(churchLevel),
+          ],
+        ),
       ),
     );
   }

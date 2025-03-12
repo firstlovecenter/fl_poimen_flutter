@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
@@ -10,7 +11,7 @@ class SharedState with ChangeNotifier {
   Role _role = Role.leaderFellowship;
   ChurchLevel _roleLevel = ChurchLevel.fellowship;
   ChurchRole _roleType = ChurchRole.leader;
-  
+
   ProfileChurch _church = ProfileChurch(
     id: '',
     typename: '',
@@ -81,8 +82,35 @@ class SharedState with ChangeNotifier {
   }
 
   set version(String version) {
-    _version = version;
-    notifyListeners();
+    // Only update if different to avoid unnecessary notifications
+    if (_version == version) return;
+
+    // Make sure version is in a valid format if it's expected to be numeric
+    if (version != "prod" && version != "dev" && version != "staging") {
+      try {
+        // Try to format as semantic version if it's supposed to be a number
+        if (version.contains('.')) {
+          _version = version;
+        } else {
+          // If it's a single number, format it as x.0.0
+          _version = "$version.0.0";
+        }
+      } catch (e) {
+        // If there's any error, just use the version as-is
+        _version = version;
+      }
+    } else {
+      // For special strings like "prod", store as-is
+      _version = version;
+    }
+
+    // Safely notify listeners outside of build phase
+    if (SchedulerBinding.instance.schedulerPhase != SchedulerPhase.persistentCallbacks) {
+      notifyListeners();
+    } else {
+      // Use a microtask to defer the notification until after the build phase
+      Future.microtask(() => notifyListeners());
+    }
   }
 
   set church(ProfileChurch church) {

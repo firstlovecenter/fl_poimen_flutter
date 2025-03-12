@@ -22,50 +22,62 @@ class AuthService {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   Auth0User? profile;
   String? auth0AccessToken;
+
   Future<bool> init() async {
     try {
       if (kIsWeb) {
-        final credentials = await auth0Web.onLoad();
-        if (credentials != null) {
-          auth0AccessToken = credentials.idToken;
+        try {
+          final credentials = await auth0Web.onLoad();
+          if (credentials != null) {
+            auth0AccessToken = credentials.idToken;
 
-          profile = Auth0User(
-            nickname: '',
-            name: credentials.user.name ?? '',
-            email: credentials.user.email ?? '',
-            picture: '',
-            updatedAt: '',
-            sub: credentials.user.sub,
-            roles: [],
-          );
-          await secureStorage.write(
-            key: 'accessToken',
-            value: credentials.idToken,
-          );
-          await secureStorage.write(
-            key: 'authId',
-            value: profile!.sub,
-          );
-          return true;
+            profile = Auth0User(
+              nickname: '',
+              name: credentials.user.name ?? '',
+              email: credentials.user.email ?? '',
+              picture: '',
+              updatedAt: '',
+              sub: credentials.user.sub,
+              roles: [],
+            );
+            await secureStorage.write(
+              key: 'accessToken',
+              value: credentials.idToken,
+            );
+            await secureStorage.write(
+              key: 'authId',
+              value: profile!.sub,
+            );
+            log('Web auth initialized successfully');
+            return true;
+          }
+          log('No credentials found on the web.');
+          return false;
+        } catch (e) {
+          log('Error during web auth initialization: $e');
+          return false;
         }
-        log('No credentials found on the web.');
-        return false;
       } else {
-        final accessToken = await secureStorage.read(key: 'accessToken');
-        final authId = await secureStorage.read(key: 'authId');
-        if (accessToken != null && authId != null) {
-          auth0AccessToken = accessToken;
+        try {
+          final accessToken = await secureStorage.read(key: 'accessToken');
+          final authId = await secureStorage.read(key: 'authId');
 
-          log('Stored credentials are valid.');
-          return true;
+          if (accessToken != null && authId != null) {
+            auth0AccessToken = accessToken;
+            log('Stored credentials found: authId=$authId');
+            return true;
+          }
+          log('No stored credentials found on mobile.');
+          return false;
+        } catch (e) {
+          log('Error reading stored credentials: $e');
+          return false;
         }
-        log('No stored credentials found on mobile.');
-        return false;
       }
     } catch (e, stackTrace) {
       log('Error during authentication initialization: $e');
       debugPrintStack(stackTrace: stackTrace);
-      return false; // Return false in case of any error
+      return false;
     }
   }
 
@@ -80,6 +92,10 @@ class AuthService {
         final credentials = await auth0.webAuthentication().login(useHTTPS: true);
         auth0AccessToken = credentials.accessToken;
 
+        if (credentials.user.sub.isEmpty) {
+          throw Exception('Missing user ID in authentication response');
+        }
+
         profile = Auth0User(
             nickname: '',
             name: credentials.user.name ?? '',
@@ -91,13 +107,12 @@ class AuthService {
 
         await secureStorage.write(key: 'accessToken', value: credentials.idToken);
         await secureStorage.write(key: 'authId', value: profile!.sub);
+        log('Mobile login successful, authId=${profile!.sub}');
 
         return 'Success';
       }
     } catch (e) {
-      if (kDebugMode) {
-        debugPrint('Login Error: $e');
-      }
+      log('Login Error: $e', level: 1000);
       return 'Login Failed: $e';
     }
   }

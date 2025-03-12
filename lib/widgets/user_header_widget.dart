@@ -18,14 +18,20 @@ class UserHeaderWidget extends StatelessWidget {
     var state = context.watch<SharedState>();
     final authUser = AuthService.instance.profile;
 
+    // Extract first and last name safely
+    final fullName = authUser?.name ?? 'User Name';
+    final nameParts = fullName.split(' ');
+    final firstName = nameParts.isNotEmpty ? nameParts[0] : 'User';
+    final lastName = nameParts.length > 1 ? nameParts.skip(1).join(' ') : 'Name';
+
     final picture = CloudinaryImage(url: authUser?.picture ?? '', size: ImageSize.lg);
     var role = parseRole(state.role);
     final user = MemberForList(
       id: authUser?.sub ?? '',
       typename: 'Member',
       status: 'Sheep',
-      firstName: authUser?.name ?? '',
-      lastName: 'last name--',
+      firstName: firstName,
+      lastName: lastName,
       pictureUrl: authUser?.picture ?? '',
       phoneNumber: '0000',
       whatsappNumber: '0000',

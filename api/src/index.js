@@ -17,14 +17,12 @@ const app = express()
 const httpServer = http.createServer(app)
 
 const driver = neo4j.driver(
-  SECRETS.NEO4J_URI || 'bolt://localhost:7687/',
+   SECRETS.NEO4J_URI || 'bolt://localhost:7687',
   neo4j.auth.basic(
     SECRETS.NEO4J_USER || 'neo4j',
     SECRETS.NEO4J_PASSWORD || 'letmein'
   ),
-  {
-    encrypted: SECRETS.NEO4J_ENCRYPTED ? 'ENCRYPTION_ON' : 'ENCRYPTION_OFF',
-  }
+ 
 )
 
 const neoSchema = new Neo4jGraphQL({

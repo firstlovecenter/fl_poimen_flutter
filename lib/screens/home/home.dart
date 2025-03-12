@@ -21,8 +21,36 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // Add error handling to prevent out of range errors
+    Widget body;
+    try {
+      if (currentIndex >= 0 && currentIndex < screens.length) {
+        body = screens[currentIndex];
+      } else {
+        // Fallback if index is somehow out of range
+        body = const Center(child: Text('Screen index out of range'));
+        // Reset to a valid index
+        currentIndex = 0;
+      }
+    } catch (e) {
+      // Catch any errors that might occur when trying to display a screen
+      body = Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Error loading screen'),
+            Text('Error: $e'),
+            ElevatedButton(
+              onPressed: () => setState(() => currentIndex = 0),
+              child: const Text('Go to Home'),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
-      body: screens[currentIndex],
+      body: body,
       bottomNavigationBar: Hero(
         tag: 'bottomNavBar',
         child: BottomNavigationBar(
