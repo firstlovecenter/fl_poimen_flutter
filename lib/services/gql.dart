@@ -29,6 +29,7 @@ ValueNotifier<GraphQLClient> client = ValueNotifier(
   GraphQLClient(
     // The default store is the InMemoryStore, which does NOT persist to disk
     cache: GraphQLCache(store: HiveStore()),
+    queryRequestTimeout: const Duration(seconds: 30),
     defaultPolicies: DefaultPolicies(
       query: Policies(fetch: FetchPolicy.cacheAndNetwork),
       watchQuery: Policies(
