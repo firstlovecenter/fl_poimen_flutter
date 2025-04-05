@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main # Adjust to your deployment branch
-    # paths:
-    #   - 'lib/**'
-    #   - 'web/**'
-    #   - 'pubspec.yaml'
-    #   - 'pubspec.lock'
 
 jobs:
   deploy:
@@ -21,7 +16,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0' # Adjust to your Flutter version
+          flutter-version: '3.24.3' # Adjust to your Flutter version
           channel: 'stable'
 
       - name: Cache Flutter dependencies
@@ -41,39 +36,42 @@ jobs:
           # Get secrets JSON and create temporary file to process
           aws secretsmanager get-secret-value --secret-id ${{ secrets.AWS_SECRETS_COLLECTION_NAME }} --query SecretString --output text > secrets.json
 
-          # Use jq to properly handle multi-line values with escaping
-          jq -r 'to_entries[] | "\(.key)<<EOF
-          \(.value)
-          EOF"' secrets.json > env_file
+          # Use jq to properly handle multi-line values with escaping and masking
+          VITE_AUTH0_DOMAIN=$(jq -r '.VITE_AUTH0_DOMAIN' secrets.json)
+          FLUTTER_AUTH0_CLIENT_ID=$(jq -r '.FLUTTER_AUTH0_CLIENT_ID' secrets.json)
+          POIMEN_GRAPHQL_URI=$(jq -r '.POIMEN_GRAPHQL_URI' secrets.json)
+          CLOUDINARY_MEMBER_ATTENDANCE_PRESET=$(jq -r '.CLOUDINARY_MEMBER_ATTENDANCE_PRESET' secrets.json)
+          CLOUDINARY_VISITATION_REPORT_PRESET=$(jq -r '.CLOUDINARY_VISITATION_REPORT_PRESET' secrets.json)
 
-          # Add the env file to GITHUB_ENV
-          cat env_file >> $GITHUB_ENV
+          echo "VITE_AUTH0_DOMAIN=$VITE_AUTH0_DOMAIN" >> $GITHUB_OUTPUT
+          echo "FLUTTER_AUTH0_CLIENT_ID=$FLUTTER_AUTH0_CLIENT_ID" >> $GITHUB_OUTPUT
+          echo "POIMEN_GRAPHQL_URI=$POIMEN_GRAPHQL_URI" >> $GITHUB_OUTPUT
+          echo "CLOUDINARY_MEMBER_ATTENDANCE_PRESET=$CLOUDINARY_MEMBER_ATTENDANCE_PRESET" >> $GITHUB_OUTPUT
+          echo "CLOUDINARY_VISITATION_REPORT_PRESET=$CLOUDINARY_VISITATION_REPORT_PRESET" >> $GITHUB_OUTPUT
+
+          echo "::add-mask::$VITE_AUTH0_DOMAIN"
+          echo "::add-mask::$FLUTTER_AUTH0_CLIENT_ID"
+          echo "::add-mask::$POIMEN_GRAPHQL_URI"
+          echo "::add-mask::$CLOUDINARY_MEMBER_ATTENDANCE_PRESET"
+          echo "::add-mask::$CLOUDINARY_VISITATION_REPORT_PRESET"
 
           # Clean up
-          rm secrets.json env_file
+          rm secrets.json
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+        id: secrets
 
       - name: Build Flutter Web
         run: |
           flutter build web --release \
-            --dart-define=AUTH0_DOMAIN=${{ env.VITE_AUTH0_DOMAIN }} \
-            --dart-define=AUTH0_CLIENT_ID=${{ env.FLUTTER_AUTH0_CLIENT_ID }} \
-            --dart-define=API_ENDPOINT=${{ env.POIMEN_GRAPHQL_URI }} \
-            --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }} \
-            --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }} \
+            --dart-define=AUTH0_DOMAIN=${{ steps.secrets.outputs.VITE_AUTH0_DOMAIN }} \
+            --dart-define=AUTH0_CLIENT_ID=${{ steps.secrets.outputs.FLUTTER_AUTH0_CLIENT_ID }} \
+            --dart-define=API_ENDPOINT=${{ steps.secrets.outputs.POIMEN_GRAPHQL_URI }} \
+            --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=${{ steps.secrets.outputs.CLOUDINARY_MEMBER_ATTENDANCE_PRESET }} \
+            --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ steps.secrets.outputs.CLOUDINARY_VISITATION_REPORT_PRESET }} \
             --web-renderer canvaskit
-        env:
-          # Add all your required environment variables here
-          VITE_AUTH0_DOMAIN: ${{ env.VITE_AUTH0_DOMAIN }}
-          FLUTTER_AUTH0_CLIENT_ID: ${{ env.FLUTTER_AUTH0_CLIENT_ID }}
-          POIMEN_GRAPHQL_URI: ${{ env.POIMEN_GRAPHQL_URI }}
-          FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET: ${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }}
-          FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET: ${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }}
-          API_URL: ${{ env.API_URL }}
-          ENVIRONMENT: ${{ env.ENVIRONMENT }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -84,9 +82,17 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync ./build/web s3://${{ secrets.S3_BUCKET_NAME }} --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Send Slack Notification
         uses: 8398a7/action-slack@v3

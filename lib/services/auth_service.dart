@@ -42,7 +42,7 @@ class AuthService {
               nickname: credentials.user.nickname ?? '',
               name: credentials.user.name ?? '',
               email: credentials.user.email ?? '',
-              picture: credentials.user.pictureUrl?.toString() ?? '',
+              picture: credentials.user.pictureUrl.toString(),
               updatedAt: '',
               sub: credentials.user.sub,
               roles: credentials.user.customClaims?['roles'] as List<String>? ?? [],
@@ -133,7 +133,7 @@ class AuthService {
         log('Login successful, processing credentials...');
         log('ID token available: ${credentials.idToken.isNotEmpty}');
         log('Access token available: ${credentials.accessToken.isNotEmpty}');
-        log('User info available: ${credentials.user != null}');
+        log('User info available: ${credentials.user}');
 
         if (credentials.user.sub.isEmpty) {
           throw Exception('Missing user ID in authentication response');
@@ -144,7 +144,7 @@ class AuthService {
             nickname: credentials.user.nickname ?? '',
             name: credentials.user.name ?? '',
             email: credentials.user.email ?? '',
-            picture: credentials.user.pictureUrl.toString() ?? '',
+            picture: credentials.user.pictureUrl.toString(),
             updatedAt: '',
             sub: credentials.user.sub,
             roles: credentials.user.customClaims?['roles'] as List<String>? ?? []);
@@ -281,7 +281,7 @@ class AuthService {
       nickname: userProfile.nickname ?? '',
       name: userProfile.name ?? '',
       email: userProfile.email ?? '',
-      picture: userProfile.pictureUrl.toString() ?? '',
+      picture: userProfile.pictureUrl.toString(),
       updatedAt: '',
       sub: sub,
       roles: [],
