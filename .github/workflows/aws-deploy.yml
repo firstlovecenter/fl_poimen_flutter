@@ -46,8 +46,15 @@ jobs:
           \(.value)
           EOF"' secrets.json > env_file
 
-          # Add the env file to GITHUB_ENV
-          cat env_file >> $GITHUB_ENV
+          # Mask secrets before adding them to GITHUB_ENV
+          while IFS= read -r line; do
+            key=$(echo "$line" | cut -d= -f1)
+            value=$(echo "$line" | cut -d= -f2-)
+            echo "::add-mask::$value"
+          done < <(grep -E '^(VITE_AUTH0_DOMAIN|FLUTTER_AUTH0_CLIENT_ID|POIMEN_GRAPHQL_URI|FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET|FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET)=' env_file)
+
+          # Add only the required env variables to GITHUB_ENV
+          grep -E '^(VITE_AUTH0_DOMAIN|FLUTTER_AUTH0_CLIENT_ID|POIMEN_GRAPHQL_URI|FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET|FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET)=' env_file >> $GITHUB_ENV
 
           # Clean up
           rm secrets.json env_file
@@ -66,7 +73,6 @@ jobs:
             --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }} \
             --web-renderer canvaskit
         env:
-          # Add all your required environment variables here
           VITE_AUTH0_DOMAIN: ${{ env.VITE_AUTH0_DOMAIN }}
           FLUTTER_AUTH0_CLIENT_ID: ${{ env.FLUTTER_AUTH0_CLIENT_ID }}
           POIMEN_GRAPHQL_URI: ${{ env.POIMEN_GRAPHQL_URI }}
