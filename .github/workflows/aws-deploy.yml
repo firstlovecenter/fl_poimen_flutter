@@ -59,14 +59,21 @@ jobs:
       - name: Build Flutter Web
         run: |
           flutter build web --release \
-            --dart-define=API_URL=${{ env.API_URL }} \
-            --dart-define=ENVIRONMENT=${{ env.ENVIRONMENT }} \
+            --dart-define=AUTH0_DOMAIN=${{ env.VITE_AUTH0_DOMAIN }} \
+            --dart-define=AUTH0_CLIENT_ID=${{ env.FLUTTER_AUTH0_CLIENT_ID }} \
+            --dart-define=API_ENDPOINT=${{ env.POIMEN_GRAPHQL_URI }} \
+            --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }} \
+            --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }} \
             --web-renderer canvaskit
         env:
           # Add all your required environment variables here
+          VITE_AUTH0_DOMAIN: ${{ env.VITE_AUTH0_DOMAIN }}
+          FLUTTER_AUTH0_CLIENT_ID: ${{ env.FLUTTER_AUTH0_CLIENT_ID }}
+          POIMEN_GRAPHQL_URI: ${{ env.POIMEN_GRAPHQL_URI }}
+          FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET: ${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }}
+          FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET: ${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }}
           API_URL: ${{ env.API_URL }}
           ENVIRONMENT: ${{ env.ENVIRONMENT }}
-          # Add any other environment variables your app needs
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
