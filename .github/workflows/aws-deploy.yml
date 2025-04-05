@@ -88,13 +88,13 @@ jobs:
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
 
-      - name: Send Slack Notification
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow
-          text: |
-            ${{ job.status == 'success' && ':rocket: Successfully deployed Poimen Flutter Web app to S3 and invalidated CloudFront cache' || ':x: Deployment failed for Poimen Flutter Web app' }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Notify deployment status
         if: always()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: deployments
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: '🟣 Poimen Flutter Web Deployment'
+          SLACK_MESSAGE: |
+            ${{ job.status == 'success' && ':rocket: Successfully deployed Poimen Flutter Web app to S3 and invalidated CloudFront cache! :tada:' || ':fire: Deployment failed for Poimen Flutter Web app. Please check the logs. :warning:' }}
