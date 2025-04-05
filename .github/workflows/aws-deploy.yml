@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main # Adjust to your deployment branch
-    paths:
-      - 'lib/**'
-      - 'web/**'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
+    # paths:
+    #   - 'lib/**'
+    #   - 'web/**'
+    #   - 'pubspec.yaml'
+    #   - 'pubspec.lock'
 
 jobs:
   deploy:
