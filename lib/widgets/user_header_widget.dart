@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poimen/screens/home/utils_home.dart';
 import 'package:poimen/screens/membership/models_membership.dart';
-import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';

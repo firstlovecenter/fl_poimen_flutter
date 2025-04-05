@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/loading_screen.dart';
 import 'package:poimen/widgets/page_title.dart';
 
