@@ -162,10 +162,10 @@ Column _memberTile(BuildContext context, ImclForList member) {
 
 ButtonStyle _imclButtonStyle() {
   return ButtonStyle(
-    padding: WidgetStateProperty.all(
+    padding: MaterialStateProperty.all(
       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     ),
-    shape: WidgetStateProperty.all(
+    shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),

@@ -91,8 +91,8 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
       height: 30,
       child: ElevatedButton.icon(
         style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(const Size(100, 30)),
-          padding: WidgetStateProperty.all<EdgeInsets>(
+          fixedSize: MaterialStateProperty.all<Size>(const Size(100, 30)),
+          padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)),
         ),
         icon: loading == true
@@ -143,10 +143,10 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                padding: WidgetStateProperty.all(
+                                padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 ),
-                                shape: WidgetStateProperty.all(
+                                shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),

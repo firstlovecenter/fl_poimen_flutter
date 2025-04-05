@@ -85,12 +85,12 @@ class _BooleanUpgradeWidgetState extends State<BooleanUpgradeWidget> with Valida
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: widget.booleanMutation.result.isLoading
-            ? const WidgetStatePropertyAll<Color>(PoimenTheme.darkCardColor)
-            : WidgetStatePropertyAll<Color>(color ?? PoimenTheme.brand),
-        padding: WidgetStateProperty.all(
+            ? const MaterialStatePropertyAll<Color>(PoimenTheme.darkCardColor)
+            : MaterialStatePropertyAll<Color>(color ?? PoimenTheme.brand),
+        padding: MaterialStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         ),
-        shape: WidgetStateProperty.all(
+        shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

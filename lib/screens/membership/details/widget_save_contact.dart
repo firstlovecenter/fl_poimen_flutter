@@ -27,8 +27,8 @@ class _WidgetSaveContactState extends State<WidgetSaveContact> {
       height: 30,
       child: ElevatedButton.icon(
         style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(const Size(80, 30)),
-          padding: WidgetStateProperty.all<EdgeInsets>(
+          fixedSize: MaterialStateProperty.all<Size>(const Size(80, 30)),
+          padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)),
         ),
         onPressed: () async {

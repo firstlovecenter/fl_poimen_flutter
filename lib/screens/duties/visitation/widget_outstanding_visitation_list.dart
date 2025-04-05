@@ -56,7 +56,6 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
 
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(children: [
@@ -217,12 +216,12 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(PoimenTheme.whatsappColor),
-                        foregroundColor: WidgetStateProperty.all(Colors.black),
-                        padding: WidgetStateProperty.all(
+                        backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
+                        foregroundColor: MaterialStateProperty.all(Colors.black),
+                        padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         ),
-                        shape: WidgetStateProperty.all(
+                        shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -256,10 +255,10 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
 
 ButtonStyle _outstandingVisitationButtonStyle() {
   return ButtonStyle(
-    padding: WidgetStateProperty.all(
+    padding: MaterialStateProperty.all(
       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     ),
-    shape: WidgetStateProperty.all(
+    shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
