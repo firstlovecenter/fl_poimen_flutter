@@ -93,7 +93,8 @@ jobs:
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow
-          text: ':rocket: Successfully deployed Poimen Flutter Web app to S3 and invalidated CloudFront cache'
+          text: |
+            ${{ job.status == 'success' && ':rocket: Successfully deployed Poimen Flutter Web app to S3 and invalidated CloudFront cache' || ':x: Deployment failed for Poimen Flutter Web app' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        if: success()
+        if: always()
