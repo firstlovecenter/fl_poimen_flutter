@@ -122,7 +122,7 @@ class AuthService {
       if (kIsWeb) {
         log('Initiating web login flow...');
         await auth0Web.loginWithRedirect(
-          redirectUrl: "http://localhost:3000/",
+          redirectUrl: "https://poimen.firstlovecenter.com/",
         );
         return 'Success';
       } else {
