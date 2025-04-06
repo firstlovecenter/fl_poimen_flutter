@@ -67,7 +67,7 @@ jobs:
             --dart-define=API_ENDPOINT=${{ env.POIMEN_GRAPHQL_URI }} \
             --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }} \
             --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }} \
-            --base-href="./"
+            --base-href="/"
         env:
           VITE_AUTH0_DOMAIN: ${{ env.VITE_AUTH0_DOMAIN }}
           FLUTTER_AUTH0_CLIENT_ID: ${{ env.FLUTTER_AUTH0_CLIENT_ID }}
