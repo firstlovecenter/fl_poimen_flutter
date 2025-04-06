@@ -21,7 +21,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0' # Adjust to your Flutter version
+          flutter-version: '3.24.3' # Adjust to your Flutter version
           channel: 'stable'
 
       - name: Cache Flutter dependencies
@@ -62,18 +62,29 @@ jobs:
       - name: Build Flutter Web
         run: |
           flutter build web --release \
+            --web-renderer html \
             --dart-define=AUTH0_DOMAIN=${{ env.VITE_AUTH0_DOMAIN }} \
             --dart-define=AUTH0_CLIENT_ID=${{ env.FLUTTER_AUTH0_CLIENT_ID }} \
             --dart-define=API_ENDPOINT=${{ env.POIMEN_GRAPHQL_URI }} \
             --dart-define=CLOUDINARY_MEMBER_ATTENDANCE_PRESET=${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }} \
-            --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }} \
-            --base-href="/"
+            --dart-define=CLOUDINARY_VISITATION_REPORT_PRESET=${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }}
         env:
           VITE_AUTH0_DOMAIN: ${{ env.VITE_AUTH0_DOMAIN }}
           FLUTTER_AUTH0_CLIENT_ID: ${{ env.FLUTTER_AUTH0_CLIENT_ID }}
           POIMEN_GRAPHQL_URI: ${{ env.POIMEN_GRAPHQL_URI }}
           FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET: ${{ env.FLUTTER_CLOUDINARY_MEMBER_ATTENDANCE_PRESET }}
           FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET: ${{ env.FLUTTER_CLOUDINARY_VISITATION_REPORT_PRESET }}
+          
+      - name: Verify Build Output
+        run: |
+          echo "Checking build output directory contents:"
+          ls -la ./build/web/
+          
+          if [ ! -f ./build/web/flutter_bootstrap.js ]; then
+            echo "Creating flutter_bootstrap.js from template"
+            # Create a basic bootstrap file or copy from a template in your repo
+            cp ./web/flutter_bootstrap_template.js ./build/web/flutter_bootstrap.js
+          fi
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
