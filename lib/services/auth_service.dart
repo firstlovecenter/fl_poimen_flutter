@@ -122,7 +122,8 @@ class AuthService {
       if (kIsWeb) {
         log('Initiating web login flow...');
         await auth0Web.loginWithRedirect(
-          redirectUrl: "https://poimen.firstlovecenter.com/",
+          redirectUrl:
+              kReleaseMode ? "https://poimen.firstlovecenter.com/" : "http://localhost:3000/",
         );
         return 'Success';
       } else {
@@ -170,7 +171,10 @@ class AuthService {
   Future<void> logout([BuildContext? context]) async {
     log('Logging out...');
     if (kIsWeb) {
-      await auth0Web.logout(returnToUrl: 'http://localhost:3000');
+      await auth0Web.logout(
+        returnToUrl:
+            kReleaseMode ? "https://poimen.firstlovecenter.com/" : "http://localhost:3000/",
+      );
     } else {
       await auth0.webAuthentication().logout(useHTTPS: true);
       await secureStorage.delete(key: 'accessToken');
