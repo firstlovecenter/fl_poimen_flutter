@@ -3,7 +3,6 @@ import 'package:poimen/screens/attendance/defaulters/service-attendance/campus_f
 import 'package:poimen/screens/attendance/defaulters/service-attendance/stream_fellowship_attendance_defaulters.dart';
 import 'package:poimen/screens/attendance/report/screen_governorship_report.dart';
 import 'package:poimen/screens/attendance/report/screen_rehearsal_report.dart';
-import 'package:poimen/screens/attendance/screen_hub_services.dart';
 import 'package:poimen/screens/attendance/screen_record_attendance.dart';
 import 'package:poimen/screens/attendance/ticker/screen_governorship_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_rehearsal_ticker.dart';
@@ -46,8 +45,6 @@ import 'package:poimen/screens/attendance/defaulters/screen_stream_defaulters.da
 import 'package:poimen/screens/attendance/defaulters/screen_campus_defaulters.dart';
 import 'package:poimen/screens/attendance/report/screen_bacenta_report.dart';
 import 'package:poimen/screens/attendance/report/screen_sunday_bussing_report.dart';
-import 'package:poimen/screens/attendance/screen_sunday_bussing.dart';
-import 'package:poimen/screens/attendance/screen_bacenta_services.dart';
 import 'package:poimen/screens/attendance/ticker/screen_sunday_bussing_ticker.dart';
 import 'package:poimen/screens/attendance/ticker/screen_bacenta_ticker.dart';
 import 'package:poimen/screens/home/home.dart';
@@ -150,19 +147,16 @@ var appRoutes = {
   ////// ATTENDANCE ROUTES //////
   // Fellowship Attendance Screens
   '/record-attendance': (context) => const RecordAttendanceScreen(),
-  '/servicerecord-services': (context) => const FellowshipServicesScreen(),
   '/servicerecord/attendance-ticker': (context) => const BacentaAttendanceTickerScreen(),
   '/governorship/attendance-ticker': (context) => const GovernorshipAttendanceTickerScreen(),
   '/servicerecord/attendance-report': (context) => const BacentaAttendanceReportScreen(),
   '/meetings/attendance-report': (context) => const GovernorshipAttendanceReportScreen(),
 
   // Bacenta Attendance Screens
-  '/bussingrecord-services': (context) => const SundayBussingScreen(),
   '/bussingrecord/attendance-ticker': (context) => const BussingRecordAttendanceTickerScreen(),
   '/bussingrecord/attendance-report': (context) => const BussingAttendanceReportScreen(),
 
   // Hub Attendance Screens
-  '/rehearsal-meetings': (context) => const HubRehearsalsScreen(),
   '/rehearsalrecord/attendance-ticker': (context) => const HubAttendanceTickerScreen(),
   '/rehearsalrecord/attendance-report': (context) => const HubAttendanceReportScreen(),
 
