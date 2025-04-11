@@ -79,25 +79,6 @@ List<Widget> countdownLevels(HomeScreenChurch church) {
 
 List<Widget> attendanceLevels(ChurchLevel churchLevel) {
   ChurchString level = ChurchString(churchLevel.name);
-  if (churchLevel == ChurchLevel.bacenta) {
-    return [
-      HomePageButton(
-        text: 'Sunday Attendance',
-        icon: FontAwesomeIcons.busSimple,
-        navKey: 'attendance',
-        route: '/bussingrecord-services',
-        permitted: [Role.values.byName('leader${level.properCase}')],
-      ),
-      HomePageButton(
-        text: 'Weekday Attendance',
-        icon: FontAwesomeIcons.userCheck,
-        navKey: 'attendance',
-        route: '/servicerecord-services',
-        permitted: [Role.values.byName('leader${level.properCase}')],
-      ),
-    ];
-  }
-
   if (churchLevel == ChurchLevel.governorship) {
     return [
       HomePageButton(
