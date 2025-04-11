@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _initializeQueryDetails(dynamic church) {
-    _pluralName = 'fellowships';
-    _query = getFellowshipHomeScreen;
+    _pluralName = 'bacentas';
+    _query = getBacentaHomeScreen;
 
     switch (church.typename) {
       case 'Bacenta':
