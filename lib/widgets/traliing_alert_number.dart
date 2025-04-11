@@ -9,30 +9,56 @@ class TrailingCardAlertNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color cardBackground = const Color(0xff000000);
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
-    Color textColor = isDark ? Colors.red : const Color.fromARGB(255, 106, 30, 30);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    if (variant == TrailingCardAlertNumberVariant.red) {
-      cardBackground = const Color(0x22C02F2F);
+    // Define colors based on variant and theme
+    Color backgroundColor;
+    Color textColor;
+    IconData? statusIcon;
+
+    switch (variant) {
+      case TrailingCardAlertNumberVariant.red:
+        backgroundColor = isDark ? const Color(0x33FF5252) : const Color(0x22C02F2F);
+        textColor = isDark ? const Color(0xFFFF5252) : const Color(0xFFC02F2F);
+        statusIcon = Icons.warning_rounded;
+        break;
+      case TrailingCardAlertNumberVariant.green:
+        backgroundColor = isDark ? const Color(0x3369F0AE) : const Color(0x2139C02F);
+        textColor = isDark ? const Color(0xFF4CD551) : const Color(0xFF2E7D32);
+        statusIcon = Icons.check_circle_outline;
+        break;
+      case TrailingCardAlertNumberVariant.black:
+      default:
+        backgroundColor = isDark ? Colors.grey.shade800.withOpacity(0.3) : Colors.grey.shade200;
+        textColor = isDark ? Colors.grey.shade300 : Colors.grey.shade800;
+        break;
     }
 
-    if (variant == TrailingCardAlertNumberVariant.green) {
-      cardBackground = const Color(0x2139C02F);
-      textColor = isDark ? const Color(0xFF4CD551) : const Color.fromARGB(255, 33, 78, 35);
-    }
+    // Determine whether to show an icon based on number
+    final shouldShowIcon = number == 0 && variant == TrailingCardAlertNumberVariant.green;
 
-    return Card(
-      color: cardBackground,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-        child: Text(
-          '$number',
-          style: TextStyle(color: textColor, fontSize: 15),
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (shouldShowIcon) ...[
+            Icon(statusIcon, size: 16, color: textColor),
+            const SizedBox(width: 4),
+          ],
+          Text(
+            '$number',
+            style: TextStyle(
+              color: textColor,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

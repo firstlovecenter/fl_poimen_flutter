@@ -32,45 +32,70 @@ class HomePageButton extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Column(
-      children: [
-        Card(
-          child: ListTile(
-            dense: true,
-            onTap: () {
-              userState.bottomNavSelected = navKey;
-              if (navigateBack != null && navigateBack == true) {
-                Navigator.pushNamed(context, route);
-              } else {
-                Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
-              }
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // <-- Radius
-            ),
-            minVerticalPadding: const EdgeInsets.only(top: 13, bottom: 13).vertical,
-            title: Text(text),
-            leading: CircleAvatar(
-              backgroundColor: PoimenTheme.brand,
-              child: Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Card(
+        elevation: 1,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
+            color: Colors.grey.shade200,
+            width: 1,
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          splashColor: PoimenTheme.brand.withOpacity(0.1),
+          highlightColor: PoimenTheme.brand.withOpacity(0.05),
+          onTap: () {
+            userState.bottomNavSelected = navKey;
+            if (navigateBack != null && navigateBack == true) {
+              Navigator.pushNamed(context, route);
+            } else {
+              Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+            child: ListTile(
+              dense: true,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+              title: Text(
+                text,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+              ),
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: PoimenTheme.brand.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Icon(
                   icon,
                   size: 20,
-                  color: Colors.white,
+                  color: PoimenTheme.brand,
                 ),
               ),
+              trailing: alertNumber != null
+                  ? TrailingCardAlertNumber(
+                      number: alertNumber ?? 0,
+                      variant: alertNumber == 0
+                          ? TrailingCardAlertNumberVariant.green
+                          : TrailingCardAlertNumberVariant.red,
+                    )
+                  : const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14,
+                      color: Colors.grey,
+                    ),
             ),
-            trailing: alertNumber != null
-                ? TrailingCardAlertNumber(
-                    number: alertNumber ?? 0,
-                    variant: alertNumber == 0
-                        ? TrailingCardAlertNumberVariant.green
-                        : TrailingCardAlertNumberVariant.red,
-                  )
-                : null,
           ),
         ),
-      ],
+      ),
     );
   }
 }

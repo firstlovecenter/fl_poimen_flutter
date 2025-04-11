@@ -17,7 +17,7 @@ class FellowshipCompletedTelepastoringScreen extends StatelessWidget {
     var churchState = context.watch<SharedState>();
 
     return GQLQueryContainer(
-      query: getFellowshipCompletedTelepastoring,
+      query: getBacentaCompletedTelepastoring,
       variables: {'id': churchState.fellowshipId},
       defaultPageTitle: 'Fellowship Completed Telepastorings',
       bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 4),
