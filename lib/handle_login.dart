@@ -28,57 +28,70 @@ class _HandleLoginState extends State<HandleLogin> {
   void initState() {
     super.initState();
     log('HandleLogin initialized');
+
+    // Initialize app version immediately
+    final version = widget.currentVersion.isNotEmpty ? widget.currentVersion : "prod";
+
     // Initialize AuthService and check authentication status
     _authFuture = _initializeAuth();
   }
 
+  // Move state initialization to after first frame is rendered
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // Use Future.microtask to move the state update outside the build phase
-    Future.microtask(() {
-      final sharedState = Provider.of<SharedState>(context, listen: false);
-      // Also initialize the AuthState
-      final authState = Provider.of<AuthState>(context, listen: false);
-      authState.init(); // Initialize the auth state
-
-      // Check if widget.currentVersion is a valid version string
-      // If it's not valid, use "prod" as a fallback
-      try {
-        // Set version with appropriate format
-        sharedState.version = widget.currentVersion.isNotEmpty ? widget.currentVersion : "prod";
-        log('App version set to: ${sharedState.version}');
-      } catch (e) {
-        debugPrint('Error setting version: $e');
-        sharedState.version = "prod";
-      }
+    // This ensures the state update happens after the build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeAppVersion();
     });
+  }
+
+  // Safe method to initialize app version
+  void _initializeAppVersion() {
+    try {
+      final sharedState = Provider.of<SharedState>(context, listen: false);
+      final authState = Provider.of<AuthState>(context, listen: false);
+
+      // Set version with appropriate format
+      final version = widget.currentVersion.isNotEmpty ? widget.currentVersion : "prod";
+      sharedState.version = version;
+      authState.setAppVersion(version); // Also store in AuthState
+      log('App version set to: $version');
+    } catch (e) {
+      debugPrint('Error setting version: $e');
+      const defaultVersion = "prod";
+      try {
+        final sharedState = Provider.of<SharedState>(context, listen: false);
+        final authState = Provider.of<AuthState>(context, listen: false);
+
+        sharedState.version = defaultVersion;
+        authState.setAppVersion(defaultVersion);
+      } catch (e) {
+        debugPrint('Critical error setting default version: $e');
+      }
+    }
   }
 
   Future<bool> _initializeAuth() async {
     try {
       log('Initializing authentication...');
-      final isInitialized = await _authService.init();
+      // Get the AuthState safely, outside of build method
+      late final AuthState authState;
+      try {
+        authState = Provider.of<AuthState>(context, listen: false);
+      } catch (e) {
+        // If we can't get it now (widget might not be mounted), initialize directly
+        log('Could not access AuthState via Provider, using direct initialization');
+        return await _authService.init();
+      }
 
-      if (isInitialized) {
-        // Check if the stored values are valid
-        final String? accessToken = await _authService.secureStorage.read(key: 'accessToken');
-        final String? authId = await _authService.secureStorage.read(key: 'authId');
+      // Use AuthState for initialization to centralize auth logic
+      final isAuthenticated = await authState.initialize();
 
-        log('Access Token: ${accessToken != null ? 'exists' : 'null'}');
-        log('Auth ID: ${authId != null ? 'exists' : 'null'}');
-        log('User profile: ${_authService.profile != null ? _authService.profile!.name : 'null'}');
-
-        // If user profile is still null but we have tokens, attempt to initialize again
-        if (_authService.profile == null && accessToken != null && authId != null) {
-          log('Profile not loaded but credentials exist - attempting to reload');
-          await _authService.init();
-          log('After second init attempt - Profile: ${_authService.profile != null ? 'loaded' : 'still null'}');
-        }
-
-        // If credentials exist and are valid, consider user authenticated
-        return accessToken != null && authId != null;
+      if (isAuthenticated) {
+        log('User is authenticated');
+        return true;
       }
 
       log('Auth initialization failed or user not logged in');
@@ -137,10 +150,21 @@ class _HandleLoginState extends State<HandleLogin> {
           );
         }
 
-        if (snapshot.hasData && snapshot.data == true) {
-          // Authenticated - Navigate to HomeScreen
+        final isAuthenticated = snapshot.data == true;
+
+        // Access AuthState only when needed and outside of build process
+        late final AuthState authState;
+        try {
+          authState = Provider.of<AuthState>(context, listen: false);
+        } catch (e) {
+          log('Error accessing AuthState: $e');
+          return const LoginScreen();
+        }
+
+        if (isAuthenticated && authState.authProfile != null) {
+          // Authenticated - Navigate to ProfileChooseScreen
           log('User authenticated, navigating to ProfileChooseScreen');
-          log('Current profile data: ${_authService.profile?.name ?? "Not set"}');
+          log('Current profile data: ${authState.authProfile?.name ?? "Not set"}');
           return const ProfileChooseScreen();
         } else {
           // Not authenticated - Navigate to LoginScreen

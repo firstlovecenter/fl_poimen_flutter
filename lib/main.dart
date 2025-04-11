@@ -38,7 +38,7 @@ class PoimenApp extends StatelessWidget {
     return GraphQLProvider(
       client: client,
       child: MaterialApp(
-        title: 'Poimen Flutter Client',
+        title: '🐑 Poimen',
         theme: newLightTheme,
         darkTheme: newDarkTheme,
         routes: appRoutes,
@@ -60,7 +60,7 @@ GraphQLProvider(
       
         ],
         child: MaterialApp(
-          title: 'Poimen Flutter Client',
+title: '🐑 Poimen',
           theme: newLightTheme,
           darkTheme: newDarkTheme,
           routes: appRoutes,

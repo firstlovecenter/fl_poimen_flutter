@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:poimen/services/auth_service.dart';
+import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/widgets/auth_button.dart';
 import 'package:poimen/widgets/loading_screen.dart';
@@ -16,33 +17,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool isProgressing = false;
-  bool isLoggedIn = false;
-  String errorMessage = '';
-  String? name;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await initAction();
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     Color textColor = isDark ? Colors.white : Colors.black;
-    var state = context.watch<SharedState>();
-    print('Check the state ${state.version}');
+
+    // Use the AuthState for all auth-related functionality
+    final authState = context.watch<AuthState>();
+
+    // Keep SharedState for backward compatibility
+    final sharedState = context.watch<SharedState>();
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            if (isProgressing)
+            if (authState.isLoading)
               const LoadingScreen()
-            else if (!isLoggedIn)
+            else
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -78,64 +71,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: AuthButton(
-                        onPressed: () {
-                          loginAction();
+                        onPressed: () async {
+                          await _handleLogin(context);
                         },
                         text: 'Login',
                       ),
                     ),
                   ],
                 ),
-              )
-            else
-              Text('Welcome $name'),
-            if (errorMessage.isNotEmpty) Text(errorMessage),
+              ),
+            if (authState.errorMessage != null && authState.errorMessage!.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  authState.errorMessage!,
+                  style: TextStyle(color: Colors.red[700]),
+                  textAlign: TextAlign.center,
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  setSuccessAuthState() async {
-    setState(() {
-      isProgressing = false;
-      isLoggedIn = true;
-      name = AuthService.instance.profile?.name;
-    });
+  Future<void> _handleLogin(BuildContext context) async {
+    log('Initiating login process');
+    final authState = Provider.of<AuthState>(context, listen: false);
 
-    Navigator.of(context).pushNamedAndRemoveUntil('/profile-choose', (route) => false);
-  }
+    final success = await authState.login();
 
-  setLoadingState() {
-    setState(() {
-      isProgressing = true;
-      errorMessage = '';
-    });
-  }
-
-  Future<void> loginAction() async {
-    setLoadingState();
-    final message = await AuthService.instance.login();
-    if (message == 'Success') {
-      setSuccessAuthState();
-    } else {
-      setState(() {
-        isProgressing = false;
-        errorMessage = message;
-      });
-    }
-  }
-
-  initAction() async {
-    setLoadingState();
-    final bool isAuth = await AuthService.instance.init();
-    log('Auth is Done $isAuth');
-    if (isAuth) {
-      setSuccessAuthState();
-    } else {
-      setState(() {
-        isProgressing = false;
-      });
+    if (success && mounted) {
+      log('Login successful, navigating to profile selection');
+      Navigator.of(context).pushNamedAndRemoveUntil('/profile-choose', (route) => false);
     }
   }
 }

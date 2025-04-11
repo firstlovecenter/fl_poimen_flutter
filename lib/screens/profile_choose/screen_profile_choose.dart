@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:poimen/screens/profile_choose/gql_profile_choose.dart';
 import 'package:poimen/screens/profile_choose/models_profile.dart';
 import 'package:poimen/screens/profile_choose/widget_profile_choose.dart';
@@ -56,83 +55,43 @@ class ProfileChooseScreen extends StatefulWidget {
 }
 
 class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
-  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  String? _accessToken;
-  String? _authId;
-  bool _isLoading = true;
-  String? _errorMessage;
+  final bool _isLoading = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _initializeAuthData();
-  }
+  // Method to safely update user profile outside of build method
+  void _updateUserProfile(Profile user, BuildContext context) {
+    log('Updating user profile in state: ${user.firstName} ${user.lastName}');
+    final authState = Provider.of<AuthState>(context, listen: false);
+    final sharedState = Provider.of<SharedState>(context, listen: false);
 
-  Future<void> _initializeAuthData() async {
-    try {
-      setState(() {
-        _isLoading = true;
-        _errorMessage = null;
-      });
-
-      // Using Future.wait to fetch both values in parallel
-      final results = await Future.wait([
-        _secureStorage.read(key: 'accessToken'),
-        _secureStorage.read(key: 'authId'),
-      ]);
-
-      final accessToken = results[0];
-      final authId = results[1];
-
-      if (accessToken == null || authId == null) {
-        debugPrint('Missing auth data. Token: ${accessToken != null}, ID: ${authId != null}');
-        setState(() {
-          _errorMessage = 'Authentication data is missing. Please log in again.';
-        });
-      }
-
-      setState(() {
-        _accessToken = accessToken;
-        _authId = authId;
-        _isLoading = false;
-      });
-
-      if (_accessToken != null && _authId != null) {
-        debugPrint('Auth data loaded. ID: $_authId');
-      } else {
-        debugPrint('No valid authentication data found.');
-      }
-    } catch (e) {
-      debugPrint('Error initializing auth data: $e');
-      setState(() {
-        _errorMessage = 'Failed to load authentication data: $e';
-        _isLoading = false;
-      });
-    }
+    // Update both states to ensure backward compatibility
+    authState.setUserProfile(user);
+    sharedState.userProfile = user;
   }
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SharedState>();
-    final authState = Provider.of<AuthState>(context, listen: false);
+    final authState = context.watch<AuthState>();
 
-    if (_isLoading) {
+    if (authState.isLoading || _isLoading) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
-    if (_errorMessage != null) {
+    if (authState.errorMessage != null) {
       return Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_errorMessage!),
+              Text(authState.errorMessage!),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _initializeAuthData,
-                child: const Text('Retry'),
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                },
+                child: const Text('Back to Login'),
               ),
             ],
           ),
@@ -140,15 +99,30 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
       );
     }
 
-    if (_authId == null) {
-      return const Scaffold(
-        body: Center(child: Text('Authentication data not found. Please login again.')),
+    if (!authState.isAuthenticated) {
+      log('ProfileChooseScreen: No valid authentication found');
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Authentication data not found. Please login again.'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                },
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+        ),
       );
     }
 
     return GQLQueryContainer(
       query: getUserRoles,
-      variables: {'id': _authId},
+      variables: {'id': authState.authId},
       defaultPageTitle: 'Profile Selection',
       bodyFunction: (data, [fetchMore]) {
         if (data == null || data['members'] == null || data['members'].isEmpty) {
@@ -159,8 +133,10 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
                 children: [
                   const Text('User profile not found. Please try again.'),
                   ElevatedButton(
-                    onPressed: _initializeAuthData,
-                    child: const Text('Retry'),
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                    },
+                    child: const Text('Back to Login'),
                   ),
                 ],
               ),
@@ -170,15 +146,14 @@ class _ProfileChooseScreenState extends State<ProfileChooseScreen> {
 
         final user = Profile.fromJson(data['members'][0]);
 
-        // Store the user profile in AuthState instead of just SharedState
-        log('Storing user profile in AuthState: ${user.firstName} ${user.lastName}');
-        Future.microtask(() {
-          // Update both states to ensure backward compatibility during transition
-          authState.setUserProfile(user);
-          Provider.of<SharedState>(context, listen: false).userProfile = user;
+        // Safely update user profile after the build is complete
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _updateUserProfile(user, context);
         });
 
-        final version = state.version;
+        // Get version from AuthState first, fallback to SharedState
+        final String version =
+            authState.appVersion.isNotEmpty ? authState.appVersion : state.version;
 
         // Conditionally render body based on version validity and platform
         if (!kIsWeb && !currentVersionValid(data['minimumRequiredVersion'], version)) {
