@@ -21,18 +21,64 @@ class RecordedMeetingsList extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: ListView(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/governorship/attendance-ticker',
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                'Record Meeting',
-                style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            margin: const EdgeInsets.only(bottom: 20.0),
+            height: 60.0,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/governorship/attendance-ticker',
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return PoimenTheme.bad.withOpacity(0.8); // Darker when pressed
+                    } else if (states.contains(WidgetState.hovered)) {
+                      return PoimenTheme.bad.withOpacity(0.9); // Slightly darker on hover
+                    } else if (states.contains(WidgetState.disabled)) {
+                      return Colors.grey.shade400; // Grey when disabled
+                    }
+                    return PoimenTheme.bad; // Default red
+                  },
+                ),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                elevation: WidgetStateProperty.resolveWith<double>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return 2.0; // Lower elevation when pressed
+                    } else if (states.contains(WidgetState.hovered)) {
+                      return 6.0; // Higher elevation on hover
+                    }
+                    return 5.0; // Default elevation
+                  },
+                ),
+                overlayColor: WidgetStateProperty.all<Color>(Colors.white.withOpacity(0.1)),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.plusCircle,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Record Meeting',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
