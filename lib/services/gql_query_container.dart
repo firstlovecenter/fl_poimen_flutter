@@ -32,7 +32,8 @@ class GQLQueryContainer extends StatefulWidget {
     this.centerTitle,
     this.elevation,
     this.leading,
-    this.automaticallyImplyLeading = true,
+    this.automaticallyImplyLeading =
+        false, // Changed default to false to avoid duplicate back buttons
     this.backgroundColor,
     this.onBackPressed,
   }) : super(key: key);
@@ -84,6 +85,7 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
                   fontWeight: FontWeight.w600,
                   overflow: TextOverflow.ellipsis,
                 ),
+                maxLines: 1, // Ensure the title doesn't wrap to multiple lines
               )
             : null;
         Widget body;
@@ -113,14 +115,15 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
                         centerTitle: widget.centerTitle ?? (isTabletOrLarger ? true : false),
                         elevation: widget.elevation ?? 2,
                         backgroundColor: widget.backgroundColor,
-                        // Custom back button with fallback logic
-                        leading: widget.automaticallyImplyLeading ?? true
-                            ? IconButton(
-                                icon: const Icon(Icons.arrow_back),
-                                onPressed: handleBackNavigation,
-                              )
-                            : widget.leading,
-                        automaticallyImplyLeading: false, // We're handling it manually
+                        // Custom back button with fallback logic - only show if explicitly set
+                        leading: widget.leading ??
+                            (widget.automaticallyImplyLeading == true
+                                ? IconButton(
+                                    icon: const Icon(Icons.arrow_back),
+                                    onPressed: handleBackNavigation,
+                                  )
+                                : null),
+                        automaticallyImplyLeading: widget.automaticallyImplyLeading ?? false,
                         actions: widget.actions,
                       )
                     : null,
@@ -145,18 +148,13 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
             appBar: pageTitle != null
                 ? AppBar(
                     title: pageTitle,
+                    titleSpacing: 0, // Reduce spacing to fit longer titles
                     centerTitle: widget.centerTitle ?? (isTabletOrLarger ? true : false),
                     elevation: widget.elevation ?? (isDarkMode ? 0 : 1),
                     backgroundColor: widget.backgroundColor,
-                    // Custom back button with fallback logic
-                    leading: widget.leading ??
-                        (widget.automaticallyImplyLeading ?? true
-                            ? IconButton(
-                                icon: const Icon(Icons.arrow_back),
-                                onPressed: handleBackNavigation,
-                              )
-                            : null),
-                    automaticallyImplyLeading: false, // We handle back button manually
+                    // Custom back button with fallback logic - only show if explicitly requested
+                    leading: widget.leading,
+                    automaticallyImplyLeading: widget.automaticallyImplyLeading ?? false,
                     actions: widget.actions,
                     shape: widget.elevation == 0
                         ? null

@@ -30,7 +30,12 @@ class RecordAttendanceScreen extends StatelessWidget {
           body = RecordedMeetingsList(meetings: governorship.poimenMeetings);
 
           return GQLQueryContainerReturnValue(
-            pageTitle: PageTitle(pageTitle: 'Recent Meetings', church: governorship),
+            pageTitle: PageTitle(
+              pageTitle: 'Recent Meetings',
+              church: governorship,
+              showBackButton: true,
+              onBackPressed: () => Navigator.of(context).pop(),
+            ),
             body: body,
           );
         });

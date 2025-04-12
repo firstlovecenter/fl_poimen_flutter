@@ -19,6 +19,7 @@ class PageTitle extends StatelessWidget {
     this.elevation = 0,
     this.centerTitle = false,
     this.isMobileLayout = true,
+    this.maxTitleLength,
   }) : super(key: key);
 
   final ProfileChurch? church;
@@ -33,6 +34,7 @@ class PageTitle extends StatelessWidget {
   final double elevation;
   final bool centerTitle;
   final bool isMobileLayout;
+  final int? maxTitleLength;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class PageTitle extends StatelessWidget {
 
     // Force show back button on mobile if we can navigate back
     final canNavigateBack = Navigator.of(context).canPop();
-    final shouldShowBackButton = (showBackButton || (isMobile && canNavigateBack));
+    final shouldShowBackButton = (showBackButton && canNavigateBack);
 
     // Improved back button handling
     void handleBackNavigation() {
@@ -84,6 +86,9 @@ class PageTitle extends StatelessWidget {
     final titleColor = isDarkMode ? Colors.white : Colors.black87;
     final subtitleColor = isDarkMode ? PoimenTheme.brandTextPrimary : PoimenTheme.textSecondary;
 
+    // Format title to fit in app bar
+    final formattedTitle = _formatTitle(pageTitle, maxTitleLength ?? (isMobile ? 20 : 30));
+
     // Use Material 3 styles for elevation and shadows
     final List<BoxShadow> titleElevation = elevation > 0
         ? [
@@ -98,16 +103,17 @@ class PageTitle extends StatelessWidget {
     // Default page title without church context
     Widget title = ListTile(
       title: Text(
-        pageTitle,
+        formattedTitle,
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: dynamicTitleSize,
           overflow: TextOverflow.ellipsis,
           color: titleColor,
         ),
+        maxLines: 1,
       ),
       trailing: trailing,
-      contentPadding: contentPadding,
+      contentPadding: contentPadding ?? EdgeInsets.zero,
       leading: shouldShowBackButton
           ? IconButton(
               icon: Icon(
@@ -118,10 +124,14 @@ class PageTitle extends StatelessWidget {
               onPressed: handleBackNavigation,
             )
           : null,
+      dense: true,
     );
 
     // Enhanced page title with church context
     if (church != null) {
+      // Generate a shorter church display for mobile
+      final churchDisplay = isMobile ? church!.name : '${church?.name} ${church?.typename}';
+
       title = Material(
         color: Colors.transparent,
         elevation: 0,
@@ -132,39 +142,37 @@ class PageTitle extends StatelessWidget {
           ),
           child: ListTile(
             title: Text(
-              pageTitle,
+              formattedTitle,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: dynamicTitleSize,
                 overflow: TextOverflow.ellipsis,
                 color: titleColor,
               ),
+              maxLines: 1,
             ),
-            subtitle: church != null
-                ? Text(
-                    '${church?.name} ${church?.typename}',
-                    style: TextStyle(
-                      fontSize: dynamicSubtitleSize,
-                      color: subtitleColor,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.2,
-                    ),
-                  )
-                : null,
+            subtitle: Text(
+              churchDisplay,
+              style: TextStyle(
+                fontSize: dynamicSubtitleSize,
+                color: subtitleColor,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.2,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             leading: shouldShowBackButton
                 ? IconButton(
-                    icon: Hero(
-                      tag: 'backButton',
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: isDarkMode ? PoimenTheme.brand : Colors.black87,
-                        size: 24,
-                      ),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: isDarkMode ? PoimenTheme.brand : Colors.black87,
+                      size: 24,
                     ),
                     onPressed: handleBackNavigation,
                   )
                 : null,
-            contentPadding: contentPadding,
+            contentPadding: contentPadding ?? EdgeInsets.zero,
             trailing: trailing ??
                 (showSearchIcon &&
                         ModalRoute.of(context)!.settings.name != '/search' &&
@@ -188,6 +196,7 @@ class PageTitle extends StatelessWidget {
                         },
                       )
                     : null),
+            dense: true,
           ),
         ),
       );
@@ -210,5 +219,22 @@ class PageTitle extends StatelessWidget {
       ),
       child: title,
     );
+  }
+
+  // Helper method to format titles to fit in app bar
+  String _formatTitle(String title, int maxLength) {
+    // If the title is already short enough, return as is
+    if (title.length <= maxLength) {
+      return title;
+    }
+
+    // Try to truncate at a space to avoid cutting words
+    int lastSpaceIndex = title.substring(0, maxLength).lastIndexOf(' ');
+    if (lastSpaceIndex > maxLength / 2) {
+      return '${title.substring(0, lastSpaceIndex)}...';
+    }
+
+    // If no good truncation point found, just cut at maxLength
+    return '${title.substring(0, maxLength)}...';
   }
 }

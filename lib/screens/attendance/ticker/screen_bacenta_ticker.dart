@@ -99,8 +99,10 @@ class BacentaAttendanceTickerScreen extends StatelessWidget {
 
           var returnValues = GQLQueryContainerReturnValue(
             pageTitle: PageTitle(
-              pageTitle: 'Tick Membership Attendance',
+              pageTitle: 'Attendance',
               church: bacenta,
+              showBackButton: true,
+              onBackPressed: () => Navigator.of(context).pop(),
             ),
             body: body,
           );

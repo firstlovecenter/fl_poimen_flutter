@@ -143,8 +143,10 @@ class GovernorshipAttendanceTickerScreen extends StatelessWidget {
 
         return GQLQueryContainerReturnValue(
           pageTitle: PageTitle(
-            pageTitle: 'Attendance Tracker',
+            pageTitle: 'Attendance',
             church: governorship,
+            showBackButton: true, // Explicitly set to show only one back button
+            onBackPressed: () => Navigator.of(context).pop(), // Define proper navigation
           ),
           body: body,
         );
