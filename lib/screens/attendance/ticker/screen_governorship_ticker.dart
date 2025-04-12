@@ -145,7 +145,6 @@ class GovernorshipAttendanceTickerScreen extends StatelessWidget {
           pageTitle: PageTitle(
             pageTitle: 'Attendance Tracker',
             church: governorship,
-            showBackButton: true,
           ),
           body: body,
         );

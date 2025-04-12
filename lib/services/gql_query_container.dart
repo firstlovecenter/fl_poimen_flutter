@@ -11,6 +11,13 @@ class GQLQueryContainer extends StatefulWidget {
   final Widget? bottomNavBar;
   final bool? infiniteScroll;
   final Widget? loadingWidget;
+  final List<Widget>? actions;
+  final bool? centerTitle;
+  final double? elevation;
+  final Widget? leading;
+  final bool? automaticallyImplyLeading;
+  final Color? backgroundColor;
+  final VoidCallback? onBackPressed;
 
   const GQLQueryContainer({
     Key? key,
@@ -21,6 +28,13 @@ class GQLQueryContainer extends StatefulWidget {
     this.infiniteScroll,
     this.bottomNavBar,
     this.loadingWidget,
+    this.actions,
+    this.centerTitle,
+    this.elevation,
+    this.leading,
+    this.automaticallyImplyLeading = true,
+    this.backgroundColor,
+    this.onBackPressed,
   }) : super(key: key);
 
   @override
@@ -30,6 +44,30 @@ class GQLQueryContainer extends StatefulWidget {
 class _GQLQueryContainerState extends State<GQLQueryContainer> {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+    final screenWidth = mediaQuery.size.width;
+    final isTabletOrLarger = screenWidth > 600;
+
+    // Safe navigation method
+    void handleBackNavigation() {
+      if (widget.onBackPressed != null) {
+        widget.onBackPressed!();
+      } else if (Navigator.of(context).canPop()) {
+        try {
+          Navigator.of(context).pop();
+        } catch (e) {
+          debugPrint('Navigation error: $e');
+          // Fallback to home if there's an error
+          Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+        }
+      } else {
+        // If we can't pop, go to home
+        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+      }
+    }
+
     return Query(
       options: QueryOptions(document: widget.query, variables: widget.variables),
       builder: (
@@ -37,11 +75,17 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         VoidCallback? refetch,
         FetchMore? fetchMore,
       }) {
-        Widget? pageTitle = ListTile(
-            title: Text(
-          widget.defaultPageTitle,
-          style: const TextStyle(color: Colors.white),
-        ));
+        Widget? pageTitle = widget.defaultPageTitle.isNotEmpty
+            ? Text(
+                widget.defaultPageTitle,
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                  fontSize: isTabletOrLarger ? 22 : 20,
+                  fontWeight: FontWeight.w600,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )
+            : null;
         Widget body;
 
         if (result.hasException) {
@@ -63,7 +107,23 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
               // If both fail, show error
               body = _handleQueryError("Error calling bodyFunction: $e2");
               return Scaffold(
-                appBar: pageTitle != null ? AppBar(title: pageTitle) : null,
+                appBar: pageTitle != null
+                    ? AppBar(
+                        title: pageTitle,
+                        centerTitle: widget.centerTitle ?? (isTabletOrLarger ? true : false),
+                        elevation: widget.elevation ?? 2,
+                        backgroundColor: widget.backgroundColor,
+                        // Custom back button with fallback logic
+                        leading: widget.automaticallyImplyLeading ?? true
+                            ? IconButton(
+                                icon: const Icon(Icons.arrow_back),
+                                onPressed: handleBackNavigation,
+                              )
+                            : widget.leading,
+                        automaticallyImplyLeading: false, // We're handling it manually
+                        actions: widget.actions,
+                      )
+                    : null,
                 body: body,
                 bottomNavigationBar: widget.bottomNavBar,
               );
@@ -74,14 +134,42 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
           body = res.body;
         }
 
-        return Scaffold(
-          appBar: pageTitle != null
-              ? AppBar(
-                  title: pageTitle,
-                )
-              : null,
-          body: body,
-          bottomNavigationBar: widget.bottomNavBar,
+        return WillPopScope(
+          onWillPop: () async {
+            // Try to handle the back button press in a controlled way
+            handleBackNavigation();
+            // Prevent the default behavior which might cause the white screen
+            return false;
+          },
+          child: Scaffold(
+            appBar: pageTitle != null
+                ? AppBar(
+                    title: pageTitle,
+                    centerTitle: widget.centerTitle ?? (isTabletOrLarger ? true : false),
+                    elevation: widget.elevation ?? (isDarkMode ? 0 : 1),
+                    backgroundColor: widget.backgroundColor,
+                    // Custom back button with fallback logic
+                    leading: widget.leading ??
+                        (widget.automaticallyImplyLeading ?? true
+                            ? IconButton(
+                                icon: const Icon(Icons.arrow_back),
+                                onPressed: handleBackNavigation,
+                              )
+                            : null),
+                    automaticallyImplyLeading: false, // We handle back button manually
+                    actions: widget.actions,
+                    shape: widget.elevation == 0
+                        ? null
+                        : const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              bottom: Radius.circular(10),
+                            ),
+                          ),
+                  )
+                : null,
+            body: body,
+            bottomNavigationBar: widget.bottomNavBar,
+          ),
         );
       },
     );
@@ -106,14 +194,28 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(errorMessage),
-          const SizedBox(height: 20),
-          ElevatedButton(
+          Icon(
+            Icons.error_outline,
+            size: 48,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Text(
+              errorMessage,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
             onPressed: () {
-              // Refresh the query
-              // You'll need to implement a way to refresh the query here
+              // Refresh the query by rebuilding the widget
+              setState(() {});
             },
-            child: const Text('Retry'),
+            icon: const Icon(Icons.refresh),
+            label: const Text('Retry'),
           ),
         ],
       ),

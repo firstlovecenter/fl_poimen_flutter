@@ -1074,7 +1074,6 @@ class _WidgetAttendanceTickerOnDateState extends State<WidgetAttendanceTickerOnD
                         Text(
                           'Submit Attendance',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
