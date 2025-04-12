@@ -18,7 +18,7 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
         ? {
             'title': 'Record Attendance',
             'icon': FontAwesomeIcons.userCheck,
-            'route': '/servicerecord-services',
+            'route': '/record-attendance',
             'navKey': 'attendance'
           }
         : null,

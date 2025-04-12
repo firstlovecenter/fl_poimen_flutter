@@ -20,7 +20,7 @@ class GovernorshipOutstandingVisitationScreen extends StatelessWidget {
       query: getGovernorshipOutstandingVisitations,
       variables: {'id': churchState.governorshipId},
       defaultPageTitle: 'Governorship Outstanding Visitations',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 2),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 

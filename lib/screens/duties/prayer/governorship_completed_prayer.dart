@@ -20,7 +20,7 @@ class GovernorshipCompletedPrayerScreen extends StatelessWidget {
       query: getGovernorshipCompletedPrayer,
       variables: {'id': churchState.governorshipId},
       defaultPageTitle: 'Governorship Completed Prayers',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 2),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 3),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
