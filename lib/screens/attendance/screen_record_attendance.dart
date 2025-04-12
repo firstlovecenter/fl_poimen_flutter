@@ -21,7 +21,7 @@ class RecordAttendanceScreen extends StatelessWidget {
         query: getGovernorshipMeetings,
         variables: {'id': churchState.governorshipId},
         defaultPageTitle: 'Services',
-        bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
+        bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
         bodyFunction: (data, [fetchMore]) {
           Widget body;
 

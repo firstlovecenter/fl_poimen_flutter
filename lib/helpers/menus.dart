@@ -14,28 +14,12 @@ List<Map<String, dynamic>?> getAttendanceMenus(ChurchLevel churchLevel) {
 
   return [
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
-    churchLevel == ChurchLevel.bacenta
+    churchLevel == ChurchLevel.governorship
         ? {
-            'title': 'Sunday',
-            'icon': FontAwesomeIcons.busSimple,
-            'route': '/bussingrecord-services',
-            'navKey': 'attendance'
-          }
-        : null,
-    churchLevel == ChurchLevel.bacenta
-        ? {
-            'title': 'Weekday',
+            'title': 'Record Attendance',
             'icon': FontAwesomeIcons.userCheck,
             'route': '/servicerecord-services',
             'navKey': 'attendance'
-          }
-        : null,
-    churchLevel == ChurchLevel.hub
-        ? {
-            'title': 'Rehearsals',
-            'icon': FontAwesomeIcons.userCheck,
-            'route': '/rehearsal-meetings',
-            'navKey': 'rehearsal-attendance'
           }
         : null,
     churchLevel == ChurchLevel.bacenta

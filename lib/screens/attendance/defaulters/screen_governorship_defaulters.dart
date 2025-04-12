@@ -20,7 +20,7 @@ class GovernorshipAttendanceDefaultersScreen extends StatelessWidget {
       query: getGovernorshipAttendanceDefaulters,
       variables: {'id': churchState.governorshipId},
       defaultPageTitle: 'Governorship Attendance Defaulters',
-      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getAttendanceMenus, index: 2),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
