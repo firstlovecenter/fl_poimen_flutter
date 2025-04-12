@@ -110,10 +110,19 @@ class _WidgetAttendanceTickerOnDateState extends State<WidgetAttendanceTickerOnD
   @override
   Widget build(BuildContext context) {
     var churchState = context.watch<SharedState>();
+
+    // Sort all member lists alphabetically by first name
+    final sortedSheep = List<MemberForList>.from(widget.church.sheep)
+      ..sort((a, b) => a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase()));
+    final sortedGoats = List<MemberForList>.from(widget.church.goats)
+      ..sort((a, b) => a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase()));
+    final sortedDeer = List<MemberForList>.from(widget.church.deer)
+      ..sort((a, b) => a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase()));
+
     final List<String> membership = [
-      ...widget.church.sheep.map((sheep) => sheep.id),
-      ...widget.church.goats.map((goat) => goat.id),
-      ...widget.church.deer.map((deer) => deer.id),
+      ...sortedSheep.map((sheep) => sheep.id),
+      ...sortedGoats.map((goat) => goat.id),
+      ...sortedDeer.map((deer) => deer.id),
     ];
     String recordId = '';
 
@@ -228,52 +237,101 @@ class _WidgetAttendanceTickerOnDateState extends State<WidgetAttendanceTickerOnD
           ),
           const SizedBox(height: 16),
           Row(
+            mainAxisAlignment: isDesktop ? MainAxisAlignment.end : MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isDarkMode ? Colors.grey.shade700 : Colors.grey.shade300,
-                        width: 1,
+              if (isDesktop)
+                SizedBox(
+                  width: 350,
+                  child: GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isDarkMode ? Colors.grey.shade700 : Colors.grey.shade300,
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _selectedDate == null
+                                ? 'Select date'
+                                : DateFormat('EEEE, MMMM d, y').format(_selectedDate!),
+                            style: TextStyle(
+                              fontSize: isDesktop
+                                  ? 18
+                                  : isTabletOrLarger
+                                      ? 16
+                                      : 14,
+                              color: _selectedDate == null
+                                  ? isDarkMode
+                                      ? Colors.grey
+                                      : Colors.grey.shade700
+                                  : isDarkMode
+                                      ? Colors.white
+                                      : Colors.black87,
+                            ),
+                          ),
+                          Icon(
+                            Icons.calendar_today,
+                            color: PoimenTheme.brand,
+                            size: isTabletOrLarger ? 24 : 18,
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          _selectedDate == null
-                              ? 'Select date'
-                              : DateFormat('EEEE, MMMM d, y').format(_selectedDate!),
-                          style: TextStyle(
-                            fontSize: isDesktop
-                                ? 18
-                                : isTabletOrLarger
-                                    ? 16
-                                    : 14,
-                            color: _selectedDate == null
-                                ? isDarkMode
-                                    ? Colors.grey
-                                    : Colors.grey.shade700
-                                : isDarkMode
-                                    ? Colors.white
-                                    : Colors.black87,
+                  ),
+                )
+              else
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isDarkMode ? Colors.grey.shade700 : Colors.grey.shade300,
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _selectedDate == null
+                                ? 'Select date'
+                                : DateFormat('EEEE, MMMM d, y').format(_selectedDate!),
+                            style: TextStyle(
+                              fontSize: isDesktop
+                                  ? 18
+                                  : isTabletOrLarger
+                                      ? 16
+                                      : 14,
+                              color: _selectedDate == null
+                                  ? isDarkMode
+                                      ? Colors.grey
+                                      : Colors.grey.shade700
+                                  : isDarkMode
+                                      ? Colors.white
+                                      : Colors.black87,
+                            ),
                           ),
-                        ),
-                        Icon(
-                          Icons.calendar_today,
-                          color: PoimenTheme.brand,
-                          size: isTabletOrLarger ? 24 : 18,
-                        ),
-                      ],
+                          Icon(
+                            Icons.calendar_today,
+                            color: PoimenTheme.brand,
+                            size: isTabletOrLarger ? 24 : 18,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
           if (_selectedDate != null) ...[
