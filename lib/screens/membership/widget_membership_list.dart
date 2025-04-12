@@ -296,9 +296,6 @@ class ChurchMembershipList extends StatelessWidget {
                       isDarkMode: isDarkMode,
                       description: 'Rarely seen members',
                     ),
-                    const SizedBox(height: 32),
-                    // Gender distribution
-                    if (isDesktop) _buildDistributionChart(isDarkMode),
                   ],
                 ),
               ),
@@ -587,115 +584,6 @@ class ChurchMembershipList extends StatelessWidget {
           ],
         ],
       ),
-    );
-  }
-
-  Widget _buildDistributionChart(bool isDarkMode) {
-    final maleColor = isDarkMode ? Colors.blue.shade300 : Colors.blue.shade400;
-    final femaleColor = isDarkMode ? Colors.pink.shade300 : Colors.pink.shade400;
-    final textColor = isDarkMode ? Colors.white : Colors.black87;
-
-    // Placeholder for gender distribution - would be calculated from actual data
-    const malePercentage = 48;
-    const femalePercentage = 52;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Gender Distribution',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          height: 24,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300,
-              width: 1,
-            ),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Row(
-            children: [
-              Expanded(
-                flex: malePercentage,
-                child: Container(
-                  color: maleColor,
-                ),
-              ),
-              Expanded(
-                flex: femalePercentage,
-                child: Container(
-                  color: femaleColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildChartLegendItem(
-              color: maleColor,
-              label: 'Male',
-              value: '$malePercentage%',
-              isDarkMode: isDarkMode,
-            ),
-            _buildChartLegendItem(
-              color: femaleColor,
-              label: 'Female',
-              value: '$femalePercentage%',
-              isDarkMode: isDarkMode,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildChartLegendItem({
-    required Color color,
-    required String label,
-    required String value,
-    required bool isDarkMode,
-  }) {
-    final textColor = isDarkMode ? Colors.grey.shade300 : Colors.grey.shade700;
-
-    return Row(
-      children: [
-        Container(
-          width: 12,
-          height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(3),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            color: textColor,
-          ),
-        ),
-        const SizedBox(width: 4),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: isDarkMode ? Colors.white : Colors.black87,
-          ),
-        ),
-      ],
     );
   }
 

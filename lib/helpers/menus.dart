@@ -54,8 +54,7 @@ List<Map<String, dynamic>?> getDutiesMenus(ChurchLevel churchLevel) {
     {'title': 'Home', 'icon': Icons.home, 'route': '/home', 'navKey': 'home'},
     [
       ChurchLevel.bacenta,
-      ChurchLevel.bacenta,
-      ChurchLevel.hub,
+      ChurchLevel.governorship,
     ].contains(churchLevel)
         ? {
             'title': 'IMCLs',

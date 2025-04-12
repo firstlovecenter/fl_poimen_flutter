@@ -20,7 +20,7 @@ class GovernorshipIMCLScreen extends StatelessWidget {
       query: getGovernorshipImcls,
       variables: {'id': churchState.governorshipId},
       defaultPageTitle: 'Governorship IMCL List',
-      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 1),
+      bottomNavBar: const BottomNavBar(menu: getDutiesMenus, index: 0),
       bodyFunction: (data, [fetchMore]) {
         Widget body;
 
