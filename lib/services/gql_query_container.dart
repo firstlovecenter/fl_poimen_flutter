@@ -7,9 +7,10 @@ class GQLQueryContainer extends StatefulWidget {
   final dynamic query;
   final Map<String, dynamic> variables;
   final String defaultPageTitle;
-  final Function(Map<String, dynamic>?) bodyFunction;
+  final Function bodyFunction;
   final Widget? bottomNavBar;
   final bool? infiniteScroll;
+  final Widget? loadingWidget;
 
   const GQLQueryContainer({
     Key? key,
@@ -19,6 +20,7 @@ class GQLQueryContainer extends StatefulWidget {
     required this.bodyFunction,
     this.infiniteScroll,
     this.bottomNavBar,
+    this.loadingWidget,
   }) : super(key: key);
 
   @override
@@ -45,9 +47,28 @@ class _GQLQueryContainerState extends State<GQLQueryContainer> {
         if (result.hasException) {
           body = _handleQueryError(result.exception);
         } else if (widget.infiniteScroll != true && (result.isLoading || result.data == null)) {
-          body = const LoadingScreen();
+          body = widget.loadingWidget ?? const LoadingScreen();
         } else {
-          GQLQueryContainerReturnValue res = widget.bodyFunction(result.data);
+          // Handle both old and new function signatures to maintain backward compatibility
+          GQLQueryContainerReturnValue res;
+
+          try {
+            // Try new signature with fetchMore
+            res = widget.bodyFunction(result.data, fetchMore);
+          } catch (e) {
+            try {
+              // Fall back to old signature without fetchMore
+              res = widget.bodyFunction(result.data);
+            } catch (e2) {
+              // If both fail, show error
+              body = _handleQueryError("Error calling bodyFunction: $e2");
+              return Scaffold(
+                appBar: pageTitle != null ? AppBar(title: pageTitle) : null,
+                body: body,
+                bottomNavigationBar: widget.bottomNavBar,
+              );
+            }
+          }
 
           pageTitle = res.pageTitle;
           body = res.body;

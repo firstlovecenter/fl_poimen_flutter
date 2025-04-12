@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart'; // Add this import for FetchMoreOptions
 import 'package:poimen/screens/home/gql_home_screen.dart';
 import 'package:poimen/screens/home/models_home_screen.dart';
 import 'package:poimen/screens/home/widget_body_home_screen.dart';
@@ -107,7 +108,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ElevatedButton(
                       onPressed: () {
                         if (fetchMore != null) {
-                          fetchMore();
+                          // Use fetchMore with appropriate options
+                          fetchMore(FetchMoreOptions(
+                            variables: {'id': church.id},
+                            updateQuery: (previousResultData, fetchMoreResultData) {
+                              return fetchMoreResultData;
+                            },
+                          ));
                         }
                       },
                       child: const Text('Retry'),
@@ -134,7 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (fetchMore != null) {
-                        fetchMore();
+                        // Use fetchMore with appropriate options
+                        fetchMore(FetchMoreOptions(
+                          variables: {'id': church.id},
+                          updateQuery: (previousResultData, fetchMoreResultData) {
+                            return fetchMoreResultData;
+                          },
+                        ));
                       }
                     },
                     child: const Text('Retry'),

@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                   width: isTablet ? 280 : 220,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: brandColor.withOpacity(0.1),
+                                    color: Colors.grey.withOpacity(0.1),
                                   ),
                                   child: const Padding(
                                     padding: EdgeInsets.all(20.0),
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                               vertical: 12.0,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.1),
+                              color: Colors.white.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: Colors.red.withOpacity(0.5),

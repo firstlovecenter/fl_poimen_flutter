@@ -166,6 +166,8 @@ class _RecordedMeetingsListState extends State<RecordedMeetingsList>
   Widget _buildAddMeetingButtonContent(BuildContext context, bool isDarkMode) {
     return SizedBox(
       height: 60.0,
+      // For large screens, set a reasonable width for the button
+      width: MediaQuery.of(context).size.width >= 900 ? 280.0 : null,
       child: ElevatedButton(
         onPressed: () {
           HapticFeedback.mediumImpact();
@@ -263,11 +265,8 @@ class _RecordedMeetingsListState extends State<RecordedMeetingsList>
       curve: const Interval(0.2, 0.8, curve: Curves.easeOutQuart),
     ));
 
-    // For mobile: full width button
-    // For tablet/larger: smaller button with right alignment
-    final buttonWidth = isTabletOrLarger
-        ? MediaQuery.of(context).size.width * 0.35
-        : MediaQuery.of(context).size.width;
+    // Always make button full width on smaller screens
+    final buttonWidth = MediaQuery.of(context).size.width;
 
     return FadeTransition(
       opacity: animation,
@@ -284,7 +283,7 @@ class _RecordedMeetingsListState extends State<RecordedMeetingsList>
             horizontal: isTabletOrLarger ? 24.0 : 16.0,
           ),
           child: Align(
-            alignment: isTabletOrLarger ? Alignment.centerRight : Alignment.center,
+            alignment: Alignment.center,
             child: SizedBox(
               width: buttonWidth,
               child: _buildAddMeetingButtonContent(context, isDarkMode),
@@ -669,12 +668,32 @@ class _RecordedMeetingsListState extends State<RecordedMeetingsList>
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  timeago.format(meeting.serviceDate.date),
-                  style: TextStyle(
-                    color: secondaryTextColor,
-                    fontSize: 12,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      timeago.format(meeting.serviceDate.date),
+                      style: TextStyle(
+                        color: secondaryTextColor,
+                        fontSize: 12,
+                      ),
+                    ),
+                    // Add the typename indicator
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: tagBgColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        meeting.typename,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isDarkMode ? Colors.grey.shade400 : Colors.grey.shade700,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const Spacer(),
                 Container(

@@ -9,11 +9,13 @@ class PageTitle extends StatelessWidget {
     this.church,
     this.trailing,
     required this.pageTitle,
+    this.showBackButton = false,
   }) : super(key: key);
 
   final ProfileChurch? church;
   final String pageTitle;
   final Widget? trailing;
+  final bool showBackButton;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,12 @@ class PageTitle extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        leading: showBackButton
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         trailing: trailing ??
             (ModalRoute.of(context)!.settings.name != '/search' &&
                     ModalRoute.of(context)!.settings.name != '/home'
