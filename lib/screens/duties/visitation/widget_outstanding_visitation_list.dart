@@ -12,6 +12,7 @@ import 'package:poimen/widgets/no_data.dart';
 import 'package:poimen/widgets/traliing_alert_number.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ChurchOutstandingVisitationList extends StatefulWidget {
   const ChurchOutstandingVisitationList({Key? key, required this.church}) : super(key: key);
@@ -25,12 +26,22 @@ class ChurchOutstandingVisitationList extends StatefulWidget {
 class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisitationList> {
   final TextEditingController _searchController = TextEditingController();
   List<OutstandingVisitationForList> _filteredMembers = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _filteredMembers = widget.church.outstandingVisitations;
     _searchController.addListener(_filterMembers);
+
+    // Simulate loading for better UX
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
   }
 
   @override
@@ -56,145 +67,362 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(children: [
-          Expanded(
-            child: ListView(children: [
-              const Padding(padding: EdgeInsets.all(10)),
-              const Text(
-                'These people have not been visited during the current shepherding cycle',
-                style: TextStyle(fontSize: 16),
-              ),
-              // a centered card with the number of outstanding visitations
-              const Padding(padding: EdgeInsets.all(10)),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 6.0),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: const Icon(FontAwesomeIcons.doorOpen),
-                        trailing: TrailingCardAlertNumber(
-                            number: widget.church.outstandingVisitations.length,
-                            variant: TrailingCardAlertNumberVariant.red),
-                        title: const Text('Visits Remaining'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+    // Responsive design variables
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= 600;
+    final isDesktop = size.width >= 900;
 
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+    // Theme detection
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+
+    // Colors based on theme
+    final cardColor = isDarkMode ? PoimenTheme.darkCardColor : Colors.white;
+    final backgroundColor = isDarkMode ? Colors.black12 : Colors.grey.shade50;
+    final textColor = isDarkMode ? Colors.white : Colors.black87;
+    final subtitleColor = isDarkMode ? Colors.grey.shade300 : Colors.grey.shade700;
+    final searchBarColor = isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200;
+
+    // Calculate content width for larger screens
+    final contentWidth = isDesktop
+        ? size.width * 0.7
+        : isTablet
+            ? size.width * 0.9
+            : size.width;
+
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            width: contentWidth,
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+                  child: Text(
+                    'These people have not been visited during the current shepherding cycle',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 6.0),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/${widget.church.typename.toLowerCase()}/completed-visitation',
-                          );
-                        },
-                        leading: const Icon(
-                          FontAwesomeIcons.solidThumbsUp,
-                          color: Colors.green,
-                        ),
-                        trailing: TrailingCardAlertNumber(
-                          number: widget.church.completedVisitationsCount,
-                          variant: TrailingCardAlertNumberVariant.green,
-                        ),
-                        title: const Text('Visits Completed'),
+
+                // Search bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      labelText: 'Search by name or location',
+                      hintText: 'Name or location',
+                      prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+                          size: 16, color: PoimenTheme.brand),
+                      filled: true,
+                      fillColor: searchBarColor,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide.none,
                       ),
-                    ],
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                    ),
+                    style: TextStyle(color: textColor),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    labelText: 'Search by member name',
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.magnifyingGlass,
-                      color: PoimenTheme.brand,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
+
+                Expanded(
+                  child: _isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : AnimationLimiter(
+                          child: ListView(
+                            children: [
+                              // Stats cards
+                              Wrap(
+                                spacing: 12.0,
+                                runSpacing: 12.0,
+                                alignment: WrapAlignment.center,
+                                children: [
+                                  // Visits Remaining Card
+                                  _buildStatsCard(
+                                    context: context,
+                                    icon: FontAwesomeIcons.doorOpen,
+                                    iconColor: Colors.red,
+                                    title: 'Visits Remaining',
+                                    count: widget.church.outstandingVisitations.length,
+                                    variant: TrailingCardAlertNumberVariant.red,
+                                    backgroundColor: cardColor,
+                                    textColor: textColor,
+                                    isDarkMode: isDarkMode,
+                                  ),
+
+                                  // Visits Completed Card
+                                  _buildStatsCard(
+                                    context: context,
+                                    icon: FontAwesomeIcons.solidThumbsUp,
+                                    iconColor: Colors.green,
+                                    title: 'Visits Completed',
+                                    count: widget.church.completedVisitationsCount,
+                                    variant: TrailingCardAlertNumberVariant.green,
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/${widget.church.typename.toLowerCase()}/completed-visitation',
+                                      );
+                                    },
+                                    backgroundColor: cardColor,
+                                    textColor: textColor,
+                                    isDarkMode: isDarkMode,
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 20),
+
+                              // Show empty state or member list
+                              if (_filteredMembers.isEmpty && _searchController.text.isNotEmpty)
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(24.0),
+                                    child: Text(
+                                      'No members found matching "${_searchController.text}"',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: textColor.withOpacity(0.7),
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                )
+                              else
+                                ...AnimationConfiguration.toStaggeredList(
+                                  duration: const Duration(milliseconds: 375),
+                                  childAnimationBuilder: (widget) => SlideAnimation(
+                                    horizontalOffset: 50.0,
+                                    child: FadeInAnimation(
+                                      child: widget,
+                                    ),
+                                  ),
+                                  children: noDataChecker(_filteredMembers.map((member) {
+                                    return _buildVisitationMemberTile(
+                                      context,
+                                      member,
+                                      cardColor: cardColor,
+                                      textColor: textColor,
+                                      subtitleColor: subtitleColor,
+                                      isDarkMode: isDarkMode,
+                                    );
+                                  }).toList()),
+                                ),
+                            ],
+                          ),
+                        ),
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(8.0)),
-              ...noDataChecker(_filteredMembers.map((member) {
-                return visitationMemberTile(context, member);
-              }).toList()),
-            ]),
-          )
-        ]));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
-}
 
-Column visitationMemberTile(BuildContext context, OutstandingVisitationForList member) {
-  CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
-  var memberState = context.watch<SharedState>();
+  Widget _buildStatsCard({
+    required BuildContext context,
+    required IconData icon,
+    required String title,
+    required int count,
+    required TrailingCardAlertNumberVariant variant,
+    required Color backgroundColor,
+    required Color textColor,
+    required bool isDarkMode,
+    Color? iconColor,
+    VoidCallback? onTap,
+  }) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= 600;
 
-  return Column(
-    children: [
-      Card(
+    // Adjust card width based on screen size
+    final cardWidth = isTablet ? 280.0 : size.width * 0.44;
+
+    return SizedBox(
+      width: cardWidth,
+      child: Card(
+        color: backgroundColor,
+        elevation: isDarkMode ? 2 : 1,
+        shadowColor: isDarkMode ? Colors.black : Colors.black12,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(16.0),
+          side: BorderSide(
+            color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
+            width: 1,
+          ),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16.0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(icon, color: iconColor, size: 20),
+                        const SizedBox(width: 12),
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: textColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TrailingCardAlertNumber(
+                      number: count,
+                      variant: variant,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVisitationMemberTile(
+    BuildContext context,
+    OutstandingVisitationForList member, {
+    required Color cardColor,
+    required Color textColor,
+    required Color subtitleColor,
+    required bool isDarkMode,
+  }) {
+    CloudinaryImage picture = CloudinaryImage(url: member.pictureUrl, size: ImageSize.normal);
+    var memberState = context.watch<SharedState>();
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width >= 600;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Card(
+        color: cardColor,
+        elevation: isDarkMode ? 2 : 1,
+        shadowColor: isDarkMode ? Colors.black : Colors.black12,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+          side: BorderSide(
+            color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
+            width: 1,
+          ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
+              // Member information row
+              InkWell(
                 onTap: () {
                   memberState.memberId = member.id;
                   memberState.member = member;
                   Navigator.pushNamed(context, '/member-details');
                 },
-                leading: Hero(
-                  tag: 'member-${member.id}',
-                  child: AvatarWithInitials(
-                    foregroundImage: picture.image,
-                    member: member,
+                borderRadius: BorderRadius.circular(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      // Avatar
+                      Hero(
+                        tag: 'member-${member.id}',
+                        child: AvatarWithInitials(
+                          foregroundImage: picture.image,
+                          member: member,
+                          radius: 30,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+
+                      // Member details
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${member.firstName} ${member.lastName}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: textColor,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              member.visitationArea,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: subtitleColor,
+                              ),
+                            ),
+                            if (member.status != null) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                member.status!,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: subtitleColor,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+
+                      // Contact buttons
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ContactIcon(
+                            icon: Icons.phone,
+                            color: PoimenTheme.phoneColor,
+                            phoneNumber: member.phoneNumber,
+                          ),
+                          const SizedBox(width: 8),
+                          ContactIcon(
+                            icon: FontAwesomeIcons.whatsapp,
+                            color: PoimenTheme.whatsappColor,
+                            whatsAppInfo: WhatsAppInfo(
+                              number: member.whatsappNumber,
+                              firstName: member.firstName,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                title: Text('${member.firstName} ${member.lastName}'),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(member.visitationArea),
-                    Text(member.status!),
-                  ],
-                ),
-                isThreeLine: true,
-                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                  ContactIcon(
-                    icon: Icons.phone,
-                    color: PoimenTheme.phoneColor,
-                    phoneNumber: member.phoneNumber,
-                  ),
-                  ContactIcon(
-                    icon: FontAwesomeIcons.whatsapp,
-                    color: PoimenTheme.whatsappColor,
-                    whatsAppInfo:
-                        WhatsAppInfo(number: member.whatsappNumber, firstName: member.firstName),
-                  ),
-                ]),
               ),
-              member.location != null
-                  ? ElevatedButton.icon(
+
+              const SizedBox(height: 16),
+
+              // Action buttons
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.center,
+                children: [
+                  if (member.location != null)
+                    ElevatedButton.icon(
                       onPressed: () async {
                         final Uri launchUri = Uri.parse(
                             'https://www.google.com/maps/search/?api=1&query=${member.location?.latitude}%2C${member.location?.longitude}');
@@ -212,68 +440,80 @@ Column visitationMemberTile(BuildContext context, OutstandingVisitationForList m
                             );
                           }
                         } else {
-                          throw 'Could not launch $launchUri';
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Could not launch map application'),
+                              ),
+                            );
+                          }
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(PoimenTheme.whatsappColor),
-                        foregroundColor: MaterialStateProperty.all(Colors.black),
-                        padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        backgroundColor: WidgetStateProperty.all(PoimenTheme.whatsappColor),
+                        foregroundColor: WidgetStateProperty.all(Colors.black),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         ),
-                        shape: MaterialStateProperty.all(
+                        shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
+                        elevation: WidgetStateProperty.all(0),
                       ),
                       icon: const Icon(
                         FontAwesomeIcons.locationPin,
-                        size: 15,
+                        size: 16,
                       ),
                       label: const Text('Go to Location'),
-                    )
-                  : Container(),
-              ElevatedButton.icon(
-                onPressed: () {
-                  _bottomSheet(context, member);
-                },
-                style: _outstandingVisitationButtonStyle(),
-                icon: const Icon(
-                  FontAwesomeIcons.pencil,
-                  size: 15,
-                ),
-                label: const Text('Record Visit'),
+                    ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      _showVisitationReportBottomSheet(context, member);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all(PoimenTheme.brand),
+                      foregroundColor: WidgetStateProperty.all(Colors.white),
+                      padding: WidgetStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                      ),
+                      elevation: WidgetStateProperty.all(0),
+                    ),
+                    icon: const Icon(
+                      FontAwesomeIcons.pencil,
+                      size: 16,
+                    ),
+                    label: const Text('Record Visit'),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
-    ],
-  );
-}
+    );
+  }
 
-ButtonStyle _outstandingVisitationButtonStyle() {
-  return ButtonStyle(
-    padding: MaterialStateProperty.all(
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-    ),
-    shape: MaterialStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    ),
-  );
-}
-
-_bottomSheet(BuildContext context, MemberForList member) {
-  showModalBottomSheet(
+  void _showVisitationReportBottomSheet(BuildContext context, MemberForList member) {
+    showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-      ),
       isScrollControlled: true,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return OutstandingVisitationReportForm(member: member);
-      });
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(25.0)),
+          ),
+          child: OutstandingVisitationReportForm(member: member),
+        );
+      },
+    );
+  }
 }
