@@ -46,9 +46,9 @@ class PageTitle extends StatelessWidget {
     final isDesktop = screenWidth >= 900;
     final isMobile = screenWidth < 600;
 
-    // Force show back button on mobile if we can navigate back
+    // Always show back button if showBackButton is true, regardless of navigation stack
     final canNavigateBack = Navigator.of(context).canPop();
-    final shouldShowBackButton = (showBackButton && canNavigateBack);
+    final shouldShowBackButton = showBackButton; // No longer depends on canNavigateBack
 
     // Improved back button handling
     void handleBackNavigation() {
