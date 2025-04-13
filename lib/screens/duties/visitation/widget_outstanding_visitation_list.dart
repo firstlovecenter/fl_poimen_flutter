@@ -998,21 +998,31 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Icon(icon, color: iconColor, size: 20),
-                        const SizedBox(width: 12),
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: textColor,
+                    // Use Flexible to ensure title doesn't overflow
+                    Flexible(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(icon, color: iconColor, size: 20),
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: textColor,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 4),
+                    // Fix the size of the counter badge
                     TrailingCardAlertNumber(
                       number: count,
                       variant: variant,
