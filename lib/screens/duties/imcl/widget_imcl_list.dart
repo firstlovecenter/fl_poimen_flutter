@@ -380,8 +380,15 @@ Widget _buildImclStatus(
         icon: const Icon(
           FontAwesomeIcons.pencil,
           size: 14,
+          color: Colors.white,
         ),
-        label: const Text('Submit Reason'),
+        label: const Text(
+          'Submit Reason',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
