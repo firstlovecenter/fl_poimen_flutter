@@ -195,7 +195,7 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
                                     context: context,
                                     icon: FontAwesomeIcons.doorOpen,
                                     iconColor: Colors.red,
-                                    title: 'Visits Remaining',
+                                    title: 'Remaining',
                                     count: widget.church.outstandingVisitations.length,
                                     variant: TrailingCardAlertNumberVariant.red,
                                     backgroundColor: cardColor,
@@ -208,7 +208,7 @@ class ChurchOutstandingVisitationListState extends State<ChurchOutstandingVisita
                                     context: context,
                                     icon: FontAwesomeIcons.solidThumbsUp,
                                     iconColor: Colors.green,
-                                    title: 'Visits Completed',
+                                    title: 'Completed',
                                     count: widget.church.completedVisitationsCount,
                                     variant: TrailingCardAlertNumberVariant.green,
                                     onTap: () {
