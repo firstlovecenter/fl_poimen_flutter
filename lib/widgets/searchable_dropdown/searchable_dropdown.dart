@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart'; // Add import for SchedulerBinding and SchedulerPhase
 
 class SearchableDropdown<T> extends StatefulWidget {
   final String label;
@@ -42,19 +43,72 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
   final LayerLink _layerLink = LayerLink();
   final FocusNode _focusNode = FocusNode();
   bool _isOpen = false;
+  bool _itemSelected = false;
+  String _lastSearchTerm = '';
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
-      if (!_focusNode.hasFocus && _isOpen) {
-        _removeOverlay();
-      }
-    });
 
-    // If there's an initial value, set the search text to its string representation
+    // Setup focus listener
+    _focusNode.addListener(_onFocusChange);
+
+    // Initialize with current value if present
     if (widget.value != null) {
       _searchController.text = widget.value.toString();
+      _itemSelected = true;
+    }
+  }
+
+  void _onFocusChange() {
+    // If losing focus and nothing was selected, restore the previous value
+    if (!_focusNode.hasFocus) {
+      if (_isOpen) {
+        _removeOverlay();
+      }
+
+      if (!_itemSelected && widget.value != null) {
+        // Restore the previous selection if we have one
+        setState(() {
+          _searchController.text = widget.value.toString();
+        });
+      }
+    } else if (_focusNode.hasFocus && _searchController.text.isEmpty) {
+      // When focused and empty, show all items
+      _itemSelected = false;
+
+      // Schedule the overlay creation after the current build is complete
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onSearch('');
+        _createOverlay();
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(SearchableDropdown<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Update text controller when the value changes from parent
+    if (widget.value != oldWidget.value) {
+      if (widget.value != null) {
+        _searchController.text = widget.value.toString();
+        _itemSelected = true;
+      } else {
+        _searchController.text = '';
+        _itemSelected = false;
+      }
+    }
+
+    // If items have changed from last time, update the dropdown if it's open
+    if (widget.items != oldWidget.items && _isOpen) {
+      // Schedule the overlay rebuild after the current build is complete
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_isOpen && mounted) {
+          _removeOverlay();
+          _createOverlay();
+        }
+      });
     }
   }
 
@@ -62,17 +116,29 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
   void dispose() {
     _debounce?.cancel();
     _removeOverlay();
-    _searchController.dispose();
+    _focusNode.removeListener(_onFocusChange);
     _focusNode.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
   void _createOverlay() {
-    if (_overlayEntry != null) return;
+    // Don't create an overlay if one already exists
+    if (_overlayEntry != null || !mounted) return;
+
+    // Don't try to create an overlay during build
+    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _createOverlay();
+      });
+      return;
+    }
 
     _isOpen = true;
 
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox == null) return;
+
     final size = renderBox.size;
 
     _overlayEntry = OverlayEntry(
@@ -88,7 +154,8 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
             child: SizedBox(
               height: widget.items.isEmpty ? 50.0 : math.min(200.0, widget.items.length * 50.0),
               child: widget.isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(
+                      child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator()))
                   : widget.items.isEmpty
                       ? Center(child: Text(widget.noItemsFoundText))
                       : ListView.builder(
@@ -102,10 +169,15 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
                               title: Text(item.toString()),
                               onTap: () {
                                 setState(() {
-                                  _searchController.text = item.toString();
+                                  _searchController.text =
+                                      item.toString(); // Update the searchController value
+                                  _itemSelected = true;
                                 });
                                 widget.onChanged(item);
                                 _removeOverlay();
+
+                                // Clear focus after selection
+                                FocusScope.of(context).unfocus();
                               },
                             );
                           },
@@ -116,7 +188,11 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
       ),
     );
 
-    Overlay.of(context).insert(_overlayEntry!);
+    // Add the overlay entry to the Overlay
+    final overlay = Overlay.of(context, rootOverlay: true);
+    if (mounted) {
+      overlay.insert(_overlayEntry!);
+    }
   }
 
   void _removeOverlay() {
@@ -129,16 +205,37 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
     if (_isOpen) {
       _removeOverlay();
     } else {
-      _createOverlay();
+      // Schedule overlay creation after the current build phase
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          // When toggling open, search with current text
+          widget.onSearch(_searchController.text);
+          _createOverlay();
+        }
+      });
     }
   }
 
   void _onSearchChanged(String query) {
+    _lastSearchTerm = query;
+    _itemSelected = false;
+
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      widget.onSearch(query);
-      if (!_isOpen) {
-        _createOverlay();
+      if (mounted) {
+        widget.onSearch(query);
+
+        // Schedule overlay manipulation after the current build phase
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            // Display the dropdown with search results
+            if (_isOpen) {
+              // If already open, refresh the dropdown to show new results
+              _removeOverlay();
+            }
+            _createOverlay();
+          }
+        });
       }
     });
   }
@@ -211,11 +308,34 @@ class _SearchableDropdownState<T> extends State<SearchableDropdown<T>> {
             ),
             onChanged: _onSearchChanged,
             onTap: () {
-              if (!_isOpen) {
-                _createOverlay();
+              // Don't try to manipulate the overlay during build
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!_isOpen && mounted) {
+                  // When tapped, search with current text
+                  widget.onSearch(_searchController.text);
+                  _createOverlay();
+                }
+              });
+            },
+            validator: (value) {
+              if (widget.isRequired && (value == null || value.isEmpty)) {
+                return 'This field is required';
               }
+              return null;
             },
           ),
+          if (_itemSelected && widget.value != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0, left: 4.0),
+              child: Text(
+                'Selected: ${widget.value.toString()}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
         ],
       ),
     );

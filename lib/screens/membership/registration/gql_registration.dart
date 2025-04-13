@@ -13,10 +13,10 @@ final createMemberMutation = gql('''
     \$dob: String!
     \$maritalStatus: String!
     \$occupation: String
-    \$pictureUrl: String
+    \$pictureUrl: String!
     \$visitationArea: String!
     \$bacentaId: ID!
-    \$basontaId: String
+    \$basontaId: ID
   ) {
     CreateMember(
       firstName: \$firstName
@@ -39,13 +39,21 @@ final createMemberMutation = gql('''
       firstName
       lastName
       middleName
-      gender
+      gender {
+        gender
+      }
       phoneNumber
       whatsappNumber
       email
-      dob
-      maritalStatus
-      occupation
+      dob {
+        date
+      }
+      maritalStatus {
+        status
+      }
+      occupation {
+        occupation
+      }
       pictureUrl
       visitationArea
     }

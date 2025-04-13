@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:poimen/screens/membership/registration/gql_registration.dart';
 import 'package:poimen/screens/membership/registration/models_registration.dart';
+import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/services/cloudinary_service.dart';
 import 'package:poimen/state/shared_state.dart';
 import 'package:poimen/theme.dart';
@@ -41,6 +42,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   bool _isLoadingBasontas = false;
   String? _basontaError;
 
+  final TextEditingController _dobController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -62,9 +65,21 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
       _bacentaError = null;
     });
 
-    // Get the current user's ID from the SharedState
-    final userState = Provider.of<SharedState>(context, listen: false);
-    final userId = userState.memberId;
+    // Get the current user's ID from AuthService
+    final rawUserId = AuthService.instance.profile?.sub;
+
+    // Ensure we have a valid user ID
+    if (rawUserId == null || rawUserId.isEmpty) {
+      setState(() {
+        _bacentaError = 'User not authenticated';
+        _isLoadingBacentas = false;
+      });
+      return;
+    }
+
+    // Remove "auth0|" prefix from the user ID if it exists
+    final userId =
+        rawUserId.startsWith('auth0|') ? rawUserId.replaceFirst('auth0|', '') : rawUserId;
 
     // Execute the GraphQL query
     final GraphQLClient client = GraphQLProvider.of(context).value;
@@ -73,7 +88,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
       QueryOptions(
         document: memberBacentaSearchQuery,
         variables: {
-          'id': userId,
+          'id': userId, // Using the cleaned userId without the auth0| prefix
           'key': searchKey,
         },
         fetchPolicy: FetchPolicy.networkOnly,
@@ -580,6 +595,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
 
                           // Date of Birth
                           TextFormField(
+                            controller: _dobController,
                             decoration: getInputDecoration(
                               labelText: 'Date of Birth *',
                               hintText: 'YYYY-MM-DD',
@@ -605,11 +621,11 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                     },
                                   );
                                   if (picked != null) {
-                                    final controller = TextEditingController();
-                                    controller.text = DateFormat('yyyy-MM-dd').format(picked);
-                                    // Update the field
-                                    _formData.dob = controller.text;
-                                    setState(() {});
+                                    setState(() {
+                                      _formData.dob = DateFormat('yyyy-MM-dd')
+                                          .format(picked); // Update the form data
+                                      _dobController.text = _formData.dob; // Update the input box
+                                    });
                                   }
                                 },
                               ),
@@ -720,6 +736,11 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter phone number';
+                              }
+                              final phoneRegex =
+                                  RegExp(r'^[+][(]{0,1}[1-9]{1,4}[)]{0,1}[-\s/0-9]*$');
+                              if (!phoneRegex.hasMatch(value)) {
+                                return 'Please enter a valid phone number';
                               }
                               return null;
                             },
@@ -1061,6 +1082,10 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter phone number';
                 }
+                final phoneRegex = RegExp(r'^[+][(]{0,1}[1-9]{1,4}[)]{0,1}[-\s/0-9]*$');
+                if (!phoneRegex.hasMatch(value)) {
+                  return 'Please enter a valid phone number';
+                }
                 return null;
               },
               onSaved: (value) {
@@ -1105,6 +1130,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
 
             // Date of Birth
             TextFormField(
+              controller: _dobController,
               decoration: getInputDecoration(
                 labelText: 'Date of Birth *',
                 hintText: 'YYYY-MM-DD',
@@ -1129,11 +1155,11 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                       },
                     );
                     if (picked != null) {
-                      final controller = TextEditingController();
-                      controller.text = DateFormat('yyyy-MM-dd').format(picked);
-                      // Update the field
-                      _formData.dob = controller.text;
-                      setState(() {});
+                      setState(() {
+                        _formData.dob =
+                            DateFormat('yyyy-MM-dd').format(picked); // Update the form data
+                        _dobController.text = _formData.dob; // Update the input box
+                      });
                     }
                   },
                 ),
@@ -1200,7 +1226,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
 
             // Bacenta Searchable Dropdown
             SearchableDropdown<BacentaOption>(
-              label: 'Bacenta *',
+              label: 'Bacenta',
               hintText: 'Search for a bacenta',
               value: _selectedBacenta,
               items: _bacentaOptions,
