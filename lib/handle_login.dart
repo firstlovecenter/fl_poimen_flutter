@@ -5,6 +5,7 @@ import 'package:poimen/services/auth_service.dart';
 import 'package:poimen/screens/login_screen.dart';
 import 'package:poimen/state/auth_state.dart';
 import 'package:poimen/state/shared_state.dart';
+import 'package:poimen/widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class HandleLogin extends StatefulWidget {
@@ -119,9 +120,11 @@ class _HandleLoginState extends State<HandleLogin> {
       future: _authFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: LoadingIndicator(
+                style: LoadingStyle.orbit,
+              ),
             ),
           );
         }
