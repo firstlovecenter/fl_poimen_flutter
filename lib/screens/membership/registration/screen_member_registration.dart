@@ -44,6 +44,9 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
 
   final TextEditingController _dobController = TextEditingController();
 
+  // Add a checkbox to indicate if the WhatsApp number is the same as the phone number
+  bool _isWhatsAppSameAsPhone = true;
+
   @override
   void initState() {
     super.initState();
@@ -749,29 +752,51 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                             },
                             onSaved: (value) {
                               _formData.phoneNumber = value ?? '';
+                              if (_isWhatsAppSameAsPhone) {
+                                _formData.whatsappNumber = value ?? '';
+                              }
                             },
                           ),
                           const SizedBox(height: 20),
 
-                          // WhatsApp Number
-                          TextFormField(
-                            decoration: getInputDecoration(
-                              labelText: 'WhatsApp Number *',
-                              hintText: 'Enter WhatsApp number (e.g., +1234567890)',
-                              helperText: 'Start with the country code and + (e.g., +1234567890)',
-                              prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
-                            ),
-                            keyboardType: TextInputType.phone,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter WhatsApp number';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _formData.whatsappNumber = value ?? '';
-                            },
+                          // Add a checkbox to toggle the WhatsApp number field
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: _isWhatsAppSameAsPhone,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isWhatsAppSameAsPhone = value ?? true;
+                                    if (_isWhatsAppSameAsPhone) {
+                                      _formData.whatsappNumber = _formData.phoneNumber;
+                                    }
+                                  });
+                                },
+                              ),
+                              const Text('WhatsApp number is the same as phone number'),
+                            ],
                           ),
+
+                          // Update the WhatsApp number field to be conditionally displayed
+                          if (!_isWhatsAppSameAsPhone)
+                            TextFormField(
+                              decoration: getInputDecoration(
+                                labelText: 'WhatsApp Number *',
+                                hintText: 'Enter WhatsApp number (e.g., +1234567890)',
+                                helperText: 'Start with the country code and + (e.g., +1234567890)',
+                                prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
+                              ),
+                              keyboardType: TextInputType.phone,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter WhatsApp number';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _formData.whatsappNumber = value ?? '';
+                              },
+                            ),
                           const SizedBox(height: 20),
 
                           // Email Address
@@ -1095,29 +1120,51 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
               },
               onSaved: (value) {
                 _formData.phoneNumber = value ?? '';
+                if (_isWhatsAppSameAsPhone) {
+                  _formData.whatsappNumber = value ?? '';
+                }
               },
             ),
             const SizedBox(height: 16),
 
-            // WhatsApp Number
-            TextFormField(
-              decoration: getInputDecoration(
-                labelText: 'WhatsApp Number *',
-                hintText: 'Enter WhatsApp number (e.g., +1234567890)',
-                helperText: 'Start with the country code and + (e.g., +1234567890)',
-                prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
-              ),
-              keyboardType: TextInputType.phone,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter WhatsApp number';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                _formData.whatsappNumber = value ?? '';
-              },
+            // Add a checkbox to toggle the WhatsApp number field
+            Row(
+              children: [
+                Checkbox(
+                  value: _isWhatsAppSameAsPhone,
+                  onChanged: (value) {
+                    setState(() {
+                      _isWhatsAppSameAsPhone = value ?? true;
+                      if (_isWhatsAppSameAsPhone) {
+                        _formData.whatsappNumber = _formData.phoneNumber;
+                      }
+                    });
+                  },
+                ),
+                const Text('WhatsApp number is the same as phone number'),
+              ],
             ),
+
+            // Update the WhatsApp number field to be conditionally displayed
+            if (!_isWhatsAppSameAsPhone)
+              TextFormField(
+                decoration: getInputDecoration(
+                  labelText: 'WhatsApp Number *',
+                  hintText: 'Enter WhatsApp number (e.g., +1234567890)',
+                  helperText: 'Start with the country code and + (e.g., +1234567890)',
+                  prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter WhatsApp number';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _formData.whatsappNumber = value ?? '';
+                },
+              ),
             const SizedBox(height: 16),
 
             // Email Address
