@@ -69,7 +69,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    constraints: const BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Telepastoring Report',
@@ -91,7 +91,7 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                constraints: const BoxConstraints(maxHeight: 350),
+                constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                 child: AlertBox(
                   type: AlertType.error,
                   title: 'Error Submitting Telepastoring Report',
@@ -159,10 +159,10 @@ class _OutstandingTelepastoringReportFormState extends State<OutstandingTelepast
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
+                            padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             ),
-                            shape: MaterialStateProperty.all(
+                            shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               ),

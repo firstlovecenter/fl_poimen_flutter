@@ -96,7 +96,7 @@ class GovernorshipAttendanceTickerScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 20),
-                        constraints: const BoxConstraints(maxHeight: 350),
+                        constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                         child: AlertBox(
                           type: AlertType.success,
                           message: 'Attendance report submitted successfully!',
@@ -120,7 +120,7 @@ class GovernorshipAttendanceTickerScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    constraints: const BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                     child: AlertBox(
                       type: AlertType.error,
                       title: 'Error Submitting Attendance Report',

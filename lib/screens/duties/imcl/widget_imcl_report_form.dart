@@ -80,7 +80,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
                   backgroundColor: isDarkMode ? PoimenTheme.darkCardColor : Colors.white,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    constraints: const BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'IMCL Report',
@@ -103,7 +103,7 @@ class _IMCLReportFormState extends State<IMCLReportForm> {
               backgroundColor: isDarkMode ? PoimenTheme.darkCardColor : Colors.white,
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                constraints: const BoxConstraints(maxHeight: 350),
+                constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                 child: AlertBox(
                   type: AlertType.error,
                   title: 'Error Submitting IMCL Report',

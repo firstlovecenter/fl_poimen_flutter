@@ -50,7 +50,7 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    constraints: const BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Pastoral Comment',
@@ -72,7 +72,7 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                constraints: const BoxConstraints(maxHeight: 350),
+                constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                 child: AlertBox(
                   type: AlertType.error,
                   title: 'Error Submitting Pastoral Comment',
@@ -91,8 +91,8 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
       height: 30,
       child: ElevatedButton.icon(
         style: ButtonStyle(
-          fixedSize: MaterialStateProperty.all<Size>(const Size(100, 30)),
-          padding: MaterialStateProperty.all<EdgeInsets>(
+          fixedSize: WidgetStateProperty.all<Size>(const Size(100, 30)),
+          padding: WidgetStateProperty.all<EdgeInsets>(
               const EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0)),
         ),
         icon: loading == true
@@ -143,10 +143,10 @@ class _WidgetAddPastoralCommentState extends State<WidgetAddPastoralComment> {
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
+                                padding: WidgetStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 ),
-                                shape: MaterialStateProperty.all(
+                                shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),

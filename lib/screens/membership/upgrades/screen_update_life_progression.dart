@@ -41,7 +41,7 @@ class _UpdateLifeProgressionScreenState extends State<UpdateLifeProgressionScree
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    constraints: const BoxConstraints(maxHeight: 350),
+                    constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                     child: AlertBox(
                       type: AlertType.success,
                       title: 'Life Progression Upgrade',
@@ -64,7 +64,7 @@ class _UpdateLifeProgressionScreenState extends State<UpdateLifeProgressionScree
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                constraints: const BoxConstraints(maxHeight: 350),
+                constraints: const BoxConstraints(maxHeight: 350, maxWidth: 350),
                 child: AlertBox(
                   type: AlertType.error,
                   title: 'Error Submitting Life Progression Report',
