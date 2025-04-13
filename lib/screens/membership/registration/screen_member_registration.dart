@@ -12,6 +12,7 @@ import 'package:poimen/widgets/alert_box.dart';
 import 'package:poimen/widgets/image_upload_button.dart';
 import 'package:poimen/widgets/location_picker_button.dart';
 import 'package:poimen/widgets/page_title.dart';
+import 'package:poimen/widgets/searchable_dropdown/searchable_dropdown.dart';
 import 'package:poimen/widgets/submit_button_text.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,153 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   String _pictureUrl = '';
   bool _isSubmitting = false;
   final bool _showOptionalFields = false;
+
+  // State for Bacenta and Basonta dropdowns
+  List<BacentaOption> _bacentaOptions = [];
+  BacentaOption? _selectedBacenta;
+  bool _isLoadingBacentas = false;
+  String? _bacentaError;
+
+  List<BasontaOption> _basontaOptions = [];
+  BasontaOption? _selectedBasonta;
+  bool _isLoadingBasontas = false;
+  String? _basontaError;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize any required state
+  }
+
+  // Function to search for bacentas
+  void searchBacentas(String searchKey) {
+    if (searchKey.isEmpty) {
+      setState(() {
+        _bacentaOptions = [];
+        _isLoadingBacentas = false;
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoadingBacentas = true;
+      _bacentaError = null;
+    });
+
+    // Get the current user's ID from the SharedState
+    final userState = Provider.of<SharedState>(context, listen: false);
+    final userId = userState.memberId;
+
+    // Execute the GraphQL query
+    final GraphQLClient client = GraphQLProvider.of(context).value;
+    client
+        .query(
+      QueryOptions(
+        document: memberBacentaSearchQuery,
+        variables: {
+          'id': userId,
+          'key': searchKey,
+        },
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    )
+        .then((result) {
+      if (result.hasException) {
+        setState(() {
+          _bacentaError =
+              result.exception?.graphqlErrors.first.message ?? 'Error searching bacentas';
+          _isLoadingBacentas = false;
+        });
+        return;
+      }
+
+      final data = result.data;
+      if (data == null || data['members'] == null || data['members'].isEmpty) {
+        setState(() {
+          _bacentaOptions = [];
+          _isLoadingBacentas = false;
+        });
+        return;
+      }
+
+      final bacentaResults = data['members'][0]['bacentaSearch'] as List<dynamic>;
+      final bacentas = bacentaResults
+          .map((item) => BacentaOption.fromJson(item as Map<String, dynamic>))
+          .toList();
+
+      setState(() {
+        _bacentaOptions = bacentas;
+        _isLoadingBacentas = false;
+      });
+    }).catchError((error) {
+      setState(() {
+        _bacentaError = 'Error searching bacentas: $error';
+        _isLoadingBacentas = false;
+      });
+    });
+  }
+
+  // Function to load basontas for a campus
+  void loadBasontas(String campusId) {
+    if (campusId.isEmpty) {
+      setState(() {
+        _basontaOptions = [];
+        _isLoadingBasontas = false;
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoadingBasontas = true;
+      _basontaError = null;
+    });
+
+    // Execute the GraphQL query
+    final GraphQLClient client = GraphQLProvider.of(context).value;
+    client
+        .query(
+      QueryOptions(
+        document: getCampusBasontasQuery,
+        variables: {
+          'id': campusId,
+        },
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    )
+        .then((result) {
+      if (result.hasException) {
+        setState(() {
+          _basontaError = result.exception?.graphqlErrors.first.message ?? 'Error loading basontas';
+          _isLoadingBasontas = false;
+        });
+        return;
+      }
+
+      final data = result.data;
+      if (data == null || data['campuses'] == null || data['campuses'].isEmpty) {
+        setState(() {
+          _basontaOptions = [];
+          _isLoadingBasontas = false;
+        });
+        return;
+      }
+
+      final basontaResults = data['campuses'][0]['basontas'] as List<dynamic>;
+      final basontas = basontaResults
+          .map((item) => BasontaOption.fromJson(item as Map<String, dynamic>))
+          .toList();
+
+      setState(() {
+        _basontaOptions = basontas;
+        _isLoadingBasontas = false;
+      });
+    }).catchError((error) {
+      setState(() {
+        _basontaError = 'Error loading basontas: $error';
+        _isLoadingBasontas = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -632,20 +780,71 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                               _formData.visitationArea = value ?? '';
                             },
                           ),
+                          const SizedBox(height: 40),
+
+                          // Bacenta Searchable Dropdown
+                          SearchableDropdown<BacentaOption>(
+                            label: 'Bacenta',
+                            hintText: 'Search for a bacenta',
+                            value: _selectedBacenta,
+                            items: _bacentaOptions,
+                            onChanged: (BacentaOption? value) {
+                              setState(() {
+                                _selectedBacenta = value;
+                                if (value != null) {
+                                  _formData.bacentaId = value.id;
+
+                                  // If the bacenta's governorship has a campus ID, load basontas
+                                  if (value.governorship != null) {
+                                    // Assuming campusId is available in governorship
+                                    // In a real app, you might need to make another query to get the campusId
+                                    String campusId = value.governorship!.id;
+                                    loadBasontas(campusId);
+                                  } else {
+                                    // Clear basontas if no governorship/campus
+                                    setState(() {
+                                      _basontaOptions = [];
+                                      _selectedBasonta = null;
+                                    });
+                                  }
+                                }
+                              });
+                            },
+                            onSearch: searchBacentas,
+                            isLoading: _isLoadingBacentas,
+                            errorText: _bacentaError,
+                            prefixIcon: const Icon(FontAwesomeIcons.church),
+                            isRequired: true,
+                            noItemsFoundText: 'No bacentas found. Try a different search term.',
+                          ),
                           const SizedBox(height: 20),
 
-                          // Additional Fields for Basonta
-                          TextFormField(
-                            decoration: getInputDecoration(
-                              labelText: 'Basonta ID',
-                              hintText: 'Enter Basonta ID (optional)',
-                              prefixIcon: const Icon(FontAwesomeIcons.users),
+                          // Basonta Searchable Dropdown - appears only if a bacenta with governorship is selected
+                          if (_selectedBacenta != null && _selectedBacenta!.governorship != null)
+                            SearchableDropdown<BasontaOption>(
+                              label: 'Basonta',
+                              hintText: 'Select a basonta',
+                              value: _selectedBasonta,
+                              items: _basontaOptions,
+                              onChanged: (BasontaOption? value) {
+                                setState(() {
+                                  _selectedBasonta = value;
+                                  if (value != null) {
+                                    _formData.basontaId = value.id;
+                                  } else {
+                                    _formData.basontaId = '';
+                                  }
+                                });
+                              },
+                              onSearch: (String searchKey) {
+                                // For basontas, we just filter the existing list
+                                // No need to make a new query since we already have all basontas
+                              },
+                              isLoading: _isLoadingBasontas,
+                              errorText: _basontaError,
+                              prefixIcon: const Icon(FontAwesomeIcons.peopleGroup),
+                              noItemsFoundText: 'No basontas available for this campus.',
                             ),
-                            onSaved: (value) {
-                              _formData.basontaId = value ?? '';
-                            },
-                          ),
-                          const SizedBox(height: 40),
 
                           // Additional information hint
                           Container(
@@ -997,7 +1196,74 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                 _formData.occupation = value ?? '';
               },
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
+
+            // Bacenta Searchable Dropdown
+            SearchableDropdown<BacentaOption>(
+              label: 'Bacenta *',
+              hintText: 'Search for a bacenta',
+              value: _selectedBacenta,
+              items: _bacentaOptions,
+              onChanged: (BacentaOption? value) {
+                setState(() {
+                  _selectedBacenta = value;
+                  if (value != null) {
+                    _formData.bacentaId = value.id;
+
+                    // If the bacenta's governorship has a campus ID, load basontas
+                    if (value.governorship != null) {
+                      String campusId = value.governorship!.id;
+                      loadBasontas(campusId);
+                    } else {
+                      // Clear basontas if no governorship/campus
+                      setState(() {
+                        _basontaOptions = [];
+                        _selectedBasonta = null;
+                      });
+                    }
+                  }
+                });
+              },
+              onSearch: searchBacentas,
+              isLoading: _isLoadingBacentas,
+              errorText: _bacentaError,
+              prefixIcon: const Icon(FontAwesomeIcons.church),
+              isRequired: true,
+              noItemsFoundText: 'No bacentas found. Try a different search term.',
+            ),
+            const SizedBox(height: 16),
+
+            // Basonta Searchable Dropdown - appears only if a bacenta with governorship is selected
+            if (_selectedBacenta != null && _selectedBacenta!.governorship != null)
+              Column(
+                children: [
+                  SearchableDropdown<BasontaOption>(
+                    label: 'Basonta',
+                    hintText: 'Select a basonta',
+                    value: _selectedBasonta,
+                    items: _basontaOptions,
+                    onChanged: (BasontaOption? value) {
+                      setState(() {
+                        _selectedBasonta = value;
+                        if (value != null) {
+                          _formData.basontaId = value.id;
+                        } else {
+                          _formData.basontaId = '';
+                        }
+                      });
+                    },
+                    onSearch: (String searchKey) {
+                      // For basontas, we just filter the existing list
+                      // No need to make a new query since we already have all basontas
+                    },
+                    isLoading: _isLoadingBasontas,
+                    errorText: _basontaError,
+                    prefixIcon: const Icon(FontAwesomeIcons.peopleGroup),
+                    noItemsFoundText: 'No basontas available for this campus.',
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
 
             // Location Information Section
             Text(
@@ -1027,19 +1293,6 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
               },
               onSaved: (value) {
                 _formData.visitationArea = value ?? '';
-              },
-            ),
-            const SizedBox(height: 16),
-
-            // Additional Fields for Basonta
-            TextFormField(
-              decoration: getInputDecoration(
-                labelText: 'Basonta ID',
-                hintText: 'Enter Basonta ID (optional)',
-                prefixIcon: const Icon(FontAwesomeIcons.users),
-              ),
-              onSaved: (value) {
-                _formData.basontaId = value ?? '';
               },
             ),
             const SizedBox(height: 32),

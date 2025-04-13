@@ -51,3 +51,34 @@ final createMemberMutation = gql('''
     }
   }
 ''');
+
+/// GraphQL query to search for bacentas
+final memberBacentaSearchQuery = gql('''
+  query memberBacentaSearch(\$id: ID!, \$key: String!) {
+    members(where: { id: \$id }) {
+      id
+      bacentaSearch(key: \$key) {
+        id
+        name
+        governorship {
+          id
+          name
+        }
+      }
+    }
+  }
+''');
+
+/// GraphQL query to get basontas for a campus
+final getCampusBasontasQuery = gql('''
+  query getCampusBasontas(\$id: ID!) {
+    campuses(where: { id: \$id }) {
+      id
+      name
+      basontas {
+        id
+        name
+      }
+    }
+  }
+''');

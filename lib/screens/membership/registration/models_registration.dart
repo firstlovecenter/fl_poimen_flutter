@@ -49,3 +49,71 @@ class MemberRegistrationConstants {
     {'value': 'Widowed', 'label': 'Widowed'},
   ];
 }
+
+/// Model for Bacenta option in the dropdown
+class BacentaOption {
+  final String id;
+  final String name;
+  final GovernorshipOption? governorship;
+
+  BacentaOption({
+    required this.id,
+    required this.name,
+    this.governorship,
+  });
+
+  factory BacentaOption.fromJson(Map<String, dynamic> json) {
+    return BacentaOption(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      governorship:
+          json['governorship'] != null ? GovernorshipOption.fromJson(json['governorship']) : null,
+    );
+  }
+
+  @override
+  String toString() {
+    return governorship != null ? '$name (${governorship?.name})' : name;
+  }
+}
+
+/// Model for Governorship option
+class GovernorshipOption {
+  final String id;
+  final String name;
+
+  GovernorshipOption({
+    required this.id,
+    required this.name,
+  });
+
+  factory GovernorshipOption.fromJson(Map<String, dynamic> json) {
+    return GovernorshipOption(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+    );
+  }
+}
+
+/// Model for Basonta option in the dropdown
+class BasontaOption {
+  final String id;
+  final String name;
+
+  BasontaOption({
+    required this.id,
+    required this.name,
+  });
+
+  factory BasontaOption.fromJson(Map<String, dynamic> json) {
+    return BasontaOption(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+    );
+  }
+
+  @override
+  String toString() {
+    return name;
+  }
+}
