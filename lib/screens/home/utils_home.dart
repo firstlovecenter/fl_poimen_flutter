@@ -259,3 +259,18 @@ Widget myLeadersTrendsLevels(ChurchLevel churchLevel) {
     permitted: const [Role.all],
   );
 }
+
+Widget registerMemberButton(ChurchLevel churchLevel) {
+  // This allows all church levels to see the Register Member button
+  ChurchString level = ChurchString(churchLevel.name);
+
+  return const HomePageButton(
+    text: 'Register Member',
+    icon: FontAwesomeIcons.userPlus,
+    navKey: 'register-member',
+    route: '/register-member',
+    // Set navigateBack to true so we can navigate back to the home screen after registration
+    navigateBack: true,
+    permitted: [Role.all],
+  );
+}

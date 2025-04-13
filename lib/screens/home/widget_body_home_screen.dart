@@ -109,6 +109,7 @@ class HomeScreenBody extends StatelessWidget {
                         route: '/$levelForUrl-members',
                         permitted: const [Role.all],
                       ),
+                      registerMemberButton(churchLevel),
                     ],
                   ),
                 ],
@@ -196,6 +197,7 @@ class HomeScreenBody extends StatelessWidget {
                         route: '/$levelForUrl-members',
                         permitted: const [Role.all],
                       ),
+                      registerMemberButton(churchLevel),
                     ],
                   ),
                   // Trends section
@@ -271,6 +273,7 @@ class HomeScreenBody extends StatelessWidget {
                   route: '/$levelForUrl-members',
                   permitted: const [Role.all],
                 ),
+                registerMemberButton(churchLevel),
               ],
             ),
             // Outstanding Work section

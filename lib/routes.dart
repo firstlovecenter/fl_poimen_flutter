@@ -61,6 +61,7 @@ import 'package:poimen/screens/membership/screen_council_list.dart';
 import 'package:poimen/screens/membership/screen_fellowship_list.dart';
 import 'package:poimen/screens/membership/screen_campus_list.dart';
 import 'package:poimen/screens/membership/details/screen_member_details.dart';
+import 'package:poimen/screens/membership/registration/screen_member_registration.dart';
 import 'package:poimen/screens/membership/screen_stream_list.dart';
 import 'package:poimen/screens/membership/upgrades/screen_update_spiritual_progression.dart';
 import 'package:poimen/screens/profile_choose/screen_profile_choose.dart';
@@ -218,4 +219,7 @@ var appRoutes = {
   '/council-subleaders-trends': (context) => const CouncilSubLeadersTrendsScreen(),
   '/stream-subleaders-trends': (context) => const StreamSubLeadersTrendsScreen(),
   '/campus-subleaders-trends': (context) => const CampusSubLeadersTrendsScreen(),
+
+  '/member/displaydetails': (context) => const MemberDetailsScreen(),
+  '/register-member': (context) => const MemberRegistrationScreen(),
 };

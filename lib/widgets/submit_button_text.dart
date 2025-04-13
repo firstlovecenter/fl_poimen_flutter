@@ -24,3 +24,30 @@ class SubmittingButtonText extends StatelessWidget {
     );
   }
 }
+
+class SubmitButtonText extends StatelessWidget {
+  const SubmitButtonText({
+    Key? key,
+    required this.text,
+    required this.isSubmitting,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final String text;
+  final bool isSubmitting;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      onPressed: isSubmitting ? null : onPressed,
+      child: isSubmitting ? const SubmittingButtonText() : Text(text),
+    );
+  }
+}
