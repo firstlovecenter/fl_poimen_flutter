@@ -314,6 +314,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     InputDecoration getInputDecoration({
       required String labelText,
       String? hintText,
+      String? helperText,
       required Icon prefixIcon,
       Widget? suffixIcon,
     }) {
@@ -349,6 +350,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
       return InputDecoration(
         labelText: labelText,
         hintText: hintText,
+        helperText: helperText,
         prefixIcon: smallerPrefixIcon,
         suffixIcon: smallerSuffixIcon,
         prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
@@ -729,7 +731,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                           TextFormField(
                             decoration: getInputDecoration(
                               labelText: 'Phone Number *',
-                              hintText: 'Enter phone number',
+                              hintText: 'Enter phone number (e.g., +1234567890)',
+                              helperText: 'Start with the country code and + (e.g., +1234567890)',
                               prefixIcon: const Icon(FontAwesomeIcons.phone),
                             ),
                             keyboardType: TextInputType.phone,
@@ -754,7 +757,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                           TextFormField(
                             decoration: getInputDecoration(
                               labelText: 'WhatsApp Number *',
-                              hintText: 'Enter WhatsApp number',
+                              hintText: 'Enter WhatsApp number (e.g., +1234567890)',
+                              helperText: 'Start with the country code and + (e.g., +1234567890)',
                               prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
                             ),
                             keyboardType: TextInputType.phone,
@@ -1074,7 +1078,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
             TextFormField(
               decoration: getInputDecoration(
                 labelText: 'Phone Number *',
-                hintText: 'Enter phone number',
+                hintText: 'Enter phone number (e.g., +1234567890)',
+                helperText: 'Start with the country code and + (e.g., +1234567890)',
                 prefixIcon: const Icon(FontAwesomeIcons.phone),
               ),
               keyboardType: TextInputType.phone,
@@ -1098,7 +1103,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
             TextFormField(
               decoration: getInputDecoration(
                 labelText: 'WhatsApp Number *',
-                hintText: 'Enter WhatsApp number',
+                hintText: 'Enter WhatsApp number (e.g., +1234567890)',
+                helperText: 'Start with the country code and + (e.g., +1234567890)',
                 prefixIcon: const Icon(FontAwesomeIcons.whatsapp),
               ),
               keyboardType: TextInputType.phone,
